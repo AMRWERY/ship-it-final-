@@ -1,0 +1,60 @@
+<template>
+  <div>
+    <ClientOnly v-if="isLoading">
+      <skeleton-loader-main />
+    </ClientOnly>
+
+    <ClientOnly v-else>
+      <NuxtLayout>
+        <progress-bar />
+        <chat-list />
+        <NuxtPage />
+        <scroll-to-top />
+        <contact-us />
+      </NuxtLayout>
+    </ClientOnly>
+  </div>
+</template>
+
+<script setup>
+const isLoading = ref(true);
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 5000);
+});
+
+// tailwind-elements referance
+// onMounted(async () => {
+//   const { Tooltip, initTWE } = await import("tw-elements");
+//   initTWE({ Tooltip });
+// });
+
+useHead({
+  titleTemplate: 'Ship-IT',
+})
+</script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.4s;
+}
+
+.layout-enter-from,
+.layout-leave-to {
+  filter: grayscale(1);
+}
+</style>
