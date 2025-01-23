@@ -131,28 +131,6 @@ const saveProfile = () => {
       loading.value = false;
     });
 };
-
-// const saveProfile = async () => {
-//   loading.value = true;
-//   try {
-//     const message = await authStore.saveProfile();
-//     triggerToast({
-//       title: t('toast.successfully_updated'),
-//       message: t('toast.your_address_has_been_successfully_updated'),
-//       type: 'success',
-//       icon: 'mdi-check-circle',
-//     });
-//   } catch (error) {
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.failed_to_update_address'),
-//       type: 'error',
-//       icon: 'material-symbols:error-outline-rounded',
-//     });
-//   } finally {
-//     loading.value = false;
-//   }
-// };
 </script>
 
 <style scoped>
