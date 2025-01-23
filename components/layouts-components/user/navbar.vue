@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Overlay Component -->
-        <Overlay :visible="isOverlayVisible" />
+        <Overlay :visible="localeStore.isOverlayVisible" />
 
         <!-- today-deal component -->
         <today-deal />
@@ -22,13 +22,13 @@
 
                     <div class="flex items-center space-s-4">
                         <!-- toggle locales -->
-                        <nuxt-link to="" class="text-white me-4" role="button" v-if="isRTL">
-                            <span class="[&>svg]:w-5" @click="updateLocale('en')">
+                        <nuxt-link to="" class="text-white me-4" role="button" v-if="localeStore.isRTL">
+                            <span class="[&>svg]:w-5" @click="setLocale('en')">
                                 En
                             </span>
                         </nuxt-link>
                         <nuxt-link to="" class="text-white me-4" role="button" v-else>
-                            <span class="[&>svg]:w-5" @click="updateLocale('ar')">
+                            <span class="[&>svg]:w-5" @click="setLocale('ar')">
                                 العربية
                             </span>
                         </nuxt-link>
@@ -89,37 +89,30 @@
 <script setup>
 const wishlistStore = useWishlistStore();
 const authStore = useAuthStore();
+const localeStore = useLocaleStore();
 
-const isRTL = ref(false);
 const { locale } = useI18n();
-const isOverlayVisible = ref(false);
 
-const updateLocale = (value) => {
-    isOverlayVisible.value = true;
-    setLocale(value);
-    localStorage.setItem('locale', value);
-    isRTL.value = value === 'ar';
-    setTimeout(() => {
-        isOverlayVisible.value = false;
-        // location.reload();
-    }, 3000);
+const setLocale = (value) => {
+    locale.value = value;
+    localeStore.updateLocale(value);
 };
 
 const userProfileImg = ref('');
 
-onMounted(() => {
-    const storedLocale = localStorage.getItem('locale') || 'en';
+computed(() => {
+    const storedLocale = localeStore.locale;
     setLocale(storedLocale);
-    isRTL.value = storedLocale === 'ar';
+});
 
+onMounted(() => {
     if (authStore.user?.profileImg) {
         userProfileImg.value = authStore.user?.profileImg;
     }
-});
 
-const setLocale = (lang) => {
-    locale.value = lang;
-};
+    //     const storedLocale = localeStore.locale;
+    //   setLocale(storedLocale);
+});
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 

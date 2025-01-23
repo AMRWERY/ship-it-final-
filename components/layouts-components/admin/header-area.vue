@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Overlay Component -->
-    <Overlay :visible="isOverlayVisible" />
+    <Overlay :visible="localeStore.isOverlayVisible" />
 
     <header class="sticky top-0 flex w-full bg-white z-999 drop-shadow-1">
       <div class="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6">
@@ -31,13 +31,13 @@
             <!-- User Area -->
           </ul>
 
-          <nuxt-link class="me-4 text-neutral-600" to="" role="button" v-if="isRTL">
-            <span class="[&>svg]:w-5" @click="updateLocale('en')">
+          <nuxt-link class="me-4 text-neutral-600" to="" role="button" v-if="localeStore.isRTL">
+            <span class="[&>svg]:w-5" @click="setLocale('en')">
               En
             </span>
           </nuxt-link>
           <nuxt-link class="me-4 text-neutral-600" to="" role="button" v-else>
-            <span class="[&>svg]:w-5" @click="updateLocale('ar')">
+            <span class="[&>svg]:w-5" @click="setLocale('ar')">
               العربية
             </span>
           </nuxt-link>
@@ -58,32 +58,20 @@
 
 <script setup>
 const { toggleSidebar } = useSidebarStore()
+const localeStore = useLocaleStore();
 // const sidebarStore = useSidebarStore()
 
-const isRTL = ref(false);
 const { locale } = useI18n();
-const isOverlayVisible = ref(false);
 
-const updateLocale = (value) => {
-  isOverlayVisible.value = true;
-  setLocale(value);
-  localStorage.setItem('locale', value);
-  isRTL.value = value === 'ar';
-  setTimeout(() => {
-    isOverlayVisible.value = false;
-    // location.reload();
-  }, 3000);
+const setLocale = (value) => {
+  locale.value = value;
+  localeStore.updateLocale(value);
 };
 
-onMounted(() => {
-  const storedLocale = localStorage.getItem('locale') || 'en';
+computed(() => {
+  const storedLocale = localeStore.locale;
   setLocale(storedLocale);
-  isRTL.value = storedLocale === 'ar';
 });
-
-const setLocale = (lang) => {
-  locale.value = lang;
-};
 
 const authStore = useAuthStore();
 const isAuthenticated = computed(() => authStore.isAuthenticated);
