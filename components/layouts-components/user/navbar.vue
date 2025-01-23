@@ -109,9 +109,6 @@ onMounted(() => {
     if (authStore.user?.profileImg) {
         userProfileImg.value = authStore.user?.profileImg;
     }
-
-    //     const storedLocale = localeStore.locale;
-    //   setLocale(storedLocale);
 });
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
