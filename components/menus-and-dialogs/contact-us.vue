@@ -3,7 +3,7 @@
     <!-- Button trigger modal -->
     <button type="button" v-if="isAuthenticated && !isAdmin && isEmailInList !== null && isEmailInList"
       class="fixed flex items-center justify-center p-4 text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bottom-28 end-8 hover:from-purple-500 hover:via-pink-500 hover:to-yellow-500 focus:ring-4 focus:ring-purple-300 active:scale-90"
-      data-twe-toggle="modal" data-twe-target="#contactUsModalVarying" data-twe-ripple-init>
+      data-twe-toggle="modal" data-twe-target="#contactUsModalVarying">
       <icon name="ic:sharp-wechat" />
     </button>
 
@@ -73,7 +73,8 @@ const contactStore = useContactStore();
 const mailStore = useMailStore();
 const { t } = useI18n()
 
-const isAuthenticated = computed(() => authStore.isAuthenticated);
+const isAuthenticated = computed(() => localStorage.getItem('user'));
+// const isAuthenticated = computed(() => authStore.isAuthenticated);
 
 const isAdmin = computed(() => {
   const user = authStore.user;
@@ -126,7 +127,8 @@ const sendMessage = () => {
 const isEmailInList = ref(null);
 
 onMounted(() => {
-  const email = authStore.user?.email;
+  const email = localStorage.getItem('user');
+  // const email = authStore.user?.email;
   if (email) {
     isEmailInList.value = mailStore.checkEmailInMailList(email);
     // console.log(email)
@@ -138,7 +140,7 @@ onMounted(() => {
 });
 
 onMounted(async () => {
-  const { Modal, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Modal, Ripple });
+  const { Modal, initTWE } = await import("tw-elements");
+  initTWE({ Modal });
 });
 </script>
