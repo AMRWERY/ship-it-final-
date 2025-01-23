@@ -73,7 +73,7 @@
                         </nuxt-link>
 
                         <!--logout -->
-                        <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
+                        <nuxt-link to="/" type="button" class="relative flex text-white rounded-full cursor-pointer"
                             @click="logout" v-if="isAuthenticated && !isAdmin">
                             <span class="absolute -inset-1.5" />
                             <span class="sr-only">Logout</span>
