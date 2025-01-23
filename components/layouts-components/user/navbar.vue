@@ -98,7 +98,7 @@ const setLocale = (value) => {
     localeStore.updateLocale(value);
 };
 
-const userProfileImg = ref('');
+const userProfileImg = computed(() => authStore.user?.profileImg || '')
 
 computed(() => {
     const storedLocale = localeStore.locale;
