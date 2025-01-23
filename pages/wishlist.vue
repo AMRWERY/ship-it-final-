@@ -52,7 +52,9 @@
       </div>
 
       <!-- social-media-sharing component -->
-      <social-media-sharing />
+      <div v-if="wishlistStore.wishlist.length >= 1">
+        <social-media-sharing />
+      </div>
     </div>
   </div>
 </template>
@@ -69,79 +71,32 @@ onMounted(() => {
 
 const removingItem = ref(null);
 
-const removeItem = (docId) => {
+const removeItem = async (docId) => {
   removingItem.value = docId;
-  wishlistStore.removeFromWishlist(docId)
-    .then(() => {
-      setTimeout(() => {
-        removingItem.value = null;
-      }, 3000);
-    })
-    .catch((error) => {
-      console.error("Error removing item from wishlist:", error);
-    });
+  await wishlistStore.removeFromWishlist(docId);
+  setTimeout(() => {
+    removingItem.value = null;
+  }, 3000);
 };
-
-// const removeItem = async (docId) => {
-//   removingItem.value = docId;
-//   await wishlistStore.removeFromWishlist(docId);
-//   setTimeout(() => {
-//     removingItem.value = null;
-//   }, 3000);
-// };
 
 const loading = ref(false);
 
-const moveToCart = (item) => {
+const moveToCart = async (item) => {
   loading.value = true;
-  setTimeout(() => {
+  setTimeout(async () => {
     const { productId, title, price, imgOne } = item;
     const existingProduct = cartStore.cart.find((product) => product.productId === productId);
     if (existingProduct) {
       const newQuantity = existingProduct.quantity + 1;
-      cartStore.updateQuantityInCart(productId, newQuantity)
-        .then(() => {
-          localStorage.setItem('cart', JSON.stringify(cartStore.cart));
-          return wishlistStore.removeFromWishlist(item.docId);
-        })
-        .catch((error) => {
-          console.error("Error updating quantity in cart or removing from wishlist:", error);
-        })
-        .finally(() => {
-          loading.value = false;
-        });
+      await cartStore.updateQuantityInCart(productId, newQuantity);
     } else {
-      cartStore.addToCart(productId, title, price, price, imgOne, "", "", "0", 1)
-        .then(() => {
-          localStorage.setItem('cart', JSON.stringify(cartStore.cart));
-          return wishlistStore.removeFromWishlist(item.docId);
-        })
-        .catch((error) => {
-          console.error("Error adding product to cart or removing from wishlist:", error);
-        })
-        .finally(() => {
-          loading.value = false;
-        });
+      await cartStore.addToCart(productId, title, price, price, imgOne, "", "", "0", 1);
     }
+    localStorage.setItem('cart', JSON.stringify(cartStore.cart));
+    await wishlistStore.removeFromWishlist(item.docId);
+    loading.value = false;
   }, 3000);
 };
-
-// const moveToCart = async (item) => {
-//   loading.value = true;
-//   setTimeout(async () => {
-//     const { productId, title, price, imgOne } = item;
-//     const existingProduct = cartStore.cart.find((product) => product.productId === productId);
-//     if (existingProduct) {
-//       const newQuantity = existingProduct.quantity + 1;
-//       await cartStore.updateQuantityInCart(productId, newQuantity);
-//     } else {
-//       await cartStore.addToCart(productId, title, price, price, imgOne, "", "", "0", 1);
-//     }
-//     localStorage.setItem('cart', JSON.stringify(cartStore.cart));
-//     await wishlistStore.removeFromWishlist(item.docId);
-//     loading.value = false;
-//   }, 3000);
-// };
 
 useHead({
   titleTemplate: () => t("head.wishlist"),

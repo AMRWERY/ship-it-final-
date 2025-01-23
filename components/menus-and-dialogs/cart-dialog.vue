@@ -95,47 +95,29 @@
 const cartStore = useCartStore();
 const removingItem = ref(null);
 
-const removeItem = (docId, quantityToRemove) => {
+const removeItem = async (docId, quantityToRemove) => {
   if (!docId) {
-    // console.error("No docId provided for removal.");
+    console.error("No docId provided for removal.");
     return;
   }
-  removingItem.value = docId;
-  cartStore
-    .removeFromCart(docId, quantityToRemove)
-    .then(() => {
-      setTimeout(() => {
-        removingItem.value = null;
-      }, 3000);
-    })
-    .catch((error) => {
-      console.error("Error removing item:", error);
-    });
+  try {
+    removingItem.value = docId;
+    await cartStore.removeFromCart(docId, quantityToRemove);
+    setTimeout(() => {
+      removingItem.value = null;
+    }, 3000);
+  } catch (error) {
+    console.error("Error removing item:", error);
+  }
 };
 
-// const removeItem = async (docId, quantityToRemove) => {
-//   if (!docId) {
-//     console.error("No docId provided for removal.");
-//     return;
-//   }
-//   try {
-//     removingItem.value = docId;
-//     await cartStore.removeFromCart(docId, quantityToRemove);
-//     setTimeout(() => {
-//       removingItem.value = null;
-//     }, 3000);
-//   } catch (error) {
-//     console.error("Error removing item:", error);
-//   }
-// };
-
-const saveCartTolocalStorage = () => {
+const saveCartToLocalStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cartStore.cart));
 };
 
 onMounted(() => {
   cartStore.fetchCart();
-  saveCartTolocalStorage();
+  saveCartToLocalStorage();
 });
 
 const totalAmount = computed(() => {
@@ -154,14 +136,14 @@ const quantity = ref(1);
 const incrementQuantity = (item) => {
   item.quantity++;
   updateQuantityInStore(item.productId, item.quantity);
-  saveCartTolocalStorage();
+  saveCartToLocalStorage();
 };
 
 const decrementQuantity = (item) => {
   if (item.quantity > 1) {
     item.quantity--;
     updateQuantityInStore(item.productId, item.quantity);
-    saveCartTolocalStorage();
+    saveCartToLocalStorage();
   }
 };
 

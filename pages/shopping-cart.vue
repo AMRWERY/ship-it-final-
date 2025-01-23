@@ -148,7 +148,9 @@
                 </div>
 
                 <!-- social-media-sharing component -->
-                <social-media-sharing />
+                <div v-if="cartStore.cart.length >= 1">
+                    <social-media-sharing />
+                </div>
             </div>
         </section>
     </div>
@@ -159,46 +161,29 @@ const cartStore = useCartStore();
 const removingItem = ref(null);
 const { t } = useI18n()
 
-const removeItem = (docId) => {
+const removeItem = async (docId) => {
     if (!docId) {
-        // console.error("No docId provided for removal.");
+        console.error("No docId provided for removal.");
         return;
     }
-    removingItem.value = docId;
-    cartStore.removeFromCart(docId)
-        .then(() => {
-            setTimeout(() => {
-                removingItem.value = null;
-            }, 3000);
-        })
-        .catch((error) => {
-            console.error("Error removing item:", error);
-        });
+    try {
+        removingItem.value = docId;
+        await cartStore.removeFromCart(docId);
+        setTimeout(() => {
+            removingItem.value = null;
+        }, 3000);
+    } catch (error) {
+        console.error("Error removing item:", error);
+    }
 };
 
-// const removeItem = async (docId) => {
-//     if (!docId) {
-//         console.error("No docId provided for removal.");
-//         return;
-//     }
-//     try {
-//         removingItem.value = docId;
-//         await cartStore.removeFromCart(docId);
-//         setTimeout(() => {
-//             removingItem.value = null;
-//         }, 3000);
-//     } catch (error) {
-//         console.error("Error removing item:", error);
-//     }
-// };
-
-const saveCartTolocalStorage = () => {
+const saveCartToLocalStorage = () => {
     localStorage.setItem('cart', JSON.stringify(cartStore.cart));
 };
 
 onMounted(() => {
     cartStore.fetchCart();
-    saveCartTolocalStorage();
+    saveCartToLocalStorage();
 });
 
 const totalAmount = computed(() => {
@@ -217,14 +202,14 @@ const quantity = ref(1);
 const incrementQuantity = (item) => {
     item.quantity++;
     updateQuantityInStore(item.productId, item.quantity);
-    saveCartTolocalStorage();
+    saveCartToLocalStorage();
 };
 
 const decrementQuantity = (item) => {
     if (item.quantity > 1) {
         item.quantity--;
         updateQuantityInStore(item.productId, item.quantity);
-        saveCartTolocalStorage();
+        saveCartToLocalStorage();
     }
 };
 
