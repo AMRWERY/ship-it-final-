@@ -74,7 +74,8 @@ computed(() => {
 });
 
 const authStore = useAuthStore();
-const isAuthenticated = computed(() => authStore.isAuthenticated);
+const isAuthenticated = computed(() => localStorage.getItem('user'));
+// const isAuthenticated = computed(() => authStore.isAuthenticated);
 const isAdmin = computed(() => {
   const user = authStore.user;
   return user?.email === 'admin@ship.com';
