@@ -108,6 +108,7 @@ computed(() => {
 onMounted(() => {
     if (authStore.user?.profileImg) {
         userProfileImg.value = authStore.user?.profileImg;
+        // console.log('img', userProfileImg.value)
     }
 });
 
