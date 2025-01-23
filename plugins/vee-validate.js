@@ -72,5 +72,5 @@ export default defineNuxtPlugin((app) => {
   });
 
   // setLocale("en");
-  setLocale(locale || "ar");
+  setLocale(locale || "en");
 });
