@@ -167,121 +167,66 @@ export const useAuthStore = defineStore("auth-store", {
       }
     },
 
-    // async saveProfile(file) {
-    //   if (!this.user) throw new Error("User not authenticated");
-    //   const storage = getStorage();
-    //   const userDocRef = doc(db, "users", this.user.uid);
-    //   try {
-    //     let profileImgUrl = this.user.profileImg || null;
-    //     if (file) {
-    //       const storageRef = ref(
-    //         storage,
-    //         `users/${this.user.uid}/${file.name}`
-    //       );
-    //       await uploadBytes(storageRef, file);
-    //       profileImgUrl = await getDownloadURL(storageRef);
-    //     }
-    //     const updatedProfile = {
-    //       firstName: this.user.firstName || "",
-    //       lastName: this.user.lastName || "",
-    //       email: this.user.email || "",
-    //       phone: this.user.phone || null,
-    //       birthDate: this.user.birthDate || null,
-    //       profileImg: profileImgUrl,
-    //       address: this.user.address || "",
-    //       apartment: this.user.apartment || "",
-    //       selectedCity: this.user.selectedCity || "",
-    //     };
-    //     await updateDoc(userDocRef, updatedProfile);
-    //     this.user = { ...this.user, ...updatedProfile };
-    //     const sessionUserData = JSON.parse(localStorage.getItem("user")) || {};
-    //     localStorage.setItem(
-    //       "user",
-    //       JSON.stringify({ ...sessionUserData, ...updatedProfile })
-    //     );
-    //   } catch (error) {
-    //     console.error("Failed to save profile:", error);
-    //     throw error;
-    //   }
-    // },
     saveProfile(file) {
-      if (!this.user) throw new Error("User not authenticated");
-      const storage = getStorage();
-      const userDocRef = doc(db, "users", this.user.uid);
-      let profileImgUrl = this.user.profileImg || null;
-      const updateProfile = () => {
-        const updatedProfile = {
-          firstName: this.user.firstName || "",
-          lastName: this.user.lastName || "",
-          email: this.user.email || "",
-          phone: this.user.phone || null,
-          birthDate: this.user.birthDate || null,
-          profileImg: profileImgUrl,
-          address: this.user.address || "",
-          apartment: this.user.apartment || "",
-          selectedCity: this.user.selectedCity || "",
+      return new Promise((resolve, reject) => {
+        if (!this.user) {
+          reject(new Error("User not authenticated"));
+          return;
+        }
+        const storage = getStorage();
+        const userDocRef = doc(db, "users", this.user.uid);
+        let profileImgUrl = this.user.profileImg || null;
+        const updateProfile = () => {
+          const updatedProfile = {
+            firstName: this.user.firstName || "",
+            lastName: this.user.lastName || "",
+            email: this.user.email || "",
+            phone: this.user.phone || null,
+            birthDate: this.user.birthDate || null,
+            profileImg: profileImgUrl,
+            address: this.user.address || "",
+            apartment: this.user.apartment || "",
+            selectedCity: this.user.selectedCity || "",
+          };
+          updateDoc(userDocRef, updatedProfile)
+            .then(() => {
+              this.user = { ...this.user, ...updatedProfile };
+              const sessionUserData =
+                JSON.parse(localStorage.getItem("user")) || {};
+              localStorage.setItem(
+                "user",
+                JSON.stringify({ ...sessionUserData, ...updatedProfile })
+              );
+              resolve("Profile updated successfully");
+            })
+            .catch((error) => {
+              // console.error("Failed to update Firestore document:", error);
+              reject(error);
+            });
         };
-        updateDoc(userDocRef, updatedProfile)
-          .then(() => {
-            this.user = { ...this.user, ...updatedProfile };
-            const sessionUserData =
-              JSON.parse(localStorage.getItem("user")) || {};
-            localStorage.setItem(
-              "user",
-              JSON.stringify({ ...sessionUserData, ...updatedProfile })
-            );
-          })
-          .catch((error) => {
-            // console.error("Failed to update Firestore document:", error);
-            throw error;
-          });
-      };
-      if (file) {
-        const storageRef = ref(storage, `users/${this.user.uid}/${file.name}`);
-        uploadBytes(storageRef, file)
-          .then(() => getDownloadURL(storageRef))
-          .then((url) => {
-            profileImgUrl = url;
-            updateProfile();
-          })
-          .catch((error) => {
-            // console.error("Failed to upload file or get download URL:", error);
-            throw error;
-          });
-      } else {
-        updateProfile();
-      }
+        if (file) {
+          const storageRef = ref(
+            storage,
+            `users/${this.user.uid}/${file.name}`
+          );
+          uploadBytes(storageRef, file)
+            .then(() => getDownloadURL(storageRef))
+            .then((url) => {
+              profileImgUrl = url;
+              updateProfile();
+            })
+            .catch((error) => {
+              console.error(
+                "Failed to upload file or get download URL:",
+                error
+              );
+              reject(error);
+            });
+        } else {
+          updateProfile();
+        }
+      });
     },
-
-    // saveProfile() {
-    //   if (!this.user) {
-    //     return Promise.reject(new Error("User is not authenticated"));
-    //   }
-    //   const userDocRef = doc(db, "users", this.user.uid);
-    //   const updatedUserData = {
-    //     phone: this.user.phone || null,
-    //     firstName: this.user.firstName || "",
-    //     lastName: this.user.lastName || "",
-    //     email: this.user.email || "",
-    //     birthDate: this.user.birthDate || null,
-    //     address: this.user.address || "",
-    //     apartment: this.user.apartment || "",
-    //     selectedCity: this.user.selectedCity || "",
-    //   };
-    //   return updateDoc(userDocRef, updatedUserData)
-    //     .then(() => {
-    //       const sessionUserData = {
-    //         ...JSON.parse(localStorage.getItem("user")),
-    //         ...updatedUserData,
-    //       };
-    //       localStorage.setItem("user", JSON.stringify(sessionUserData));
-    //       return "Profile updated successfully";
-    //     })
-    //     .catch((error) => {
-    //       // console.error("Error updating profile:", error);
-    //       return Promise.reject(new Error("Failed to update profile"));
-    //     });
-    // },
 
     async resetPassword(email) {
       try {
