@@ -89,10 +89,9 @@
 
 <script setup>
 const checkoutStore = useCheckoutStore();
+const cartStore = useCartStore();
 
 const orderId = checkoutStore.generateOrderId();
-
-const cartStore = useCartStore();
 
 const subTotalAmount = computed(() => {
   return storedCart.value.reduce((total, item) => {
@@ -137,6 +136,7 @@ onMounted(() => {
   const savedCart = localStorage.getItem('cart');
   if (savedCart) {
     storedCart.value = JSON.parse(savedCart);
+    // console.log('cart data', storedCart.value)
   }
 });
 
