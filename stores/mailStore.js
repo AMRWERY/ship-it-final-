@@ -36,7 +36,7 @@ export const useMailStore = defineStore("mail", {
     },
 
     addEmailToMailList(email) {
-      addDoc(collection(db, "mail-list"), {
+      return addDoc(collection(db, "mail-list"), {
         email: email,
         timestamp: new Date().toLocaleDateString("en-CA"),
       })
@@ -47,17 +47,6 @@ export const useMailStore = defineStore("mail", {
           console.error("Error adding email: ", error);
         });
     },
-    // async addEmailToMailList(email) {
-    //   try {
-    //     const docRef = await addDoc(collection(db, "mail-list"), {
-    //       email: email,
-    //       timestamp: new Date().toLocaleDateString("en-CA"),
-    //     });
-    //     // console.log("Email added to Firestore with ID: ", docRef.id);
-    //   } catch (error) {
-    //     console.error("Error adding email: ", error);
-    //   }
-    // },
 
     checkEmailInMailList(email) {
       const q = query(collection(db, "mail-list"), where("email", "==", email));

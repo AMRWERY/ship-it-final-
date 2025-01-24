@@ -29,8 +29,16 @@
               <button @click="subscribe"
                 class="absolute end-1 top-1 rounded bg-black py-2 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="submit">
-                {{ $t('btn.subscribe') }}
+                <div class="flex items-center justify-center" v-if="loading">
+                  <span class="text-center me-2">{{ $t('btn.please_wait') }}</span>
+                  <icon name="svg-spinners:270-ring-with-bg" />
+                </div>
+                <span v-else>{{ $t('btn.subscribe') }}</span>
               </button>
+            </div>
+
+            <div v-if="subscribeFailed" class="mt-2">
+              <p class="font-normal text-center text-red-800">Please enter a valid email address</p>
             </div>
           </div>
         </div>
@@ -43,30 +51,23 @@
 const mailStore = useMailStore();
 const email = ref('');
 const showDialog = ref(false);
+const loading = ref(false);
+const subscribeFailed = ref(false)
 
-const subscribe = () => {
+const subscribe = async () => {
+  loading.value = true;
   if (email.value) {
-    mailStore
-      .addEmailToMailList(email.value)
-      .then(() => {
-        closeModal();
-      })
-      .catch((error) => {
-        console.error("Error subscribing: ", error);
-      });
+    try {
+      await mailStore.addEmailToMailList(email.value);
+      closeModal();
+    } catch (error) {
+      console.error("Error subscribing: ", error);
+    }
   } else {
-    alert("Please enter a valid email address.");
+    subscribeFailed.value = false
+    loading.value = false;
   }
 };
-
-// const subscribe = async () => {
-//   if (email.value) {
-//     await mailStore.addEmailToMailList(email.value);
-//     closeModal();
-//   } else {
-//     alert('Please enter a valid email address.');
-//   }
-// };
 
 const closeModal = () => {
   showDialog.value = false
