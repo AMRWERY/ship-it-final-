@@ -53,7 +53,7 @@
     "price": "Price",
     "enter_price": "Enter price",
     "discount": "Discount",
-    "enter_discount": "Enter discount",
+    "enter_the_discount_percentage": "Enter the discount percentage",
     "sku": "SKU",
     "enter_sku": "Enter SKU",
     "start_time": "Start time",
@@ -69,7 +69,18 @@
     "cvv": "CVV",
     "enter_cvv": "Enter CVV",
     "start_date": "Start date",
-    "end_date": "End date"
+    "end_date": "End date",
+    "add_product": "Add Product",
+    "description": "Description",
+    "discounted_price": "Discounted Price",
+    "enter_discounted_price": "Enter discounted price",
+    "availability": "Availability",
+    "select_availability": "Select availability",
+    "stock": "Stock",
+    "enter_stock": "Enter number of stock",
+    "product_type": "Product Type",
+    "size": "Size",
+    "color": "Color"
   },
   "btn": {
     "logging": "Logging",
@@ -95,7 +106,8 @@
     "sending": "Sending",
     "filter": "Filter",
     "view_details": "View details",
-    "close": "Close"
+    "close": "Close",
+    "add_product": "Add Product"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -137,7 +149,8 @@
     "order_status_updated": "Order status updated",
     "failed_to_update_order": "Failed to update order",
     "product_deleted_successfully": "Product deleted successfully",
-    "product_deletion_failed": "Product deletion failed"
+    "product_deletion_failed": "Product deletion failed",
+    "product_added_successfully": "Product added successfully"
   },
   "breadcrumb": {
     "home": "Home",
@@ -148,7 +161,8 @@
     "order_summary": "Order Summary",
     "dashboard_users": "Users",
     "dashboard_orders": "Orders",
-    "dashboard_items_stock": "Items Stock"
+    "dashboard_items_stock": "Items Stock",
+    "dashboard_add_product": "Add Product"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -159,7 +173,8 @@
     "order_summary": "Order Summary",
     "users": "Users",
     "orders": "Orders",
-    "items_stock": "Items Stock"
+    "items_stock": "Items Stock",
+    "add_product": "Add Product"
   },
   "social_media": {
     "share_my": "Share my",

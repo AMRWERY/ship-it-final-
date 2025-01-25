@@ -6,6 +6,7 @@ import {
   max,
   regex,
   between,
+  numeric
 } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
@@ -57,6 +58,7 @@ export default defineNuxtPlugin((app) => {
   defineRule("max", max);
   defineRule("regex", regex);
   defineRule("between", between);
+  defineRule("numeric", numeric);
 
   configure({
     generateMessage: localize({

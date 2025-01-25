@@ -53,7 +53,7 @@
     "price": "السعر",
     "enter_price": "أدخل السعر",
     "discount": "الخصم",
-    "enter_discount": "أدخل الخصم",
+    "enter_the_discount_percentage": "ادخل النسبه المئويه للخصم",
     "sku": "الرمز المرجعي للمنتج",
     "enter_sku": "أدخل الرمز المرجعي للمنتج",
     "start_time": "وقت البدء",
@@ -69,7 +69,18 @@
     "cvv": "رمز التحقق (CVV)",
     "enter_cvv": "أدخل رمز التحقق (CVV)",
     "start_date": "تاريخ البدء",
-    "end_date": "تاريخ الأنتهاء"
+    "end_date": "تاريخ الأنتهاء",
+    "add_product": "إضافة منتج",
+    "description": "الوصف",
+    "discounted_price": "السعر بعد الخصم",
+    "enter_discounted_price": "أدخل السعر بعد الخصم",
+    "availability": "التوفر",
+    "select_availability": "اختر التوفر",
+    "stock": "المخزون",
+    "enter_stock": "أدخل عدد المخزون",
+    "product_type": "نوع المنتج",
+    "size": "المقاس / الحجم",
+    "color": "اللون"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
@@ -95,7 +106,8 @@
     "sending": "جارٍ الإرسال",
     "filter": "تصفية",
     "view_details": "عرض التفاصيل",
-    "close": "غلق"
+    "close": "غلق",
+    "add_product": "إضافة منتج"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -137,7 +149,8 @@
     "order_status_updated": "تم تحديث حالة الطلب",
     "failed_to_update_order": "فشل في تحديث الطلب",
     "product_deleted_successfully": "تم حذف المنتج بنجاح",
-    "product_deletion_failed": "فشل حذف المنتج"
+    "product_deletion_failed": "فشل حذف المنتج",
+    "product_added_successfully": "تم إضافة المنتج بنجاح"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -148,7 +161,8 @@
     "order_summary": "ملخص الطلب",
     "dashboard_users": "المستخدمون",
     "dashboard_orders": "الطلبات",
-    "dashboard_items_stock": "مخزون العناصر"
+    "dashboard_items_stock": "مخزون العناصر",
+    "dashboard_add_product": "إضافة منتج"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -159,7 +173,8 @@
     "order_summary": "ملخص الطلب",
     "users": "المستخدمون",
     "orders": "الطلبات",
-    "items_stock": "مخزون العناصر"
+    "items_stock": "مخزون العناصر",
+    "add_product": "إضافة منتج"
   },
   "social_media": {
     "share_my": "شارك",

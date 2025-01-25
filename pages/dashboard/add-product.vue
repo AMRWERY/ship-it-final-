@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- breadcrumb component -->
+    <breadcrumb />
+
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white border rounded-lg">
       <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
         }}</h2>
@@ -14,9 +17,8 @@
         </div>
 
         <div class="mb-4">
-          <label for="brand" class="block mb-2 font-medium text-gray-700">Brand</label>
-          <input type="text" id="brand" name="brand" v-model="product.brand"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+          <dynamic-inputs :label="t('form.brand')" :placeholder="t('form.enter_brand')" type="text" name="brand"
+            :rules="'required|alpha_spaces'" :required="true" prefixIcon="cib:brand-ai" v-model="product.brand" />
         </div>
 
         <div class="mb-4">
@@ -53,19 +55,20 @@
         </div>
 
         <div class="mb-4">
-          <label for="title" class="block mb-2 font-medium text-gray-700">{{ $t('form.title') }}</label>
-          <input type="text" id="title" name="title" v-model="product.title"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+          <dynamic-inputs :label="t('form.product_title')" :placeholder="t('form.enter_product_title')" type="text"
+            name="title" :rules="'required|alpha_spaces'" :required="true" prefixIcon="mdi:tshirt-v"
+            v-model="product.title" />
         </div>
 
         <div class="mb-4">
           <label for="description" class="block mb-2 font-medium text-gray-700">{{ $t('form.description') }}</label>
-          <textarea id="description" rows="4" name="description" v-model="product.description"
+          <textarea id="description" rows="4" name="description" :placeholder="$t('form.enter_product_description')"
+            v-model="product.description"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400" />
         </div>
 
         <div class="mb-4">
-          <p class="block mb-2 font-medium text-gray-700">Product Type</p>
+          <p class="block mb-2 font-medium text-gray-700">{{ $t('form.product_type') }}</p>
           <div class="grid grid-cols-3 gap-4">
             <label for="new-arrival" class="block mb-2 font-medium text-gray-700">
               <input type="checkbox" id="new-arrival" name="new-arrival" value="New_Arrival" class="me-2"
@@ -94,7 +97,7 @@
         </div>
 
         <div class="mb-4">
-          <p class="block mb-2 font-medium text-gray-700">Size</p>
+          <p class="block mb-2 font-medium text-gray-700">{{ $t('form.size') }}</p>
           <div class="grid grid-cols-4 gap-4 md:grid-cols-5 sm:grid-cols-4">
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
               <input type="checkbox" id="size-choice" name="size-choice" value="XXS" class="me-2"
@@ -185,7 +188,7 @@
 
         <!-- don't delete it -->
         <div class="mb-4">
-          <p class="block mb-2 font-medium text-gray-700">Color</p>
+          <p class="block mb-2 font-medium text-gray-700">{{ $t('form.color') }}</p>
           <div class="grid grid-cols-3 gap-4">
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
               <input type="checkbox" id="color-choice" name="color-choice" value="Black" class="me-2"
@@ -240,30 +243,28 @@
         </div>
 
         <div class="mb-4">
-          <label for="original-price" class="block mb-2 font-medium text-gray-700">{{ $t('form.original_price')
-            }}</label>
-          <input type="text" id="original-price" name="original-price" v-model="product.originalPrice"
+          <dynamic-inputs :label="t('form.original_price')" :placeholder="t('form.enter_original_price')" type="text"
+            name="price" :rules="'required'" :required="true" prefixIcon="solar:dollar-linear"
             @input="(event) => handleInput(event, 'originalPrice')" @blur="() => handleBlur('originalPrice')"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+            v-model="product.originalPrice" />
         </div>
 
         <div class="mb-4">
-          <label for="price" class="block mb-2 font-medium text-gray-700">{{ $t('form.discounted_price') }}</label>
-          <input type="text" id="price" name="price" v-model="product.discountedPrice"
+          <dynamic-inputs :label="t('form.discounted_price')" :placeholder="t('form.enter_discounted_price')"
+            type="text" name="price" :rules="'required'" :required="true" prefixIcon="solar:dollar-linear"
             @input="(event) => handleInput(event, 'discountedPrice')" @blur="() => handleBlur('discountedPrice')"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+            v-model="product.discountedPrice" />
         </div>
 
         <div class="mb-4">
-          <label for="discount" class="block mb-2 font-medium text-gray-700">{{ $t('form.discount') }}</label>
-          <input type="text" id="discount" name="discount" v-model="product.discount"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+          <dynamic-inputs :label="t('form.discount')" :placeholder="t('form.enter_the_discount_percentage')" type="text"
+            name="discount" :rules="'required'" :required="true" prefixIcon="ri:discount-percent-fill"
+            v-model="product.discount" />
         </div>
 
         <div class="mb-4">
-          <label for="sku" class="block mb-2 font-medium text-gray-700">SKU</label>
-          <input type="text" id="sku" name="sku" v-model="product.sku"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+          <dynamic-inputs :label="t('form.sku')" :placeholder="t('form.enter_sku')" type="text" name="sku"
+            :rules="'required'" :required="true" prefixIcon="material-symbols:barcode" v-model="product.sku" />
         </div>
 
         <div class="mb-4">
@@ -277,15 +278,15 @@
         </div>
 
         <div class="mb-4" v-if="product.availability === 'In stock'">
-          <label for="sku" class="block mb-2 font-medium text-gray-700">Stock</label>
-          <input type="number" id="sku" name="sku" v-model="product.stock"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
+          <dynamic-inputs :label="t('form.stock')" :placeholder="t('form.enter_stock')" type="text" name="stock"
+            :rules="'required|numeric'" :required="true" prefixIcon="lsicon:management-stockout-filled"
+            v-model="product.stock" />
         </div>
 
         <div>
           <button type="submit" class="w-full px-4 py-2 btn-style">
             <div class="flex items-center justify-center" v-if="loading">
-              <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
+              <span class="text-center me-2">{{ $t('btn.please_wait') }}...</span>
               <icon name="svg-spinners:270-ring-with-bg" />
             </div>
             <span v-else>{{ $t('btn.add_product') }}</span>
@@ -336,19 +337,71 @@ const handleImageUpload = (event) => {
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n();
 
+// const handleSubmit = () => {
+//   loading.value = true;
+//   const category = categories.value.find(cat => cat.id === selectedCategory.value);
+//   if (!product.value.title || !selectedCategory.value || !selectedFiles.value) {
+//     triggerToast({
+//       title: t('toast.error'),
+//       message: t('toast.please_fill_all_required_fields'),
+//       type: 'error',
+//       icon: 'mdi-alert-circle',
+//     });
+//     loading.value = false;
+//     return;
+//   }
+//   const filteredProductData = Object.fromEntries(
+//     Object.entries(product.value).filter(([key, value]) => {
+//       if (Array.isArray(value)) {
+//         return value.length > 0;
+//       }
+//       return value !== "" && value !== null && value !== undefined;
+//     })
+//   );
+//   const productData = {
+//     ...filteredProductData,
+//     categoryId: selectedCategory.value,
+//   };
+//   store.createProduct(productData, selectedFiles.value)
+//     .then(() => {
+//       triggerToast({
+//         title: t('toast.success'),
+//         message: t('toast.product_added_successfully'),
+//         type: 'success',
+//         icon: 'mdi-check-circle',
+//       });
+//       resetForm();
+//     })
+//     .catch((error) => {
+//       console.error("Error submitting product:", error);
+//       triggerToast({
+//         title: t('toast.error'),
+//         message: t('toast.something_went_wrong_please_try_again'),
+//         type: 'error',
+//         icon: 'mdi-alert-circle',
+//       });
+//     })
+//     .finally(() => {
+//       loading.value = false;
+//     });
+// };
 const handleSubmit = () => {
   loading.value = true;
-  const category = categories.value.find(cat => cat.id === selectedCategory.value);
+  const category = categories.value.find(
+    (cat) => cat.id === selectedCategory.value
+  );
+
   if (!product.value.title || !selectedCategory.value || !selectedFiles.value) {
     triggerToast({
-      title: t('toast.error'),
-      message: t('toast.please_fill_all_required_fields'),
-      type: 'error',
-      icon: 'mdi-alert-circle',
+      title: t("toast.error"),
+      message: t("toast.please_fill_all_required_fields"),
+      type: "error",
+      icon: "mdi-alert-circle",
     });
     loading.value = false;
     return;
   }
+
   const filteredProductData = Object.fromEntries(
     Object.entries(product.value).filter(([key, value]) => {
       if (Array.isArray(value)) {
@@ -357,27 +410,30 @@ const handleSubmit = () => {
       return value !== "" && value !== null && value !== undefined;
     })
   );
+
   const productData = {
     ...filteredProductData,
     categoryId: selectedCategory.value,
   };
-  store.createProduct(productData, selectedFiles.value)
+
+  store
+    .createProduct(productData, selectedFiles.value)
     .then(() => {
       triggerToast({
-        title: t('toast.success'),
-        message: t('toast.product_added_successfully'),
-        type: 'success',
-        icon: 'mdi-check-circle',
+        title: t("toast.success"),
+        message: t("toast.product_added_successfully"),
+        type: "success",
+        icon: "mdi-check-circle",
       });
       resetForm();
     })
     .catch((error) => {
       console.error("Error submitting product:", error);
       triggerToast({
-        title: t('toast.error'),
-        message: t('toast.something_went_wrong_please_try_again'),
-        type: 'error',
-        icon: 'mdi-alert-circle',
+        title: t("toast.error"),
+        message: t("toast.something_went_wrong_please_try_again"),
+        type: "error",
+        icon: "mdi-alert-circle",
       });
     })
     .finally(() => {
@@ -439,6 +495,11 @@ const resetForm = () => {
 };
 
 const categoryStore = useCategoriesStore()
+
+// onMounted(async () => {
+//   await categoryStore.fetchCategories();
+//   categories.value = categoryStore.categories;
+// });
 
 onMounted(() => {
   categoryStore.fetchCategories();
