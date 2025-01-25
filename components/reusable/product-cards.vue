@@ -29,7 +29,7 @@
             </div>
           </div>
 
-          <nuxt-link to="" class="text-lg font-semibold leading-tight text-gray-900 truncate hover:underline">
+          <nuxt-link to="" class="text-lg font-semibold leading-tight text-gray-900 hover:underline">
             {{ product.title }}</nuxt-link>
           <div class="flex items-center gap-2 mt-2">
             <div class="flex items-center">
