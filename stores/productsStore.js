@@ -22,34 +22,35 @@ export const useProductsStore = defineStore("new-products", {
   }),
 
   actions: {
-    // async fetchProducts() {
-    //   try {
-    //     const querySnap = await getDocs(query(collection(db, "products")));
-    //     const allProducts = querySnap.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     this.products = allProducts;
-    //     // console.log(this.products);
-    //     this.updatePagination();
-    //   } catch (error) {
-    //     console.error("Error fetching products:", error);
-    //   }
-    // },
-    fetchProducts() {
-      getDocs(query(collection(db, "products")))
-        .then((querySnap) => {
-          const allProducts = querySnap.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          this.products = allProducts;
-          this.updatePagination();
-        })
-        .catch((error) => {
-          console.error("Error fetching products:", error);
-        });
+    async fetchProducts() {
+      try {
+        const querySnap = await getDocs(query(collection(db, "products")));
+        const allProducts = querySnap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        this.products = allProducts;
+        console.log(this.products);
+        this.updatePagination();
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     },
+    // fetchProducts() {
+    //   getDocs(query(collection(db, "products")))
+    //     .then((querySnap) => {
+    //       const allProducts = querySnap.docs.map((doc) => ({
+    //         id: doc.id,
+    //         ...doc.data(),
+    //       }));
+    //       this.products = allProducts;
+    //       console.log(this.products);
+    //       this.updatePagination();
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching products:", error);
+    //     });
+    // },
 
     // async createProduct(productData, imageFiles) {
     //   try {
@@ -78,11 +79,13 @@ export const useProductsStore = defineStore("new-products", {
     //     throw error;
     //   }
     // },
+
     createProduct(productData, imageFiles) {
       if (!imageFiles || imageFiles.length < 1) {
-        // console.error("At least one image file is required.");
-        return;
+        console.error("At least one image file is required.");
+        return Promise.reject("No image files provided.");
       }
+
       const imageUrls = [];
       const uploadPromises = imageFiles.map((file) => {
         const storagePath = "/products/" + file.name;
@@ -93,7 +96,8 @@ export const useProductsStore = defineStore("new-products", {
             imageUrls.push(url);
           });
       });
-      Promise.all(uploadPromises)
+
+      return Promise.all(uploadPromises)
         .then(() => {
           const imageUrlsObj = imageUrls.reduce((acc, url, index) => {
             acc[`imageUrl${index + 1}`] = url;
@@ -107,8 +111,40 @@ export const useProductsStore = defineStore("new-products", {
         })
         .catch((error) => {
           console.error("Error adding product:", error);
+          throw error; // Re-throw error to allow chaining `.catch()` in the caller
         });
     },
+    // createProduct(productData, imageFiles) {
+    //   if (!imageFiles || imageFiles.length < 1) {
+    //     // console.error("At least one image file is required.");
+    //     return;
+    //   }
+    //   const imageUrls = [];
+    //   const uploadPromises = imageFiles.map((file) => {
+    //     const storagePath = "/products/" + file.name;
+    //     const storageRef = ref(storage, storagePath);
+    //     return uploadBytes(storageRef, file)
+    //       .then((snapshot) => getDownloadURL(snapshot.ref))
+    //       .then((url) => {
+    //         imageUrls.push(url);
+    //       });
+    //   });
+    //   Promise.all(uploadPromises)
+    //     .then(() => {
+    //       const imageUrlsObj = imageUrls.reduce((acc, url, index) => {
+    //         acc[`imageUrl${index + 1}`] = url;
+    //         return acc;
+    //       }, {});
+    //       const newProductData = { ...productData, ...imageUrlsObj };
+    //       return addDoc(collection(db, "products"), newProductData);
+    //     })
+    //     .then(() => {
+    //       this.updatePagination();
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error adding product:", error);
+    //     });
+    // },
 
     updateProduct(productId, updatedData) {
       const productRef = doc(db, "products", productId);
