@@ -258,7 +258,7 @@
             }}</label>
           <input id="category-title" type="text" v-model="product.discount"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
-            :placeholder="$t('form.enter_discount')" required />
+            :placeholder="$t('form.enter_the_discount_percentage')" required />
         </div>
 
         <div class="mb-4">
@@ -385,64 +385,6 @@ const handleAddDeal = () => {
     });
 };
 
-// const handleAddDeal = async () => {
-//   loading.value = true;
-//   const category = categories.value.find(cat => cat.id === selectedCategory.value);
-//   try {
-//     if (
-//       !product.value.title ||
-//       !selectedCategory.value ||
-//       !product.value.startTime ||
-//       !product.value.endTime ||
-//       selectedFiles.value.length === 0
-//     ) {
-//       triggerToast({
-//         title: t("toast.error"),
-//         message: t("toast.please_fill_all_required_fields"),
-//         type: "error",
-//         icon: "mdi-alert-circle",
-//       });
-//       return;
-//     }
-//     const startTime = Timestamp.fromDate(new Date(product.value.startTime));
-//     const endTime = Timestamp.fromDate(new Date(product.value.endTime));
-//     const filteredProductData = Object.fromEntries(
-//       Object.entries(product.value).filter(([key, value]) => {
-//         if (Array.isArray(value)) {
-//           return value.length > 0;
-//         }
-//         return value !== "" && value !== null && value !== undefined;
-//       })
-//     );
-//     const productData = {
-//       ...filteredProductData,
-//       categoryId: selectedCategory.value,
-//       startTime,
-//       endTime,
-//     };
-//     const success = await todayDealStore.addNewDeal(productData, selectedFiles.value);
-//     if (success) {
-//       triggerToast({
-//         title: t("toast.success"),
-//         message: t("toast.deal_added_successfully"),
-//         type: "success",
-//         icon: "mdi-check-circle",
-//       });
-//       resetForm();
-//     }
-//   } catch (error) {
-//     console.error("Error submitting product:", error);
-//     triggerToast({
-//       title: t("toast.error"),
-//       message: t("toast.something_went_wrong_please_try_again"),
-//       type: "error",
-//       icon: "mdi-alert-circle",
-//     });
-//   } finally {
-//     loading.value = false;
-//   }
-// };
-
 const handleImageUpload = (event) => {
   const files = event.target.files;
   if (files.length > 0) {
@@ -477,8 +419,8 @@ const handleBlur = (key) => {
   product.value[key] = enforceTwoDecimalPlaces(product.value[key]);
 };
 
-onMounted(() => {
-  categoryStore.fetchCategories();
+onMounted(async () => {
+  await categoryStore.fetchCategories();
   categories.value = categoryStore.categories;
 });
 
