@@ -385,12 +385,12 @@ const { t } = useI18n();
 //       loading.value = false;
 //     });
 // };
+
 const handleSubmit = () => {
   loading.value = true;
   const category = categories.value.find(
     (cat) => cat.id === selectedCategory.value
   );
-
   if (!product.value.title || !selectedCategory.value || !selectedFiles.value) {
     triggerToast({
       title: t("toast.error"),
@@ -401,7 +401,6 @@ const handleSubmit = () => {
     loading.value = false;
     return;
   }
-
   const filteredProductData = Object.fromEntries(
     Object.entries(product.value).filter(([key, value]) => {
       if (Array.isArray(value)) {
@@ -410,12 +409,10 @@ const handleSubmit = () => {
       return value !== "" && value !== null && value !== undefined;
     })
   );
-
   const productData = {
     ...filteredProductData,
     categoryId: selectedCategory.value,
   };
-
   store
     .createProduct(productData, selectedFiles.value)
     .then(() => {
@@ -428,7 +425,7 @@ const handleSubmit = () => {
       resetForm();
     })
     .catch((error) => {
-      console.error("Error submitting product:", error);
+      // console.error("Error submitting product:", error);
       triggerToast({
         title: t("toast.error"),
         message: t("toast.something_went_wrong_please_try_again"),
