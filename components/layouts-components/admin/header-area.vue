@@ -64,14 +64,27 @@ const localeStore = useLocaleStore();
 const { locale } = useI18n();
 
 const setLocale = (value) => {
-  locale.value = value;
   localeStore.updateLocale(value);
+  locale.value = value;
+  updatePageTitle();
 };
 
-computed(() => {
-  const storedLocale = localeStore.locale;
-  setLocale(storedLocale);
+watch(() => localeStore.locale, (newLocale) => {
+  locale.value = newLocale;
+  updatePageTitle();
 });
+
+const updatePageTitle = () => {
+  const pageTitle = locale.value === 'ar' ? 'العنوان بالعربية' : 'Title in English'; // Adjust based on current locale
+  useHead({
+    title: pageTitle,
+  });
+};
+
+// computed(() => {
+//   const storedLocale = localeStore.locale;
+//   setLocale(storedLocale);
+// });
 
 const authStore = useAuthStore();
 const isAuthenticated = computed(() => localStorage.getItem('user'));
@@ -84,5 +97,6 @@ const isAdmin = computed(() => {
 onMounted(async () => {
   const { Tooltip, Ripple, initTWE } = await import("tw-elements");
   initTWE({ Tooltip, Ripple });
+  updatePageTitle()
 });
 </script>

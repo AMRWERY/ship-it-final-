@@ -82,7 +82,7 @@ const menuGroups = computed(() => [
         label: 'layout.products',
         route: '',
         children: [
-          { label: 'layout.add_product', route: '' },
+          { label: 'layout.add_product', route: '/dashboard/add-product' },
           { label: 'layout.edit_product', route: '' }
         ]
       },
