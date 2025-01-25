@@ -80,7 +80,9 @@
     "enter_stock": "أدخل عدد المخزون",
     "product_type": "نوع المنتج",
     "size": "المقاس / الحجم",
-    "color": "اللون"
+    "color": "اللون",
+    "product_description_required": "وصف المنتج مطلوب",
+    "availability_required": "التوفر مطلوب"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",

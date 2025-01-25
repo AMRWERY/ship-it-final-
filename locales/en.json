@@ -80,7 +80,9 @@
     "enter_stock": "Enter number of stock",
     "product_type": "Product Type",
     "size": "Size",
-    "color": "Color"
+    "color": "Color",
+    "product_description_required": "Product description required",
+    "availability_required": "Availability required"
   },
   "btn": {
     "logging": "Logging",

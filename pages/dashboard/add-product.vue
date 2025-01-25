@@ -44,9 +44,6 @@
             <img :src="image" class="w-48 h-32 rounded-lg" />
           </div>
         </div>
-        <!-- <div class="flex items-center justify-center mb-4 space-s-6" v-if="previewImage">
-          <img :src="previewImage" class="w-48 h-32 rounded-lg">
-        </div> -->
 
         <div class="flex items-center justify-center mb-4 space-s-6">
           <div v-if="product.imgOne" class="mt-4 border border-gray-200">
@@ -56,8 +53,7 @@
 
         <div class="mb-4">
           <dynamic-inputs :label="t('form.product_title')" :placeholder="t('form.enter_product_title')" type="text"
-            name="title" :rules="'required|alpha_spaces'" :required="true" prefixIcon="mdi:tshirt-v"
-            v-model="product.title" />
+            name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v" v-model="product.title" />
         </div>
 
         <div class="mb-4">
@@ -306,13 +302,11 @@
 </template>
 
 <script setup>
-// import { useProductsStore } from '@/stores/productsStore';
-
 const store = useProductsStore()
 const loading = ref(false);
 const categories = ref([])
 const selectedCategory = ref('')
-const product = ref({ brand: '', title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
+const product = ref({ brand: '', title: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
 const selectedFiles = ref([]);
 const previewImages = ref([])
 
@@ -336,55 +330,6 @@ const handleImageUpload = (event) => {
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n();
-
-// const handleSubmit = () => {
-//   loading.value = true;
-//   const category = categories.value.find(cat => cat.id === selectedCategory.value);
-//   if (!product.value.title || !selectedCategory.value || !selectedFiles.value) {
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.please_fill_all_required_fields'),
-//       type: 'error',
-//       icon: 'mdi-alert-circle',
-//     });
-//     loading.value = false;
-//     return;
-//   }
-//   const filteredProductData = Object.fromEntries(
-//     Object.entries(product.value).filter(([key, value]) => {
-//       if (Array.isArray(value)) {
-//         return value.length > 0;
-//       }
-//       return value !== "" && value !== null && value !== undefined;
-//     })
-//   );
-//   const productData = {
-//     ...filteredProductData,
-//     categoryId: selectedCategory.value,
-//   };
-//   store.createProduct(productData, selectedFiles.value)
-//     .then(() => {
-//       triggerToast({
-//         title: t('toast.success'),
-//         message: t('toast.product_added_successfully'),
-//         type: 'success',
-//         icon: 'mdi-check-circle',
-//       });
-//       resetForm();
-//     })
-//     .catch((error) => {
-//       console.error("Error submitting product:", error);
-//       triggerToast({
-//         title: t('toast.error'),
-//         message: t('toast.something_went_wrong_please_try_again'),
-//         type: 'error',
-//         icon: 'mdi-alert-circle',
-//       });
-//     })
-//     .finally(() => {
-//       loading.value = false;
-//     });
-// };
 
 const handleSubmit = () => {
   loading.value = true;
@@ -438,52 +383,6 @@ const handleSubmit = () => {
     });
 };
 
-// const handleSubmit = async () => {
-//   loading.value = true;
-//   const category = categories.value.find(cat => cat.id === selectedCategory.value);
-//   try {
-//     if (!product.value.title || !selectedCategory.value || !selectedFiles.value) {
-//       triggerToast({
-//         title: t('toast.error'),
-//         message: t('toast.please_fill_all_required_fields'),
-//         type: 'error',
-//         icon: 'mdi-alert-circle',
-//       });
-//       return;
-//     }
-//     const filteredProductData = Object.fromEntries(
-//       Object.entries(product.value).filter(([key, value]) => {
-//         if (Array.isArray(value)) {
-//           return value.length > 0;
-//         }
-//         return value !== "" && value !== null && value !== undefined;
-//       })
-//     );
-//     const productData = {
-//       ...filteredProductData,
-//       categoryId: selectedCategory.value,
-//     };
-//     await store.createProduct(productData, selectedFiles.value);
-//     triggerToast({
-//       title: t('toast.success'),
-//       message: t('toast.product_added_successfully'),
-//       type: 'success',
-//       icon: 'mdi-check-circle',
-//     });
-//     resetForm();
-//   } catch (error) {
-//     console.error("Error submitting product:", error);
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.something_went_wrong_please_try_again'),
-//       type: 'error',
-//       icon: 'mdi-alert-circle',
-//     });
-//   } finally {
-//     loading.value = false;
-//   }
-// };
-
 const resetForm = () => {
   product.value = { brand: '', title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '' };
   selectedCategory.value = '';
@@ -493,13 +392,8 @@ const resetForm = () => {
 
 const categoryStore = useCategoriesStore()
 
-// onMounted(async () => {
-//   await categoryStore.fetchCategories();
-//   categories.value = categoryStore.categories;
-// });
-
-onMounted(() => {
-  categoryStore.fetchCategories();
+onMounted(async () => {
+  await categoryStore.fetchCategories();
   categories.value = categoryStore.categories;
 });
 
