@@ -107,7 +107,7 @@
             </td>
             <td class="p-4 py-5">
               <button type="button" @click="deleteProduct(product.id)">
-                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="product.loading" />
+                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="loading" />
                 <icon name="material-symbols:delete-sharp" class="text-red-700" data-twe-toggle="tooltip"
                   data-twe-placement="top" :title="$t('tooltip.delete_item')" v-else />
               </button>
@@ -154,73 +154,37 @@
 const { t } = useI18n()
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 const productStore = useProductsStore()
+const loading = ref(false)
 
 onMounted(() => {
   productStore.fetchProducts()
 });
 
-// const deleteProduct = async (productId) => {
-//   const product = productStore.paginatedProducts.find(p => p.id === productId);
-//   if (product) {
-//     product.loading = true;
-//   }
-//   try {
-//     await productStore.deleteProduct(productId);
-//     productStore.paginatedProducts = productStore.paginatedProducts.filter(product => product.id !== productId);
-//     triggerToast({
-//       title: t('toast.great'),
-//       message: t('toast.product_deleted_successfully'),
-//       type: 'success',
-//       icon: 'mdi:check-circle',
-//     });
-//   } catch (error) {
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.product_deletion_failed'),
-//       type: 'error',
-//       icon: 'mdi:alert-circle',
-//     });
-//   } finally {
-//     setTimeout(() => {
-//       if (product) {
-//         product.loading = false;
-//       }
-//     }, 3000);
-//   }
-// };
-const deleteProduct = (productId) => {
+const deleteProduct = async (productId) => {
   const product = productStore.paginatedProducts.find((p) => p.id === productId);
-  if (product) {
-    product.loading = true;
-  }
-  productStore
-    .deleteProduct(productId)
-    .then(() => {
-      productStore.paginatedProducts = productStore.paginatedProducts.filter(
-        (product) => product.id !== productId
-      );
-      triggerToast({
-        title: t('toast.great'),
-        message: t('toast.product_deleted_successfully'),
-        type: 'success',
-        icon: 'mdi:check-circle',
-      });
-    })
-    .catch((error) => {
-      triggerToast({
-        title: t('toast.error'),
-        message: error.message || t('toast.product_deletion_failed'),
-        type: 'error',
-        icon: 'mdi:alert-circle',
-      });
-    })
-    .finally(() => {
-      setTimeout(() => {
-        if (product) {
-          product.loading = false;
-        }
-      }, 3000);
+  if (!product) return;
+  loading.value = true;
+  try {
+    await productStore.deleteProduct(productId);
+    productStore.paginatedProducts = productStore.paginatedProducts.filter(
+      (product) => product.id !== productId
+    );
+    triggerToast({
+      title: t('toast.great'),
+      message: t('toast.product_deleted_successfully'),
+      type: 'success',
+      icon: 'mdi:check-circle',
     });
+  } catch (error) {
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.product_deletion_failed'),
+      type: 'error',
+      icon: 'mdi:alert-circle',
+    });
+  } finally {
+    loading.value = false;
+  }
 };
 
 onMounted(async () => {
