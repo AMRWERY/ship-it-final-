@@ -9,7 +9,9 @@
         <icon :name="item.icon" />
         {{ $t(item.label) }}
         <!-- {{ item.label }} -->
-        <icon name="material-symbols:keyboard-arrow-down" class="absolute w-5 h-5 -translate-y-1/2 fill-current end-4 top-1/2" :class="{ 'rotate-180': sidebarStore.page === item.label }" v-if="item.children" />
+        <icon name="material-symbols:keyboard-arrow-down"
+          class="absolute w-5 h-5 -translate-y-1/2 fill-current end-4 top-1/2"
+          :class="{ 'rotate-180': sidebarStore.page === item.label }" v-if="item.children" role="button" />
       </nuxt-link>
 
       <!-- Dropdown Menu Start -->
