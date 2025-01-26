@@ -22,35 +22,35 @@ export const useProductsStore = defineStore("new-products", {
   }),
 
   actions: {
-    async fetchProducts() {
-      try {
-        const querySnap = await getDocs(query(collection(db, "products")));
-        const allProducts = querySnap.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.products = allProducts;
-        console.log(this.products);
-        this.updatePagination();
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    },
-    // fetchProducts() {
-    //   getDocs(query(collection(db, "products")))
-    //     .then((querySnap) => {
-    //       const allProducts = querySnap.docs.map((doc) => ({
-    //         id: doc.id,
-    //         ...doc.data(),
-    //       }));
-    //       this.products = allProducts;
-    //       console.log(this.products);
-    //       this.updatePagination();
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching products:", error);
-    //     });
+    // async fetchProducts() {
+    //   try {
+    //     const querySnap = await getDocs(query(collection(db, "products")));
+    //     const allProducts = querySnap.docs.map((doc) => ({
+    //       id: doc.id,
+    //       ...doc.data(),
+    //     }));
+    //     this.products = allProducts;
+    //     console.log(this.products);
+    //     this.updatePagination();
+    //   } catch (error) {
+    //     console.error("Error fetching products:", error);
+    //   }
     // },
+    fetchProducts() {
+      getDocs(query(collection(db, "products")))
+        .then((querySnap) => {
+          const allProducts = querySnap.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          this.products = allProducts;
+          // console.log(this.products);
+          this.updatePagination();
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+        });
+    },
 
     // async createProduct(productData, imageFiles) {
     //   try {

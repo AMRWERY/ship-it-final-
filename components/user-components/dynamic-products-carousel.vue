@@ -146,7 +146,7 @@ const itemAdded = ref('')
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
 
-onMounted(() => {
+onMounted( () => {
   productsStore.fetchProducts();
   products.value = productsStore.products;
 
