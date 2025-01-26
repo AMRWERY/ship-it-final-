@@ -113,7 +113,7 @@ export const useCartStore = defineStore("cart", {
         return;
       }
       if (this.cart.length === 0) {
-         this.fetchCart();
+        this.fetchCart();
       }
       const existingProduct = this.cart.find(
         (item) => item.productId === id && item.uid === uid
@@ -166,7 +166,7 @@ export const useCartStore = defineStore("cart", {
             docId: docRef.id,
             ...product,
           });
-          console.log("Product added to Firestore:", docRef.id);
+          // console.log("Product added to Firestore:", docRef.id);
         } catch (error) {
           console.error("Error adding new product to Firestore:", error);
         }
