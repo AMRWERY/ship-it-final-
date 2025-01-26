@@ -94,7 +94,7 @@
           'bg-slate-800 text-white': page === userStore.currentPage,
           'bg-white text-slate-500': page !== userStore.currentPage,
         }"
-          class="px-3 py-1 text-sm font-normal transition duration-200 border rounded min-w-9 min-h-9 border-slate-200 hover:bg-slate-50 hover:border-slate-400 ease">
+          class="px-3 py-1 text-sm font-normal transition duration-200 border rounded min-w-9 min-h-9 border-slate-200 ease">
           {{ page }}
         </button>
         <button @click="userStore.changePage(userStore.currentPage + 1)"
@@ -116,8 +116,6 @@
 </template>
 
 <script setup>
-// import { useUserStore } from "@/stores/usersStore";
-
 const userStore = useUserStore();
 
 const removingUser = ref(null);

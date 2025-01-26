@@ -164,7 +164,8 @@
     "dashboard_users": "Users",
     "dashboard_orders": "Orders",
     "dashboard_items_stock": "Items Stock",
-    "dashboard_add_product": "Add Product"
+    "dashboard_products_add_product": "Add Product",
+    "dashboard_products_all_products": "Products"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -176,7 +177,8 @@
     "users": "Users",
     "orders": "Orders",
     "items_stock": "Items Stock",
-    "add_product": "Add Product"
+    "add_product": "Add Product",
+    "products": "Products"
   },
   "social_media": {
     "share_my": "Share my",

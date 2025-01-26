@@ -129,7 +129,7 @@
           'bg-slate-800 text-white': page === productStore.currentPage,
           'bg-white text-slate-500': page !== productStore.currentPage,
         }"
-          class="px-3 py-1 text-sm font-normal transition duration-200 border rounded min-w-9 min-h-9 border-slate-200 hover:bg-slate-50 hover:border-slate-400 ease">
+          class="px-3 py-1 text-sm font-normal transition duration-200 border rounded min-w-9 min-h-9 border-slate-200 ease">
           {{ page }}
         </button>
         <button @click="productStore.changePage(productStore.currentPage + 1)"

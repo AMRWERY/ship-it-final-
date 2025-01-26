@@ -164,7 +164,8 @@
     "dashboard_users": "المستخدمون",
     "dashboard_orders": "الطلبات",
     "dashboard_items_stock": "مخزون العناصر",
-    "dashboard_add_product": "إضافة منتج"
+    "dashboard_products_add_product": "إضافة منتج",
+    "dashboard_products_all_products": "المنتجات"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -176,7 +177,8 @@
     "users": "المستخدمون",
     "orders": "الطلبات",
     "items_stock": "مخزون العناصر",
-    "add_product": "إضافة منتج"
+    "add_product": "إضافة منتج",
+    "products": "المنتجات"
   },
   "social_media": {
     "share_my": "شارك",
