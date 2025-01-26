@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useLocaleStore = defineStore("localeStore", {
+export const useLocaleStore = defineStore("locales", {
   state: () => ({
     locale: localStorage.getItem("locale") || "en",
     isOverlayVisible: false,

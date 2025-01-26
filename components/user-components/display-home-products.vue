@@ -14,7 +14,7 @@
       <dynamic-products-carousel :config="config" :productTypes="['Bundle']" :title="'Wallet'" :cardsOne="cardsOne" />
 
       <!-- dynamic-products-carousel component -->
-      <dynamic-products-carousel :config="config" :productTypes="['kids_Clothing']" :title="'kids Clothing'"
+      <dynamic-products-carousel :config="config" :productTypes="['Sale']" :title="'kids Clothing'"
         :imageSrc="'https://justfields.com/storage/projects/7M5rV059/six-shop.jpg'" />
 
       <!-- dynamic-products-carousel component -->

@@ -74,11 +74,10 @@ const mailStore = useMailStore();
 const { t } = useI18n()
 
 const isAuthenticated = computed(() => localStorage.getItem('user'));
-// const isAuthenticated = computed(() => authStore.isAuthenticated);
 
 const isAdmin = computed(() => {
-  const user = authStore.user;
-  return user?.email === 'admin@ship.com';
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user?.role === 'admin';
 });
 
 const loading = ref(false);

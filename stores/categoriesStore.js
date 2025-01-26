@@ -26,35 +26,20 @@ export const useCategoriesStore = defineStore("categoriesStore", {
   }),
 
   actions: {
-    // async fetchCategories() {
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db, "categories"));
-    //     this.categories = querySnapshot.docs
-    //       .map((doc) => ({
-    //         id: doc.id,
-    //         ...doc.data(),
-    //       }))
-    //       .sort((a, b) => a.catId - b.catId);
-    //     this.updatePagination();
-    //     // console.log("Fetched categories:", this.categories);
-    //   } catch (error) {
-    //     console.error("Error fetching categories:", error);
-    //   }
-    // },
-    fetchCategories() {
-      getDocs(collection(db, "categories"))
-        .then((querySnapshot) => {
-          this.categories = querySnapshot.docs
-            .map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }))
-            .sort((a, b) => a.catId - b.catId);
-          this.updatePagination();
-        })
-        .catch((error) => {
-          console.error("Error fetching categories:", error);
-        });
+    async fetchCategories() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        this.categories = querySnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a, b) => a.catId - b.catId);
+        this.updatePagination();
+        // console.log("Fetched categories:", this.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
     },
 
     // async fetchCategoriesByRange(minId, maxId) {

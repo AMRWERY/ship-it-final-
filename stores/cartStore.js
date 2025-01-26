@@ -96,7 +96,7 @@ export const useCartStore = defineStore("cart", {
         });
     },
 
-    addToCart(
+    async addToCart(
       id,
       title,
       discountedPrice,
@@ -109,62 +109,72 @@ export const useCartStore = defineStore("cart", {
       const authStore = useAuthStore();
       const uid = authStore.user?.uid;
       if (!uid) {
-        // console.error("User ID is not defined.");
+        // console.error("User is not authenticated or UID is missing.");
         return;
       }
       if (this.cart.length === 0) {
-        this.fetchCart();
+         this.fetchCart();
       }
       const existingProduct = this.cart.find(
         (item) => item.productId === id && item.uid === uid
       );
       const productRef = doc(db, "products", id);
-      getDoc(productRef)
-        .then((productSnap) => {
-          if (!productSnap.exists()) {
-            // console.error("Product not found");
-            return;
-          }
-          const productData = productSnap.data();
-          const stock = productData.stock || 0;
-          if (quantity > stock) {
-            // console.error("Not enough stock available");
-            return;
-          }
-          const newStock = stock - quantity;
-          return updateDoc(productRef, { stock: newStock }).then(() => {
-            if (existingProduct) {
-              const docRef = doc(db, "cart", existingProduct.docId);
-              const newQuantity = (existingProduct.quantity || 0) + quantity;
-              return updateDoc(docRef, { quantity: newQuantity }).then(() => {
-                existingProduct.quantity = newQuantity;
-              });
-            } else {
-              const product = {
-                productId: id,
-                title,
-                discountedPrice,
-                originalPrice,
-                imageUrl1,
-                brand,
-                discount,
-                quantity: quantity || 1,
-                uid,
-              };
-              return addDoc(collection(db, "cart"), product).then((docRef) => {
-                this.cart.push({
-                  docId: docRef.id,
-                  ...product,
-                });
-                localStorage.setItem("cart", JSON.stringify(this.cart));
-              });
-            }
+      const productSnap = await getDoc(productRef);
+      if (!productSnap.exists()) {
+        // console.error("Product not found.");
+        return;
+      }
+      const productData = productSnap.data();
+      const stock = productData.stock || 0;
+      if (quantity > stock) {
+        // console.error("Not enough stock available.");
+        return;
+      }
+      const newStock = stock - quantity;
+      try {
+        await updateDoc(productRef, { stock: newStock });
+        // console.log("Stock updated successfully.");
+      } catch (error) {
+        // console.error("Error updating stock:", error);
+        return;
+      }
+      if (existingProduct) {
+        try {
+          const docRef = doc(db, "cart", existingProduct.docId);
+          const newQuantity = (existingProduct.quantity || 0) + quantity;
+          await updateDoc(docRef, { quantity: newQuantity });
+          existingProduct.quantity = newQuantity;
+          // console.log("Product quantity updated in Firestore.");
+        } catch (error) {
+          console.error("Error updating product quantity in Firestore:", error);
+        }
+      } else {
+        const product = {
+          productId: id,
+          title,
+          discountedPrice,
+          originalPrice,
+          imageUrl1,
+          brand,
+          discount,
+          quantity: quantity || 1,
+          uid,
+        };
+        try {
+          const docRef = await addDoc(collection(db, "cart"), product);
+          this.cart.push({
+            docId: docRef.id,
+            ...product,
           });
-        })
-        .catch((error) => {
-          console.error("Error adding to cart:", error);
-        });
+          console.log("Product added to Firestore:", docRef.id);
+        } catch (error) {
+          console.error("Error adding new product to Firestore:", error);
+        }
+      }
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      // console.log("Cart updated in localStorage:", this.cart);
     },
+
     // async addToCart(
     //   id,
     //   title,
@@ -182,7 +192,7 @@ export const useCartStore = defineStore("cart", {
     //     return;
     //   }
     //   if (this.cart.length === 0) {
-    //     await this.fetchCart();
+    //      this.fetchCart();
     //   }
     //   const existingProduct = this.cart.find(
     //     (item) => item.productId === id && item.uid === uid
@@ -207,6 +217,7 @@ export const useCartStore = defineStore("cart", {
     //   await updateDoc(productRef, { stock: newStock });
     //   if (existingProduct) {
     //     try {
+    //       debugger
     //       const docRef = doc(db, "cart", existingProduct.docId);
     //       const newQuantity = (existingProduct.quantity || 0) + quantity;
     //       await updateDoc(docRef, { quantity: newQuantity });
@@ -239,31 +250,31 @@ export const useCartStore = defineStore("cart", {
     //   localStorage.setItem("cart", JSON.stringify(this.cart));
     // },
 
-    updateQuantityInCart(productId, newQuantity) {
-      const product = this.cart.find((item) => item.productId === productId);
-      if (!product) return;
-      const docRef = doc(db, "cart", product.docId);
-      updateDoc(docRef, { quantity: newQuantity })
-        .then(() => {
-          product.quantity = newQuantity;
-          const productRef = doc(db, "products", productId);
-          return getDoc(productRef).then((productSnap) => {
-            if (productSnap.exists()) {
-              const productData = productSnap.data();
-              const stock = productData.stock;
-              if (newQuantity <= stock) {
-                const stockUpdate = stock - newQuantity;
-                return updateDoc(productRef, { stock: stockUpdate });
-              } else {
-                console.error("Not enough stock available");
-              }
-            }
-          });
-        })
-        .catch((error) => {
-          console.error("Error updating product quantity in Firestore:", error);
-        });
-    },
+    // updateQuantityInCart(productId, newQuantity) {
+    //   const product = this.cart.find((item) => item.productId === productId);
+    //   if (!product) return;
+    //   const docRef = doc(db, "cart", product.docId);
+    //   updateDoc(docRef, { quantity: newQuantity })
+    //     .then(() => {
+    //       product.quantity = newQuantity;
+    //       const productRef = doc(db, "products", productId);
+    //       return getDoc(productRef).then((productSnap) => {
+    //         if (productSnap.exists()) {
+    //           const productData = productSnap.data();
+    //           const stock = productData.stock;
+    //           if (newQuantity <= stock) {
+    //             const stockUpdate = stock - newQuantity;
+    //             return updateDoc(productRef, { stock: stockUpdate });
+    //           } else {
+    //             console.error("Not enough stock available");
+    //           }
+    //         }
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error updating product quantity in Firestore:", error);
+    //     });
+    // },
     // async updateQuantityInCart(productId, newQuantity) {
     //   const product = this.cart.find((item) => item.productId === productId);
     //   if (product) {

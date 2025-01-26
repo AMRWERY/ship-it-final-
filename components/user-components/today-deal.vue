@@ -63,7 +63,7 @@
                           <p class="text-base text-gray-500 line-through">{{ currentDeal?.originalPrice }} egp</p>
                           <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice }}
                             egp</h4>
-                          <div class="flex py-1 px-2 bg-purple-600 font-semibold !ml-4">
+                          <div class="flex py-1 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
                             <span class="text-sm text-white">save {{ currentDeal?.discount }}%</span>
                           </div>
                         </div>
@@ -118,10 +118,10 @@
                         <div class="flex flex-wrap gap-4 mt-4">
                           <!-- Add to Cart -->
                           <button class="flex items-center justify-center gap-2 px-6 py-2 btn-style w-[60%]"
-                            @click="handleAddToCart">
+                            @click="handleAddToCart(currentDeal)">
                             <icon name="material-symbols:add-shopping-cart-sharp" class="w-5 h-5" />
                             <div class="flex items-center justify-center" v-if="loading">
-                              <span class="text-center">{{ $t('loading_btn.adding_to_cart') }}...</span>
+                              <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
                               <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
                             </div>
                             <span v-else>Add to Cart</span>
@@ -133,9 +133,20 @@
                             <icon :name="isInWishlist ? 'clarity:heart-solid' : 'clarity:heart-line'" size="20px"
                               :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
                           </button>
+
+                          <!-- Success Message -->
+                          <div v-if="productAdded">
+                            <p class="font-medium text-green-700">{{ $t('toast.product_added_to_cart') }}</p>
+                          </div>
+                          <div v-if="notAuth">
+                            <p class="font-medium text-red-700">{{ $t('toast.please_log_in_first_to_add_to_cart') }}</p>
+                          </div>
+                          <div v-if="productNotAdded">
+                            <p class="font-medium text-red-700">{{ $t('toast.failed_to_add_to_cart') }}</p>
+                          </div>
                         </div>
 
-                        <div class="max-w-2xl mt-12 custom-scroll max-h-24">
+                        <div class="max-w-2xl mt-12 custom-scroll max-h-32">
                           <div class="mt-6">
                             <h3 class="text-lg font-bold text-gray-800">Description</h3>
                             <p class="mt-4 text-sm text-gray-600">{{ currentDeal?.description }}</p>
@@ -143,22 +154,12 @@
                         </div>
                       </div>
 
-                      <!-- Success Message -->
-                      <div v-if="productAdded" class="mt-2">
-                        <p class="font-semibold text-green-700">{{ $t('toast.product_added_to_cart') }}</p>
-                      </div>
-                      <div v-if="notAuth" class="mt-2">
-                        <p class="font-semibold text-red-700">{{ $t('toast.please_log_in_first_to_add_to_cart') }}</p>
-                      </div>
-                      <div v-if="productNotAdded" class="mt-2">
-                        <p class="font-semibold text-red-700">{{ $t('toast.failed_to_add_to_cart') }}</p>
-                      </div>
                     </div>
                   </div>
 
-                  <!-- Next Deals Section -->
+                  <!-- Upcoming Deals Section -->
                   <div class="mt-12 border-t-2" v-if="currentDeal">
-                    <h3 class="mt-4 text-lg font-bold text-gray-800">Next Deals</h3>
+                    <h3 class="mt-4 text-lg font-bold text-gray-800">Upcoming Deals</h3>
                     <div class="grid grid-cols-2 gap-4 md:grid-cols-2 max-sm:justify-center gap-y-8 sm:gap-x-6">
                       <div class="flex items-center gap-6 overflow-hidden cursor-pointer max-sm:flex-col"
                         v-for="(deal, index) in nextDeals" :key="index">
@@ -178,7 +179,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -247,21 +247,6 @@ const updateNextDealStartTime = () => {
 
 let interval;
 
-// onMounted(async () => {
-//   await todayDealStore.fetchDeals();
-//   const firstImage = todayDealStore.currentDeal?.imageUrl1;
-//   if (firstImage) selectedImage.value = firstImage;
-//   interval = setInterval(() => {
-//     updateCurrentDealTime();
-//     updateNextDealsTimes();
-//   }, 1000);
-//   updateCurrentDealTime();
-//   updateNextDealsTimes();
-//   updateNextDealStartTime();
-//   setInterval(() => {
-//     updateNextDealStartTime();
-//   }, 1000)
-// });
 onMounted(() => {
   todayDealStore
     .fetchDeals()
@@ -327,57 +312,19 @@ const quantity = ref(1);
 const { t } = useI18n()
 const loading = ref(false);
 
-// const handleAddToCart = async () => {
-//   if (!authStore.isAuthenticated) {
-//     setTimeout(() => {
-//       notAuth.value = true;
-//     }, 3000);
-//     return;
-//   }
-//   const currentDeal = todayDealStore.currentDeal;
-//   if (!currentDeal) {
-//     // console.error("No active deal available.");
-//     return;
-//   }
-//   try {
-//     loading.value = true;
-//     await cartStore.addToCart(
-//       currentDeal.id,
-//       currentDeal.title,
-//       currentDeal.discountedPrice,
-//       currentDeal.originalPrice,
-//       currentDeal.imageUrl1,
-//       currentDeal.brand,
-//       currentDeal.discount,
-//       quantity.value
-//     );
-//     setTimeout(() => {
-//       productAdded.value = true;
-//     }, 3000);
-//   } catch (error) {
-//     // console.error("Error adding product to cart:", error);
-//     setTimeout(() => {
-//       productNotAdded.value = true;
-//     }, 3000);;
-//   } finally {
-//     loading.value = false;
-//   }
-// };
-const handleAddToCart = () => {
+const handleAddToCart = async (currentDeal) => {
+  if (!currentDeal) return;
   if (!authStore.isAuthenticated) {
+    notAuth.value = true;
     setTimeout(() => {
-      notAuth.value = true;
+      notAuth.value = false;
     }, 3000);
     return;
   }
-  const currentDeal = todayDealStore.currentDeal;
-  if (!currentDeal) {
-    // console.error("No active deal available.");
-    return;
-  }
-  loading.value = true;
-  cartStore
-    .addToCart(
+  try {
+    loading.value = true;
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await cartStore.addToCart(
       currentDeal.id,
       currentDeal.title,
       currentDeal.discountedPrice,
@@ -386,60 +333,28 @@ const handleAddToCart = () => {
       currentDeal.brand,
       currentDeal.discount,
       quantity.value
-    )
-    .then(() => {
-      setTimeout(() => {
-        productAdded.value = true;
-      }, 3000);
-    })
-    .catch((error) => {
-      // console.error("Error adding product to cart:", error);
-      setTimeout(() => {
-        productNotAdded.value = true;
-      }, 3000);
-    })
-    .finally(() => {
-      loading.value = false;
-    });
+    );
+    cartStore.cart.push(currentDeal)
+    localStorage.setItem('cart', JSON.stringify(cartStore.cart));
+    console.log("Product added successfully");
+    console.log("Current Cart:", cartStore.cart);
+    setTimeout(() => {
+      productAdded.value = true;
+    }, 3000);
+  } catch (error) {
+    setTimeout(() => {
+      productNotAdded.value = true;
+    }, 3000);
+  } finally {
+    loading.value = false;
+  }
 };
 
-// const toggleWishlist = async () => {
-//   if (!authStore.isAuthenticated) {
-//     setTimeout(() => {
-//       notAuth.value = true;
-//     }, 3000);
-//     return;
-//   }
-//   const currentDeal = todayDealStore.currentDeal;
-//   if (!currentDeal) {
-//     // console.error("No active deal available.");
-//     return;
-//   }
-//   try {
-//     await wishlistStore.addToWishlist(
-//       currentDeal.id,
-//       currentDeal.title,
-//       currentDeal.discountedPrice,
-//       currentDeal.originalPrice,
-//       currentDeal.imageUrl1,
-//       currentDeal.brand,
-//       currentDeal.discount,
-//       quantity.value
-//     );
-//     setTimeout(() => {
-//       productAdded.value = true;
-//     }, 3000);
-//   } catch (error) {
-//     // console.error("Error adding product to cart:", error);
-//     setTimeout(() => {
-//       productNotAdded.value = true;
-//     }, 3000);;
-//   }
-// };
 const toggleWishlist = () => {
   if (!authStore.isAuthenticated) {
+    notAuth.value = true;
     setTimeout(() => {
-      notAuth.value = true;
+      notAuth.value = false;
     }, 3000);
     return;
   }
