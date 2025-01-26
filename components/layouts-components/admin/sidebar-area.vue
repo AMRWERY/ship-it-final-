@@ -92,7 +92,8 @@ const menuGroups = computed(() => [
         label: 'layout.categories',
         route: '',
         children: [
-          { label: 'layout.add_category', route: '' },
+          { label: 'layout.categories', route: '/dashboard/categories/categories' },
+          { label: 'layout.add_category', route: '/dashboard/categories/add-category' },
           { label: 'layout.edit_category', route: '' }
         ]
       },

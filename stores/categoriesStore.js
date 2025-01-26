@@ -19,7 +19,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     paginatedCategories: [],
     paginatedSubcategories: [],
     currentPage: 1,
-    categoriesPerPage: 4,
+    categoriesPerPage: 8,
     subcategoriesPerPage: 4,
     currentCategory: null,
     currentMarketCategory: null,
@@ -161,18 +161,18 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         });
     },
 
-    // async deleteCategory(categoryId) {
-    //   try {
-    //     const categoryDoc = doc(db, "categories", categoryId);
-    //     await deleteDoc(categoryDoc);
-    //     this.categories = this.categories.filter(
-    //       (category) => category.id !== categoryId
-    //     );
-    //     this.updatePagination();
-    //   } catch (error) {
-    //     console.error("Error deleting category:", error);
-    //   }
-    // },
+    async deleteCategory(categoryId) {
+      try {
+        const categoryDoc = doc(db, "categories", categoryId);
+        await deleteDoc(categoryDoc);
+        this.categories = this.categories.filter(
+          (category) => category.id !== categoryId
+        );
+        this.updatePagination();
+      } catch (error) {
+        console.error("Error deleting category:", error);
+      }
+    },
 
     fetchSubCategories() {
       getDocs(collection(db, "subCategories"))

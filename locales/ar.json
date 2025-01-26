@@ -152,7 +152,8 @@
     "failed_to_update_order": "فشل في تحديث الطلب",
     "product_deleted_successfully": "تم حذف المنتج بنجاح",
     "product_deletion_failed": "فشل حذف المنتج",
-    "product_added_successfully": "تم إضافة المنتج بنجاح"
+    "product_added_successfully": "تم إضافة المنتج بنجاح",
+    "category_deleted_successfully": "تم حذف الفئة بنجاح"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -165,7 +166,8 @@
     "dashboard_orders": "الطلبات",
     "dashboard_items_stock": "مخزون العناصر",
     "dashboard_products_add_product": "إضافة منتج",
-    "dashboard_products_all_products": "المنتجات"
+    "dashboard_products_all_products": "المنتجات",
+    "dashboard_categories_categories": "الفئات"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -178,7 +180,8 @@
     "orders": "الطلبات",
     "items_stock": "مخزون العناصر",
     "add_product": "إضافة منتج",
-    "products": "المنتجات"
+    "products": "المنتجات",
+    "categories": "الفئات"
   },
   "social_media": {
     "share_my": "شارك",
@@ -191,7 +194,9 @@
     "unblock_user": "إلغاء حظر المستخدم",
     "block_user": "حظر المستخدم",
     "back_to_home": "العودة إلى الصفحة الرئيسية",
-    "delete_order": "حذف الطلب"
+    "delete_order": "حذف الطلب",
+    "edit_category": "تعديل الفئة",
+    "delete_category": "حذف الفئة"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",
@@ -252,7 +257,10 @@
     "city": "المدينة",
     "brand": "العلامة التجارية",
     "quantity": "الكمية",
-    "items_stock": "مخزون العناصر"
+    "items_stock": "مخزون العناصر",
+    "categories": "الفئات",
+    "category_title": "عنوان الفئة",
+    "image": "صورة"
   },
   "pagination": {
     "previous": "السابق",

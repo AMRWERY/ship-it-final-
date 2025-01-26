@@ -152,7 +152,8 @@
     "failed_to_update_order": "Failed to update order",
     "product_deleted_successfully": "Product deleted successfully",
     "product_deletion_failed": "Product deletion failed",
-    "product_added_successfully": "Product added successfully"
+    "product_added_successfully": "Product added successfully",
+    "category_deleted_successfully": "Category deleted successfully"
   },
   "breadcrumb": {
     "home": "Home",
@@ -165,7 +166,8 @@
     "dashboard_orders": "Orders",
     "dashboard_items_stock": "Items Stock",
     "dashboard_products_add_product": "Add Product",
-    "dashboard_products_all_products": "Products"
+    "dashboard_products_all_products": "Products",
+    "dashboard_categories_categories": "Categories"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -178,7 +180,8 @@
     "orders": "Orders",
     "items_stock": "Items Stock",
     "add_product": "Add Product",
-    "products": "Products"
+    "products": "Products",
+    "categories": "Categories"
   },
   "social_media": {
     "share_my": "Share my",
@@ -191,7 +194,9 @@
     "unblock_user": "Unblock user",
     "block_user": "Block user",
     "back_to_home": "Back to home",
-    "delete_order": "Delete order"
+    "delete_order": "Delete order",
+    "edit_category":"Edit Category",
+    "delete_category": "Delete category"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty",
@@ -254,7 +259,10 @@
     "city": "City",
     "brand": "Brand",
     "quantity": "Quantity",
-    "items_stock": "Items Stock"
+    "items_stock": "Items Stock",
+    "categories": "Categories",
+    "category_title": "Category Title",
+    "image": "Image"
   },
   "pagination": {
     "previous": "Previous",
