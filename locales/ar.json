@@ -82,7 +82,9 @@
     "size": "المقاس / الحجم",
     "color": "اللون",
     "product_description_required": "وصف المنتج مطلوب",
-    "availability_required": "التوفر مطلوب"
+    "availability_required": "التوفر مطلوب",
+    "category_title": "اسم الفئة",
+    "enter_category_title": "أدخل اسم الفئة"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
@@ -109,7 +111,8 @@
     "filter": "تصفية",
     "view_details": "عرض التفاصيل",
     "close": "غلق",
-    "add_product": "إضافة منتج"
+    "add_product": "إضافة منتج",
+    "add_category": "إضافة فئة"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -153,7 +156,9 @@
     "product_deleted_successfully": "تم حذف المنتج بنجاح",
     "product_deletion_failed": "فشل حذف المنتج",
     "product_added_successfully": "تم إضافة المنتج بنجاح",
-    "category_deleted_successfully": "تم حذف الفئة بنجاح"
+    "category_deleted_successfully": "تم حذف الفئة بنجاح",
+    "category_added_successfully": "تمت إضافة الفئة بنجاح",
+    "failed_to_add_category": "فشل في إضافة الفئة"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -167,7 +172,8 @@
     "dashboard_items_stock": "مخزون العناصر",
     "dashboard_products_add_product": "إضافة منتج",
     "dashboard_products_all_products": "المنتجات",
-    "dashboard_categories_categories": "الفئات"
+    "dashboard_categories_categories": "الفئات",
+    "dashboard_categories_add_category": "إضافة فئة"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -181,7 +187,8 @@
     "items_stock": "مخزون العناصر",
     "add_product": "إضافة منتج",
     "products": "المنتجات",
-    "categories": "الفئات"
+    "categories": "الفئات",
+    "add_category": "إضافة فئة"
   },
   "social_media": {
     "share_my": "شارك",
@@ -260,7 +267,8 @@
     "items_stock": "مخزون العناصر",
     "categories": "الفئات",
     "category_title": "عنوان الفئة",
-    "image": "صورة"
+    "image": "صورة",
+    "add_category": "إضافة فئة"
   },
   "pagination": {
     "previous": "السابق",

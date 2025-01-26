@@ -42,21 +42,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
       }
     },
 
-    // async fetchCategoriesByRange(minId, maxId) {
-    //   try {
-    //     const categoriesQuery = query(
-    //       collection(db, "categories"),
-    //       where("catId", ">=", minId),
-    //       where("catId", "<=", maxId)
-    //     );
-    //     const querySnapshot = await getDocs(categoriesQuery);
-    //     this.categories = querySnapshot.docs.map((doc) => doc.data());
-    //     // console.log(this.categories)
-    //   } catch (error) {
-    //     console.error("Error fetching categories:", error);
-    //   }
-    // },
-
     fetchCategoriesByRange(minId, maxId) {
       const categoriesQuery = query(
         collection(db, "categories"),
@@ -98,66 +83,29 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     //   }
     // },
 
-    // async addCategory(title, imageFile) {
-    //   try {
-    //     const storage = getStorage();
-    //     const storagePath = "/categories/" + imageFile.name;
-    //     const storageRef = ref(storage, storagePath);
-    //     const snapshot = await uploadBytes(storageRef, imageFile);
-    //     const imageUrl = await getDownloadURL(snapshot.ref);
-    //     const querySnapshot = await getDocs(collection(db, "categories"));
-    //     const categories = querySnapshot.docs.map((doc) => doc.data());
-    //     const maxId =
-    //       categories.length > 0
-    //         ? Math.max(...categories.map((cat) => cat.catId || 0))
-    //         : 0;
-    //     const newId = maxId + 1;
-    //     const docRef = await addDoc(collection(db, "categories"), {
-    //       catId: newId,
-    //       title,
-    //       imgOne: imageUrl,
-    //     });
-    //     const newCategory = { id: newId, title, imgOne: imageUrl };
-    //     this.categories.push(newCategory);
-    //     // console.log("Category added successfully:", newCategory);
-    //   } catch (error) {
-    //     console.error("Error adding category:", error);
-    //   }
-    // },
     addCategory(title, imageFile) {
       const storage = getStorage();
       const storagePath = "/categories/" + imageFile.name;
       const storageRef = ref(storage, storagePath);
-      uploadBytes(storageRef, imageFile)
+      return uploadBytes(storageRef, imageFile)
         .then((snapshot) => getDownloadURL(snapshot.ref))
         .then((imageUrl) => {
-          getDocs(collection(db, "categories"))
-            .then((querySnapshot) => {
-              const categories = querySnapshot.docs.map((doc) => doc.data());
-              const maxId =
-                categories.length > 0
-                  ? Math.max(...categories.map((cat) => cat.catId || 0))
-                  : 0;
-              const newId = maxId + 1;
-              addDoc(collection(db, "categories"), {
-                catId: newId,
-                title,
-                imgOne: imageUrl,
-              })
-                .then(() => {
-                  const newCategory = { id: newId, title, imgOne: imageUrl };
-                  this.categories.push(newCategory);
-                })
-                .catch((error) => {
-                  console.error("Error adding category:", error);
-                });
-            })
-            .catch((error) => {
-              console.error("Error fetching categories:", error);
+          return getDocs(collection(db, "categories")).then((querySnapshot) => {
+            const categories = querySnapshot.docs.map((doc) => doc.data());
+            const maxId =
+              categories.length > 0
+                ? Math.max(...categories.map((cat) => cat.catId || 0))
+                : 0;
+            const newId = maxId + 1;
+            return addDoc(collection(db, "categories"), {
+              catId: newId,
+              title,
+              imgOne: imageUrl,
+            }).then(() => {
+              const newCategory = { id: newId, title, imgOne: imageUrl };
+              this.categories.push(newCategory);
             });
-        })
-        .catch((error) => {
-          console.error("Error uploading image:", error);
+          });
         });
     },
 
@@ -187,28 +135,12 @@ export const useCategoriesStore = defineStore("categoriesStore", {
           console.error("Error fetching subcategories:", error);
         });
     },
-    // async fetchSubCategories() {
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db, "subCategories"));
-    //     this.subCategories = querySnapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     this.updatePagination();
-    //   } catch (error) {
-    //     console.error("Error fetching subcategories:", error);
-    //   }
-    // },
 
     updatePagination() {
       this.paginatedCategories = this.categories.slice(
         (this.currentPage - 1) * this.categoriesPerPage,
         this.currentPage * this.categoriesPerPage
       );
-      // this.paginatedSubcategories = this.subCategories.slice(
-      //   (this.currentPage - 1) * this.subcategoriesPerPage,
-      //   this.currentPage * this.subcategoriesPerPage
-      // );
     },
 
     changePage(page) {
@@ -220,12 +152,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
   },
 
   getters: {
-    // getSubCategoriesByCategory: (state) => (categoryId) => {
-    //   return state.subCategories.filter(
-    //     (subCategory) => subCategory.categoryId === categoryId
-    //   );
-    // },
-
     totalPages() {
       return Math.ceil(this.categories.length / this.categoriesPerPage);
     },

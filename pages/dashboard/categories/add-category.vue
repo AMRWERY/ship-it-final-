@@ -1,14 +1,15 @@
 <template>
   <div>
+    <!-- breadcrumb component -->
+    <breadcrumb />
+
     <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
-      <h2 class="mb-4 text-xl font-bold">{{ $t('form.add_category') }}</h2>
+      <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('dashboard.add_category') }}</h2>
       <form @submit.prevent="handleAddCategory">
         <div class="mb-4">
-          <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.category_title')
-            }}</label>
-          <input id="category-title" type="text" v-model="newCategoryTitle"
-            class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
-            :placeholder="$t('form.enter_category_title')" required />
+          <dynamic-inputs :label="t('form.category_title')" :placeholder="t('form.enter_category_title')" type="text"
+            name="category" :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:category"
+            v-model="newCategoryTitle" />
         </div>
 
         <div class="mb-4">
@@ -35,7 +36,7 @@
 
         <button type="submit" class="w-full px-4 py-2 btn-style">
           <div class="flex items-center justify-center" v-if="loadingOne">
-            <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
+            <span class="text-center me-2">{{ $t('btn.please_wait') }}...</span>
             <icon name="svg-spinners:270-ring-with-bg" />
           </div>
           <span v-else>{{ $t('btn.add_category') }}</span>
@@ -54,9 +55,7 @@
 </template>
 
 <script setup>
-import { useCategoriesStore } from '@/stores/categoriesStore';
-
-const store = useCategoriesStore();
+const categoryStore = useCategoriesStore();
 const loadingOne = ref(false);
 const newCategoryTitle = ref('');
 const previewImage = ref("");
@@ -74,35 +73,10 @@ const handleImageUpload = (event) => {
   }
 };
 
-// const handleAddCategory = async () => {
-//   loadingOne.value = true;
-//   if (newCategoryTitle.value.trim() && selectedFile.value) {
-//     try {
-//       await store.addCategory(newCategoryTitle.value.trim(), selectedFile.value);
-//       triggerToast({
-//         title: t('toast.great'),
-//         message: t('toast.category_added_successfully'),
-//         type: 'success',
-//         icon: 'mdi-check-circle',
-//       });
-//       newCategoryTitle.value = '';
-//       previewImage.value = null;
-//       selectedFile.value = null;
-//     } catch (error) {
-//       triggerToast({
-//         title: t('toast.error'),
-//         message: t('toast.failed_to_add_category'),
-//         type: 'error',
-//         icon: 'mdi-alert-circle',
-//       });
-//     }
-//   }
-//   loadingOne.value = false;
-// };
 const handleAddCategory = () => {
   loadingOne.value = true;
   if (newCategoryTitle.value.trim() && selectedFile.value) {
-    store.addCategory(newCategoryTitle.value.trim(), selectedFile.value)
+    categoryStore.addCategory(newCategoryTitle.value.trim(), selectedFile.value)
       .then(() => {
         triggerToast({
           title: t('toast.great'),

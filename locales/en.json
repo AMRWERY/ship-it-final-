@@ -82,7 +82,9 @@
     "size": "Size",
     "color": "Color",
     "product_description_required": "Product description required",
-    "availability_required": "Availability required"
+    "availability_required": "Availability required",
+    "category_title": "Category Title",
+    "enter_category_title": "Enter category title"
   },
   "btn": {
     "logging": "Logging",
@@ -109,7 +111,8 @@
     "filter": "Filter",
     "view_details": "View details",
     "close": "Close",
-    "add_product": "Add Product"
+    "add_product": "Add Product",
+    "add_category": "Add Category"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -153,7 +156,9 @@
     "product_deleted_successfully": "Product deleted successfully",
     "product_deletion_failed": "Product deletion failed",
     "product_added_successfully": "Product added successfully",
-    "category_deleted_successfully": "Category deleted successfully"
+    "category_deleted_successfully": "Category deleted successfully",
+    "category_added_successfully": "Category added successfully",
+    "failed_to_add_category": "Failed to add category"
   },
   "breadcrumb": {
     "home": "Home",
@@ -167,7 +172,8 @@
     "dashboard_items_stock": "Items Stock",
     "dashboard_products_add_product": "Add Product",
     "dashboard_products_all_products": "Products",
-    "dashboard_categories_categories": "Categories"
+    "dashboard_categories_categories": "Categories",
+    "dashboard_categories_add_category": "Add Category"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -181,7 +187,8 @@
     "items_stock": "Items Stock",
     "add_product": "Add Product",
     "products": "Products",
-    "categories": "Categories"
+    "categories": "Categories",
+    "add_category":"Add Category"
   },
   "social_media": {
     "share_my": "Share my",
@@ -262,7 +269,8 @@
     "items_stock": "Items Stock",
     "categories": "Categories",
     "category_title": "Category Title",
-    "image": "Image"
+    "image": "Image",
+    "add_category":"Add Category"
   },
   "pagination": {
     "previous": "Previous",
