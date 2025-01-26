@@ -147,28 +147,6 @@ const removeUser = (userId) => {
     });
 };
 
-// const removeUser = async (userId) => {
-//   if (!userId) {
-//     // console.error("No userId provided for removal.");
-//     return;
-//   }
-//   try {
-//     removingUser.value = userId;
-//     await userStore.deleteUser(userId);
-//     setTimeout(() => {
-//       removingUser.value = null;
-//     }, 3000);
-//     triggerToast({
-//       title: t('toast.great'),
-//       message: t('toast.user_deleted_successfully'),
-//       type: 'success',
-//       icon: 'mdi-check-circle',
-//     });
-//   } catch (error) {
-//     console.error("Error removing user:", error);
-//   }
-// };
-
 onMounted(() => {
   userStore.fetchUsers();
 });
