@@ -146,7 +146,7 @@ const itemAdded = ref('')
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
 
-onMounted( () => {
+onMounted(() => {
   productsStore.fetchProducts();
   products.value = productsStore.products;
 
@@ -158,6 +158,16 @@ onMounted( () => {
     // console.log('Filtered Products:', filteredProducts.value);
   }
 });
+
+watch(
+  () => productsStore.products,
+  (newProducts) => {
+    products.value = newProducts;
+    filteredProducts.value = newProducts.filter(product =>
+      product.productTypes?.some(type => props.productTypes.includes(type))
+    );
+  }
+);
 
 const quantity = ref(1)
 
