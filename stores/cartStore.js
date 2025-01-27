@@ -51,7 +51,12 @@ export const useCartStore = defineStore("cart", {
           }));
         })
         .catch((error) => {
-          console.error("Error fetching cart:", error);
+          if (error.name === 'BloomFilterError') {
+            console.error("BloomFilterError encountered:", error);
+            // Implement logic to handle the error, e.g., retry the operation with a delay
+          } else {
+            console.error("Error fetching cart:", error);
+          }
         })
         .finally(() => {
           this.isLoading = false;
