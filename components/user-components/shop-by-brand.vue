@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="max-w-5xl py-6 mx-auto sm:px-6 lg:px-8">
-      <section class="max-w-full m-10 mx-auto sm:px-6 lg:px-8">
+      <section class="max-w-full m-10 mx-auto">
         <div class="flex items-center justify-center mt-8 mb-3">
-          <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
+          <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
           <span class="mx-4 title title-font">Shop by Brand</span>
-          <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
+          <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
         </div>
 
         <!-- skeleton-loader component-->
@@ -14,16 +14,14 @@
         <ClientOnly v-else>
           <Carousel v-bind="config">
             <Slide v-for="category in categoriesStore.categories" :key="category.catId">
-              <div class="carousel__item">
                 <div class="carousel__item">
                   <nuxt-link :to="{ path: '/products', query: { brand: category.title } }"
-                    class="relative flex justify-center flex-shrink-0 h-56 mx-2 overflow-hidden border border-white w-44 rounded-xl">
-                    <div class="relative overflow-hidden bg-no-repeat bg-cover transit">
-                      <img class="rounded-t-lg" :src="category.imgOne" />
+                    class="relative flex justify-center flex-shrink-0 w-40 h-40 mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
+                    <div class="relative overflow-hidden bg-no-repeat bg-cover">
+                      <img class="h-full rounded-t-lg" :src="category.imgOne" />
                     </div>
                   </nuxt-link>
                 </div>
-              </div>
             </Slide>
 
             <template #addons>
@@ -34,9 +32,9 @@
       </section>
     </div>
 
-    <div class="px-4 mx-auto mb-5 -mt-16 sm:px-6 lg:max-w-full lg:px-8">
+    <div class="px-4 mx-auto mb-8 -mt-8 sm:px-6 lg:max-w-full lg:px-8">
       <div class="grid max-w-full grid-cols-1 gap-6 px-4 mx-auto sm:grid-cols-2 lg:grid-cols-4">
-        <nuxt-link class="relative border rounded-lg shadow-md group" v-for="card in cards" :key="card"
+        <nuxt-link class="relative border rounded-lg shadow-md group dark:border-none" v-for="card in cards" :key="card"
           :to="{ path: '/products', query: { brand: card.brand } }">
           <div class="overflow-hidden h-80 sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1">
             <img :src="card.img"
@@ -86,7 +84,7 @@ const config = ref({
   // breakpointMode: 'carousel',
   breakpoints: {
     200: { itemsToShow: 1.5, snapAlign: 'center' },
-    400: { itemsToShow: 2, snapAlign: 'start' },
+    400: { itemsToShow: 2.5, snapAlign: 'start' },
     700: { itemsToShow: 3, snapAlign: 'center' },
     1024: { itemsToShow: 5, snapAlign: 'center' },
   }

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <section class="container max-w-full m-10 mx-auto sm:px-6 lg:px-8">
+    <section class="max-w-full mx-auto">
       <div class="flex items-center justify-center mt-8 mb-3">
-        <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
+        <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
         <span class="mx-4 title title-font">{{ title }}</span>
-        <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
+        <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
       </div>
 
       <!-- skeleton-loader component -->
@@ -15,27 +15,27 @@
           <Slide v-for="card in filteredProducts" :key="card.id">
             <div class="carousel__item">
               <nuxt-link :to="`/products/${card.id}`"
-                class="relative flex flex-col w-full max-w-xs my-10 overflow-hidden bg-white group">
+                class="relative flex flex-col w-full max-w-xs overflow-hidden bg-white group dark:bg-black">
                 <div class="w-full h-[307px] relative">
                   <img
                     class="absolute top-0 object-cover object-top w-full h-full transition-all duration-500 ease-in-out end-0"
                     :src="card.imageUrl1" />
                   <img
                     class="absolute top-0 object-cover object-top w-full h-full transition-all duration-500 ease-in-out opacity-0 end-0 group-hover:opacity-100"
-                    :src="card.imageUrl2" />
+                    :src="card.imageUrl2" v-if="card.imageUrl2" />
                 </div>
 
                 <div class="flex flex-col flex-1 p-2">
                   <div class="flex-1">
-                    <h5 class="text-sm font-bold text-gray-800 truncate sm:text-base text-start">{{ card.title }}</h5>
+                    <h5 class="text-sm font-bold text-gray-800 truncate sm:text-base text-start dark:text-gray-200">{{ card.title }}</h5>
                     <div class="flex items-center justify-between">
-                      <p class="mt-1 text-gray-500 truncate text-start">{{ card.brand }}</p>
-                      <p class="mt-1 text-gray-500 truncate text-start">{{ card.productTypes[0] }}</p>
+                      <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.brand }}</p>
+                      <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.productTypes[0] }}</p>
                     </div>
                     <div class="flex flex-wrap justify-between gap-2 mt-2">
                       <div class="flex items-center gap-2">
-                        <h6 class="text-sm font-bold text-gray-800 sm:text-base">{{ card.discountedPrice }} egp</h6>
-                        <h6 class="text-sm text-gray-500 line-through sm:text-base" v-if="card.originalPrice">{{
+                        <h6 class="text-sm font-bold text-gray-800 sm:text-base dark:text-gray-200">{{ card.discountedPrice }} egp</h6>
+                        <h6 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100" v-if="card.originalPrice">{{
                           card.originalPrice
                           }} egp</h6>
                       </div>
@@ -46,11 +46,11 @@
                   </div>
                 </div>
               </nuxt-link>
-              <div class="flex items-center gap-2 mt-4">
+              <div class="flex items-center gap-2 mt-2">
                 <button type="button" @click="toggleWishlist(card)"
                   class="flex items-center justify-center w-12 bg-pink-100 rounded cursor-pointer hover:bg-pink-200 h-9"
                   title="Wishlist">
-                  <icon name="heroicons-outline:heart" class="inline-block fill-pink-600" />
+                  <icon name="heroicons-outline:heart" class="inline-block fill-pink-600 dark:text-black" />
                 </button>
                 <button type="button" class="flex items-center justify-center w-full px-4 py-2 btn-style"
                   @click="handleAddToCart(card)">
@@ -85,7 +85,7 @@
       <div class="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-full lg:px-8 my-7">
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
           <nuxt-link v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
-            class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105">
+            class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105 dark:border-none">
             <div class="block bg-white rounded-lg max-w-96 xs:min-w-full">
               <img :src="card.img" class="object-cover w-full h-full" />
             </div>

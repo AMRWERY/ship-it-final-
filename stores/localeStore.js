@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useLocaleStore = defineStore("locales", {
   state: () => ({
-    locale: localStorage.getItem("locale") || "en",
+    locale: "en",
     isOverlayVisible: false,
   }),
 
@@ -10,10 +10,18 @@ export const useLocaleStore = defineStore("locales", {
     updateLocale(value) {
       this.isOverlayVisible = true;
       this.locale = value;
-      localStorage.setItem("locale", value);
+      if (process.client) {
+        localStorage.setItem("locale", value);
+      }
       setTimeout(() => {
         this.isOverlayVisible = false;
       }, 3000);
+    },
+
+    loadLocale() {
+      if (process.client) {
+        this.locale = localStorage.getItem("locale") || "en";
+      }
     },
   },
 

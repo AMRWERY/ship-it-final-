@@ -2,7 +2,7 @@
   <div>
     <Form v-slot="{ errors }">
       <div class="my-4">
-        <label :for="id" class="block mb-1 text-sm font-medium text-gray-700">
+        <label :for="id" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">
           {{ label }}
           <span v-if="required" class="text-red-600">*</span>
         </label>
@@ -16,7 +16,7 @@
           <!-- input -->
           <Field :type="showPassword ? 'text' : type" :name="name" :placeholder="placeholder" :id="id"
             v-model="internalValue" :rules="rules"
-            class="w-full px-3 py-2 text-gray-800 transition duration-100 border rounded outline-none pe-9 bg-gray-50 ps-9" />
+            class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9" />
           <!-- Eye icon -->
           <span v-if="type === 'password'" @click="togglePassword"
             class="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer end-3 hover:text-gray-600">
@@ -28,7 +28,7 @@
 
         <!-- error messages -->
         <div class="mt-1">
-          <ErrorMessage :name="name" class="text-red-600" />
+          <ErrorMessage :name="name" class="text-red-600 dark:text-red-400" />
         </div>
       </div>
     </Form>

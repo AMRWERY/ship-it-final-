@@ -12,7 +12,7 @@
       <div data-twe-modal-dialog-ref
         class="fixed bottom-6 end-6 pointer-events-none translate-y-[100px] opacity-0 transition-all duration-300 ease-in-out w-[500px]">
         <div
-          class="relative flex flex-col w-full text-current bg-white border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
+          class="relative flex flex-col w-full text-current bg-white dark:bg-[#181a1b] border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
           <!-- Modal body -->
           <div class="relative flex-auto p-4" data-twe-modal-body-ref>
             <div class="space-y-4">
@@ -25,14 +25,14 @@
                 <div class="relative flex items-center justify-center space-x-4">
                   <icon name="logos:google-icon" class="absolute w-12 start-0" />
                   <span
-                    class="block text-sm font-semibold tracking-wide text-gray-700 transition duration-300 w-max group-hover:text-blue-600 sm:text-base">Continue
+                    class="block text-sm font-semibold tracking-wide text-gray-700 transition duration-300 w-max group-hover:text-blue-600 sm:text-base dark:text-gray-200 dark:group-hover:text-blue-300">Continue
                     with Google</span>
                 </div>
               </button>
             </div>
 
             <div class="mt-5 text-center">
-              <p>or <nuxt-link to="/sign-up" class="text-blue-600">Create free
+              <p>or <nuxt-link to="/sign-up" class="text-blue-600 dark:text-blue-400">Create free
                   account</nuxt-link>
               </p>
             </div>
@@ -42,7 +42,7 @@
                 <div class="w-full border-t border-gray-300"></div>
               </div>
               <div class="relative flex justify-center text-sm">
-                <span class="px-2 text-gray-500 bg-white">or continue with</span>
+                <span class="px-6 text-gray-500 bg-white dark:bg-gray-800 dark:text-gray-200">or continue with</span>
               </div>
             </div>
 

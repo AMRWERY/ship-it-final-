@@ -84,7 +84,8 @@
     "product_description_required": "Product description required",
     "availability_required": "Availability required",
     "category_title": "Category Title",
-    "enter_category_title": "Enter category title"
+    "enter_category_title": "Enter category title",
+    "new_message": "New Message"
   },
   "btn": {
     "logging": "Logging",

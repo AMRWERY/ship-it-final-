@@ -22,12 +22,12 @@
 
                     <div class="flex items-center space-s-4">
                         <!-- toggle locales -->
-                        <nuxt-link to="" class="text-white me-4" role="button" v-if="localeStore.isRTL">
+                        <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-if="localeStore.isRTL">
                             <span class="[&>svg]:w-5" @click="setLocale('en')">
                                 En
                             </span>
                         </nuxt-link>
-                        <nuxt-link to="" class="text-white me-4" role="button" v-else>
+                        <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-else>
                             <span class="[&>svg]:w-5" @click="setLocale('ar')">
                                 العربية
                             </span>

@@ -14,9 +14,9 @@
       <div data-twe-modal-dialog-ref
         class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[1000px]">
         <div
-          class="relative flex flex-col w-full text-current bg-white border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
+          class="relative flex flex-col w-full text-current bg-white border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4 dark:bg-[#181a1b]">
           <div class="p-3">
-            <p class="text-2xl font-semibold text-center text-gray-800 capitalize">Today Deal</p>
+            <p class="text-2xl font-semibold text-center text-gray-800 capitalize dark:text-gray-200">Today Deal</p>
           </div>
 
           <!-- Modal body -->
@@ -27,9 +27,9 @@
 
                   <!-- no deals available -->
                   <div v-if="!currentDeal">
-                    <p class="text-3xl font-semibold text-center text-gray-600">No deals available right now</p>
-                    <p v-if="nextDealStartTime" class="mt-2 text-xl font-medium text-center text-gray-500">
-                      Next deal will start in <span class="font-semibold text-red-500">{{
+                    <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">No deals available right now</p>
+                    <p v-if="nextDealStartTime" class="mt-2 text-xl font-medium text-center text-gray-500 dark:text-gray-100">
+                      Next deal will start in <span class="font-semibold text-red-500 dark:text-red-400">{{
                         formatRemainingTime(nextDealStartTime) }}</span>
                     </p>
                   </div>
@@ -40,7 +40,7 @@
                         <div class="p-2 bg-white shadow">
                           <img :src="selectedImage" class="w-full  aspect-[11/8] object-cover object-top" />
                         </div>
-                        <div class="w-full max-w-full p-2 overflow-auto bg-white">
+                        <div class="w-full max-w-full p-2 overflow-auto bg-white dark:bg-[#181a1b]">
                           <div class="flex flex-row gap-4 shrink-0">
                             <img v-for="(image, index) in imageList" :key="index" :src="image"
                               @click="setSelectedImage(image)"
@@ -52,7 +52,7 @@
 
                     <div class="w-full">
                       <div>
-                        <h3 class="text-lg font-bold text-gray-800 sm:text-xl">{{ currentDeal?.title }}</h3>
+                        <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ currentDeal?.title }}</h3>
                         <p class="mt-3 mb-4 text-sm">{{ currentDeal?.brand }}</p>
                         <div class="flex items-center gap-3 mt-1">
                           <!-- ratings component -->
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="flex flex-wrap items-center gap-2 mt-4">
-                          <p class="text-base text-gray-500 line-through">{{ currentDeal?.originalPrice }} egp</p>
+                          <p class="text-base text-gray-500 line-through dark:text-gray-100">{{ currentDeal?.originalPrice }} egp</p>
                           <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice }}
                             egp</h4>
                           <div class="flex py-1 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
@@ -83,7 +83,7 @@
                       <hr class="my-6 border-gray-300" />
 
                       <div class="mt-4">
-                        <h3 class="text-lg font-bold text-gray-800">Color</h3>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Color</h3>
                         <div class="flex flex-wrap gap-2 mt-2">
                           <button type="button" v-for="color in currentDeal?.colors" :key="color"
                             class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
@@ -92,7 +92,7 @@
                       </div>
 
                       <div class="mt-4">
-                        <h3 class="text-lg font-bold text-gray-800">Size</h3>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Size</h3>
                         <div class="flex flex-wrap gap-2 mt-2">
                           <button type="button" v-for="size in currentDeal?.sizes" :key="size"
                             class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
@@ -106,11 +106,11 @@
 
                       <div class="mt-4">
                         <div class="flex gap-2 items-center border border-gray-300 bg-white px-3 py-2.5 w-max">
-                          <button type="button" class="border-none outline-none">
+                          <button type="button" class="text-black border-none outline-none">
                             <icon name="ic:round-minus" class="w-2.5 h-2.5" />
                           </button>
                           <span class="px-3 text-sm font-semibold text-gray-800">1</span>
-                          <button type="button" class="border-none outline-none">
+                          <button type="button" class="text-black border-none outline-none">
                             <icon name="material-symbols:add" class="w-2.5 h-2.5" />
                           </button>
                         </div>
@@ -129,27 +129,27 @@
 
                           <!-- Add to Wishlist -->
                           <button @click="toggleWishlist"
-                            class="flex items-center justify-center h-10 p-2 text-gray-700 border border-gray-300 w-11 hover:text-gray-50 hover:bg-black">
+                            class="flex items-center justify-center h-10 p-2 text-gray-700 border border-gray-300 dark:text-gray-200 w-11 hover:text-gray-50 hover:bg-black dark:hover:bg-gray-700">
                             <icon :name="isInWishlist ? 'clarity:heart-solid' : 'clarity:heart-line'" size="20px"
                               :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
                           </button>
 
                           <!-- Success Message -->
                           <div v-if="productAdded">
-                            <p class="font-medium text-green-700">{{ $t('toast.product_added_to_cart') }}</p>
+                            <p class="font-medium text-green-700 dark:text-green-400">{{ $t('toast.product_added_to_cart') }}</p>
                           </div>
                           <div v-if="notAuth">
-                            <p class="font-medium text-red-700">{{ $t('toast.please_log_in_first_to_add_to_cart') }}</p>
+                            <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.please_log_in_first_to_add_to_cart') }}</p>
                           </div>
                           <div v-if="productNotAdded">
-                            <p class="font-medium text-red-700">{{ $t('toast.failed_to_add_to_cart') }}</p>
+                            <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.failed_to_add_to_cart') }}</p>
                           </div>
                         </div>
 
                         <div class="max-w-2xl mt-12 custom-scroll max-h-32">
                           <div class="mt-6">
-                            <h3 class="text-lg font-bold text-gray-800">Description</h3>
-                            <p class="mt-4 text-sm text-gray-600">{{ currentDeal?.description }}</p>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Description</h3>
+                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ currentDeal?.description }}</p>
                           </div>
                         </div>
                       </div>
@@ -159,7 +159,7 @@
 
                   <!-- Upcoming Deals Section -->
                   <div class="mt-12 border-t-2" v-if="currentDeal">
-                    <h3 class="mt-4 text-lg font-bold text-gray-800">Upcoming Deals</h3>
+                    <h3 class="mt-4 text-lg font-bold text-gray-800 dark:text-gray-200">Upcoming Deals</h3>
                     <div class="grid grid-cols-2 gap-4 md:grid-cols-2 max-sm:justify-center gap-y-8 sm:gap-x-6">
                       <div class="flex items-center gap-6 overflow-hidden cursor-pointer max-sm:flex-col"
                         v-for="(deal, index) in nextDeals" :key="index">
@@ -167,12 +167,12 @@
                           <img :src="deal.imageUrl1" class="object-contain w-full h-full" />
                         </div>
                         <div class="max-sm:text-center">
-                          <h3 class="text-sm font-bold text-gray-800 truncate sm:text-base">{{ deal.title }}</h3>
-                          <h4 class="mt-2 text-xs font-bold text-gray-700">{{ deal.brand }}</h4>
-                          <h4 class="mt-2 text-xs font-bold text-gray-700">Save {{ deal.discount }}%</h4>
-                          <h4 class="mt-2 text-sm font-bold text-blue-600">{{ deal.discountedPrice }} egp
+                          <h3 class="text-sm font-bold text-gray-800 truncate sm:text-base dark:text-gray-200">{{ deal.title }}</h3>
+                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">{{ deal.brand }}</h4>
+                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount }}%</h4>
+                          <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice }} egp
                           </h4>
-                          <h4 class="mt-2 text-sm font-normal text-red-600">{{ formatRemainingTime(deal.remainingTime)
+                          <h4 class="mt-2 text-sm font-normal text-red-600 dark:text-red-400">{{ formatRemainingTime(deal.remainingTime)
                             }}
                           </h4>
                         </div>

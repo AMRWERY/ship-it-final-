@@ -8,7 +8,8 @@
         <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="w-auto h-16 mx-auto" src="@/public/shopping-bags.svg" />
-            <h2 class="mt-5 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Create free
+            <h2 class="mt-5 text-2xl font-bold leading-9 tracking-tight text-center text-gray-800 dark:text-gray-200">
+              Create free
               account</h2>
           </div>
 
@@ -19,7 +20,7 @@
                 <div class="relative flex items-center justify-center space-s-4">
                   <icon name="logos:google-icon" class="absolute w-12 start-0" />
                   <span
-                    class="block text-sm font-semibold tracking-wide text-gray-700 transition duration-300 w-max group-hover:text-blue-600 sm:text-base">Continue
+                    class="block text-sm font-semibold tracking-wide text-gray-700 transition duration-300 w-max group-hover:text-blue-600 sm:text-base dark:text-gray-200 dark:group-hover:text-blue-300">Continue
                     with Google</span>
                 </div>
               </button>
@@ -30,7 +31,7 @@
                 <div class="w-full border-t border-gray-300"></div>
               </div>
               <div class="relative flex justify-center text-sm">
-                <span class="px-2 text-gray-500 bg-white">or continue with</span>
+                <span class="px-6 text-gray-500 bg-white dark:bg-gray-800 dark:text-gray-200">or continue with</span>
               </div>
             </div>
 

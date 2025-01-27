@@ -5,7 +5,7 @@
     </ClientOnly>
 
     <ClientOnly v-else>
-      <NuxtLayout>
+      <NuxtLayout :dir="isRTL ? 'rtl' : 'ltr'" :class="{ 'rtl': isRTL, 'ltr': !isRTL }">
         <progress-bar />
         <chat-list />
         <NuxtPage />
@@ -30,6 +30,17 @@ onMounted(() => {
 //   const { Tooltip, initTWE } = await import("tw-elements");
 //   initTWE({ Tooltip });
 // });
+
+//toggle locales
+const { locale } = useI18n();
+const localeStore = useLocaleStore()
+
+const isRTL = computed(() => localeStore.isRTL);
+
+onMounted(() => {
+  localeStore.loadLocale();
+  locale.value = localeStore.locale;
+});
 
 useHead({
   titleTemplate: 'Ship-IT',

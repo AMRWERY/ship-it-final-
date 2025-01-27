@@ -6,23 +6,13 @@ import {
   max,
   regex,
   between,
-  numeric
+  numeric,
 } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
 import ar from "@vee-validate/i18n/dist/locale/ar.json";
 import inputsEn from "~/locales/en.json";
 import inputsAr from "~/locales/ar.json";
-
-const getLocale = () => {
-  if (process.client) {
-    return localStorage.getItem("locale");
-  }
-  return null;
-};
-
-const locale = getLocale();
-// const locale = localStorage.getItem("locale");
 
 export default defineNuxtPlugin((app) => {
   defineRule("required", required);
@@ -60,19 +50,34 @@ export default defineNuxtPlugin((app) => {
   defineRule("between", between);
   defineRule("numeric", numeric);
 
-  configure({
-    generateMessage: localize({
-      en: {
-        ...en,
-        names: inputsEn.form,
-      },
-      ar: {
-        ...ar,
-        names: inputsAr.form,
-      },
-    }),
-  });
+  const localeStore = useLocaleStore();
+  const updateValidationLocale = (locale) => {
+    configure({
+      generateMessage: localize({
+        en: {
+          ...en,
+          names: inputsEn.form,
+        },
+        ar: {
+          ...ar,
+          names: inputsAr.form,
+        },
+      }),
+    });
+    setLocale(locale);
+  };
 
-  // setLocale("en");
-  setLocale(locale || "en");
+  if (process.client) {
+    const initialLocale =
+      localeStore.locale || localStorage.getItem("locale") || "en";
+    updateValidationLocale(initialLocale);
+  }
+
+  watch(
+    () => localeStore.locale,
+    (newLocale) => {
+      localStorage.setItem("locale", newLocale);
+      updateValidationLocale(newLocale);
+    }
+  );
 });

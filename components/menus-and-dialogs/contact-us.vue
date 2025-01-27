@@ -2,7 +2,7 @@
   <div>
     <!-- Button trigger modal -->
     <button type="button" v-if="isAuthenticated && !isAdmin && isEmailInList !== null && isEmailInList"
-      class="fixed flex items-center justify-center p-4 text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bottom-28 end-8 hover:from-purple-500 hover:via-pink-500 hover:to-yellow-500 focus:ring-4 focus:ring-purple-300 active:scale-90"
+      class="fixed z-50 flex items-center justify-center p-4 text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bottom-28 end-8 hover:from-purple-500 hover:via-pink-500 hover:to-yellow-500 focus:ring-4 focus:ring-purple-300 active:scale-90"
       data-twe-toggle="modal" data-twe-target="#contactUsModalVarying">
       <icon name="ic:sharp-wechat" />
     </button>
@@ -14,13 +14,13 @@
       <div data-twe-modal-dialog-ref
         class="fixed bottom-6 end-6 pointer-events-none translate-y-[100px] opacity-0 transition-all duration-300 ease-in-out w-[400xpx]">
         <div
-          class="relative flex flex-col w-full text-current bg-white border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
+          class="relative flex flex-col w-full text-current bg-white dark:bg-[#181a1b] border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
           <div class="flex items-center justify-between flex-shrink-0 p-4 border-b-2 rounded-t-md border-neutral-100">
-            <h5 class="text-xl font-medium leading-normal text-surface" id="contactUsModalLabel">
-              New Message
+            <h5 class="text-xl font-medium leading-normal text-surface dark:text-gray-100" id="contactUsModalLabel">
+              {{ $t('form.new_message') }}
             </h5>
             <button type="button"
-              class="box-content border-none rounded-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+              class="box-content border-none rounded-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-gray-100 dark:hover:text-gray-200"
               data-twe-modal-dismiss aria-label="Close">
               <span class="[&>svg]:h-6 [&>svg]:w-6">
                 <icon name="ic:baseline-close" />
@@ -31,16 +31,16 @@
           <!-- Modal body -->
           <div class="relative flex-auto p-4" data-twe-modal-body-ref>
             <ClientOnly>
-              <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
-                name="your name" :rules="'required|alpha_spaces'" :required="true"
-                prefixIcon="material-symbols:alternate-email" v-model="data.yourName" />
+              <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text" name="name"
+                :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:alternate-email"
+                v-model="data.yourName" />
 
               <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
                 name="email" :rules="'required|email'" :required="true" prefixIcon="material-symbols:alternate-email"
                 v-model="data.email" />
 
               <dynamic-inputs :label="t('form.your_message')" :placeholder="t('form.enter_your_message')"
-                type="textarea" name="your message" :rules="'required|between:10,500'" :required="true"
+                type="textarea" :name="t('form.your_message')" :rules="'required|between:10,500'" :required="true"
                 prefixIcon="material-symbols:person" v-model="data.message" />
 
               <div class="mt-6">
