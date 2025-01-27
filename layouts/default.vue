@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- Overlay Component -->
+    <Overlay :visible="showOverlay" />
+
     <main :dir="isRTL ? 'rtl' : 'ltr'" :class="{ 'rtl': isRTL, 'ltr': !isRTL }">
       <navbar :is-dark="isDark" @toggle-theme="toggleTheme" />
       <div class="max-w-full py-6 mx-auto sm:px-6 lg:px-8">
@@ -19,13 +22,17 @@ const isRTL = computed(() => {
 
 //toggle themes
 const isDark = ref(false);
+const showOverlay = ref(false);
 
 const toggleTheme = () => {
-  isDark.value = !isDark.value;
-  updateTheme();
+  showOverlay.value = true;
+  setTimeout(() => {
+    isDark.value = !isDark.value;
+    updateTheme();
+    showOverlay.value = false;
+  }, 3000);
 };
 
-// Applies the theme based on state
 const updateTheme = () => {
   if (isDark.value) {
     document.documentElement.classList.add('dark');
