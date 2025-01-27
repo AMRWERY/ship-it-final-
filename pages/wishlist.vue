@@ -8,22 +8,22 @@
 
       <h2 class="mb-8 text-3xl font-semibold text-center">Your Wishlist</h2>
       <!-- Check if wishlist is empty -->
-      <div v-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500">
-        <p>Your wishlist is empty. <nuxt-link to="/products" class="text-blue-500">Start adding products!</nuxt-link>
+      <div v-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500 dark:text-gray-100">
+        <p>Your wishlist is empty. <nuxt-link to="/products" class="text-blue-500 dark:text-blue-300">Start adding products!</nuxt-link>
         </p>
       </div>
 
       <!-- Wishlist Items -->
       <div v-else class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <div v-for="item in wishlistStore.wishlist" :key="item.id"
-          class="overflow-hidden bg-white rounded-lg shadow-lg">
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-black">
           <img :src="item.imageUrl1" class="object-cover w-full h-48">
           <div class="p-4">
             <h3 class="text-lg font-semibold truncate">{{ item.title }}</h3>
-            <p class="mt-1 text-gray-500">Brand: {{ item.brand }}</p>
+            <p class="mt-1 text-gray-500 dark:text-gray-100">Brand: {{ item.brand }}</p>
             <div class="flex items-center mt-2 space-s-2">
-              <p class="mt-1 text-xl font-bold text-gray-900">{{ item.discountedPrice }} egp</p>
-              <p class="mt-2 text-sm text-gray-400 line-through">{{ item.originalPrice }} egp</p>
+              <p class="mt-1 text-xl font-bold text-gray-900 dark:text-gray-200">{{ item.discountedPrice }} egp</p>
+              <p class="mt-2 text-sm text-gray-500 line-through dark:text-gray-100">{{ item.originalPrice }} egp</p>
             </div>
 
             <div class="flex mt-2 space-s-5">
@@ -32,11 +32,11 @@
                 class="flex items-center justify-center h-10 bg-transparent border rounded-full w-11">
                 <icon v-if="removingItem === item.docId" name="svg-spinners:6-dots-rotate" size="20px"
                   class="text-red-500" />
-                <icon name="material-symbols:close-rounded" class="inline w-6 text-red-500" v-else />
+                <icon name="material-symbols:close-rounded" class="inline w-6 text-red-500 dark:text-red-300" v-else />
               </button>
               <!-- add to cart Button -->
               <button type="button" @click="moveToCart(item)"
-                class="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm text-white hover:bg-white hover:text-black hover:border-black border-transparent border w-full capitalize font-semibold">
+                class="flex items-center justify-center w-full px-5 py-2.5 btn-style">
                 <div class="flex items-center justify-center" v-if="loading">
                   <span class="text-center me-2">{{ $t('btn.adding_to_cart') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />

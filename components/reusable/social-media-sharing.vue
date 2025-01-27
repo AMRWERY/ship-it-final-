@@ -1,8 +1,9 @@
 <template>
   <div>
     <!-- share via social media -->
-    <div class="space-y-2 mt-7">
-      <p class="text-base text-gray-700">{{ $t('social_media.share_my') }} {{ $t(`breadcrumb.${normalizedItemName}`) }}
+    <div class="mt-12 space-y-2">
+      <p class="text-base text-gray-700 dark:text-gray-100">{{ $t('social_media.share_my') }} {{
+        $t(`breadcrumb.${normalizedItemName}`) }}
         {{ $t('social_media.via') }}</p>
       <div class="flex items-center space-s-4">
         <SocialShare network="facebook" :styled="false" :label="false"

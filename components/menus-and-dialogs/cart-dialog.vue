@@ -10,9 +10,9 @@
 
     <div v-if="isSidebarOpen"
       class="fixed inset-0 w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] font-sans">
-      <div class="relative w-full h-screen max-w-lg bg-white shadow-lg ms-auto">
+      <div class="relative w-full h-screen max-w-lg bg-white shadow-lg ms-auto dark:bg-[#181a1b]">
         <div class="overflow-auto p-6 h-[calc(100vh-124px)] scroll-hidden">
-          <div class="flex items-center gap-4 text-gray-800">
+          <div class="flex items-center gap-4 text-gray-800 dark:text-gray-200">
             <h3 class="flex-1 text-2xl font-bold">Shopping cart</h3>
             <button @click="closeCartSidebar">
               <icon name="material-symbols:close-rounded"
@@ -21,9 +21,9 @@
           </div>
 
           <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
-            <p class="text-base text-center text-gray-800">{{ $t('cart.your_cart_is_currently_empty') }}</p>
+            <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty') }}</p>
             <nuxt-link to="/products" @click="closeCartSidebar" type="button"
-              class="block text-sm font-medium text-center text-blue-500">
+              class="block text-sm font-medium text-center text-blue-500 dark:text-blue-300">
               <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
                 <icon name="material-symbols:arrow-right-alt-rounded" class="rtl:rotate-180 ms-1" />
               </span>
@@ -32,18 +32,18 @@
 
           <div class="mt-12 space-y-4" v-else>
             <div class="grid items-start grid-cols-3 gap-4" v-for="item in cartStore.cart" :key="item.id">
-              <div class="flex items-start col-span-2 gap-4 border-b">
-                <div class="p-2 bg-gray-100 rounded-md w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0">
+              <div class="flex items-start col-span-2 gap-4 border-b-2">
+                <div class="p-2 bg-gray-100 rounded-md w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 dark:bg-[#181a1b]">
                   <img :src="item.imageUrl1" class="object-contain w-full h-full" />
                 </div>
 
                 <div class="flex flex-col">
-                  <h3 class="text-base font-bold text-gray-800 max-sm:text-sm">{{ item.title }}</h3>
-                  <p class="text-xs font-semibold text-gray-500 mt-0.5">Brand: {{ item.brand }}</p>
-                  <p class="text-xs font-semibold text-gray-500 mt-0.5">Quantity: {{ item.quantity }}</p>
+                  <h3 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.title }}</h3>
+                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Brand: {{ item.brand }}</p>
+                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Quantity: {{ item.quantity }}</p>
 
                   <button type="button" @click.stop="removeItem(item.docId, item.quantity)"
-                    class="flex items-center gap-1 mt-6 text-xs font-semibold text-red-500 shrink-0">
+                    class="flex items-center gap-1 mt-6 text-xs font-semibold text-red-500 shrink-0 dark:text-red-400">
                     <icon v-if="removingItem === item.docId" name="svg-spinners:6-dots-rotate"
                       class="inline w-4 fill-curren" />
                     <icon name="material-symbols:delete-outline-rounded" class="inline w-4 fill-current" v-else />
@@ -53,15 +53,15 @@
               </div>
 
               <div class="ms-auto">
-                <h4 class="text-base font-bold text-gray-800 max-sm:text-sm">{{ item.discountedPrice }} egp</h4>
+                <h4 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.discountedPrice }} egp</h4>
                 <div class="flex items-center gap-3 mt-10">
                   <button type="button" @click.stop="decrementQuantity(item)"
-                    class="flex items-center justify-center w-5 h-5 bg-gray-400 rounded-full outline-none">
-                    <icon name="ic:round-minus" class="w-4 text-white fill-white" />
+                    class="flex items-center justify-center w-5 h-5 bg-gray-400 rounded-full outline-none dark:bg-gray-200">
+                    <icon name="ic:round-minus" class="w-4 text-white dark:text-black fill-white" />
                   </button>
                   <span class="font-bold text-sm leading-[18px]">{{ item.quantity }}</span>
                   <button type="button" @click.stop="incrementQuantity(item)"
-                    class="flex items-center justify-center w-5 h-5 bg-gray-800 rounded-full outline-none">
+                    class="flex items-center justify-center w-5 h-5 bg-gray-800 rounded-full outline-none dark:bg-gray-500">
                     <icon name="material-symbols:add" class="w-4 text-white fill-white" />
                   </button>
                 </div>
@@ -70,8 +70,8 @@
           </div>
         </div>
 
-        <div class="absolute bottom-0 w-full p-4 bg-white border-t" v-if="cartStore.cart.length > 0">
-          <ul class="text-gray-800 divide-y">
+        <div class="absolute bottom-0 w-full p-4 bg-white dark:bg-[#181a1b] border-t" v-if="cartStore.cart.length > 0">
+          <ul class="text-gray-800 divide-y dark:text-gray-200">
             <li class="flex flex-wrap gap-4 text-lg font-bold">Subtotal <span class="ms-auto">{{ totalAmount }}
                 egp</span>
             </li>

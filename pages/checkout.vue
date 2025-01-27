@@ -3,24 +3,29 @@
     <!-- breadcrumb component -->
     <breadcrumb />
 
-    <section class="py-8 mx-auto bg-white md:py-16 max-w-7xl">
+    <section class="py-8 mx-auto bg-white dark:bg-[#181a1b] md:py-16 max-w-7xl">
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 md:col-span-8">
           <ol class="flex items-center w-full max-w-2xl text-sm font-medium text-center text-gray-500 sm:text-base">
-            <li :class="step === 1 ? 'text-blue-600' : 'text-gray-400'"
+            <li :class="step === 1 ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-gray-100'"
               class="after:border-1 flex items-center after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
               <span class="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                 <icon name="material-symbols:check-circle-outline-rounded" class="w-4 h-4 me-2 sm:h-5 sm:w-5"
                   aria-hidden="true" />
-                {{ $t('checkout.checkout') }}
+                <span class="whitespace-nowrap">
+                  {{ $t('checkout.checkout') }}
+                </span>
               </span>
             </li>
-            <li class="flex items-center shrink-0 " :class="step === 2 ? 'text-blue-600' : 'text-gray-400'">
+            <li class="flex items-center shrink-0 "
+              :class="step === 2 ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-gray-100'">
               <span class="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                 <icon name="material-symbols:check-circle-outline-rounded" class="w-4 h-4 me-2 sm:h-5 sm:w-5"
                   aria-hidden="true" />
               </span>
-              {{ $t('checkout.payment_details') }}
+              <span class="whitespace-nowrap">
+                {{ $t('checkout.payment_details') }}
+              </span>
             </li>
           </ol>
 
@@ -28,7 +33,7 @@
           <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
             <div v-if="step === 1">
               <!-- Checkout Form -->
-              <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
+              <div class="mt-2 lg:flex lg:items-start lg:gap-12 xl:gap-16">
                 <div class="flex-1 min-w-0 space-y-8">
                   <div class="space-y-4">
                     <h2 class="text-xl font-semibold text-gray-900">{{ $t('checkout.delivery_details')
@@ -44,45 +49,51 @@
 
                       <div>
                         <div class="flex items-center gap-2 mb-1">
-                          <label for="country" class="block text-sm font-medium text-gray-900">{{
-                            $t('form.country') }}</label>
+                          <label for="country"
+                            class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
+                              $t('form.country') }}</label>
                         </div>
                         <select id="country" name="country" autocomplete="country-name" v-model="selectedCountry"
-                          class="w-full py-2 text-gray-800 transition duration-100 border rounded outline-none ring-indigo-300 focus:ring bg-gray-50">
-                          <option v-for=" country in countriesData" :key="country.country" :value="country.country">
+                          class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9">
+                          <option v-for=" country in countriesData" :key="country.country" :value="country.country"
+                            class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">
                             {{ country.country }}</option>
                         </select>
                       </div>
 
                       <div>
                         <div class="flex items-center gap-2 mb-1">
-                          <label for="city" class="block text-sm font-medium text-gray-900">{{
+                          <label for="city" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
                             $t('form.city') }}</label>
                         </div>
                         <select id="city" name="city" autocomplete="city-name"
                           v-model="checkoutStore.deliveryDetails.city"
-                          class="w-full py-2 text-gray-800 transition duration-100 border rounded outline-none ring-indigo-300 focus:ring bg-gray-50">
-                          <option v-for="city in getCitiesForSelectedCountry" :key="city" :value="city">
+                          class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9">
+                          <option v-for="city in getCitiesForSelectedCountry" :key="city" :value="city"
+                            class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">
                             {{ city }}</option>
                         </select>
                       </div>
 
                       <div>
-                        <label for="phone-input-3" class="block mb-1 text-sm font-medium text-gray-900">
-                          {{ $t('form.phone_number') }} <span class="text-red-500">*</span>
+                        <label for="phone-input-3"
+                          class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">
+                          {{ $t('form.phone_number') }}
                         </label>
                         <div class="flex items-center">
                           <button id="dropdown-phone-button-3"
-                            class="z-10 inline-flex shrink-0 items-center rounded-s-lg border border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-100"
+                            class="z-10 inline-flex shrink-0 items-center rounded-s-lg border border-gray-300 bg-gray-100 dark:bg-[#181a1b] px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-100"
                             type="button">
                             <img v-if="selectedCountryFlag" :src="selectedCountryFlag"
                               class="w-[19.5px] h-[14px] me-2" />
-                            <span v-if="selectedCallingCode">+{{ selectedCallingCode }}</span>
-                            <icon name="material-symbols:keyboard-arrow-down-rounded" class="-me-0.5 ms-2 h-5 w-5" />
+                            <span class="text-slate-700 dark:text-slate-200" v-if="selectedCallingCode">+{{
+                              selectedCallingCode }}</span>
+                            <icon name="material-symbols:keyboard-arrow-down-rounded"
+                              class="-me-0.5 ms-2 h-5 w-5 dark:text-white" />
                           </button>
                           <div class="relative w-full">
                             <input type="text" id="phone-input" v-model="checkoutStore.deliveryDetails.phoneNumber"
-                              class="z-20 block w-full rounded-e-lg border border-s-0 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
+                              class="z-20 w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9"
                               placeholder="123-456-7890" />
                           </div>
                         </div>
@@ -102,7 +113,7 @@
           <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
             <div v-if="step === 2">
               <!-- Payment Form -->
-              <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
+              <div class="mt-2 lg:flex lg:items-start lg:gap-12 xl:gap-16">
                 <div class="flex-1 min-w-0 space-y-8">
                   <div class="space-y-4">
                     <h2 class="text-xl font-semibold text-gray-900">{{ $t('checkout.payment_details') }}
@@ -119,8 +130,8 @@
 
                       <div>
                         <div class="mt-4 sm:col-span-full">
-                          <span class="block mb-1 text-sm font-medium text-gray-700">Card expiration <span
-                              class="text-red-600">*</span></span>
+                          <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
+                            $t('form.card_expiration') }} <span class="text-red-600">*</span></span>
                           <VueDatePicker :name="t('form.card_expiration')"
                             :placeholder="t('form.choose_card_expiration')" format="MM/dd/yyyy" cancel-text="Close"
                             :teleport="true" :esc-close="false" :state="true"
@@ -151,11 +162,11 @@
             </div>
           </transition>
           <div>
-            <label for="voucher" class="block mb-2 text-sm font-medium text-gray-900">{{
+            <label for="voucher" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
               $t('checkout.enter_a_gift_card_voucher_or_promotional_code') }} </label>
             <div class="flex items-center max-w-md gap-4">
               <input type="text" id="voucher"
-                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
+                class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200"
                 :placeholder="$t('checkout.enter_your_a_gift_card_voucher_or_promotional_code')" />
               <button type="button" class="flex items-center justify-center px-5 py-2.5 btn-style">{{
                 $t('btn.apply') }}</button>
@@ -168,25 +179,25 @@
             <div class="flow-root">
               <div class="-my-3 divide-y divide-gray-200">
                 <dl class="flex items-center justify-between gap-4 py-3">
-                  <dt class="text-base font-normal text-gray-500">{{ $t('checkout.subtotal') }}</dt>
-                  <dd class="text-base font-medium text-gray-900">{{ subTotalAmount }}</dd>
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.subtotal') }}</dt>
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ subTotalAmount }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
-                  <dt class="text-base font-normal text-gray-500">{{ $t('checkout.savings') }}</dt>
-                  <dd class="text-base font-medium text-green-500">%{{ averageDiscount }}</dd>
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.savings') }}</dt>
+                  <dd class="text-base font-medium text-green-500 dark:text-gray-200">%{{ averageDiscount }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
-                  <dt class="text-base font-normal text-gray-500">{{ $t('checkout.store_pickup') }}
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.store_pickup') }}
                   </dt>
-                  <dd class="text-base font-medium text-gray-900">$25.00</dd>
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">$25.00</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
-                  <dt class="text-base font-normal text-gray-500">{{ $t('checkout.tax') }}</dt>
-                  <dd class="text-base font-medium text-gray-900">$18.00</dd>
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.tax') }}</dt>
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">$18.00</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
-                  <dt class="text-base font-bold text-gray-900">{{ $t('checkout.total') }}</dt>
-                  <dd class="text-base font-bold text-gray-900">${{ totalAmount }}</dd>
+                  <dt class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $t('checkout.total') }}</dt>
+                  <dd class="text-base font-bold text-gray-900 dark:text-gray-200">${{ totalAmount }}</dd>
                 </dl>
               </div>
             </div>
@@ -196,6 +207,7 @@
                 $t('btn.place_order') }}</nuxt-link>
             </div>
           </div>
+
           <!-- <div class="flex items-center justify-center gap-8 mt-6">
               <img class="w-auto h-8"
                 src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal.svg" />
@@ -392,5 +404,13 @@ useHead({
 
 .dp__theme_light {
   --dp-border-color: #28282a;
+}
+
+select {
+  scrollbar-width: none;
+}
+
+select::-webkit-scrollbar {
+  display: none;
 }
 </style>
