@@ -54,6 +54,7 @@
                 </button>
                 <button type="button" class="flex items-center justify-center w-full px-4 py-2 btn-style"
                   @click="handleAddToCart(card)">
+                  <icon name="material-symbols:add-shopping-cart" class="w-5 h-5 -ms-2 me-2" aria-hidden="true" />
                   <div class="flex items-center justify-center" v-if="loading">
                     <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
                     <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
