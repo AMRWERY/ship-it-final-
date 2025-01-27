@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-7">
-      <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm" v-for="product in productStore.products"
+      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black" v-for="product in productStore.products"
         :key="product.id">
         <div class="w-full h-56">
           <nuxt-link to="">
@@ -15,46 +15,46 @@
             <div class="flex items-center justify-end gap-1">
               <nuxt-link :to="`/products/${product.id}`" type="button" data-twe-toggle="tooltip"
                 data-twe-placement="top" title="Quick Look"
-                class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-900">
+                class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300">
                 <span class="sr-only">Quick look</span>
                 <icon name="material-symbols:visibility-outline-rounded" class="w-6 h-6" aria-hidden="true" />
               </nuxt-link>
 
               <button @click="toggleWishlist(product)"
-                class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-900" data-twe-toggle="tooltip"
-                data-twe-placement="top" title="Add to favorites">
+                class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300" data-twe-toggle="tooltip"
+                data-twe-placement="top" title="Add to wishlist">
                 <icon :name="wishlistIcon(product)" size="20px" :class="wishlistIconClass(product)"
                   class="p-1 rounded-full" />
               </button>
             </div>
           </div>
 
-          <nuxt-link to="" class="text-lg font-semibold leading-tight text-gray-900 hover:underline">
+          <nuxt-link to="" class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-gray-200">
             {{ product.title }}</nuxt-link>
           <div class="flex items-center gap-2 mt-2">
             <div class="flex items-center">
               <!-- ratings component -->
               <ratings />
             </div>
-            <p class="text-sm font-medium text-gray-900">5.0</p>
-            <p class="text-sm font-medium text-gray-500">(455)</p>
+            <p class="text-sm font-medium text-gray-900 dark:text-gray-200">5.0</p>
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-100">(455)</p>
           </div>
 
           <ul class="flex items-center gap-4 mt-2">
             <li class="flex items-center gap-2">
-              <icon name="material-symbols:delivery-truck-speed" class="w-4 h-4 text-gray-500" aria-hidden="true" />
-              <p class="text-sm font-medium text-gray-500">Fast Delivery</p>
+              <icon name="material-symbols:delivery-truck-speed" class="w-4 h-4 text-gray-500 dark:text-gray-100" aria-hidden="true" />
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-100">Fast Delivery</p>
             </li>
 
             <li class="flex items-center gap-2">
-              <icon name="bi:cash-stack" class="w-4 h-4 text-gray-500" aria-hidden="true" />
-              <p class="text-sm font-medium text-gray-500">Best Price</p>
+              <icon name="bi:cash-stack" class="w-4 h-4 text-gray-500 dark:text-gray-100" aria-hidden="true" />
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-100">Best Price</p>
             </li>
           </ul>
 
           <div class="flex items-center gap-2 mt-4">
-            <p class="text-2xl font-extrabold leading-tight text-gray-800">{{ product.discountedPrice }} egp</p>
-            <p class="mt-2 font-semibold leading-tight text-gray-400 line-through text-md" v-if="product.originalPrice">
+            <p class="text-2xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">{{ product.discountedPrice }} egp</p>
+            <p class="mt-2 font-semibold leading-tight text-gray-400 line-through text-md dark:text-gray-100" v-if="product.originalPrice">
               {{
                 product.originalPrice }} egp</p>
           </div>
