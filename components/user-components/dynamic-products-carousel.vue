@@ -258,6 +258,6 @@ const toggleWishlist = async (product) => {
 };
 
 const isInWishlist = computed(() =>
-  wishlistStore.isInWishlist(productStore.selectedProduct?.id)
+  wishlistStore.isInWishlist(productsStore.selectedProduct?.id)
 );
 </script>
