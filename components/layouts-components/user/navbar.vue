@@ -64,6 +64,14 @@
                             <span v-if="wishlistStore.wishlist.length > 0"
                                 class="absolute top-0 end-0 w-2.5 h-2.5 bg-red-600 rounded-full"></span>
                         </nuxt-link>
+
+                        <!--toggle theme -->
+                        <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
+                            @click="$emit('toggle-theme')">
+                            <span class="absolute -inset-1.5" />
+                            <span class="sr-only">toggle theme</span>
+                            <icon :name="isDark ? 'heroicons-solid:sun' : 'heroicons-solid:moon'" class="ms-2" />
+                        </nuxt-link>
                     </div>
 
                     <!-- display for admin only -->
@@ -129,4 +137,9 @@ const logout = async () => {
         console.error('Error during logout:', err);
     }
 };
+
+//toggle themes
+defineProps({
+    isDark: Boolean,
+});
 </script>

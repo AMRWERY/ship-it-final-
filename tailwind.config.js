@@ -12,6 +12,7 @@ export default {
   theme: {
     extend: {},
   },
+  darkMode: "class",
   corePlugins: {
     aspectRatio: false,
   },
