@@ -25,12 +25,14 @@
 
 <script setup>
 const config = {
+  itemsToShow: 5,
   gap: 5,
   breakpoints: {
     200: { itemsToShow: 1.5, snapAlign: 'center', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
-    400: { itemsToShow: 2, snapAlign: 'start', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
-    700: { itemsToShow: 3, snapAlign: 'center', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
-    1024: { itemsToShow: 4, snapAlign: 'start', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
+    400: { itemsToShow: 1.5, snapAlign: 'start', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
+    700: { itemsToShow: 2, snapAlign: 'center', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
+    1024: { itemsToShow: 3, snapAlign: 'start', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
+    1280: { itemsToShow: 4, snapAlign: 'start', wrapAround: true, autoplay: 4000, transition: 400, breakpointMode: 'carousel' },
   },
 };
 

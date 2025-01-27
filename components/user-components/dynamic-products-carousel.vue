@@ -37,7 +37,7 @@
                         <h6 class="text-sm font-bold text-gray-800 sm:text-base">{{ card.discountedPrice }} egp</h6>
                         <h6 class="text-sm text-gray-500 line-through sm:text-base" v-if="card.originalPrice">{{
                           card.originalPrice
-                        }} egp</h6>
+                          }} egp</h6>
                       </div>
 
                       <!-- ratings component -->
@@ -70,7 +70,7 @@
         </Carousel>
       </ClientOnly>
 
-      <div class="flex flex-col items-center pb-2 space-y-2 bg-home/40 md:pb-4 md:space-y-4" v-if="imageSrc">
+      <div class="flex flex-col items-center pb-2 mt-16 space-y-2 bg-home/40 md:pb-4 md:space-y-4" v-if="imageSrc">
         <div class="relative w-full h-[100px] md:h-[180px] lg:h-[360px]">
           <canvas width="10" height="10"
             class="inset-0 object-contain object-center w-full h-full !absolute !object-cover !object-top">
