@@ -38,7 +38,7 @@
               <!-- add to cart Button -->
               <button type="button" @click="moveToCart(item)"
                 class="flex items-center justify-center w-full px-5 py-2.5 btn-style">
-                <div class="flex items-center justify-center" v-if="loading">
+                <div class="flex items-center justify-center" v-if="loading[item.productId]">
                   <span class="text-center me-2">{{ $t('btn.adding_to_cart') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div>
@@ -80,22 +80,22 @@ const removeItem = async (docId) => {
   }, 3000);
 };
 
-const loading = ref(false);
+const loading = ref({});
 
 const moveToCart = async (item) => {
-  loading.value = true;
+  loading.value[item.productId] = true;
   setTimeout(async () => {
-    const { productId, title, discountedPrice, imageUrl1 } = item;
+    const { productId, title, originalPrice, discountedPrice, imageUrl1, brand, discount = null } = item;
     const existingProduct = cartStore.cart.find((product) => product.productId === productId);
     if (existingProduct) {
       const newQuantity = existingProduct.quantity + 1;
       await cartStore.updateQuantityInCart(productId, newQuantity);
     } else {
-      await cartStore.addToCart(productId, title, discountedPrice, imageUrl1, 1);
+      await cartStore.addToCart(productId, title, originalPrice, discountedPrice, imageUrl1, brand, discount, 1);
     }
     localStorage.setItem('cart', JSON.stringify(cartStore.cart));
     await wishlistStore.removeFromWishlist(item.docId);
-    loading.value = false;
+    loading.value[item.productId] = false;
   }, 3000);
 };
 

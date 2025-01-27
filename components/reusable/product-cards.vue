@@ -125,10 +125,10 @@ const handleAddToCart = async (product) => {
       product.id,
       product.title,
       product.discountedPrice,
-      product.originalPrice,
+      product.originalPrice || null,
       product.imageUrl1,
       product.brand,
-      product.discount,
+      product.discount || null,
       quantity.value,
     );
     triggerToast({
@@ -170,7 +170,7 @@ const toggleWishlist = async (product) => {
         product.id,
         product.title,
         product.discountedPrice,
-        product.originalPrice,
+        product.originalPrice || null,
         product.brand,
         product.imageUrl1,
         userId
