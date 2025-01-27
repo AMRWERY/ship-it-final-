@@ -37,7 +37,7 @@
                         <h6 class="text-sm font-bold text-gray-800 sm:text-base">{{ card.discountedPrice }} egp</h6>
                         <h6 class="text-sm text-gray-500 line-through sm:text-base" v-if="card.originalPrice">{{
                           card.originalPrice
-                          }} egp</h6>
+                        }} egp</h6>
                       </div>
 
                       <!-- ratings component -->
@@ -216,70 +216,24 @@ const handleAddToCart = (product) => {
     });
 };
 
-// const handleAddToCart = async (product) => {
-//   if (!product) return;
-//   const authStore = useAuthStore();
-//   if (!authStore.isAuthenticated) {
-//     triggerToast({
-//       title: t('toast.ah_ah'),
-//       message: t('toast.please_log_in_first_to_add_to_cart'),
-//       type: 'warning',
-//       icon: 'material-symbols:warning-outline-rounded'
-//     });
-//     return;
-//   }
-//   try {
-//     loading.value = true;
-//     await cartStore.addToCart(
-//       product.id,
-//       product.title,
-//       product.discountedPrice,
-//       product.originalPrice,
-//       product.imageUrl1,
-//       product.brand,
-//       product.discount,
-//       quantity.value,
-//     );
-//     triggerToast({
-//       title: t('toast.great'),
-//       message: t('toast.item_added_to_your_cart'),
-//       type: 'success',
-//       icon: 'clarity:shopping-cart-line'
-//     });
-//   } catch (error) {
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.failed_to_add_to_cart'),
-//       type: 'error',
-//       icon: 'material-symbols:error-outline-rounded'
-//     });
-//   } finally {
-//     loading.value = false;
-//   }
-// };
-
-const toggleWishlist = (product) => {
+const toggleWishlist = async (product) => {
   if (!product) return;
   const authStore = useAuthStore();
   if (!authStore.isAuthenticated) {
-    triggerToast({
-      title: t('toast.ah_ah'),
-      message: t('toast.please_log_in_first_to_add_to_wishlist'),
-      type: 'warning',
-      icon: 'material-symbols:warning-outline-rounded',
-    });
+    triggerToast({ title: t('toast.ah_ah'), message: t('toast.please_log_in_first_to_add_to_wishlist'), type: 'warning', icon: 'material-symbols:warning-outline-rounded' });
     return;
   }
   const userId = authStore.user?.uid;
   if (!userId) {
+    // console.error('User ID is not available');
     return;
   }
   if (wishlistStore.isInWishlist(product.id)) {
     errorMessage.value = "Product already added to the wishlist.";
     setTimeout(() => (errorMessage.value = ""), 3000);
   } else {
-    wishlistStore
-      .addToWishlist(
+    try {
+      await wishlistStore.addToWishlist(
         product.id,
         product.title,
         product.discountedPrice,
@@ -287,67 +241,20 @@ const toggleWishlist = (product) => {
         product.brand,
         product.imageUrl1,
         userId
-      )
-      .then(() => {
-        itemAdded.value = "Product added to wishlist!";
-        setTimeout(() => (itemAdded.value = ""), 3000);
-        triggerToast({
-          title: t('toast.great'),
-          message: t('toast.item_added_to_your_wishlist'),
-          type: 'success',
-          icon: 'clarity:heart-line',
-        });
-      })
-      .catch((error) => {
-        if (error.message === "Product already added to the wishlist.") {
-          errorMessage.value = error.message;
-          setTimeout(() => (errorMessage.value = ""), 3000);
-        } else {
-          console.error("Error adding to wishlist:", error);
-        }
-      });
+      );
+      itemAdded.value = "Product added to wishlist!";
+      setTimeout(() => (itemAdded.value = ""), 3000);
+      triggerToast({ title: t('toast.great'), message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
+    } catch (error) {
+      if (error.message === "Product already added to the wishlist.") {
+        errorMessage.value = error.message;
+        setTimeout(() => (errorMessage.value = ""), 3000);
+      } else {
+        console.error("Error adding to wishlist:", error);
+      }
+    }
   }
 };
-
-// const toggleWishlist = async (product) => {
-//   if (!product) return;
-//   const authStore = useAuthStore();
-//   if (!authStore.isAuthenticated) {
-//     triggerToast({ title: t('toast.ah_ah'), message: t('toast.please_log_in_first_to_add_to_wishlist'), type: 'warning', icon: 'material-symbols:warning-outline-rounded' });
-//     return;
-//   }
-//   const userId = authStore.user?.uid;
-//   if (!userId) {
-//     // console.error('User ID is not available');
-//     return;
-//   }
-//   if (wishlistStore.isInWishlist(product.id)) {
-//     errorMessage.value = "Product already added to the wishlist.";
-//     setTimeout(() => (errorMessage.value = ""), 3000);
-//   } else {
-//     try {
-//       await wishlistStore.addToWishlist(
-//         product.id,
-//         product.title,
-//         product.discountedPrice,
-//         product.originalPrice,
-//         product.brand,
-//         product.imageUrl1,
-//         userId
-//       );
-//       itemAdded.value = "Product added to wishlist!";
-//       setTimeout(() => (itemAdded.value = ""), 3000);
-//       triggerToast({ title: t('toast.great'), message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
-//     } catch (error) {
-//       if (error.message === "Product already added to the wishlist.") {
-//         errorMessage.value = error.message;
-//         setTimeout(() => (errorMessage.value = ""), 3000);
-//       } else {
-//         console.error("Error adding to wishlist:", error);
-//       }
-//     }
-//   }
-// };
 
 const isInWishlist = computed(() =>
   wishlistStore.isInWishlist(productStore.selectedProduct?.id)
