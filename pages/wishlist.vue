@@ -9,7 +9,8 @@
       <h2 class="mb-8 text-3xl font-semibold text-center">Your Wishlist</h2>
       <!-- Check if wishlist is empty -->
       <div v-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500 dark:text-gray-100">
-        <p>Your wishlist is empty. <nuxt-link to="/products" class="text-blue-500 dark:text-blue-300">Start adding products!</nuxt-link>
+        <p>Your wishlist is empty. <nuxt-link to="/products" class="text-blue-500 dark:text-blue-300">Start adding
+            products!</nuxt-link>
         </p>
       </div>
 
@@ -84,13 +85,13 @@ const loading = ref(false);
 const moveToCart = async (item) => {
   loading.value = true;
   setTimeout(async () => {
-    const { productId, title, price, imgOne } = item;
+    const { productId, title, discountedPrice, imageUrl1 } = item;
     const existingProduct = cartStore.cart.find((product) => product.productId === productId);
     if (existingProduct) {
       const newQuantity = existingProduct.quantity + 1;
       await cartStore.updateQuantityInCart(productId, newQuantity);
     } else {
-      await cartStore.addToCart(productId, title, price, price, imgOne, "", "", "0", 1);
+      await cartStore.addToCart(productId, title, discountedPrice, imageUrl1, 1);
     }
     localStorage.setItem('cart', JSON.stringify(cartStore.cart));
     await wishlistStore.removeFromWishlist(item.docId);
