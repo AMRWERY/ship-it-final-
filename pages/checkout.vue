@@ -324,7 +324,8 @@ const submitCheckoutForm = () => {
       return checkoutStore.saveCheckoutData(cartData);
     })
     .then(() => {
-      return cartStore.clearCart();
+      localStorage.setItem("cart", JSON.stringify(cartData));
+      cartStore.clearCart();
     })
     .then(() => {
       triggerToast({
@@ -341,29 +342,6 @@ const submitCheckoutForm = () => {
       loading.value = false;
     });
 };
-
-// const submitCheckoutForm = async () => {
-//   loading.value = true;
-//   try {
-//     const cartData = [...cartStore.cart];
-//     if (!cartData || cartData.length === 0) {
-//       return
-//     }
-//     await new Promise(resolve => setTimeout(resolve, 3000));
-//     await checkoutStore.saveCheckoutData(cartData);
-//     await cartStore.clearCart();
-//     triggerToast({
-//       title: t('toast.payment_successful'),
-//       message: t('toast.your_payment_was_processed_successfully_thank_you_for_your_purchase'),
-//       type: 'success',
-//       icon: 'mdi-check-circle',
-//     });
-//   } catch (error) {
-//     console.error("Error during checkout:", error);
-//   } finally {
-//     loading.value = false;
-//   }
-// };
 
 function beforeEnter(el) {
   el.style.opacity = 0;

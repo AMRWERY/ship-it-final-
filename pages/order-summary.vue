@@ -3,18 +3,20 @@
     <!-- breadcrumb component -->
     <breadcrumb />
 
-    <div class="max-w-4xl p-6 mx-auto my-10 bg-white rounded-lg shadow-lg" id="Ship-IT">
+    <div class="max-w-4xl p-6 mx-auto my-10 bg-white dark:bg-[#181a1b] rounded-lg shadow-lg" id="Ship-IT">
       <!-- Order Number -->
       <div class="flex items-center justify-between mb-12">
         <div>
-          <h2 class="text-2xl font-semibold text-gray-900">{{ $t('order_summary.order_summary') }}</h2>
-          <p class="mt-1 text-sm text-gray-500">
-            {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">{{ orderId }}</span>
+          <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-200">{{ $t('order_summary.order_summary') }}
+          </h2>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">
+            {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900 dark:text-gray-200">{{
+              orderId }}</span>
           </p>
         </div>
         <button @click="downloadPDF" data-twe-toggle="tooltip" data-twe-placement="top" data-twe-ripple-init
           :title="$t('tooltip.download_pdf')"
-          class="flex items-center px-4 py-4 text-blue-700 border border-blue-700 rounded-full hover:bg-blue-100">
+          class="flex items-center px-4 py-4 text-blue-700 border border-blue-400 rounded-full dark:text-blue-700 dark:border-blue-400 hover:bg-blue-100">
           <icon name="icon-park:printer" class="w-5 h-5" />
         </button>
       </div>
@@ -25,10 +27,12 @@
           <img :src="item.imageUrl1" class="w-full h-auto rounded-lg shadow-md" />
         </div>
         <div class="col-span-10">
-          <p class="text-lg font-semibold text-gray-900">{{ item.title }}</p>
-          <p class="text-sm font-semibold text-gray-700"><span class="me-1">{{ $t('order_summary.brand') }} </span>{{
-            item.brand }}</p>
-          <p class="mt-8 text-sm font-semibold text-gray-700"><span class="me-1">{{ $t('order_summary.quantity') }}
+          <p class="text-lg font-semibold text-gray-900 dark:text-gray-200">{{ item.title }}</p>
+          <p class="text-sm font-semibold text-gray-700 dark:text-gray-100"><span class="me-1">{{
+            $t('order_summary.brand') }} </span>{{
+                item.brand }}</p>
+          <p class="mt-8 text-sm font-semibold text-gray-700 dark:text-gray-100"><span class="me-1">{{
+            $t('order_summary.quantity') }}
             </span>{{
               item.quantity }}</p>
         </div>
@@ -37,50 +41,50 @@
       <!-- Subtotal Section -->
       <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b">
         <div class="col-span-8">
-          <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.subtotal') }}</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.subtotal') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-sm font-medium text-gray-900">${{ subTotalAmount }}</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ subTotalAmount }} egp</dd>
         </div>
       </div>
 
       <!-- Savings Section -->
       <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b">
         <div class="col-span-8">
-          <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.savings') }}</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.savings') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-sm font-medium text-green-500">%{{ averageDiscount }}</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-sm font-medium text-green-500 dark:text-gray-200">%{{ averageDiscount }}</dd>
         </div>
       </div>
 
       <!-- Store Pickup Section -->
       <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b">
         <div class="col-span-8">
-          <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.store_pickup') }}</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.store_pickup') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-sm font-medium text-gray-900">$25.00</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">25.00 egp</dd>
         </div>
       </div>
 
       <!-- Tax Section -->
       <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b">
         <div class="col-span-8">
-          <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.tax') }}</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.tax') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-sm font-medium text-gray-900">$18.00</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">18.00 egp</dd>
         </div>
       </div>
 
       <!-- Total Section -->
       <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-8 font-semibold text-gray-900">
+        <div class="col-span-8 font-semibold text-gray-900 dark:text-gray-200">
           <dt class="text-xl">{{ $t('order_summary.total') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-xl font-semibold text-gray-900">${{ totalAmount }}</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ totalAmount }} egp</dd>
         </div>
       </div>
     </div>
