@@ -4,7 +4,7 @@
       <section class="max-w-full m-10 mx-auto">
         <div class="flex items-center justify-center mt-8 mb-3">
           <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
-          <span class="mx-4 title title-font">Shop by Brand</span>
+          <span class="mx-4 title title-font">{{ $t('home.shop_by_brand') }}</span>
           <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
         </div>
 
@@ -68,6 +68,7 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
 const categoriesStore = useCategoriesStore()
 
 onMounted(() => {
@@ -90,10 +91,10 @@ const config = ref({
   }
 });
 
-const cards = ref([
-  { title: 'Activewear For Your Coolness', subtitle: 'Large collections of activewear. Explore the outside!', brand: 'Nike', img: 'https://justfields.com/storage/projects/7M5rV059/activewear.jpg', route: '' },
-  { title: 'Too cool hipster kids clothes', subtitle: 'Every kid needs this place. It’s fun inside! Check out the coolest kids.', brand: 'Levis', img: 'https://justfields.com/storage/projects/7M5rV059/4-Kids.jpg', route: '' },
-  { title: 'A Never-Ending Sunglasses Season', subtitle: 'On any and all occasions, the right pair of shades will elevate your days out.', brand: 'New_Look', img: 'https://justfields.com/storage/projects/7M5rV059/6-sunglasses.jpg', route: '' },
-  { title: 'Accessories and Bags', subtitle: 'Sharpening up your fashion look with these statement.', brand: 'XD_Design', img: 'https://justfields.com/storage/projects/7M5rV059/bagssss.jpg', route: '' },
-])
+const cards = computed(() => [
+  { title: t('home.activewear_for_your_coolness'), subtitle: t('home.large_collections_of_activewear_explore_the_outside'), brand: 'Nike', img: 'https://justfields.com/storage/projects/7M5rV059/activewear.jpg', route: '' },
+  { title: t('home.too_cool_hipster_kids_clothes'), subtitle: t('home.every_kid_needs_this_place_its_fun_inside_check_out_the_coolest_kids'), brand: 'Levis', img: 'https://justfields.com/storage/projects/7M5rV059/4-Kids.jpg', route: '' },
+  { title: t('home.a_never_ending_sunglasses_season'), subtitle: t('home.on_any_and_all_occasions_the_right_pair_of_shades_will_elevate_your_days_out'), brand: 'New_Look', img: 'https://justfields.com/storage/projects/7M5rV059/6-sunglasses.jpg', route: '' },
+  { title: t('home.accessories_and_bags'), subtitle: t('home.sharpening_up_your_fashion_look_with_these_statement'), brand: 'XD_Design', img: 'https://justfields.com/storage/projects/7M5rV059/bagssss.jpg', route: '' },
+]);
 </script>

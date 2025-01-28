@@ -3,22 +3,24 @@
     <div class="max-w-full py-6 mx-auto space-y-6 sm:px-6 lg:px-8">
 
       <!-- dynamic-products-carousel component -->
-      <dynamic-products-carousel :config="config" :productTypes="['Express_Deals']" :title="'Express Deals'"
+      <dynamic-products-carousel :config="config" :productTypes="['Express_Deals']" :title="$t('home.express_deals')"
         :imageSrc="'https://justfields.com/storage/projects/7M5rV059/ck_banner.webp'" />
 
       <!-- dynamic-products-carousel component -->
-      <dynamic-products-carousel :config="config" :productTypes="['New_Arrival']" :title="'New Arrival'"
+      <dynamic-products-carousel :config="config" :productTypes="['New_Arrival']" :title="$t('home.new_arrival')"
         :imageSrc="'https://justfields.com/storage/projects/7M5rV059/tommy.webp'" />
 
       <!-- dynamic-products-carousel component -->
-      <dynamic-products-carousel :config="config" :productTypes="['Bundle']" :title="'Wallet'" :cardsOne="cardsOne" />
+      <dynamic-products-carousel :config="config" :productTypes="['Bundle']" :title="$t('home.wallet')"
+        :cardsOne="cardsOne" />
 
       <!-- dynamic-products-carousel component -->
-      <dynamic-products-carousel :config="config" :productTypes="['Sale']" :title="'kids Clothing'"
+      <dynamic-products-carousel :config="config" :productTypes="['Sale']" :title="$t('home.kids_clothing')"
         :imageSrc="'https://justfields.com/storage/projects/7M5rV059/six-shop.jpg'" />
 
       <!-- dynamic-products-carousel component -->
-      <dynamic-products-carousel :config="config" :productTypes="['Custom']" :title="'Shoes'" :cardsOne="cardsTwo" />
+      <dynamic-products-carousel :config="config" :productTypes="['Custom']" :title="$t('home.shoes')"
+        :cardsOne="cardsTwo" />
     </div>
   </div>
 </template>

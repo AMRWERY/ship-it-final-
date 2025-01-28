@@ -13,6 +13,23 @@
     "users": "المستخدمين",
     "messages": "الرسائل"
   },
+  "home": {
+    "get_free_delivery_on_orders_over_egp1000": "احصل على توصيل مجاني على الطلبات التي تزيد عن 1000 جنيه مصري",
+    "shop_by_brand": "تسوق حسب العلامة التجارية",
+    "activewear_for_your_coolness": "ملابس نشطة لتبريدك",
+    "large_collections_of_activewear_explore_the_outside": "مجموعة كبيرة من الملابس النشطة. استمتع بالخارج!",
+    "too_cool_hipster_kids_clothes": "ملابس أطفال باردة للغاية وعصرية",
+    "every_kid_needs_this_place_its_fun_inside_check_out_the_coolest_kids": "كل طفل يحتاج إلى هذا المكان. إنه ممتع في الداخل! تحقق من الأطفال الأكثر روعة.",
+    "a_never_ending_sunglasses_season": "موسم النظارات الشمسية الذي لا ينتهي",
+    "on_any_and_all_occasions_the_right_pair_of_shades_will_elevate_your_days_out": "في أي مناسبة، النظارات المناسبة سترفع من تجربتك أثناء الخروج.",
+    "accessories_and_bags": "الإكسسوارات والحقائب",
+    "sharpening_up_your_fashion_look_with_these_statement": "عزز مظهرك العصري مع هذه التصاميم الرائعة.",
+    "express_deals": "عروض سريعة",
+    "new_arrival": "وصل حديثًا",
+    "wallet": "محفظة",
+    "kids_clothing": "ملابس أطفال",
+    "shoes": "أحذية"
+  },
   "form": {
     "email": "البريد الإلكتروني",
     "enter_your_email": "أدخل بريدك الإلكتروني",

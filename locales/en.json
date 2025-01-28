@@ -13,6 +13,23 @@
     "users": "Users",
     "messages": "Messages"
   },
+  "home": {
+    "get_free_delivery_on_orders_over_egp1000": "Get Free delivery on orders over EGP 1,000",
+    "shop_by_brand": "Shop by Brand",
+    "activewear_for_your_coolness": "Activewear For Your Coolness",
+    "large_collections_of_activewear_explore_the_outside": "Large collections of activewear. Explore the outside!",
+    "too_cool_hipster_kids_clothes": "Too cool hipster kids clothes",
+    "every_kid_needs_this_place_its_fun_inside_check_out_the_coolest_kids": "Every kid needs this place. It’s fun inside! Check out the coolest kids.",
+    "a_never_ending_sunglasses_season": "A Never-Ending Sunglasses Season",
+    "on_any_and_all_occasions_the_right_pair_of_shades_will_elevate_your_days_out": "On any and all occasions, the right pair of shades will elevate your days out.",
+    "accessories_and_bags": "Accessories and Bags",
+    "sharpening_up_your_fashion_look_with_these_statement": "Sharpening up your fashion look with these statement.",
+    "express_deals": "Express Deals",
+    "new_arrival": "New Arrival",
+    "wallet": "Wallet",
+    "kids_clothing": "kids Clothing",
+    "shoes": "Shoes"
+  },
   "form": {
     "email": "Email",
     "enter_your_email": "Enter your email",
@@ -189,7 +206,7 @@
     "add_product": "Add Product",
     "products": "Products",
     "categories": "Categories",
-    "add_category":"Add Category"
+    "add_category": "Add Category"
   },
   "social_media": {
     "share_my": "Share my",
@@ -203,7 +220,7 @@
     "block_user": "Block user",
     "back_to_home": "Back to home",
     "delete_order": "Delete order",
-    "edit_category":"Edit Category",
+    "edit_category": "Edit Category",
     "delete_category": "Delete category"
   },
   "cart": {
@@ -271,7 +288,7 @@
     "categories": "Categories",
     "category_title": "Category Title",
     "image": "Image",
-    "add_category":"Add Category"
+    "add_category": "Add Category"
   },
   "pagination": {
     "previous": "Previous",
