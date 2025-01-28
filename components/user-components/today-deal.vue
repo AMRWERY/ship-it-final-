@@ -337,7 +337,6 @@ const handleAddToCart = async (currentDeal) => {
   try {
     loading.value = true;
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    // debugger
     const cartItem = {
       id: currentDeal.id,
       title: currentDeal.title,
@@ -351,11 +350,10 @@ const handleAddToCart = async (currentDeal) => {
     // console.log("Cart item to add:", cartItem);
     debugger
     setTimeout(() => {
-      //  debugger
       // cartStore.cart.push(cartItem)
       cartStore.addToCart(cartItem);
       localStorage.setItem('cart', JSON.stringify(cartItem));
-      console.log('cart', cartItem)
+      // console.log('cart', cartItem)
       console.log("Product added successfully");
       console.log("Current Cart:", cartStore.cart);
       productAdded.value = true;

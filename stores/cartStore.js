@@ -52,7 +52,7 @@ export const useCartStore = defineStore("cart", {
           }));
         })
         .catch((error) => {
-          if (error.name === 'BloomFilterError') {
+          if (error.name === "BloomFilterError") {
             console.error("BloomFilterError encountered:", error);
             // Implement logic to handle the error, e.g., retry the operation with a delay
           } else {
@@ -77,16 +77,13 @@ export const useCartStore = defineStore("cart", {
       const authStore = useAuthStore();
       const uid = authStore.user?.uid;
       if (!uid) {
-        // console.error("User is not authenticated or UID is missing.");
         return;
       }
       if (!Array.isArray(this.cart)) {
-        // debugger
-        console.error("Cart is not an array!");
         this.cart = [];
       }
       if (this.cart.length === 0) {
-       this.fetchCart();
+        this.fetchCart();
       }
       const existingProduct = this.cart.find(
         (item) => item.productId === id && item.uid === uid
@@ -94,13 +91,11 @@ export const useCartStore = defineStore("cart", {
       const productRef = doc(db, "products", id);
       const productSnap = await getDoc(productRef);
       if (!productSnap.exists()) {
-        // console.error("Product not found.");
         return;
       }
       const productData = productSnap.data();
       const stock = productData.stock || 0;
       if (quantity > stock) {
-        // console.error("Not enough stock available.");
         return;
       }
       const newStock = stock - quantity;
@@ -108,7 +103,6 @@ export const useCartStore = defineStore("cart", {
         await updateDoc(productRef, { stock: newStock });
         // console.log("Stock updated successfully.");
       } catch (error) {
-        // console.error("Error updating stock:", error);
         return;
       }
       if (existingProduct) {
@@ -117,7 +111,6 @@ export const useCartStore = defineStore("cart", {
           const newQuantity = (existingProduct.quantity || 0) + quantity;
           await updateDoc(docRef, { quantity: newQuantity });
           existingProduct.quantity = newQuantity;
-          // console.log("Product quantity updated in Firestore.");
         } catch (error) {
           console.error("Error updating product quantity in Firestore:", error);
         }
@@ -139,13 +132,11 @@ export const useCartStore = defineStore("cart", {
             docId: docRef.id,
             ...product,
           });
-          // console.log("Product added to Firestore:", docRef.id);
         } catch (error) {
           console.error("Error adding new product to Firestore:", error);
         }
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));
-      // console.log("Cart updated in localStorage:", this.cart);
     },
 
     updateQuantityInCart(productId, newQuantity) {
