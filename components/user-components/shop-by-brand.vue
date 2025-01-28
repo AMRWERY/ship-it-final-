@@ -14,14 +14,14 @@
         <ClientOnly v-else>
           <Carousel v-bind="config">
             <Slide v-for="category in categoriesStore.categories" :key="category.catId">
-                <div class="carousel__item">
-                  <nuxt-link :to="{ path: '/products', query: { brand: category.title } }"
-                    class="relative flex justify-center flex-shrink-0 w-40 h-40 mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
-                    <div class="relative overflow-hidden bg-no-repeat bg-cover">
-                      <img class="h-full rounded-t-lg" :src="category.imgOne" />
-                    </div>
-                  </nuxt-link>
-                </div>
+              <div class="carousel__item">
+                <nuxt-link :to="{ path: '/products', query: { brand: category.title } }"
+                  class="relative flex justify-center flex-shrink-0 w-40 h-40 mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
+                  <div class="relative overflow-hidden bg-no-repeat bg-cover">
+                    <img class="h-full rounded-t-lg" :src="category.imgOne" />
+                  </div>
+                </nuxt-link>
+              </div>
             </Slide>
 
             <template #addons>
@@ -79,7 +79,7 @@ const config = ref({
   snapAlign: 'center',
   warpAround: true,
   gap: 7,
-  autoplay: 3000,
+  // autoplay: 3000,
   transition: 400,
   // breakpointMode: 'carousel',
   breakpoints: {

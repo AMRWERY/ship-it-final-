@@ -27,16 +27,20 @@
 
                 <div class="flex flex-col flex-1 p-2">
                   <div class="flex-1">
-                    <h5 class="text-sm font-bold text-gray-800 truncate sm:text-base text-start dark:text-gray-200">{{ card.title }}</h5>
+                    <h5 class="text-sm font-bold text-gray-800 truncate sm:text-base text-start dark:text-gray-200">{{
+                      card.title }}</h5>
                     <div class="flex items-center justify-between">
                       <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.brand }}</p>
-                      <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.productTypes[0] }}</p>
+                      <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.productTypes[0] }}
+                      </p>
                     </div>
                     <div class="flex flex-wrap justify-between gap-2 mt-2">
                       <div class="flex items-center gap-2">
-                        <h6 class="text-sm font-bold text-gray-800 sm:text-base dark:text-gray-200">{{ card.discountedPrice }} egp</h6>
-                        <h6 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100" v-if="card.originalPrice">{{
-                          card.originalPrice
+                        <h6 class="text-sm font-bold text-gray-800 sm:text-base dark:text-gray-200">{{
+                          card.discountedPrice }} egp</h6>
+                        <h6 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100"
+                          v-if="card.originalPrice">{{
+                            card.originalPrice
                           }} egp</h6>
                       </div>
 
@@ -55,7 +59,7 @@
                 <button type="button" class="flex items-center justify-center w-full px-4 py-2 btn-style"
                   @click="handleAddToCart(card)">
                   <icon name="material-symbols:add-shopping-cart" class="w-5 h-5 -ms-2 me-2" aria-hidden="true" />
-                  <div class="flex items-center justify-center" v-if="loading">
+                  <div class="flex items-center justify-center" v-if="loading[card.id]">
                     <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
                     <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
                   </div>
@@ -141,7 +145,7 @@ const products = ref([])
 const filteredProducts = ref([])
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
-const loading = ref(false);
+const loading = ref({});
 const errorMessage = ref("");
 const itemAdded = ref('')
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
@@ -184,16 +188,16 @@ const handleAddToCart = (product) => {
     });
     return;
   }
-  loading.value = true;
+  loading.value[product.id] = true;
   cartStore
     .addToCart(
       product.id,
-      product.title,
-      product.discountedPrice,
-      product.originalPrice,
-      product.imageUrl1,
-      product.brand,
-      product.discount,
+      product.title || null,
+      product.discountedPrice || null,
+      product.originalPrice || null,
+      product.imageUrl1 || null,
+      product.brand || null,
+      product.discount || null,
       quantity.value
     )
     .then(() => {
@@ -213,7 +217,7 @@ const handleAddToCart = (product) => {
       });
     })
     .finally(() => {
-      loading.value = false;
+      loading.value[product.id] = false;
     });
 };
 
