@@ -335,21 +335,10 @@ const handleAddToCart = async (currentDeal) => {
     return;
   }
   try {
-    debugger
-
+    // debugger
     loading.value = true;
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const cartItem = {
-      id: currentDeal.id,
-      title: currentDeal.title,
-      discountedPrice: currentDeal.discountedPrice,
-      originalPrice: currentDeal.originalPrice,
-      imageUrl1: currentDeal.imageUrl1,
-      brand: currentDeal.brand,
-      discount: currentDeal.discount,
-      quantity: currentDeal.quantity || 1
-    };
-    console.log("Cart item to add:", cartItem);
+    console.log("Cart item to add:", cartStore.cart);
     // debugger
     await cartStore.addToCart(
       currentDeal.id,
@@ -359,23 +348,19 @@ const handleAddToCart = async (currentDeal) => {
       currentDeal.imageUrl1 || null,
       currentDeal.brand || null,
       currentDeal.discount || null,
-      quantity.value)
-      .then(() => {
-      cartStore.cart.push(cartItem)
-      localStorage.setItem('cart', JSON.stringify(cartStore.cart));
-      console.log("Product added successfully");
-      console.log("Current Cart:", cartStore.cart);
+      quantity.value
+    )
+    debugger
+    cartStore.cart.push(currentDeal)
+    // console.log('product in firestore', currentDeal)
+    localStorage.setItem('cart', JSON.stringify(currentDeal));
+    console.log("Product added successfully");
+    console.log("Current Cart:", cartStore.cart)
+    .then(() => {
       setTimeout(() => {
-        // cartStore.cart.push(cartItem)
-        cartStore.addToCart(cartItem);
-        localStorage.setItem('cart', JSON.stringify(cartItem));
-        // console.log('cart', cartItem)
-        console.log("Product added successfully");
-        console.log("Current Cart:", cartStore.cart);
         productAdded.value = true;
       }, 3000);
     });
- 
   } catch (error) {
     setTimeout(() => {
       productNotAdded.value = true;
