@@ -323,7 +323,6 @@ const productAdded = ref('');
 const notAuth = ref(false)
 const productNotAdded = ref('')
 const quantity = ref(1);
-const { t } = useI18n()
 const loading = ref(false);
 
 const handleAddToCart = async (currentDeal) => {
@@ -339,8 +338,6 @@ const handleAddToCart = async (currentDeal) => {
     loading.value = true;
     await new Promise((resolve) => setTimeout(resolve, 2000));
     // debugger
-    // const { id, title, discountedPrice, originalPrice, imageUrl1, brand, discount, quantity } = currentDeal
-    // console.log("Destructured currentDeal:", { id, title, discountedPrice, originalPrice, imageUrl1, brand, discount, quantity });
     const cartItem = {
       id: currentDeal.id,
       title: currentDeal.title,
@@ -351,15 +348,16 @@ const handleAddToCart = async (currentDeal) => {
       discount: currentDeal.discount,
       quantity: currentDeal.quantity || 1
     };
-    console.log("Cart item to add:", cartItem);
-    // debugger
-    await cartStore.addToCart(cartItem);
+    // console.log("Cart item to add:", cartItem);
     debugger
-    cartStore.cart.push(cartItem)
-    localStorage.setItem('cart', JSON.stringify(cartStore.cart));
-    console.log("Product added successfully");
-    console.log("Current Cart:", cartStore.cart);
     setTimeout(() => {
+      //  debugger
+      // cartStore.cart.push(cartItem)
+      cartStore.addToCart(cartItem);
+      localStorage.setItem('cart', JSON.stringify(cartItem));
+      console.log('cart', cartItem)
+      console.log("Product added successfully");
+      console.log("Current Cart:", cartStore.cart);
       productAdded.value = true;
     }, 3000);
   } catch (error) {
@@ -398,10 +396,8 @@ const toggleWishlist = async (currentDeal) => {
       currentDeal.title,
       currentDeal.discountedPrice,
       currentDeal.originalPrice,
-      currentDeal.imageUrl1,
       currentDeal.brand,
-      currentDeal.discount,
-      quantity.value,
+      currentDeal.imageUrl1,
     );
     setTimeout(() => {
       productAdded.value = "Product added to wishlist!";
@@ -412,47 +408,6 @@ const toggleWishlist = async (currentDeal) => {
     }, 3000);
   }
 };
-
-
-// const toggleWishlist = (currentDeal) => {
-//   if (!currentDeal) return;
-//   if (!authStore.isAuthenticated) {
-//     notAuth.value = true;
-//     setTimeout(() => {
-//       notAuth.value = false;
-//     }, 3000);
-//     return;
-//   }
-//   const userId = authStore.user?.uid;
-//   if (!userId) {
-//     // console.error('User ID is not available');
-//     return;
-//   }
-//   // const currentDeal = todayDealStore.currentDeal;
-//   wishlistStore
-//     .addToWishlist(
-//       currentDeal.id || null,
-//       currentDeal.title || null,
-//       currentDeal.discountedPrice || null,
-//       currentDeal.originalPrice || null,
-//       currentDeal.imageUrl1 || null,
-//       currentDeal.brand || null,
-//       currentDeal.discount || null,
-//       quantity.value,
-//       userId
-//     )
-//     .then(() => {
-//       setTimeout(() => {
-//         productAdded.value = true;
-//       }, 3000);
-//     })
-//     .catch((error) => {
-//       // console.error("Error adding product to wishlist:", error);
-//       setTimeout(() => {
-//         productNotAdded.value = true;
-//       }, 3000);
-//     });
-// };
 
 const isInWishlist = computed(() =>
   wishlistStore.isInWishlist(currentDeal.id)

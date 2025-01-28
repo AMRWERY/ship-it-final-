@@ -81,11 +81,12 @@ export const useCartStore = defineStore("cart", {
         return;
       }
       if (!Array.isArray(this.cart)) {
+        // debugger
         console.error("Cart is not an array!");
         this.cart = [];
       }
       if (this.cart.length === 0) {
-        this.fetchCart();
+       this.fetchCart();
       }
       const existingProduct = this.cart.find(
         (item) => item.productId === id && item.uid === uid
