@@ -335,6 +335,8 @@ const handleAddToCart = async (currentDeal) => {
     return;
   }
   try {
+    debugger
+
     loading.value = true;
     await new Promise((resolve) => setTimeout(resolve, 2000));
     const cartItem = {
@@ -347,17 +349,25 @@ const handleAddToCart = async (currentDeal) => {
       discount: currentDeal.discount,
       quantity: currentDeal.quantity || 1
     };
-    // console.log("Cart item to add:", cartItem);
-    debugger
-    setTimeout(() => {
-      // cartStore.cart.push(cartItem)
-      cartStore.addToCart(cartItem);
-      localStorage.setItem('cart', JSON.stringify(cartItem));
-      // console.log('cart', cartItem)
+    console.log("Cart item to add:", cartItem);
+    // debugger
+    await cartStore.addToCart(cartItem).then(() => {
+      cartStore.cart.push(cartItem)
+      localStorage.setItem('cart', JSON.stringify(cartStore.cart));
       console.log("Product added successfully");
       console.log("Current Cart:", cartStore.cart);
-      productAdded.value = true;
-    }, 3000);
+      setTimeout(() => {
+        // cartStore.cart.push(cartItem)
+        cartStore.addToCart(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cartItem));
+        // console.log('cart', cartItem)
+        console.log("Product added successfully");
+        console.log("Current Cart:", cartStore.cart);
+        productAdded.value = true;
+      }, 3000);
+    });
+    debugger
+
   } catch (error) {
     setTimeout(() => {
       productNotAdded.value = true;
