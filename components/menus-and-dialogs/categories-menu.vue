@@ -13,17 +13,18 @@
           </nuxt-link>
 
           <div
-            class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-[1300px] border-none bg-white bg-clip-padding data-[twe-dropdown-show]:block"
+            class="absolute start-0 end-0 top-full z-[1000] mt-0 hidden w-[1300px] border-none bg-white bg-clip-padding data-[twe-dropdown-show]:block dark:bg-gray-800"
             aria-labelledby="dropdownMenuButton1" data-twe-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
               <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
                 <div v-for="category in categoriesStore.subCategories" :key="category">
-                  <p class="block w-full px-6 py-2 font-semibold border-b border-neutral-100 text-neutral-700">
+                  <p
+                    class="block w-full px-6 py-2 font-semibold border-b border-neutral-100 text-neutral-700 dark:text-neutral-100">
                     {{ category.title }}
                   </p>
                   <nuxt-link v-for="(subCategory, index) in category.subCategories" :key="index" to=""
                     aria-current="true"
-                    class="block w-full px-6 py-2 bg-white border-b border-neutral-100 text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline">
+                    class="block w-full px-6 py-2 bg-white border-b dark:bg-gray-800 border-neutral-100 text-neutral-700 dark:text-neutral-100 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline">
                     {{ subCategory }}
                   </nuxt-link>
                 </div>
