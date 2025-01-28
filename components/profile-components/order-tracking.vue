@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="max-w-xl">
+    <div class="max-w-xl p-2">
       <h1 class="text-3xl font-semibold">Order history</h1>
     </div>
     <div class="flex items-center flex-1 h-full">
       <div class="flex-1 w-full mt-5 text-center" v-if="!showOrders">
         <icon name="streamline:interface-file-clipboard-work-plain-clipboard-task-list-company-office"
-          class="w-12 h-12 mx-auto text-gray-400" />
-        <h3 class="mt-2 text-sm font-medium text-gray-900">You do not have any orders yet!</h3>
-        <p class="mt-1 text-sm text-gray-500">What are you waiting for? </p>
+          class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-100" />
+        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">You do not have any orders yet!</h3>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">What are you waiting for? </p>
         <div class="mt-6">
           <nuxt-link to="/products" type="button"
             class="inline-flex items-center justify-center px-4 py-2 btn-style">Start
@@ -20,29 +20,29 @@
     <div class="max-w-6xl px-4 py-12 mx-auto sm:px-6 lg:px-8" v-if="showOrders" v-for="order in checkoutStore.orders"
       :key="order">
       <!-- Order Details -->
-      <div class="p-6 mb-8 bg-white rounded-lg shadow">
+      <div class="p-6 mb-8 rounded-lg shadow">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-600">Order Number</p>
-            <p class="text-lg font-semibold text-gray-800">{{ order.orderId }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-100">Order Number</p>
+            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.orderId }}</p>
           </div>
           <div>
-            <p class="text-sm text-gray-600">Order Date</p>
-            <p class="text-lg font-semibold text-gray-800">{{ order.date }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-100">Order Date</p>
+            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.date }}</p>
           </div>
           <div>
-            <p class="text-sm text-gray-600">Estimated Delivery</p>
-            <p class="text-lg font-semibold text-gray-800">{{ order.estimatedDelivery }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-100">Estimated Delivery</p>
+            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.estimatedDelivery }}</p>
           </div>
         </div>
       </div>
 
 
       <!-- Progress Tracker -->
-      <div class="p-6 bg-white rounded-lg shadow">
-        <h2 class="mb-6 text-xl font-semibold text-gray-800">Order Status</h2>
+      <div class="p-6 rounded-lg shadow">
+        <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">Order Status</h2>
         <div v-if="isOrderCompleted(order.statusId)" class="p-4 mb-8 bg-green-100 rounded">
-          <p class="text-lg font-semibold text-green-800">This order is completed.</p>
+          <p class="text-lg font-semibold text-green-800 dark:text-green-500">This order is completed.</p>
         </div>
 
         <div class="relative">
@@ -63,15 +63,16 @@
                 class="absolute flex items-center justify-center w-8 h-8 mx-auto font-bold text-white transform -translate-x-1/2 bg-black rounded-full left-1/2 -top-4"
                 :class="{
                   'bg-black': order.statusId === status.id,
-                  'bg-gray-300 text-gray-600': order.statusId !== status.id
+                  'bg-gray-300 text-gray-600 dark:bg-gray-100 dark:text-black': order.statusId !== status.id
                 }">
                 <icon :name="currentStatusIcon(status.id)" />
               </div>
 
               <!-- Status Name -->
               <div class="mt-6">
-                <p class="mt-2 text-sm text-gray-800">{{ status.status }}</p>
-                <p v-if="order.statusId === status.id" class="text-xs text-gray-500">{{ order.date }}</p>
+                <p class="mt-2 text-sm text-gray-800 dark:text-gray-200">{{ status.status }}</p>
+                <p v-if="order.statusId === status.id" class="text-xs text-gray-500 dark:text-gray-100">{{ order.date }}
+                </p>
               </div>
             </div>
           </div>
@@ -79,20 +80,21 @@
       </div>
 
       <!-- Order Items -->
-      <div class="p-6 mt-8 bg-white rounded-lg shadow">
-        <h2 class="mb-6 text-xl font-semibold text-gray-800">Order Items</h2>
+      <div class="p-6 mt-8 rounded-lg shadow">
+        <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">Order Items</h2>
         <div class="space-y-8" v-if="order.cart && Array.isArray(order.cart) && order.cart.length > 0">
           <div class="flex items-center" v-for="item in order.cart" :key="item">
             <div class="w-20 h-20 overflow-hidden bg-gray-100 rounded-lg">
               <img :src="item.imageUrl1" alt="placeholder" class="object-cover w-full h-full">
             </div>
-            <div class="ms-4">
-              <p class="text-lg font-medium text-gray-800">{{ item.title }}</p>
-              <p class="text-sm text-gray-600">Brand: {{ item.brand }}</p>
-              <p class="text-sm text-gray-600">Discount: {{ item.discount }}%</p>
-              <p class="text-sm text-gray-600">Qty: {{ item.quantity }}</p>
+            <div class="ms-5">
+              <p class="text-lg font-medium text-gray-800 dark:text-gray-200">{{ item.title }}</p>
+              <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">Brand: {{ item.brand }}</p>
+              <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">Discount: {{ item.discount }}%</p>
+              <p class="text-sm text-gray-600 dark:text-gray-100">Qty: {{ item.quantity }}</p>
             </div>
-            <div class="text-lg font-medium text-gray-800 ms-auto">${{ item.discountedPrice }}</div>
+            <div class="mt-1 text-lg font-medium text-gray-800 dark:text-gray-200 ms-auto">${{ item.discountedPrice }}
+            </div>
           </div>
         </div>
       </div>

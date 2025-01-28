@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="mt-6 overflow-hidden rounded-md shadow-md max-w-7xl bg-slate-50">
+    <div class="mt-6 overflow-hidden rounded-md shadow-md max-w-7xl">
       <div class="p-4">
         <p>Edit your Profile</p>
-        <div class="grid grid-cols-1 mt-10 gap-x-6 sm:grid-cols-6">
+        <div class="grid grid-cols-1 mt-6 gap-x-6 sm:grid-cols-6">
           <ClientOnly>
             <div class="sm:col-span-3" v-if="authStore.user">
               <dynamic-inputs :label="t('form.first_name')" :placeholder="t('form.enter_your_first_name')" type="text"
@@ -29,7 +29,7 @@
             </div>
 
             <div class="sm:col-span-3" v-if="authStore.user">
-              <span class="block mb-1 text-sm font-medium text-gray-700">Birth Date</span>
+              <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">Birth Date</span>
               <VueDatePicker :name="t('form.date_of_birth')" :placeholder="t('form.date_of_birth')" format="MM/dd/yyyy"
                 cancel-text="Close" :teleport="true" :esc-close="false" :state="true"
                 v-model="authStore.user.birthDate" />
@@ -37,10 +37,10 @@
           </ClientOnly>
 
           <div class="mt-5 sm:col-span-full" v-if="authStore.user">
-            <div class="flex items-center justify-center h-48 p-4 bg-gray-200 border rounded-md shadow-md w-96">
+            <div class="flex items-center justify-center h-48 p-4 bg-gray-200 border rounded-md shadow-md dark:bg-gray-100 w-96">
               <label for="upload" class="flex flex-col items-center gap-2 cursor-pointer">
                 <template v-if="imagePreview">
-                  <img :src="imagePreview" alt="Profile Preview" class="object-cover w-full h-48 rounded-md" />
+                  <img :src="imagePreview" alt="Profile Preview" class="object-cover w-full h-48 rounded-xl" />
                 </template>
                 <template v-else>
                   <icon name="tdesign:user-avatar" class="w-10 h-10 text-gray-500 stroke-indigo-500" />
@@ -64,10 +64,10 @@
       </div>
     </div>
 
-    <div class="mt-6 overflow-hidden rounded-md shadow-md max-w-7xl bg-slate-50">
+    <div class="mt-6 overflow-hidden rounded-md shadow-md max-w-7xl">
       <div class="p-4">
         <p>Change your Password</p>
-        <div class="grid grid-cols-1 mt-5 gap-x-6 sm:grid-cols-6">
+        <div class="grid grid-cols-1 mt-6 gap-x-6 sm:grid-cols-6">
           <ClientOnly>
             <div class="sm:col-span-3" v-if="authStore.user">
               <dynamic-inputs :label="t('form.password')" :placeholder="t('form.enter_your_password')" type="password"
