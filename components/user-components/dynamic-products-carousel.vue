@@ -14,58 +14,32 @@
         <Carousel v-bind="config">
           <Slide v-for="card in filteredProducts" :key="card.id">
             <div class="carousel__item">
-              <nuxt-link :to="`/products/${card.id}`"
-                class="relative flex flex-col w-full max-w-xs overflow-hidden bg-white group dark:bg-black">
-                <div class="w-full h-[307px] relative">
-                  <img
-                    class="absolute top-0 object-cover object-top w-full h-full transition-all duration-500 ease-in-out end-0"
-                    :src="card.imageUrl1" />
-                  <img
-                    class="absolute top-0 object-cover object-top w-full h-full transition-all duration-500 ease-in-out opacity-0 end-0 group-hover:opacity-100"
-                    :src="card.imageUrl2" v-if="card.imageUrl2" />
-                </div>
-
-                <div class="flex flex-col flex-1 p-2">
-                  <div class="flex-1">
-                    <h5 class="text-sm font-bold text-gray-800 truncate sm:text-base text-start dark:text-gray-200">{{
-                      card.title }}</h5>
-                    <div class="flex items-center justify-between">
-                      <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.brand }}</p>
-                      <p class="mt-1 text-gray-500 truncate text-start dark:text-gray-100">{{ card.productTypes[0] }}
-                      </p>
-                    </div>
-                    <div class="flex flex-wrap justify-between gap-2 mt-2">
-                      <div class="flex items-center gap-2">
-                        <h6 class="text-sm font-bold text-gray-800 sm:text-base dark:text-gray-200">{{
-                          card.discountedPrice }} egp</h6>
-                        <h6 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100"
-                          v-if="card.originalPrice">{{
-                            card.originalPrice
-                          }} egp</h6>
+              <nuxt-link :to="`/products/${card.id}`">
+                <div
+                  class="relative z-50 p-2 overflow-hidden bg-gray-100 rounded-lg cursor-pointer group hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all dark:bg-gray-800">
+                  <div class="w-full h-[200px] sm:h-[300px] overflow-hidden mx-auto">
+                    <img :src="card.imageUrl1" alt="product-card" class="object-contain w-full h-full" />
+                  </div>
+                  <div
+                    class="absolute w-11/12 p-2 mx-auto transition-all duration-300 rounded-lg end-0 start-0 bottom-2 lg:-bottom-80 lg:group-hover:bottom-2 bg-black/60 lg:bg-white lg:p-3 dark:bg-gray-600">
+                    <div class="text-center">
+                      <h3
+                        class="text-sm font-bold text-white lg:text-base lg:text-gray-800 dark:text-gray-200 dark:lg:text-gray-300">
+                        {{ card.title }}</h3>
+                      <div class="flex items-center justify-center mt-2 space-s-2">
+                        <h4 class="text-lg font-bold text-red-700 sm:text-base dark:text-red-400 lg:text-2xl">{{
+                          card.discountedPrice }} egp</h4>
+                        <h4 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100 mt-0.5"
+                          v-if="card.originalPrice">{{ card.originalPrice }} egp</h4>
                       </div>
-
+                    </div>
+                    <div class="flex justify-center mt-4 max-sm:hidden">
                       <!-- ratings component -->
                       <ratings />
                     </div>
                   </div>
                 </div>
               </nuxt-link>
-              <div class="flex items-center gap-2 mt-2">
-                <button type="button" @click="toggleWishlist(card)"
-                  class="flex items-center justify-center w-12 bg-pink-100 rounded cursor-pointer hover:bg-pink-200 h-9"
-                  title="Wishlist">
-                  <icon name="heroicons-outline:heart" class="inline-block fill-pink-600 dark:text-black" />
-                </button>
-                <button type="button" class="flex items-center justify-center w-full px-4 py-2 btn-style"
-                  @click="handleAddToCart(card)">
-                  <icon name="material-symbols:add-shopping-cart" class="w-5 h-5 -ms-2 me-2" aria-hidden="true" />
-                  <div class="flex items-center justify-center" v-if="loading[card.id]">
-                    <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
-                    <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
-                  </div>
-                  <span v-else>Add to Cart</span>
-                </button>
-              </div>
             </div>
           </Slide>
 
@@ -102,14 +76,6 @@
         </div>
       </div>
     </section>
-
-    <!-- dynamic-toast component -->
-    <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
-      <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
-      </div>
-    </div>
   </div>
 </template>
 
@@ -143,13 +109,6 @@ const props = defineProps({
 const productsStore = useProductsStore()
 const products = ref([])
 const filteredProducts = ref([])
-const cartStore = useCartStore();
-const wishlistStore = useWishlistStore();
-const loading = ref({});
-const errorMessage = ref("");
-const itemAdded = ref('')
-const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
-const { t } = useI18n()
 
 onMounted(() => {
   productsStore.fetchProducts();
@@ -172,96 +131,5 @@ watch(
       product.productTypes?.some(type => props.productTypes.includes(type))
     );
   }
-);
-
-const quantity = ref(1)
-
-const handleAddToCart = (product) => {
-  if (!product) return;
-  const authStore = useAuthStore();
-  if (!authStore.isAuthenticated) {
-    triggerToast({
-      title: t('toast.ah_ah'),
-      message: t('toast.please_log_in_first_to_add_to_cart'),
-      type: 'warning',
-      icon: 'material-symbols:warning-outline-rounded',
-    });
-    return;
-  }
-  loading.value[product.id] = true;
-  cartStore
-    .addToCart(
-      product.id,
-      product.title || null,
-      product.discountedPrice || null,
-      product.originalPrice || null,
-      product.imageUrl1 || null,
-      product.brand || null,
-      product.discount || null,
-      quantity.value
-    )
-    .then(() => {
-      triggerToast({
-        title: t('toast.great'),
-        message: t('toast.item_added_to_your_cart'),
-        type: 'success',
-        icon: 'clarity:shopping-cart-line',
-      });
-    })
-    .catch((error) => {
-      triggerToast({
-        title: t('toast.error'),
-        message: t('toast.failed_to_add_to_cart'),
-        type: 'error',
-        icon: 'material-symbols:error-outline-rounded',
-      });
-    })
-    .finally(() => {
-      loading.value[product.id] = false;
-    });
-};
-
-const toggleWishlist = async (product) => {
-  if (!product) return;
-  const authStore = useAuthStore();
-  if (!authStore.isAuthenticated) {
-    triggerToast({ title: t('toast.ah_ah'), message: t('toast.please_log_in_first_to_add_to_wishlist'), type: 'warning', icon: 'material-symbols:warning-outline-rounded' });
-    return;
-  }
-  const userId = authStore.user?.uid;
-  if (!userId) {
-    // console.error('User ID is not available');
-    return;
-  }
-  if (wishlistStore.isInWishlist(product.id)) {
-    errorMessage.value = "Product already added to the wishlist.";
-    setTimeout(() => (errorMessage.value = ""), 3000);
-  } else {
-    try {
-      await wishlistStore.addToWishlist(
-        product.id,
-        product.title,
-        product.discountedPrice,
-        product.originalPrice,
-        product.brand,
-        product.imageUrl1,
-        userId
-      );
-      itemAdded.value = "Product added to wishlist!";
-      setTimeout(() => (itemAdded.value = ""), 3000);
-      triggerToast({ title: t('toast.great'), message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
-    } catch (error) {
-      if (error.message === "Product already added to the wishlist.") {
-        errorMessage.value = error.message;
-        setTimeout(() => (errorMessage.value = ""), 3000);
-      } else {
-        console.error("Error adding to wishlist:", error);
-      }
-    }
-  }
-};
-
-const isInWishlist = computed(() =>
-  wishlistStore.isInWishlist(productsStore.selectedProduct?.id)
 );
 </script>
