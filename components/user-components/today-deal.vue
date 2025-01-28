@@ -27,8 +27,10 @@
 
                   <!-- no deals available -->
                   <div v-if="!currentDeal">
-                    <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">No deals available right now</p>
-                    <p v-if="nextDealStartTime" class="mt-2 text-xl font-medium text-center text-gray-500 dark:text-gray-100">
+                    <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">No deals available
+                      right now</p>
+                    <p v-if="nextDealStartTime"
+                      class="mt-2 text-xl font-medium text-center text-gray-500 dark:text-gray-100">
                       Next deal will start in <span class="font-semibold text-red-500 dark:text-red-400">{{
                         formatRemainingTime(nextDealStartTime) }}</span>
                     </p>
@@ -52,7 +54,8 @@
 
                     <div class="w-full">
                       <div>
-                        <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ currentDeal?.title }}</h3>
+                        <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ currentDeal?.title
+                          }}</h3>
                         <p class="mt-3 mb-4 text-sm">{{ currentDeal?.brand }}</p>
                         <div class="flex items-center gap-3 mt-1">
                           <!-- ratings component -->
@@ -60,7 +63,8 @@
                         </div>
 
                         <div class="flex flex-wrap items-center gap-2 mt-4">
-                          <p class="text-base text-gray-500 line-through dark:text-gray-100">{{ currentDeal?.originalPrice }} egp</p>
+                          <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
+                            currentDeal?.originalPrice }} egp</p>
                           <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice }}
                             egp</h4>
                           <div class="flex py-1 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
@@ -106,11 +110,14 @@
 
                       <div class="mt-4">
                         <div class="flex gap-2 items-center border border-gray-300 bg-white px-3 py-2.5 w-max">
-                          <button type="button" class="text-black border-none outline-none">
+                          <button type="button" class="text-black border-none outline-none" @click="decrementQuantity">
                             <icon name="ic:round-minus" class="w-2.5 h-2.5" />
                           </button>
-                          <span class="px-3 text-sm font-semibold text-gray-800">1</span>
-                          <button type="button" class="text-black border-none outline-none">
+                          <input type="number" placeholder="1"
+                            class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
+                            v-model="quantity">
+                          <!-- <span class="px-3 text-sm font-semibold text-gray-800">1</span> -->
+                          <button type="button" class="text-black border-none outline-none" @click="incrementQuantity">
                             <icon name="material-symbols:add" class="w-2.5 h-2.5" />
                           </button>
                         </div>
@@ -124,11 +131,11 @@
                               <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
                               <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
                             </div>
-                            <span v-else>Add to Cart</span>
+                            <span v-else>{{ $t('btn.add_to_cart') }}</span>
                           </button>
 
                           <!-- Add to Wishlist -->
-                          <button @click="toggleWishlist"
+                          <button @click="toggleWishlist(currentDeal)"
                             class="flex items-center justify-center h-10 p-2 text-gray-700 border border-gray-300 dark:text-gray-200 w-11 hover:text-gray-50 hover:bg-black dark:hover:bg-gray-700">
                             <icon :name="isInWishlist ? 'clarity:heart-solid' : 'clarity:heart-line'" size="20px"
                               :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
@@ -136,13 +143,16 @@
 
                           <!-- Success Message -->
                           <div v-if="productAdded">
-                            <p class="font-medium text-green-700 dark:text-green-400">{{ $t('toast.product_added_to_cart') }}</p>
+                            <p class="font-medium text-green-700 dark:text-green-400">{{
+                              $t('toast.product_added_to_cart') }}</p>
                           </div>
                           <div v-if="notAuth">
-                            <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.please_log_in_first_to_add_to_cart') }}</p>
+                            <p class="font-medium text-red-700 dark:text-red-400">{{
+                              $t('toast.please_log_in_first_to_add_to_cart') }}</p>
                           </div>
                           <div v-if="productNotAdded">
-                            <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.failed_to_add_to_cart') }}</p>
+                            <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.failed_to_add_to_cart')
+                              }}</p>
                           </div>
                         </div>
 
@@ -167,13 +177,17 @@
                           <img :src="deal.imageUrl1" class="object-contain w-full h-full" />
                         </div>
                         <div class="max-sm:text-center">
-                          <h3 class="text-sm font-bold text-gray-800 truncate sm:text-base dark:text-gray-200">{{ deal.title }}</h3>
+                          <h3 class="text-sm font-bold text-gray-800 truncate sm:text-base dark:text-gray-200">{{
+                            deal.title }}</h3>
                           <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">{{ deal.brand }}</h4>
-                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount }}%</h4>
-                          <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice }} egp
+                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount }}%
                           </h4>
-                          <h4 class="mt-2 text-sm font-normal text-red-600 dark:text-red-400">{{ formatRemainingTime(deal.remainingTime)
-                            }}
+                          <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice }}
+                            egp
+                          </h4>
+                          <h4 class="mt-2 text-sm font-normal text-red-600 dark:text-red-400">{{
+                            formatRemainingTime(deal.remainingTime)
+                          }}
                           </h4>
                         </div>
                       </div>
@@ -305,9 +319,9 @@ const setSelectedImage = (image) => {
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const wishlistStore = useWishlistStore();
-const productAdded = ref(false);
+const productAdded = ref('');
 const notAuth = ref(false)
-const productNotAdded = ref(false)
+const productNotAdded = ref('')
 const quantity = ref(1);
 const { t } = useI18n()
 const loading = ref(false);
@@ -324,17 +338,24 @@ const handleAddToCart = async (currentDeal) => {
   try {
     loading.value = true;
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    await cartStore.addToCart(
-      currentDeal.id,
-      currentDeal.title,
-      currentDeal.discountedPrice,
-      currentDeal.originalPrice,
-      currentDeal.imageUrl1,
-      currentDeal.brand,
-      currentDeal.discount,
-      quantity.value
-    );
-    cartStore.cart.push(currentDeal)
+    // debugger
+    // const { id, title, discountedPrice, originalPrice, imageUrl1, brand, discount, quantity } = currentDeal
+    // console.log("Destructured currentDeal:", { id, title, discountedPrice, originalPrice, imageUrl1, brand, discount, quantity });
+    const cartItem = {
+      id: currentDeal.id,
+      title: currentDeal.title,
+      discountedPrice: currentDeal.discountedPrice,
+      originalPrice: currentDeal.originalPrice,
+      imageUrl1: currentDeal.imageUrl1,
+      brand: currentDeal.brand,
+      discount: currentDeal.discount,
+      quantity: currentDeal.quantity || 1
+    };
+    console.log("Cart item to add:", cartItem);
+    // debugger
+    await cartStore.addToCart(cartItem);
+    debugger
+    cartStore.cart.push(cartItem)
     localStorage.setItem('cart', JSON.stringify(cartStore.cart));
     console.log("Product added successfully");
     console.log("Current Cart:", cartStore.cart);
@@ -350,7 +371,20 @@ const handleAddToCart = async (currentDeal) => {
   }
 };
 
-const toggleWishlist = () => {
+const incrementQuantity = () => {
+  quantity.value++;
+  // updateQuantityInStore(quantity.value);
+};
+
+const decrementQuantity = () => {
+  if (quantity.value > 1) {
+    quantity.value--;
+    // updateQuantityInStore(quantity.value);
+  }
+};
+
+const toggleWishlist = async (currentDeal) => {
+  if (!currentDeal) return;
   if (!authStore.isAuthenticated) {
     notAuth.value = true;
     setTimeout(() => {
@@ -358,13 +392,8 @@ const toggleWishlist = () => {
     }, 3000);
     return;
   }
-  const currentDeal = todayDealStore.currentDeal;
-  if (!currentDeal) {
-    // console.error("No active deal available.");
-    return;
-  }
-  wishlistStore
-    .addToWishlist(
+  try {
+    wishlistStore.addToWishlist(
       currentDeal.id,
       currentDeal.title,
       currentDeal.discountedPrice,
@@ -372,20 +401,58 @@ const toggleWishlist = () => {
       currentDeal.imageUrl1,
       currentDeal.brand,
       currentDeal.discount,
-      quantity.value
-    )
-    .then(() => {
-      setTimeout(() => {
-        productAdded.value = true;
-      }, 3000);
-    })
-    .catch((error) => {
-      // console.error("Error adding product to wishlist:", error);
-      setTimeout(() => {
-        productNotAdded.value = true;
-      }, 3000);
-    });
+      quantity.value,
+    );
+    setTimeout(() => {
+      productAdded.value = "Product added to wishlist!";
+    }, 3000);
+  } catch (error) {
+    setTimeout(() => {
+      productNotAdded.value = "Failed add Product to wishlist!";
+    }, 3000);
+  }
 };
+
+
+// const toggleWishlist = (currentDeal) => {
+//   if (!currentDeal) return;
+//   if (!authStore.isAuthenticated) {
+//     notAuth.value = true;
+//     setTimeout(() => {
+//       notAuth.value = false;
+//     }, 3000);
+//     return;
+//   }
+//   const userId = authStore.user?.uid;
+//   if (!userId) {
+//     // console.error('User ID is not available');
+//     return;
+//   }
+//   // const currentDeal = todayDealStore.currentDeal;
+//   wishlistStore
+//     .addToWishlist(
+//       currentDeal.id || null,
+//       currentDeal.title || null,
+//       currentDeal.discountedPrice || null,
+//       currentDeal.originalPrice || null,
+//       currentDeal.imageUrl1 || null,
+//       currentDeal.brand || null,
+//       currentDeal.discount || null,
+//       quantity.value,
+//       userId
+//     )
+//     .then(() => {
+//       setTimeout(() => {
+//         productAdded.value = true;
+//       }, 3000);
+//     })
+//     .catch((error) => {
+//       // console.error("Error adding product to wishlist:", error);
+//       setTimeout(() => {
+//         productNotAdded.value = true;
+//       }, 3000);
+//     });
+// };
 
 const isInWishlist = computed(() =>
   wishlistStore.isInWishlist(currentDeal.id)

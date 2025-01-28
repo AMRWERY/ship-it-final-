@@ -27,6 +27,7 @@ export const useCartStore = defineStore("cart", {
       if (savedCart) {
         try {
           this.cart = JSON.parse(savedCart);
+          // console.log('savedCart', this.cart)
         } catch (error) {
           // console.error("Error parsing saved cart data", error);
           this.cart = [];
@@ -78,6 +79,10 @@ export const useCartStore = defineStore("cart", {
       if (!uid) {
         // console.error("User is not authenticated or UID is missing.");
         return;
+      }
+      if (!Array.isArray(this.cart)) {
+        console.error("Cart is not an array!");
+        this.cart = [];
       }
       if (this.cart.length === 0) {
         this.fetchCart();
