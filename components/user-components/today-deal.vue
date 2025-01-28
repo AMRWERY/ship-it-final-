@@ -351,7 +351,16 @@ const handleAddToCart = async (currentDeal) => {
     };
     console.log("Cart item to add:", cartItem);
     // debugger
-    await cartStore.addToCart(cartItem).then(() => {
+    await cartStore.addToCart(
+      currentDeal.id,
+      currentDeal.title || null,
+      currentDeal.discountedPrice || null,
+      currentDeal.originalPrice || null,
+      currentDeal.imageUrl1 || null,
+      currentDeal.brand || null,
+      currentDeal.discount || null,
+      quantity.value)
+      .then(() => {
       cartStore.cart.push(cartItem)
       localStorage.setItem('cart', JSON.stringify(cartStore.cart));
       console.log("Product added successfully");
@@ -366,8 +375,7 @@ const handleAddToCart = async (currentDeal) => {
         productAdded.value = true;
       }, 3000);
     });
-    debugger
-
+ 
   } catch (error) {
     setTimeout(() => {
       productNotAdded.value = true;
