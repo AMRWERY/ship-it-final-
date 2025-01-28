@@ -342,25 +342,26 @@ const handleAddToCart = async (currentDeal) => {
     // debugger
     await cartStore.addToCart(
       currentDeal.id,
-      currentDeal.title || null,
-      currentDeal.discountedPrice || null,
-      currentDeal.originalPrice || null,
-      currentDeal.imageUrl1 || null,
-      currentDeal.brand || null,
-      currentDeal.discount || null,
-      quantity.value
+      currentDeal.title,
+      currentDeal.discountedPrice,
+      currentDeal.originalPrice,
+      currentDeal.imageUrl1,
+      currentDeal.brand,
+      currentDeal.discount,
+      quantity.value || 1
     )
-    debugger
-    cartStore.cart.push(currentDeal)
-    // console.log('product in firestore', currentDeal)
-    localStorage.setItem('cart', JSON.stringify(currentDeal));
-    console.log("Product added successfully");
-    console.log("Current Cart:", cartStore.cart)
-    .then(() => {
-      setTimeout(() => {
-        productAdded.value = true;
-      }, 3000);
-    });
+      // debugger
+      // cartStore.cart.push(currentDeal)
+      .then(() => {
+        // cartStore.cart.push(currentDeal)
+        // console.log('product in firestore', currentDeal)
+        // localStorage.setItem('cart', JSON.stringify(currentDeal));
+        console.log("Product added successfully");
+        console.log("Current Cart:", cartStore.cart)
+        setTimeout(() => {
+          productAdded.value = true;
+        }, 3000);
+      });
   } catch (error) {
     setTimeout(() => {
       productNotAdded.value = true;
