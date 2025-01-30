@@ -125,24 +125,6 @@ export const useProductsStore = defineStore("new-products", {
           console.error("Error fetching products by brand:", error);
         });
     },
-    // async fetchProductsByBrand(brandName) {
-    //   if (!brandName) {
-    //     // console.log("Brand name is required to fetch products by brand");
-    //     return;
-    //   }
-    //   try {
-    //     const querySnap = await getDocs(
-    //       query(collection(db, "products"), where("brand", "==", brandName))
-    //     );
-    //     const filteredProducts = querySnap.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     this.products = filteredProducts;
-    //   } catch (error) {
-    //     console.error("Error fetching products by brand:", error);
-    //   }
-    // },
 
     fetchProductsByCategory(catId) {
       if (!catId) {
