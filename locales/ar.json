@@ -11,7 +11,10 @@
     "items_stock": "مخزون العناصر",
     "payments": "المدفوعات",
     "users": "المستخدمين",
-    "messages": "الرسائل"
+    "messages": "الرسائل",
+    "deals": "العروض",
+    "all_deals": "كل العروض",
+    "add_deal": "أضف عرض"
   },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "احصل على توصيل مجاني على الطلبات التي تزيد عن 1000 جنيه مصري",
@@ -199,7 +202,9 @@
     "dashboard_products_add_product": "إضافة منتج",
     "dashboard_products_all_products": "المنتجات",
     "dashboard_categories_categories": "الفئات",
-    "dashboard_categories_add_category": "إضافة فئة"
+    "dashboard_categories_add_category": "إضافة فئة",
+    "dashboard_deals_all_deals": "كل العروض",
+    "dashboard_deals_add_today_deals": "إضافة عرض"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -214,7 +219,9 @@
     "add_product": "إضافة منتج",
     "products": "المنتجات",
     "categories": "الفئات",
-    "add_category": "إضافة فئة"
+    "add_category": "إضافة فئة",
+    "all_deals": "كل العروض",
+    "add_deal": "أضف عرض"
   },
   "social_media": {
     "share_my": "شارك",

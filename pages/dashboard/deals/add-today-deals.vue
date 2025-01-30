@@ -1,7 +1,10 @@
 <template>
   <div>
+    <!-- breadcrumb component -->
+    <breadcrumb />
+
     <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
-      <h2 class="mb-4 text-xl font-bold">{{ $t('form.add_new_deal') }}</h2>
+      <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_new_deal') }}</h2>
       <form @submit.prevent="handleAddDeal">
         <div class="mb-4">
           <label for="main-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.category') }}</label>
@@ -427,6 +430,10 @@ onMounted(async () => {
 definePageMeta({
   layout: 'dashboard'
 })
+
+useHead({
+  titleTemplate: () => t('head.add_deal'),
+});
 </script>
 
 <style scoped>

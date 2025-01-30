@@ -11,7 +11,10 @@
     "items_stock": "Items Stock",
     "payments": "Payments",
     "users": "Users",
-    "messages": "Messages"
+    "messages": "Messages",
+    "deals": "Deals",
+    "all_deals": "All Deals",
+    "add_deal": "Add Deal"
   },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "Get Free delivery on orders over EGP 1,000",
@@ -199,7 +202,9 @@
     "dashboard_products_add_product": "Add Product",
     "dashboard_products_all_products": "Products",
     "dashboard_categories_categories": "Categories",
-    "dashboard_categories_add_category": "Add Category"
+    "dashboard_categories_add_category": "Add Category",
+    "dashboard_deals_all_deals": "All Deals",
+    "dashboard_deals_add_today_deals": "Add Deal"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -214,7 +219,9 @@
     "add_product": "Add Product",
     "products": "Products",
     "categories": "Categories",
-    "add_category": "Add Category"
+    "add_category": "Add Category",
+    "all_deals": "All Deals",
+    "add_deal": "Add Deal"
   },
   "social_media": {
     "share_my": "Share my",

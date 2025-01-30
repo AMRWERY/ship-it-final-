@@ -107,11 +107,15 @@ const menuGroups = computed(() => [
         label: 'layout.orders',
         route: '/dashboard/orders'
       },
-      // {
-      //   icon: 'material-symbols:payments',
-      //   label: 'layout.payments',
-      //   route: ''
-      // },
+      {
+        icon: 'streamline:discount-percent-fire',
+        label: 'layout.deals',
+        route: '',
+        children: [
+          { label: 'layout.all_deals', route: '/dashboard/deals/all-deals' },
+          { label: 'layout.add_deal', route: '/dashboard/deals/add-today-deals' },
+        ]
+      },
       {
         icon: 'gridicons:multiple-users',
         label: 'layout.users',
