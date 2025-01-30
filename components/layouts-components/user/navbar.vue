@@ -16,7 +16,7 @@
                 <categories-menu class="me-auto" />
 
                 <div class="flex items-center lg:order-2">
-                    <div class="hidden mt-2 mr-4 sm:inline-block">
+                    <div class="hidden mt-2 me-4 sm:inline-block">
                         <span></span>
                     </div>
 
