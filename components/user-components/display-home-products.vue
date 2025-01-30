@@ -38,13 +38,15 @@ const config = {
   },
 };
 
-const cardsOne = ref([
-  { title: 'Browse this extraordinary Women’s dresses assortment', subtitle: 'From this exceptional assortment, choose your ideal dress and be whatever you desire!', brand: 'Ajooni', img: 'https://justfields.com/storage/projects/7M5rV059/035.jpg' },
-  { title: 'Shop stylish winter wear with No wallet-worries', subtitle: 'Find great winter season looks without worrying about your wallet - All within your budget.', brand: 'Inc', img: 'https://justfields.com/storage/projects/7M5rV059/036.jpg' },
-])
+const { t } = useI18n()
 
-const cardsTwo = ref([
-  { title: 'Unleash the fashionista side of you with SHEIN products', subtitle: 'Explore an incredible collection of trendy clothing at amazing prices', brand: 'Shein', img: 'https://justfields.com/storage/projects/7M5rV059/01201.jpg' },
-  { title: "Find the Best Women's Winter Boots around", subtitle: "Make a statement with our stunning selection of women's boots, they're the best!", brand: 'Michael_kors', img: 'https://justfields.com/storage/projects/7M5rV059/045454.jpg' },
-])
+const cardsOne = computed(() => [
+  { title: t('home.browse_this_extraordinary_womens_dresses_assortment'), subtitle: t('home.from_this_exceptional_assortment_choose_your_ideal_dress_and_be_whatever_you_desire'), brand: 'Ajooni', img: 'https://justfields.com/storage/projects/7M5rV059/035.jpg' },
+  { title: t('home.shop_stylish_winter_wear_with_no_wallet_worries'), subtitle: t('home.find_great_winter_season_looks_without_worrying_about_your_wallet_all_within_your_budget'), brand: 'Inc', img: 'https://justfields.com/storage/projects/7M5rV059/036.jpg' },
+]);
+
+const cardsTwo = computed(() => [
+  { title: t('home.unleash_the_fashionista_side_of_you_with_shein_products'), subtitle: t('home.explore_an_incredible_collection_of_trendy_clothing_at_amazing_prices'), brand: 'Shein', img: 'https://justfields.com/storage/projects/7M5rV059/01201.jpg' },
+  { title: t('home.find_the_best_womens_Winter_boots_around'), subtitle: t('home.make_a_statement_with_our_stunning_selection_of_womens_boots_they_re_the_best'), brand: 'Michael_kors', img: 'https://justfields.com/storage/projects/7M5rV059/045454.jpg' },
+]);
 </script>
