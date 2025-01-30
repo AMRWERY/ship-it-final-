@@ -12,17 +12,15 @@
 
       <!-- Dropdown Start -->
       <div v-show="dropdownOpen"
-        class="absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default sm:right-0 sm:w-80">
-        <div class="px-4.5 py-3">
-          <h5 class="text-sm font-medium">Notification</h5>
+        class="absolute -end-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default sm:end-0 sm:w-80">
+        <div class="px-4.5 pt-3">
+          <h5 class="text-sm font-medium ms-4">Notification</h5>
         </div>
 
-        <ul class="flex flex-col h-auto overflow-y-auto">
+        <ul class="flex flex-col h-auto p-4 overflow-y-auto">
           <template v-for="(item, index) in notificationItems" :key="index">
             <li>
-              <nuxt-link
-                class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2"
-                to="">
+              <nuxt-link class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2" to="">
                 <p class="text-sm">
                   <span class="text-black">{{ item.title }}</span>
                   {{ item.details }}
@@ -40,8 +38,6 @@
 </template>
 
 <script setup>
-import { onClickOutside } from '@vueuse/core'
-
 const target = ref(null)
 const dropdownOpen = ref(false)
 const notifying = ref(true)
