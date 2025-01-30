@@ -2,7 +2,8 @@
   <div>
     <div class="h-8 bg-[#4f46e5] text-white">
       <nuxt-link to="" type="button" class="flex items-center justify-center py-1 capitalize cursor-pointer"
-        data-twe-toggle="modal" data-twe-target="#todayModalCenteredScrollable">{{ $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
+        data-twe-toggle="modal" data-twe-target="#todayModalCenteredScrollable">{{
+          $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
     </div>
 
     <!-- dialog -->
