@@ -27,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                    <div class="lg:col-span-8 lg:row-span-2 lg:row-end-2">
                         <div class="lg:ps-6">
                             <div class="mb-6">
                                 <span class="text-red-500 dark:text-red-200">{{ currentDeal?.brand }}</span>
@@ -68,7 +68,7 @@
                                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Description</h3>
                                         <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{
                                             currentDeal?.description
-                                        }}</p>
+                                            }}</p>
                                     </div>
                                 </div>
                             </div>
