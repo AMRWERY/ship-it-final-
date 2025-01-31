@@ -5,7 +5,7 @@
 
         <section class="py-4">
             <div class="px-4 mx-auto">
-                <div class="grid grid-cols-1 gap-12 mt-8 lg:col-gap-12 xl:col-gap-16 lg:mt-12 lg:grid-cols-5 lg:gap-16">
+                <div class="grid grid-cols-1 gap-12 mt-8 lg:col-gap-12 xl:col-gap-10 lg:mt-12 lg:grid-cols-5 lg:gap-10">
                     <div class="lg:col-span-3 lg:row-end-1">
                         <div class="lg:flex lg:items-start">
                             <div class="lg:order-2 lg:ms-5">
@@ -68,7 +68,7 @@
                                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Description</h3>
                                         <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{
                                             currentDeal?.description
-                                            }}</p>
+                                        }}</p>
                                     </div>
                                 </div>
                             </div>
