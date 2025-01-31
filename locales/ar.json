@@ -14,7 +14,8 @@
     "messages": "الرسائل",
     "deals": "العروض",
     "all_deals": "كل العروض",
-    "add_deal": "أضف عرض"
+    "add_deal": "أضف عرض",
+    "customer_messages": "رسائل العملاء"
   },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "احصل على توصيل مجاني على الطلبات التي تزيد عن 1000 جنيه مصري",
@@ -141,7 +142,8 @@
     "view_details": "عرض التفاصيل",
     "close": "غلق",
     "add_product": "إضافة منتج",
-    "add_category": "إضافة فئة"
+    "add_category": "إضافة فئة",
+    "view_message": "عرض الرسالة"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -187,7 +189,9 @@
     "product_added_successfully": "تم إضافة المنتج بنجاح",
     "category_deleted_successfully": "تم حذف الفئة بنجاح",
     "category_added_successfully": "تمت إضافة الفئة بنجاح",
-    "failed_to_add_category": "فشل في إضافة الفئة"
+    "failed_to_add_category": "فشل في إضافة الفئة",
+    "message_deleted": "تم حذف الرسالة",
+    "message_deletion_failed": "فشل حذف الرسالة"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -204,7 +208,8 @@
     "dashboard_categories_categories": "الفئات",
     "dashboard_categories_add_category": "إضافة فئة",
     "dashboard_deals_all_deals": "كل العروض",
-    "dashboard_deals_add_today_deals": "إضافة عرض"
+    "dashboard_deals_add_today_deals": "إضافة عرض",
+    "dashboard_customer_messages": "رسائل العملاء"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -221,7 +226,8 @@
     "categories": "الفئات",
     "add_category": "إضافة فئة",
     "all_deals": "كل العروض",
-    "add_deal": "أضف عرض"
+    "add_deal": "أضف عرض",
+    "customer_messages": "رسائل العملاء"
   },
   "social_media": {
     "share_my": "شارك",
@@ -236,7 +242,8 @@
     "back_to_home": "العودة إلى الصفحة الرئيسية",
     "delete_order": "حذف الطلب",
     "edit_category": "تعديل الفئة",
-    "delete_category": "حذف الفئة"
+    "delete_category": "حذف الفئة",
+    "delete_message": "حذف الرسالة"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",
@@ -301,7 +308,8 @@
     "categories": "الفئات",
     "category_title": "عنوان الفئة",
     "image": "صورة",
-    "add_category": "إضافة فئة"
+    "add_category": "إضافة فئة",
+    "customer_messages": "رسائل العملاء"
   },
   "pagination": {
     "previous": "السابق",

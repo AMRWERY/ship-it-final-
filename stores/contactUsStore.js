@@ -44,24 +44,42 @@ export const useContactStore = defineStore("contact", {
         });
     },
 
+    // fetchMessages() {
+    //   const user = JSON.parse(localStorage.getItem("user"));
+    //   // const user = authStore
+    //   const uid = user?.uid;
+    //   if (!uid) {
+    //     // console.warn("UID is undefined or not found in localStorage.");
+    //     return Promise.resolve();
+    //   }
+    //   const q = query(collection(db, "contact-us"), where("uid", "==", uid));
+    //   return getDocs(q)
+    //     .then((querySnapshot) => {
+    //       this.messages = querySnapshot.docs.map((doc) => ({
+    //         id: doc.id,
+    //         ...doc.data(),
+    //       }));
+    //       // console.log("Messages fetched for UID:", uid);
+    //       console.log('all messages fetched', this.messages)
+    //     })
+    //     .catch((e) => {
+    //       console.error("Error fetching messages:", e);
+    //     });
+    // },
+
     fetchMessages() {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const uid = user?.uid;
-      if (!uid) {
-        // console.warn("UID is undefined or not found in localStorage.");
-        return Promise.resolve();
-      }
-      const q = query(collection(db, "contact-us"), where("uid", "==", uid));
-      return getDocs(q)
+      getDocs(collection(db, "contact-us"))
         .then((querySnapshot) => {
-          this.messages = querySnapshot.docs.map((doc) => ({
+          const messages = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
-          // console.log("Messages fetched for UID:", uid);
+          this.messages = messages;
+          // console.log(messages);
+          this.updatePagination();
         })
         .catch((e) => {
-          console.error("Error fetching messages:", e);
+          // console.log("Error fetching messages: ", e);
         });
     },
 

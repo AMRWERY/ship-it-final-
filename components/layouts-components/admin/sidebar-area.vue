@@ -23,7 +23,7 @@
           <nav class="px-4 py-4 mt-5 lg:mt-9 lg:px-6">
             <template v-for="menuGroup in menuGroups" :key="menuGroup.name">
               <div>
-                <h3 class="mb-4 ml-4 text-sm font-medium text-white">{{ menuGroup.name }}</h3>
+                <h3 class="mb-4 text-sm font-medium text-white ms-4">{{ menuGroup.name }}</h3>
 
                 <ul class="mb-6 flex flex-col gap-1.5">
                   <sidebar-item v-for="(menuItem, index) in menuGroup.menuItems" :item="menuItem" :key="index"
@@ -123,8 +123,8 @@ const menuGroups = computed(() => [
       },
       {
         icon: 'ph:envelope-simple-bold',
-        label: 'layout.messages',
-        route: '',
+        label: 'layout.customer_messages',
+        route: '/dashboard/customer-messages',
       },
     ],
   },

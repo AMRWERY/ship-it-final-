@@ -14,7 +14,8 @@
     "messages": "Messages",
     "deals": "Deals",
     "all_deals": "All Deals",
-    "add_deal": "Add Deal"
+    "add_deal": "Add Deal",
+    "customer_messages": "Customer Messages"
   },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "Get Free delivery on orders over EGP 1,000",
@@ -141,7 +142,8 @@
     "view_details": "View details",
     "close": "Close",
     "add_product": "Add Product",
-    "add_category": "Add Category"
+    "add_category": "Add Category",
+    "view_message": "View Message"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -187,7 +189,9 @@
     "product_added_successfully": "Product added successfully",
     "category_deleted_successfully": "Category deleted successfully",
     "category_added_successfully": "Category added successfully",
-    "failed_to_add_category": "Failed to add category"
+    "failed_to_add_category": "Failed to add category",
+    "message_deleted": "Message deleted",
+    "message_deletion_failed": "Message deletion failed"
   },
   "breadcrumb": {
     "home": "Home",
@@ -204,7 +208,8 @@
     "dashboard_categories_categories": "Categories",
     "dashboard_categories_add_category": "Add Category",
     "dashboard_deals_all_deals": "All Deals",
-    "dashboard_deals_add_today_deals": "Add Deal"
+    "dashboard_deals_add_today_deals": "Add Deal",
+    "dashboard_customer_messages": "Customer Messages"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -221,7 +226,8 @@
     "categories": "Categories",
     "add_category": "Add Category",
     "all_deals": "All Deals",
-    "add_deal": "Add Deal"
+    "add_deal": "Add Deal",
+    "customer_messages": "Customer Messages"
   },
   "social_media": {
     "share_my": "Share my",
@@ -236,7 +242,8 @@
     "back_to_home": "Back to home",
     "delete_order": "Delete order",
     "edit_category": "Edit Category",
-    "delete_category": "Delete category"
+    "delete_category": "Delete category",
+    "delete_message": "Delete message"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty",
@@ -303,7 +310,8 @@
     "categories": "Categories",
     "category_title": "Category Title",
     "image": "Image",
-    "add_category": "Add Category"
+    "add_category": "Add Category",
+    "customer_messages": "Customer Messages"
   },
   "pagination": {
     "previous": "Previous",
