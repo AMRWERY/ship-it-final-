@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div class="flex flex-col w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
-        <div v-if="messages?.length" class="flex space-x-6">
+      <div class="flex flex-col w-full max-w-3xl p-6 bg-white rounded-lg shadow-lg">
+        <div v-if="messages?.length" class="flex flex-col gap-4 md:flex-row space-s-6">
           <!-- Customer Info Section -->
           <div class="flex-1 p-6 rounded-lg shadow-md bg-gray-50">
             <h3 class="mb-4 text-xl font-semibold text-gray-900">

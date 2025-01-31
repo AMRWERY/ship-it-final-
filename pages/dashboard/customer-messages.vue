@@ -147,12 +147,14 @@ onMounted(() => {
 const isDialogOpen = ref(false);
 const selectedMessage = ref({});
 
-const openMessageDetails = async (message) => {
+const openMessageDetails = (message) => {
   message.loadingView = true;
   selectedMessage.value = message;
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  message.loadingView = false;
-  isDialogOpen.value = true;
+  new Promise((resolve) => setTimeout(resolve, 2000))
+    .then(() => {
+      message.loadingView = false;
+      isDialogOpen.value = true;
+    });
 };
 
 const closeDialog = () => {
@@ -162,34 +164,36 @@ const closeDialog = () => {
 
 const { t } = useI18n()
 
-const deleteMessage = async (messageId) => {
+const deleteMessage = (messageId) => {
   const message = contactStore.paginatedMessages.find(o => o.id === messageId);
   if (message) {
     message.loadingDelete = true;
   }
-  try {
-    await contactStore.deleteMessage(messageId);
-    contactStore.paginatedMessages = contactStore.paginatedMessages.filter(message => message.id !== messageId);
-    triggerToast({
-      title: t('toast.great'),
-      message: t('toast.message_deleted'),
-      type: 'success',
-      icon: 'mdi:check-circle',
+  contactStore.deleteMessage(messageId)
+    .then(() => {
+      contactStore.paginatedMessages = contactStore.paginatedMessages.filter(message => message.id !== messageId);
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.message_deleted'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+    })
+    .catch(() => {
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.message_deletion_failed'),
+        type: 'error',
+        icon: 'mdi:alert-circle',
+      });
+    })
+    .finally(() => {
+      setTimeout(() => {
+        if (message) {
+          message.loadingDelete = false;
+        }
+      }, 3000);
     });
-  } catch (error) {
-    triggerToast({
-      title: t('toast.error'),
-      message: t('toast.message_deletion_failed'),
-      type: 'error',
-      icon: 'mdi:alert-circle',
-    });
-  } finally {
-    setTimeout(() => {
-      if (message) {
-        message.loadingDelete = false;
-      }
-    }, 3000);
-  }
 };
 
 const startDate = ref('');
