@@ -74,10 +74,13 @@
                         </nuxt-link>
                     </div>
 
-                    <!-- display for admin only -->
+                    <!-- admin dashboard - display for admin only -->
                     <div class="flex items-center space-s-4">
-                        <nuxt-link to="/dashboard" v-if="isAdmin">
-                            <icon name="heroicons-solid:presentation-chart-line" class="text-white" />
+                        <nuxt-link to="/dashboard" v-if="isAdmin" type="button"
+                            class="relative flex text-white rounded-full cursor-pointer">
+                            <span class="absolute -inset-1.5" />
+                            <span class="sr-only">admin dashboard</span>
+                            <icon name="heroicons-solid:presentation-chart-line" class="ms-2" />
                         </nuxt-link>
 
                         <!--logout -->
