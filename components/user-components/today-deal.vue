@@ -67,7 +67,7 @@
                             currentDeal?.originalPrice }} egp</p>
                           <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice }}
                             egp</h4>
-                          <div class="flex py-1 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
+                          <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
                             <span class="text-sm text-white">save {{ currentDeal?.discount }}%</span>
                           </div>
                         </div>

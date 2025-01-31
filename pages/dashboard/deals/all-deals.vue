@@ -10,31 +10,17 @@
                         <div class="lg:flex lg:items-start">
                             <div class="lg:order-2 lg:ms-5">
                                 <div class="max-w-xl overflow-hidden rounded-lg">
-                                    <img class="object-cover w-full h-full max-w-full"
-                                        src="https://justfields.com/storage/projects/7M5rV059/coffee.jpg"
+                                    <img class="object-cover w-full max-w-full h-96" :src="selectedImage"
                                         alt="product-img-1" />
                                 </div>
                             </div>
 
                             <div class="w-full mt-2 lg:order-1 lg:w-32 lg:flex-shrink-0">
                                 <div class="flex flex-row items-start lg:flex-col">
-                                    <button type="button"
-                                        class="h-20 mb-3 overflow-hidden text-center border-2 border-gray-900 rounded-lg flex-0 aspect-square">
-                                        <img class="object-cover w-full h-full"
-                                            src="https://justfields.com/storage/projects/7M5rV059/coffee.jpg"
-                                            alt="product-img-2" />
-                                    </button>
-                                    <button type="button"
-                                        class="h-20 mb-3 overflow-hidden text-center border-2 border-transparent rounded-lg flex-0 aspect-square">
-                                        <img class="object-cover w-full h-full"
-                                            src="https://justfields.com/storage/projects/7M5rV059/coffee.jpg"
-                                            alt="product-img-2" />
-                                    </button>
-                                    <button type="button"
-                                        class="h-20 mb-3 overflow-hidden text-center border-2 border-transparent rounded-lg flex-0 aspect-square">
-                                        <img class="object-cover w-full h-full"
-                                            src="https://justfields.com/storage/projects/7M5rV059/coffee.jpg"
-                                            alt="product-img-3" />
+                                    <button type="button" v-for="(image, index) in imageList" :key="index"
+                                        @click="setSelectedImage(image)"
+                                        class="w-24 h-20 mb-3 overflow-hidden text-center border-2 border-gray-400 rounded-lg flex-0 aspect-square">
+                                        <img class="object-cover w-full h-full" :src="image" alt="product-img-2" />
                                     </button>
                                 </div>
                             </div>
@@ -44,82 +30,60 @@
                     <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
                         <div class="lg:ps-6">
                             <div class="mb-6">
-                                <span class="text-red-500 dark:text-red-200">brand</span>
+                                <span class="text-red-500 dark:text-red-200">{{ currentDeal?.brand }}</span>
                                 <h2 class="max-w-xl mt-2 mb-4 text-2xl font-bold font-heading dark:text-gray-300">
-                                    Buy One Plus 8 Pro
+                                    {{ currentDeal?.title }}
                                 </h2>
                             </div>
 
                             <div class="flex mb-6 item-center gap-x-6">
-                                <p>price</p>
-                                <p>original price</p>
-                                <p>discount</p>
+                                <div class="flex items-center space-s-2">
+                                    <p class="text-2xl font-semibold text-red-600">{{ currentDeal?.discountedPrice }}
+                                        epg</p>
+                                    <p class="text-base font-medium text-gray-600 line-through"
+                                        v-if="currentDeal?.originalPrice">{{ currentDeal?.originalPrice
+                                        }} epg</p>
+                                </div>
+                                <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
+                                    <span class="text-sm text-white">save {{ currentDeal?.discount }}%</span>
+                                </div>
                             </div>
 
-                            <div class="gap-4 border-b border-gray-300">
-                                <div class="py-6">
-                                    <p class="mb-2 text-lg font-semibold dark:text-gray-400">
-                                        time circles
-                                    </p>
-                                    <div class="flex flex-wrap items-center gap-2 mt-3 select-none">
-                                        <label class="">
-                                            <input type="radio" name="type" value="Powder" class="sr-only peer"
-                                                checked />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Powder
-                                            </p>
-                                        </label>
-                                        <label class="">
-                                            <input type="radio" name="type" value="Whole Bean" class="sr-only peer" />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Whole Bean
-                                            </p>
-                                        </label>
-                                        <label class="">
-                                            <input type="radio" name="type" value="Groud" class="sr-only peer" />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Groud
-                                            </p>
-                                        </label>
+                            <div class="gap-4 pb-5 border-b border-gray-300">
+                                <div class="flex items-center justify-around gap-5 mt-5">
+                                    <div v-for="(value, key) in currentDealTime" :key="key"
+                                        class="flex flex-col items-center space-y-2">
+                                        <div class="flex items-center justify-center w-10 h-10 border-2 rounded-full"
+                                            :class="`border-${key}`">
+                                            <span class="text-lg font-bold">{{ value }}</span>
+                                        </div>
+                                        <span class="text-sm capitalize">{{ key }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gap-4 pb-5 border-b border-gray-300">
+                                <div class="max-w-2xl custom-scroll max-h-32">
+                                    <div class="mt-6">
+                                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Description</h3>
+                                        <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{
+                                            currentDeal?.description
+                                            }}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="gap-4 border-b border-gray-300">
-                                <p class="max-w-md my-4 text-gray-500 dark:text-gray-400">
-                                    description
-                                </p>
-                            </div>
-
-                            <div class="gap-4 border-b border-gray-300">
                                 <div class="py-6">
                                     <p class="mb-2 text-lg font-semibold dark:text-gray-400">
-                                        colors squares
+                                        Color
                                     </p>
                                     <div class="flex flex-wrap items-center gap-2 mt-3 select-none">
-                                        <label class="">
-                                            <input type="radio" name="type" value="Powder" class="sr-only peer"
-                                                checked />
+                                        <label v-for="color in currentDeal?.colors" :key="color">
+                                            <input type="radio" name="type" value="" class="sr-only peer" />
                                             <p
                                                 class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Powder
-                                            </p>
-                                        </label>
-                                        <label class="">
-                                            <input type="radio" name="type" value="Whole Bean" class="sr-only peer" />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Whole Bean
-                                            </p>
-                                        </label>
-                                        <label class="">
-                                            <input type="radio" name="type" value="Groud" class="sr-only peer" />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Groud
+                                                {{ color }}
                                             </p>
                                         </label>
                                     </div>
@@ -129,29 +93,14 @@
                             <div class="gap-4 border-b border-gray-300">
                                 <div class="py-6">
                                     <p class="mb-2 text-lg font-semibold dark:text-gray-400">
-                                        sizes squares
+                                        Size
                                     </p>
                                     <div class="flex flex-wrap items-center gap-2 mt-3 select-none">
-                                        <label class="">
-                                            <input type="radio" name="type" value="Powder" class="sr-only peer"
-                                                checked />
+                                        <label v-for="size in currentDeal?.sizes" :key="size">
+                                            <input type="radio" name="type" value="" class="sr-only peer" />
                                             <p
                                                 class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Powder
-                                            </p>
-                                        </label>
-                                        <label class="">
-                                            <input type="radio" name="type" value="Whole Bean" class="sr-only peer" />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Whole Bean
-                                            </p>
-                                        </label>
-                                        <label class="">
-                                            <input type="radio" name="type" value="Groud" class="sr-only peer" />
-                                            <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
-                                                Groud
+                                                {{ size }}
                                             </p>
                                         </label>
                                     </div>
@@ -169,15 +118,21 @@
                         </nav>
 
                         <div class="flow-root mt-8 sm:mt-12">
-                            <div class="grid grid-cols-2 gap-4 md:grid-cols-3 max-sm:justify-center gap-y-8 sm:gap-x-6">
-                                <div class="flex items-center gap-6 overflow-hidden cursor-pointer max-sm:flex-col">
+                            <div class="grid grid-cols-2 gap-4 md:grid-cols-2 max-sm:justify-center gap-y-8 sm:gap-x-6">
+                                <div class="flex items-center gap-6 overflow-hidden cursor-pointer max-sm:flex-col"
+                                    v-for="(deal, index) in nextDeals" :key="index">
                                     <div class="w-24 h-24 p-3 overflow-hidden bg-gray-100 rounded-lg shrink-0">
-                                        <img src="https://readymadeui.com/images/watch1.webp" alt="product1"
+                                        <img :src="deal.imageUrl1" alt="product1"
                                             class="object-contain w-full h-full" />
                                     </div>
                                     <div class="max-sm:text-center">
-                                        <h3 class="text-sm font-bold text-gray-800 sm:text-base">French Connection</h3>
-                                        <h4 class="mt-2 text-sm font-bold text-blue-600 sm:text-base">$95.00</h4>
+                                        <h3 class="text-sm font-bold text-gray-800 sm:text-base">{{ deal.title }}</h3>
+                                        <h4 class="mt-1 text-xs font-bold text-blue-600">{{ deal.brand }}</h4>
+                                        <h4 class="mt-1 text-xs font-bold text-blue-600">Save {{ deal.discount }}%</h4>
+                                        <h4 class="mt-1 text-xs font-bold text-blue-600">{{ deal.discountedPrice }} egp
+                                        </h4>
+                                        <h4 class="mt-1 text-xs font-bold text-red-600">{{
+                                            formatRemainingTime(deal.remainingTime) }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -191,6 +146,117 @@
 
 <script setup>
 const { t } = useI18n();
+const todayDealStore = useTodayDealStore();
+
+const currentDeal = computed(() => todayDealStore.currentDeal);
+const nextDeals = computed(() => todayDealStore.nextDeals);
+
+const nextDealStartTime = ref(null);
+
+const currentDealTime = ref({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+});
+
+const calculateRemainingTime = (timestamp) => {
+    const now = new Date().getTime();
+    const targetTime = new Date(timestamp.seconds * 1000).getTime();
+    const diff = targetTime - now;
+    if (diff <= 0) return null;
+    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+    const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
+    return { days, hours, minutes, seconds };
+};
+
+const updateCurrentDealTime = () => {
+    if (!currentDeal.value?.endTime) return;
+    const remaining = calculateRemainingTime(currentDeal.value.endTime);
+    if (remaining) {
+        currentDealTime.value = remaining;
+    } else {
+        currentDealTime.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+};
+
+const updateNextDealsTimes = () => {
+    nextDeals.value.forEach((deal) => {
+        deal.remainingTime = calculateRemainingTime(deal.startTime);
+    });
+};
+
+const updateNextDealStartTime = () => {
+    if (!nextDeals.value || nextDeals.value.length === 0) {
+        nextDealStartTime.value = null;
+        return;
+    }
+    const nextDeal = nextDeals.value.find(
+        (deal) => new Date(deal.startTime.seconds * 1000) > new Date()
+    );
+    nextDealStartTime.value = nextDeal
+        ? calculateRemainingTime(nextDeal.startTime)
+        : null;
+};
+
+let interval;
+
+onMounted(() => {
+    todayDealStore
+        .fetchDeals()
+        .then(() => {
+            const firstImage = todayDealStore.currentDeal?.imageUrl1;
+            if (firstImage) selectedImage.value = firstImage;
+            interval = setInterval(() => {
+                updateCurrentDealTime();
+                updateNextDealsTimes();
+            }, 1000);
+            updateCurrentDealTime();
+            updateNextDealsTimes();
+            updateNextDealStartTime();
+            setInterval(() => {
+                updateNextDealStartTime();
+            }, 1000);
+        })
+        .catch((error) => {
+            console.error("Error fetching deals:", error);
+        });
+});
+
+onBeforeUnmount(() => {
+    if (interval) clearInterval(interval);
+});
+
+const formatRemainingTime = (timeObj) => {
+    if (
+        typeof timeObj === "object" &&
+        timeObj.days !== undefined &&
+        timeObj.hours !== undefined &&
+        timeObj.minutes !== undefined &&
+        timeObj.seconds !== undefined
+    ) {
+        return `${timeObj.days} days ${timeObj.hours} hrs ${timeObj.minutes} mins ${timeObj.seconds} secs`;
+    }
+    return "Invalid time";
+};
+
+const imageList = computed(() =>
+    [
+        todayDealStore.currentDeal?.imageUrl1,
+        todayDealStore.currentDeal?.imageUrl2,
+        todayDealStore.currentDeal?.imageUrl3,
+        todayDealStore.currentDeal?.imageUrl4,
+        todayDealStore.currentDeal?.imageUrl5,
+    ].filter(Boolean)
+);
+
+const selectedImage = ref('');
+
+const setSelectedImage = (image) => {
+    selectedImage.value = image;
+};
 
 definePageMeta({
     layout: 'dashboard'
@@ -200,3 +266,18 @@ useHead({
     titleTemplate: () => t('head.all_deals'),
 });
 </script>
+
+<style scoped>
+.custom-scroll {
+    overflow-y: scroll;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.custom-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+</style>
