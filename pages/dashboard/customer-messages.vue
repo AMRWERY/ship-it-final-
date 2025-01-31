@@ -7,12 +7,13 @@
       <h3 class="py-2 mt-5 mb-12 text-2xl font-bold text-start">{{ $t('dashboard.customer_messages') }}</h3>
       <div class="flex items-end space-s-4">
         <div class="flex flex-col">
-          <label class="mb-1 text-sm font-medium">{{ $t('form.start_date') }}</label>
-          <input type="date" v-model="startDate" class="p-2 border rounded" :placeholder="$t('form.start_date')" />
+          <VueDatePicker :name="t('form.start_date')" :placeholder="t('form.start_date')" format="MM/dd/yyyy"
+            cancel-text="Close" :teleport="true" :esc-close="false" :state="true" v-model="startDate" />
         </div>
         <div class="flex flex-col">
-          <label class="mb-1 text-sm font-medium">{{ $t('form.end_date') }}</label>
-          <input type="date" v-model="endDate" class="p-2 border rounded" :placeholder="$t('form.end_date')" />
+          <VueDatePicker :name="t('form.end_date')" :placeholder="t('form.end_date')" format="MM/dd/yyyy"
+            cancel-text="Close" :teleport="true" :esc-close="false" :state="true" v-model="endDate" />
+
         </div>
         <button @click="filterOrdersByDate" class="px-4 py-2 btn-style">
           {{ $t('btn.filter') }}
@@ -137,6 +138,9 @@
 </template>
 
 <script setup>
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 const contactStore = useContactStore();
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
