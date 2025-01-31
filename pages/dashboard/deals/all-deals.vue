@@ -38,9 +38,9 @@
 
                             <div class="flex mb-6 item-center gap-x-6">
                                 <div class="flex items-center space-s-2">
-                                    <p class="text-2xl font-semibold text-red-600">{{ currentDeal?.discountedPrice }}
+                                    <p class="text-2xl font-bold text-red-600">{{ currentDeal?.discountedPrice }}
                                         epg</p>
-                                    <p class="text-base font-medium text-gray-600 line-through"
+                                    <p class="text-base font-semibold text-gray-600 line-through"
                                         v-if="currentDeal?.originalPrice">{{ currentDeal?.originalPrice
                                         }} epg</p>
                                 </div>
