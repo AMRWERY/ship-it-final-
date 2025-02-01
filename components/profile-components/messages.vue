@@ -23,7 +23,7 @@
 
           <!-- Received Message -->
           <div class="flex items-end justify-end space-s-3">
-            <div class="p-3 text-white bg-blue-500 rounded-lg dark:bg-blue-300 dark:text-gray-800">
+            <div class="p-3 text-white bg-blue-400 rounded-lg dark:bg-blue-300 dark:text-gray-800">
               <p class="text-sm" v-if="msg.reply">{{ msg.reply }}</p>
               <small class="font-semibold text-gray-100" v-if="msg.repliedAt">{{ formatDate(msg.repliedAt) }}</small>
             </div>
