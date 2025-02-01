@@ -143,7 +143,10 @@
     "close": "Close",
     "add_product": "Add Product",
     "add_category": "Add Category",
-    "view_message": "View Message"
+    "view_message": "View Message",
+    "reply": "Reply",
+    "send_reply": "Send Reply",
+    "sending_reply": "Sending reply"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",

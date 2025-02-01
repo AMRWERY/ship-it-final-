@@ -143,7 +143,10 @@
     "close": "غلق",
     "add_product": "إضافة منتج",
     "add_category": "إضافة فئة",
-    "view_message": "عرض الرسالة"
+    "view_message": "عرض الرسالة",
+    "reply": "رد",
+    "send_reply": "ارسل الرد",
+    "sending_reply": "جاري ارسال الرد"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",

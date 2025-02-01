@@ -92,6 +92,33 @@ export const useContactStore = defineStore("contact", {
           // console.error("Error deleting message:", error);
         });
     },
+
+    replyToMessage(messageId, replyText) {
+      if (!messageId) {
+        return Promise.reject(new Error("Invalid message ID"));
+      }
+      const messageDocRef = doc(db, "contact-us", messageId);
+      return updateDoc(messageDocRef, {
+        reply: replyText,
+        repliedAt: new Date(),
+      })
+        .then(() => {
+          const updateLocalMessage = (messagesArr) => {
+            const index = messagesArr.findIndex((m) => m.id === messageId);
+            if (index !== -1) {
+              messagesArr[index].reply = replyText;
+              messagesArr[index].repliedAt = new Date();
+            }
+          };
+          updateLocalMessage(this.messages);
+          updateLocalMessage(this.paginatedMessages);
+          return true;
+        })
+        .catch((error) => {
+          console.error("Error replying to message:", error);
+          return false;
+        });
+    },
   },
 
   getters: {
