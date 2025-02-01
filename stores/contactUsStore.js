@@ -3,13 +3,9 @@ import {
   collection,
   getDocs,
   addDoc,
-  setDoc,
   updateDoc,
-  getDoc,
   doc,
   deleteDoc,
-  query,
-  where,
 } from "firebase/firestore";
 import { db } from "@/firebase";
 
@@ -40,7 +36,8 @@ export const useContactStore = defineStore("contact", {
           console.log("Message saved");
         })
         .catch((e) => {
-          console.error("Error saving message:", e);
+          // console.error("Error saving message:", e);
+          throw e;
         });
     },
 
@@ -57,6 +54,7 @@ export const useContactStore = defineStore("contact", {
         })
         .catch((e) => {
           // console.log("Error fetching messages: ", e);
+          throw e;
         });
     },
 
@@ -90,6 +88,7 @@ export const useContactStore = defineStore("contact", {
         })
         .catch((error) => {
           // console.error("Error deleting message:", error);
+          throw error;
         });
     },
 
@@ -115,7 +114,8 @@ export const useContactStore = defineStore("contact", {
           return true;
         })
         .catch((error) => {
-          console.error("Error replying to message:", error);
+          // console.error("Error replying to message:", error);
+          throw error;
           return false;
         });
     },
