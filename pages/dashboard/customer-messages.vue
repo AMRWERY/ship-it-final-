@@ -81,12 +81,13 @@
               <p class="text-sm text-slate-500">{{ message.date }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-blue-700 cursor-pointer" @click="openMessageDetails(message)">
-              <div class="flex items-center justify-center">
-                <icon name="svg-spinners:tadpole" v-if="message.loadingView" />
-                <span v-else>{{ $t('btn.view_message') }}</span>
-              </div>
-              </p>
+              <nuxt-link to="" role="button" class="text-sm text-blue-700 cursor-pointer"
+                @click="openMessageDetails(message)">
+                <div class="flex items-center justify-center">
+                  <icon name="svg-spinners:tadpole" v-if="message.loadingView" />
+                  <span v-else>{{ $t('btn.view_message') }}</span>
+                </div>
+              </nuxt-link>
             </td>
             <td class="p-4 py-5">
               <button type="button" @click="deleteMessage(message.id)">
