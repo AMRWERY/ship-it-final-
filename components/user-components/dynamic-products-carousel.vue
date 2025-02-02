@@ -35,7 +35,7 @@
                     </div>
                     <div class="flex justify-center mt-4 max-sm:hidden">
                       <!-- ratings component -->
-                      <ratings />
+                      <ratings @ratingSelected="handleRating" :productId="card.id" />
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,8 @@ const props = defineProps({
     type: Array,
     required: false,
     default: () => [],
-  }
+  },
+  productId: String,
 });
 
 const productsStore = useProductsStore()
@@ -132,4 +133,11 @@ watch(
     );
   }
 );
+
+//ratings
+const productStore = useProductsStore()
+
+const handleRating = (rating) => {
+  productStore.updateProductRating(props.productId, rating);
+};
 </script>

@@ -97,17 +97,13 @@ const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast 
 const { t } = useI18n()
 
 onMounted(async () => {
-  // loading.value = true;
-  // setTimeout(() => {
   brandName.value = route.query.brand;
   if (brandName.value) {
     productStore.fetchProductsByBrand(brandName.value);
   } else {
     productStore.fetchProducts();
   }
-  // loading.value = false;
-  // }, 3000);
-
+  
   // Initialize tooltips
   const { Tooltip, Ripple, initTWE } = await import("tw-elements");
   initTWE({ Tooltip, Ripple });

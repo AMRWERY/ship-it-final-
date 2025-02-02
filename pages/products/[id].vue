@@ -35,8 +35,8 @@
               <div class="flex items-center gap-4 mt-3">
                 <div class="flex items-center">
                   <div class="flex space-s-2">
-                    <icon name="material-symbols:kid-star-sharp" class="w-5 h-5 text-yellow-400" />
-                    <span class="-mt-0.5 text-gray-600 dark:text-gray-100">(253 ratings and 27 reviews)</span>
+                     <!-- ratings component -->
+              <ratings @ratingSelected="handleRating" :productId="productStore.selectedProduct?.id" />
                   </div>
                 </div>
               </div>
@@ -379,6 +379,15 @@ const updateQuantityInStore = (newQuantity) => {
   if (productId) {
     cartStore.updateQuantityInCart(productId, newQuantity);
   }
+};
+
+//ratings
+const props = defineProps({
+  productId: String,
+});
+
+const handleRating = (rating) => {
+  productStore.updateProductRating(props.productId, rating);
 };
 </script>
 

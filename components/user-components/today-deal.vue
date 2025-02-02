@@ -57,10 +57,6 @@
                         <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ currentDeal?.title
                           }}</h3>
                         <p class="mt-3 mb-4 text-sm">{{ currentDeal?.brand }}</p>
-                        <div class="flex items-center gap-3 mt-1">
-                          <!-- ratings component -->
-                          <ratings />
-                        </div>
 
                         <div class="flex flex-wrap items-center gap-2 mt-4">
                           <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
