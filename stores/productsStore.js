@@ -8,6 +8,7 @@ import {
   where,
   addDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db, storage } from "@/firebase";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
@@ -19,6 +20,7 @@ export const useProductsStore = defineStore("new-products", {
     paginatedProducts: [],
     currentPage: 1,
     productsPerPage: 10,
+    productRatings: {},
   }),
 
   actions: {
@@ -197,6 +199,52 @@ export const useProductsStore = defineStore("new-products", {
       if (page > 0 && page <= this.totalPages) {
         this.currentPage = page;
         this.updatePagination();
+      }
+    },
+
+    async fetchProductRating(productId) {
+      if (!productId) return;
+      const productRef = doc(db, "products", productId);
+      const productSnap = await getDoc(productRef);
+      if (productSnap.exists()) {
+        const data = productSnap.data();
+        this.productRatings[productId] = {
+          rating: data.rating || 0,
+          totalVotes: data.totalVotes || 0,
+        };
+      }
+    },
+
+    async updateProductRating(productId, newRating) {
+      if (!productId || !newRating) return;
+      if (!this.productRatings) {
+        this.productRatings = {};
+      }
+      if (!this.productRatings[productId]) {
+        this.productRatings[productId] = { rating: 0, totalVotes: 0 };
+      }
+      const previousTotalVotes = this.productRatings[productId].totalVotes || 0;
+      const previousRating = this.productRatings[productId].rating || 0;
+      const newTotalVotes = previousTotalVotes + 1;
+      const updatedRating =
+        (previousRating * previousTotalVotes + newRating) / newTotalVotes;
+      const roundedRating = Math.round(updatedRating * 100) / 100;
+      this.productRatings[productId] = {
+        rating: roundedRating,
+        totalVotes: newTotalVotes,
+      };
+      this.productRatings[productId] = {
+        rating: updatedRating,
+        totalVotes: newTotalVotes,
+      };
+      try {
+        const productRef = doc(db, "products", productId);
+        await updateDoc(productRef, {
+          rating: updatedRating,
+          totalVotes: newTotalVotes,
+        });
+      } catch (error) {
+        console.error("Error updating rating:", error);
       }
     },
   },

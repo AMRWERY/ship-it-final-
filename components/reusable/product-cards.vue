@@ -34,10 +34,8 @@
           <div class="flex items-center gap-2 mt-2">
             <div class="flex items-center">
               <!-- ratings component -->
-              <ratings />
+              <ratings @ratingSelected="handleRating" :productId="product.id" />
             </div>
-            <p class="text-sm font-medium text-gray-900 dark:text-gray-200">5.0</p>
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-100">(455)</p>
           </div>
 
           <ul class="flex items-center gap-4 mt-2">
@@ -101,13 +99,13 @@ const { t } = useI18n()
 onMounted(async () => {
   // loading.value = true;
   // setTimeout(() => {
-    brandName.value = route.query.brand;
-    if (brandName.value) {
-      productStore.fetchProductsByBrand(brandName.value);
-    } else {
-      productStore.fetchProducts();
-    }
-    // loading.value = false;
+  brandName.value = route.query.brand;
+  if (brandName.value) {
+    productStore.fetchProductsByBrand(brandName.value);
+  } else {
+    productStore.fetchProducts();
+  }
+  // loading.value = false;
   // }, 3000);
 
   // Initialize tooltips
@@ -206,5 +204,14 @@ const wishlistIcon = (product) => {
 
 const wishlistIconClass = (product) => {
   return wishlistStore.isInWishlist(product.id) ? 'text-red-600' : '';
+};
+
+//ratings
+const props = defineProps({
+  productId: String,
+});
+
+const handleRating = (rating) => {
+  productStore.updateProductRating(props.productId, rating);
 };
 </script>
