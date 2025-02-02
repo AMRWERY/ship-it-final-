@@ -17,6 +17,23 @@
     "add_deal": "أضف عرض",
     "customer_messages": "رسائل العملاء"
   },
+  "footer": {
+    "get_connected_with_us_on_social_networks": "تواصل معنا على وسائل التواصل الاجتماعي:",
+    "is_your_trusted_ecommerce_solution_for_the_best_shopping_experience": "هو حلك الموثوق به للتجارة الإلكترونية للحصول على أفضل تجربة تسوق.",
+    "categories": "الفئات",
+    "women": "النساء",
+    "men": "الرجال",
+    "juniors_kids": "الأطفال والصغار",
+    "electronics": "الإلكترونيات",
+    "beauty": "الجمال",
+    "blogs": "المدونات",
+    "customer_support": "دعم العملاء",
+    "faqs": "الأسئلة الشائعة",
+    "help_center": "مركز المساعدة",
+    "maadi_cairo_egypt": "المعادي، القاهرة، مصر",
+    "quick_links": "روابط سريعة",
+    "contact": "اتصل بنا"
+  },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "احصل على توصيل مجاني على الطلبات التي تزيد عن 1000 جنيه مصري",
     "shop_by_brand": "تسوق حسب العلامة التجارية",
@@ -246,7 +263,13 @@
     "delete_order": "حذف الطلب",
     "edit_category": "تعديل الفئة",
     "delete_category": "حذف الفئة",
-    "delete_message": "حذف الرسالة"
+    "delete_message": "حذف الرسالة",
+    "profile": "الملف الشخصي",
+    "your_wishlist": "قائمة الرغبات الخاصه بك",
+    "toggle_theme": "تبديل السمة",
+    "dashboard": "لوحة التحكم",
+    "logout": "تسجيل الخروج",
+    "your_cart": "عربة التسوق الخاصة بك"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",

@@ -9,7 +9,7 @@
             type="button" id="dropdownMenuButton1" data-twe-dropdown-toggle-ref aria-expanded="false"
             data-twe-nav-link-ref>
             <icon name="mingcute:grid-2-line" class="me-1" />
-            Categories
+            {{ $t('layout.categories') }}
           </nuxt-link>
 
           <div

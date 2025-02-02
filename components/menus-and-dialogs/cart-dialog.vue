@@ -1,6 +1,7 @@
 <template>
   <div>
-    <nuxt-link to="" role="button" @click="openCartSidebar" class="flex items-center text-white">
+    <nuxt-link to="" role="button" @click="openCartSidebar" class="flex items-center text-white"
+      data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.your_cart')">
       <icon name="material-symbols:shopping-cart" class="me-1" />
       <span class="inline-block bg-red-600 text-white rounded-full px-1 py-0.5 text-xs font-bold"
         v-if="cartStore.cart.length > 0">

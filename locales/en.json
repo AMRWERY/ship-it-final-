@@ -17,6 +17,23 @@
     "add_deal": "Add Deal",
     "customer_messages": "Customer Messages"
   },
+  "footer": {
+    "get_connected_with_us_on_social_networks": "Get connected with us on social networks:",
+    "is_your_trusted_ecommerce_solution_for_the_best_shopping_experience": "is your trusted e-commerce solution for the best shopping experience.",
+    "categories": "Categories",
+    "women": "Women",
+    "men": "Men",
+    "juniors_kids": "Juniors & Kids",
+    "electronics": "Electronics",
+    "beauty": "Beauty",
+    "blogs": "Blogs",
+    "customer_support": "Customer Support",
+    "faqs": "FAQs",
+    "help_center": "Help Center",
+    "maadi_cairo_egypt": "Maadi, Cairo, Egypt",
+    "quick_links:": "Quick Links",
+    "contact": "Contact"
+  },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "Get Free delivery on orders over EGP 1,000",
     "shop_by_brand": "Shop by Brand",
@@ -246,7 +263,13 @@
     "delete_order": "Delete order",
     "edit_category": "Edit Category",
     "delete_category": "Delete category",
-    "delete_message": "Delete message"
+    "delete_message": "Delete message",
+    "profile": "Profile",
+    "your_wishlist": "Your Wishlist",
+    "toggle_theme": "Toggle theme",
+    "dashboard": "Dashboard",
+    "logout": "Logout",
+    "your_cart": "Your Cart"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty",

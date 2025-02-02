@@ -43,6 +43,7 @@
                     <div class="flex items-center space-s-1">
                         <!-- profile -->
                         <nuxt-link to="/profile" type="button" class="relative flex text-white rounded-full"
+                            data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.profile')"
                             v-if="isAuthenticated && !isAdmin">
                             <span class="absolute -inset-1.5" />
                             <span class="sr-only">View Profile</span>
@@ -57,6 +58,7 @@
 
                         <!--wishlist -->
                         <nuxt-link to="/wishlist" type="button" class="relative flex text-white rounded-full"
+                            data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.your_wishlist')"
                             v-if="isAuthenticated && !isAdmin">
                             <span class="absolute -inset-1.5" />
                             <span class="sr-only">View wishlist</span>
@@ -67,6 +69,7 @@
 
                         <!--toggle theme -->
                         <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
+                            data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.toggle_theme')"
                             @click="$emit('toggle-theme')">
                             <span class="absolute -inset-1.5" />
                             <span class="sr-only">toggle theme</span>
@@ -76,7 +79,8 @@
 
                     <!-- admin dashboard - display for admin only -->
                     <div class="flex items-center space-s-4">
-                        <nuxt-link to="/dashboard" v-if="isAdmin" type="button"
+                        <nuxt-link to="/dashboard" v-if="isAdmin" type="button" data-twe-toggle="tooltip"
+                            data-twe-placement="bottom" :title="$t('tooltip.dashboard')"
                             class="relative flex text-white rounded-full cursor-pointer">
                             <span class="absolute -inset-1.5" />
                             <span class="sr-only">admin dashboard</span>
@@ -85,6 +89,7 @@
 
                         <!--logout -->
                         <nuxt-link to="/" type="button" class="relative flex text-white rounded-full cursor-pointer"
+                            data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.logout')"
                             @click="logout" v-if="isAuthenticated && !isAdmin">
                             <span class="absolute -inset-1.5" />
                             <span class="sr-only">Logout</span>
@@ -116,11 +121,14 @@ computed(() => {
     setLocale(storedLocale);
 });
 
-onMounted(() => {
+onMounted(async () => {
     if (authStore.user?.profileImg) {
         userProfileImg.value = authStore.user?.profileImg;
         // console.log('img', userProfileImg.value)
     }
+
+    const { Tooltip, Ripple, initTWE } = await import("tw-elements");
+    initTWE({ Tooltip, Ripple });
 });
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);

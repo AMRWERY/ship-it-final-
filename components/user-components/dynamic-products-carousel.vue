@@ -18,7 +18,7 @@
                 <div
                   class="relative z-50 p-2 overflow-hidden bg-gray-100 rounded-lg cursor-pointer group hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all dark:bg-gray-800">
                   <div class="w-full h-[200px] sm:h-[300px] overflow-hidden mx-auto">
-                    <img :src="card.imageUrl1" alt="product-card" class="object-contain w-full h-full" />
+                    <img :src="card.imageUrl1" alt="product-card" class="object-cover object-center w-full h-full" />
                   </div>
                   <div
                     class="absolute w-11/12 p-2 mx-auto transition-all duration-300 rounded-lg end-0 start-0 bottom-2 lg:-bottom-80 lg:group-hover:bottom-2 bg-black/60 lg:bg-white lg:p-3 dark:bg-gray-600">
@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <div class="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-full lg:px-8 my-7">
+      <div class="max-w-2xl mx-auto lg:max-w-full my-7">
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
           <nuxt-link v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
             class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105 dark:border-none">

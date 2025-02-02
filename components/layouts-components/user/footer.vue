@@ -3,7 +3,7 @@
     <footer class="text-center text-white bg-black lg:text-start">
       <div class="flex items-center justify-center p-6 border-b-2 border-neutral-400 lg:justify-between">
         <div class="hidden me-12 lg:block">
-          <span>Get connected with us on social networks:</span>
+          <span>{{ $t('footer.get_connected_with_us_on_social_networks') }}</span>
         </div>
         <!-- Social network icons container -->
         <div class="flex justify-center">
@@ -30,58 +30,57 @@
               <span class="text-2xl">Ship-IT</span>
             </h6>
             <p class="text-lg">
-              Ship-IT is your trusted e-commerce solution for the best shopping experience.
+              Ship-IT {{ $t('footer.is_your_trusted_ecommerce_solution_for_the_best_shopping_experience') }}
             </p>
           </div>
 
           <!-- Useful links section 1 -->
           <div class="">
             <h6 class="flex justify-center mb-4 font-semibold md:justify-start">
-              Categories
+              {{ $t('footer.categories') }}
             </h6>
             <p class="mb-4">
-              <nuxt-link to="" class="text-white">Women</nuxt-link>
+              <nuxt-link to="" class="text-white">{{ $t('footer.women') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="" class="text-white">Men</nuxt-link>
+              <nuxt-link to="" class="text-white">{{ $t('footer.men') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="" class="text-white">Juniors &
-                Kids</nuxt-link>
+              <nuxt-link to="" class="text-white">{{ $t('footer.juniors_kids') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="" class="text-white">Electronics</nuxt-link>
+              <nuxt-link to="" class="text-white">{{ $t('footer.electronics') }}</nuxt-link>
             </p>
             <p>
-              <nuxt-link to="" class="text-white">Beauty</nuxt-link>
+              <nuxt-link to="" class="text-white">{{ $t('footer.beauty') }}</nuxt-link>
             </p>
           </div>
           <!-- Useful links section 2 -->
           <div class="">
             <h6 class="flex justify-center mb-4 font-semibold md:justify-start">
-              Quick Links
+              {{ $t('footer.quick_links') }}
             </h6>
             <p class="mb-4">
-              <nuxt-link to="/blogs" class="text-white">Blogs</nuxt-link>
+              <nuxt-link to="/blogs" class="text-white">{{ $t('footer.blogs') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="/customer-support" class="text-white">Customer Support</nuxt-link>
+              <nuxt-link to="/customer-support" class="text-white">{{ $t('footer.customer_support') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="/faqs" class="text-white">FAQs</nuxt-link>
+              <nuxt-link to="/faqs" class="text-white">{{ $t('footer.faqs') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="/help-center" class="text-white">Help Center</nuxt-link>
+              <nuxt-link to="/help-center" class="text-white">{{ $t('footer.help_center') }}</nuxt-link>
             </p>
           </div>
           <!-- Contact section -->
           <div>
             <h6 class="flex justify-center mb-4 font-semibold md:justify-start">
-              Contact
+              {{ $t('footer.contact') }}
             </h6>
             <p class="flex items-center justify-center mb-4 md:justify-start">
               <icon name="material-symbols:home-work-outline-rounded" class="w-5 h-5 me-3" />
-              Maadi, Cairo, Egypt
+              {{ $t('footer.maadi_cairo_egypt') }}
             </p>
             <p class="flex items-center justify-center mb-4 md:justify-start">
               <icon name="material-symbols:alternate-email-rounded" class="w-5 h-5 me-3" />
@@ -93,12 +92,6 @@
             </p>
           </div>
         </div>
-      </div>
-
-      <!--Copyright section-->
-      <div class="p-6 text-center bg-black border-t-2 border-neutral-400">
-        <span class="me-1">© 2024 Copyright:</span>
-        <nuxt-link class="font-semibold text-white" to="">Ship-IT</nuxt-link>
       </div>
     </footer>
   </div>
