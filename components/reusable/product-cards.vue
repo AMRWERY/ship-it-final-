@@ -4,7 +4,8 @@
       <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
     </div>
 
-    <div v-else-if="productStore.products.length === 0" class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
+    <div v-else-if="productStore.products.length === 0"
+      class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
       No Products found
     </div>
 

@@ -4,7 +4,16 @@
         <breadcrumb />
 
         <div class="p-4 mx-auto font-sans lg:max-w-6xl md:max-w-4xl">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
+            <div v-if="loading" class="flex items-center justify-center text-gray-500">
+                <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+            </div>
+
+            <div v-else-if="productStore.products.length === 0"
+                class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
+                No Products found
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6" v-else>
                 <div v-for="product in productStore.paginatedProducts" :key="product"
                     class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
                     <div class="relative w-full h-full">
@@ -74,9 +83,14 @@
 <script setup>
 const productStore = useProductsStore()
 const { t } = useI18n();
+const loading = ref(false);
 
 onMounted(() => {
-    productStore.fetchProducts()
+    loading.value = true;
+    setTimeout(() => {
+        productStore.fetchProducts()
+        loading.value = false;
+    }, 3000);
 })
 
 definePageMeta({

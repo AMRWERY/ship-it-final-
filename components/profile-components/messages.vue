@@ -49,7 +49,6 @@ onMounted(() => {
     userProfileImg.value = authStore.user?.profileImg;
   }
   // console.log('profile img:', userProfileImg.value)
-
   try {
     setTimeout(async () => {
       const userData = localStorage.getItem('user');
