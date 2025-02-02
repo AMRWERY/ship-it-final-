@@ -16,7 +16,7 @@
 
     <div class="mx-auto my-6 max-w-8xl">
       <div class="flex justify-between px-6">
-        <p class="font-medium text-gray-700 dark:text-gray-200">1 - 1 pages over 2 items for <span
+        <p class="font-medium text-gray-700 dark:text-gray-200">1 - 1 {{ $t('products.pages_over_2_items_for') }} <span
             class="font-semibold text-blue-700 dark:text-blue-400">{{
               brandName }}</span></p>
         <div class="flex space-s-4">
@@ -32,12 +32,12 @@
         <div class="hidden col-span-12 lg:col-span-3 lg:block">
           <!-- Filter Options in the Sidebar (for large screens) -->
           <div class="p-6">
-            <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">Filter Options</h3>
+            <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">{{ $t('products.filter_options') }}</h3>
             <div class="space-y-5">
               <!-- Categories -->
               <div>
                 <div class="flex items-center justify-between">
-                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">Categories</h4>
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.categories') }}</h4>
                   <button @click="toggleSection('categories')" class="text-gray-500 dark:text-gray-100">
                     <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.categories" />
                     <icon name="material-symbols:add" size="18px" v-else />
@@ -75,7 +75,7 @@
               <!-- Color Filter -->
               <div>
                 <div class="flex items-center justify-between">
-                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">Color</h4>
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.color') }}</h4>
                   <button @click="toggleSection('colors')" class="text-gray-500 dark:text-gray-100">
                     <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.colors" />
                     <icon name="material-symbols:add" size="18px" v-else />
@@ -108,7 +108,7 @@
               <!-- Size Filter -->
               <div>
                 <div class="flex items-center justify-between">
-                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">Size</h4>
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.size') }}</h4>
                   <button @click="toggleSection('sizes')" class="text-gray-500 dark:text-gray-100">
                     <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.sizes" />
                     <icon name="material-symbols:add" size="18px" v-else />
@@ -158,14 +158,14 @@
           :class="isSidebarVisible ? 'translate-x-0' : 'translate-x-full'">
           <div class="p-4 space-y-5">
             <div class="flex justify-between">
-              <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">Filter Options</h3>
+              <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">{{ $t('products.filter_options') }}</h3>
               <icon name="material-symbols:close-small-outline" class="text-gray-500 cursor-pointer dark:text-gray-200"
                 @click="closeSidebar" />
             </div>
             <!-- Categories -->
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-semibold text-gray-600 dark:text-gray-100">Categories</h4>
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.categories') }}</h4>
                 <button @click="toggleSection('categories')" class="text-gray-500 dark:text-gray-100">
                   <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.categories" />
                   <icon name="material-symbols:add" size="18px" v-else />
@@ -203,7 +203,7 @@
             <!-- Color Filter -->
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-semibold text-gray-600 dark:text-gray-100">Color</h4>
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.color') }}</h4>
                 <button @click="toggleSection('colors')" class="text-gray-500 dark:text-gray-100">
                   <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.colors" />
                   <icon name="material-symbols:add" size="18px" v-else />
@@ -236,7 +236,7 @@
             <!-- Size Filter -->
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-semibold text-gray-600 dark:text-gray-100">Size</h4>
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.size') }}</h4>
                 <button @click="toggleSection('sizes')" class="text-gray-500 dark:text-gray-100">
                   <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.sizes" />
                   <icon name="material-symbols:add" size="18px" v-else />

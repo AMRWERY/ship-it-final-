@@ -340,5 +340,12 @@
   "pagination": {
     "previous": "السابق",
     "next": "التالي"
+  },
+  "products": {
+    "pages_over_2_items_for": "الصفحات التي تحتوي على أكثر من عنصرين لـ",
+    "filter_options": "خيارات التصفية",
+    "categories": "الفئات",
+    "color": "اللون",
+    "size": "المقاس"
   }
 }

@@ -342,5 +342,12 @@
   "pagination": {
     "previous": "Previous",
     "next": "Next"
+  },
+  "products": {
+    "pages_over_2_items_for": "pages over 2 items for",
+    "filter_options": "Filter Options",
+    "categories": "Categories",
+    "color": "Color",
+    "size": "Size"
   }
 }

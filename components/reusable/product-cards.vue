@@ -68,7 +68,7 @@
               <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
               <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
             </div>
-            <span v-else>Add to Cart</span>
+            <span v-else>{{ $t('btn.add_to_cart') }}</span>
           </button>
         </div>
       </div>
@@ -103,7 +103,7 @@ onMounted(async () => {
   } else {
     productStore.fetchProducts();
   }
-  
+
   // Initialize tooltips
   const { Tooltip, Ripple, initTWE } = await import("tw-elements");
   initTWE({ Tooltip, Ripple });
