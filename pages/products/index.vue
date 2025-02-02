@@ -16,12 +16,13 @@
 
     <div class="mx-auto my-6 max-w-8xl">
       <div class="flex justify-between px-6">
-        <p class="font-medium text-gray-700">1 - 1 pages over 2 items for <span class="font-semibold text-blue-700">{{
-          brandName }}</span></p>
+        <p class="font-medium text-gray-700 dark:text-gray-200">1 - 1 pages over 2 items for <span
+            class="font-semibold text-blue-700 dark:text-blue-400">{{
+              brandName }}</span></p>
         <div class="flex space-s-4">
-          <icon name="mdi:square-rounded" class="text-gray-500" />
+          <icon name="mdi:square-rounded" class="text-gray-500 dark:text-gray-100" />
           <!-- Button to trigger the sidebar (Only visible on small screens) -->
-          <icon name="material-symbols:filter-alt" class="text-gray-500 cursor-pointer lg:hidden"
+          <icon name="material-symbols:filter-alt" class="text-gray-500 cursor-pointer dark:text-gray-100 lg:hidden"
             @click="openSidebar" />
         </div>
       </div>
@@ -31,18 +32,18 @@
         <div class="hidden col-span-12 lg:col-span-3 lg:block">
           <!-- Filter Options in the Sidebar (for large screens) -->
           <div class="p-6">
-            <h3 class="mb-4 font-semibold text-gray-700">Filter Options</h3>
+            <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">Filter Options</h3>
             <div class="space-y-5">
               <!-- Categories -->
               <div>
                 <div class="flex items-center justify-between">
-                  <h4 class="font-semibold text-gray-600">Categories</h4>
-                  <button @click="toggleSection('categories')" class="text-gray-500">
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">Categories</h4>
+                  <button @click="toggleSection('categories')" class="text-gray-500 dark:text-gray-100">
                     <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.categories" />
                     <icon name="material-symbols:add" size="18px" v-else />
                   </button>
                 </div>
-                <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600">
+                <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="totes" v-model="filters.categories" value="Totes"
                       class="text-black border-gray-300 rounded focus:ring-black">
@@ -74,13 +75,13 @@
               <!-- Color Filter -->
               <div>
                 <div class="flex items-center justify-between">
-                  <h4 class="font-semibold text-gray-600">Color</h4>
-                  <button @click="toggleSection('colors')" class="text-gray-500">
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">Color</h4>
+                  <button @click="toggleSection('colors')" class="text-gray-500 dark:text-gray-100">
                     <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.colors" />
                     <icon name="material-symbols:add" size="18px" v-else />
                   </button>
                 </div>
-                <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600">
+                <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="red" v-model="filters.colors" value="Red"
                       class="text-black border-gray-300 rounded focus:ring-black">
@@ -107,13 +108,13 @@
               <!-- Size Filter -->
               <div>
                 <div class="flex items-center justify-between">
-                  <h4 class="font-semibold text-gray-600">Size</h4>
-                  <button @click="toggleSection('sizes')" class="text-gray-500">
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">Size</h4>
+                  <button @click="toggleSection('sizes')" class="text-gray-500 dark:text-gray-100">
                     <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.sizes" />
                     <icon name="material-symbols:add" size="18px" v-else />
                   </button>
                 </div>
-                <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600">
+                <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="small" v-model="filters.sizes" value="Small"
                       class="text-black border-gray-300 rounded focus:ring-black">
@@ -153,24 +154,24 @@
       <!-- Sidebar that will slide in from the right on small screens -->
       <div v-if="isSidebarVisible"
         class="fixed inset-0 z-50 transition-all duration-300 ease-in-out bg-gray-600 bg-opacity-50">
-        <div class="fixed top-0 w-64 h-full transition-transform transform bg-white shadow-lg end-0"
+        <div class="fixed top-0 w-64 h-full transition-transform transform bg-white shadow-lg dark:bg-[#181a1b] end-0"
           :class="isSidebarVisible ? 'translate-x-0' : 'translate-x-full'">
           <div class="p-4 space-y-5">
             <div class="flex justify-between">
-              <h3 class="mb-4 font-semibold text-gray-700">Filter Options</h3>
-              <icon name="material-symbols:close-small-outline" class="text-gray-500 cursor-pointer"
+              <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">Filter Options</h3>
+              <icon name="material-symbols:close-small-outline" class="text-gray-500 cursor-pointer dark:text-gray-200"
                 @click="closeSidebar" />
             </div>
             <!-- Categories -->
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-semibold text-gray-600">Categories</h4>
-                <button @click="toggleSection('categories')" class="text-gray-500">
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">Categories</h4>
+                <button @click="toggleSection('categories')" class="text-gray-500 dark:text-gray-100">
                   <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.categories" />
                   <icon name="material-symbols:add" size="18px" v-else />
                 </button>
               </div>
-              <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600">
+              <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="totes" v-model="filters.categories" value="Totes"
                     class="text-black border-gray-300 rounded focus:ring-black">
@@ -202,13 +203,13 @@
             <!-- Color Filter -->
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-semibold text-gray-600">Color</h4>
-                <button @click="toggleSection('colors')" class="text-gray-500">
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">Color</h4>
+                <button @click="toggleSection('colors')" class="text-gray-500 dark:text-gray-100">
                   <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.colors" />
                   <icon name="material-symbols:add" size="18px" v-else />
                 </button>
               </div>
-              <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600">
+              <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="red" v-model="filters.colors" value="Red"
                     class="text-black border-gray-300 rounded focus:ring-black">
@@ -235,13 +236,13 @@
             <!-- Size Filter -->
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-semibold text-gray-600">Size</h4>
-                <button @click="toggleSection('sizes')" class="text-gray-500">
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">Size</h4>
+                <button @click="toggleSection('sizes')" class="text-gray-500 dark:text-gray-100">
                   <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.sizes" />
                   <icon name="material-symbols:add" size="18px" v-else />
                 </button>
               </div>
-              <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600">
+              <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="small" v-model="filters.sizes" value="Small"
                     class="text-black border-gray-300 rounded focus:ring-black">
