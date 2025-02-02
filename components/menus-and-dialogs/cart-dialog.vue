@@ -20,8 +20,13 @@
             </button>
           </div>
 
+          <div v-if="loading" class="flex items-center justify-center text-gray-500">
+            <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+          </div>
+
           <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
-            <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty') }}</p>
+            <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty')
+              }}</p>
             <nuxt-link to="/products" @click="closeCartSidebar" type="button"
               class="block text-sm font-medium text-center text-blue-500 dark:text-blue-300">
               <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
@@ -40,7 +45,8 @@
                 <div class="flex flex-col">
                   <h3 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.title }}</h3>
                   <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Brand: {{ item.brand }}</p>
-                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Quantity: {{ item.quantity }}</p>
+                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Quantity: {{ item.quantity }}
+                  </p>
 
                   <button type="button" @click.stop="removeItem(item.docId, item.quantity)"
                     class="flex items-center gap-1 mt-6 text-xs font-semibold text-red-500 shrink-0 dark:text-red-400">
@@ -53,7 +59,8 @@
               </div>
 
               <div class="ms-auto">
-                <h4 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.discountedPrice }} egp</h4>
+                <h4 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.discountedPrice
+                  }} egp</h4>
                 <div class="flex items-center gap-3 mt-10">
                   <button type="button" @click.stop="decrementQuantity(item)"
                     class="flex items-center justify-center w-5 h-5 bg-gray-400 rounded-full outline-none dark:bg-gray-200">
@@ -94,6 +101,7 @@
 <script setup>
 const cartStore = useCartStore();
 const removingItem = ref(null);
+const loading = ref(false)
 
 const removeItem = async (docId, quantityToRemove) => {
   if (!docId) {
@@ -115,9 +123,16 @@ const saveCartToLocalStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cartStore.cart));
 };
 
-onMounted(() => {
-  cartStore.fetchCart();
-  saveCartToLocalStorage();
+onMounted(async () => {
+  loading.value = true;
+  setTimeout(() => {
+    cartStore.fetchCart();
+    saveCartToLocalStorage();
+    loading.value = false;
+  }, 3000);
+
+  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
+  initTWE({ Tooltip, Ripple });
 });
 
 const totalAmount = computed(() => {
@@ -162,11 +177,6 @@ const openCartSidebar = () => {
 const closeCartSidebar = () => {
   isSidebarOpen.value = false;
 };
-
-onMounted(async () => {
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
-});
 </script>
 
 <style scoped>

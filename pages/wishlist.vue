@@ -7,8 +7,12 @@
       </div>
 
       <h2 class="mb-8 text-3xl font-semibold text-center">Your Wishlist</h2>
+      <div v-if="loading" class="flex items-center justify-center text-gray-500">
+        <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+      </div>
+
       <!-- Check if wishlist is empty -->
-      <div v-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500 dark:text-gray-100">
+      <div v-else-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500 dark:text-gray-100">
         <p>Your wishlist is empty. <nuxt-link to="/products" class="text-blue-500 dark:text-blue-300">Start adding
             products!</nuxt-link>
         </p>
@@ -66,8 +70,12 @@ const cartStore = useCartStore();
 const { t } = useI18n()
 
 onMounted(() => {
-  wishlistStore.fetchWishlist();
-  cartStore.fetchCart();
+  loading.value = true;
+  setTimeout(() => {
+    wishlistStore.fetchWishlist();
+    cartStore.fetchCart();;
+    loading.value = false;
+  }, 3000);
 });
 
 const removingItem = ref(null);

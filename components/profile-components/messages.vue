@@ -4,10 +4,11 @@
       <!-- Chat Messages -->
       <div class="flex-1 p-8 space-y-4 overflow-y-auto">
         <div v-if="loading" class="flex items-center justify-center text-gray-500">
-          <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500" />
+          <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
         </div>
 
-        <div v-else-if="userMessages.length === 0" class="text-lg font-semibold text-center text-gray-500">
+        <div v-else-if="userMessages.length === 0"
+          class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
           No messages found
         </div>
 
@@ -73,7 +74,7 @@ const userMessages = computed(() => {
 
 watchEffect(() => {
   if (contactStore.messages.length > 0) {
-    console.log("Reactive messages:", JSON.parse(JSON.stringify(contactStore.messages)));
+    // console.log("Reactive messages:", JSON.parse(JSON.stringify(contactStore.messages)));
   }
 });
 

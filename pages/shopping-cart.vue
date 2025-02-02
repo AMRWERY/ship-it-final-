@@ -2,14 +2,17 @@
     <div>
         <section class="py-8 antialiased bg-white dark:bg-[#181a1b] md:py-16">
             <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-
                 <div class="mb-6">
                     <!-- breadcrumb component -->
                     <breadcrumb />
                 </div>
 
                 <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-gray-200">Shopping Cart</h2>
-                <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
+                <div v-if="loading" class="flex items-center justify-center text-gray-500">
+                    <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+                </div>
+
+                <div class="p-4 space-y-4" v-else-if="cartStore.cart.length === 0">
                     <p class="text-[13px] text-center text-gray-800 dark:text-gray-200">{{
                         $t('cart.your_cart_is_currently_empty') }}</p>
                     <nuxt-link to="/products" type="button"
@@ -171,6 +174,7 @@
 const cartStore = useCartStore();
 const removingItem = ref(null);
 const { t } = useI18n()
+const loading = ref(false)
 
 const removeItem = async (docId) => {
     if (!docId) {
@@ -193,8 +197,12 @@ const saveCartToLocalStorage = () => {
 };
 
 onMounted(() => {
-    cartStore.fetchCart();
-    saveCartToLocalStorage();
+    loading.value = true;
+    setTimeout(() => {
+        cartStore.fetchCart();
+        saveCartToLocalStorage();
+        loading.value = false;
+    }, 3000);
 });
 
 const totalAmount = computed(() => {

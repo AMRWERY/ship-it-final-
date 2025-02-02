@@ -1,8 +1,16 @@
 <template>
   <div>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-7">
-      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black" v-for="product in productStore.products"
-        :key="product.id">
+    <div v-if="loading" class="flex items-center justify-center text-gray-500">
+      <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+    </div>
+
+    <div v-else-if="productStore.products.length === 0" class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
+      No Products found
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-7" v-else>
+      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black"
+        v-for="product in productStore.products" :key="product.id">
         <div class="w-full h-56">
           <nuxt-link to="">
             <img class="object-cover w-full h-full mx-auto" :src="product.imageUrl1" />
@@ -21,8 +29,8 @@
               </nuxt-link>
 
               <button @click="toggleWishlist(product)"
-                class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300" data-twe-toggle="tooltip"
-                data-twe-placement="top" title="Add to wishlist">
+                class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300"
+                data-twe-toggle="tooltip" data-twe-placement="top" title="Add to wishlist">
                 <icon :name="wishlistIcon(product)" size="20px" :class="wishlistIconClass(product)"
                   class="p-1 rounded-full" />
               </button>
@@ -42,7 +50,8 @@
 
           <ul class="flex items-center gap-4 mt-2">
             <li class="flex items-center gap-2">
-              <icon name="material-symbols:delivery-truck-speed" class="w-4 h-4 text-gray-500 dark:text-gray-100" aria-hidden="true" />
+              <icon name="material-symbols:delivery-truck-speed" class="w-4 h-4 text-gray-500 dark:text-gray-100"
+                aria-hidden="true" />
               <p class="text-sm font-medium text-gray-500 dark:text-gray-100">Fast Delivery</p>
             </li>
 
@@ -53,8 +62,10 @@
           </ul>
 
           <div class="flex items-center gap-2 mt-4">
-            <p class="text-2xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">{{ product.discountedPrice }} egp</p>
-            <p class="mt-2 font-semibold leading-tight text-gray-400 line-through text-md dark:text-gray-100" v-if="product.originalPrice">
+            <p class="text-2xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">{{ product.discountedPrice
+              }} egp</p>
+            <p class="mt-2 font-semibold leading-tight text-gray-400 line-through text-md dark:text-gray-100"
+              v-if="product.originalPrice">
               {{
                 product.originalPrice }} egp</p>
           </div>
@@ -95,13 +106,21 @@ const itemAdded = ref('')
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
 
-onMounted(() => {
-  brandName.value = route.query.brand;
-  if (brandName.value) {
-    productStore.fetchProductsByBrand(brandName.value);
-  } else {
-    productStore.fetchProducts();
-  }
+onMounted(async () => {
+  loading.value = true;
+  setTimeout(() => {
+    brandName.value = route.query.brand;
+    if (brandName.value) {
+      productStore.fetchProductsByBrand(brandName.value);
+    } else {
+      productStore.fetchProducts();
+    }
+    loading.value = false;
+  }, 3000);
+
+  // Initialize tooltips
+  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
+  initTWE({ Tooltip, Ripple });
 })
 
 const quantity = ref(1)
@@ -196,9 +215,4 @@ const wishlistIcon = (product) => {
 const wishlistIconClass = (product) => {
   return wishlistStore.isInWishlist(product.id) ? 'text-red-600' : '';
 };
-
-onMounted(async () => {
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
-});
 </script>
