@@ -327,45 +327,25 @@ const loading = ref(false);
 
 const handleAddToCart = async (currentDeal) => {
   if (!currentDeal) return;
-  if (!authStore.isAuthenticated) {
-    notAuth.value = true;
-    setTimeout(() => {
-      notAuth.value = false;
-    }, 3000);
-    return;
-  }
   try {
-    // debugger
     loading.value = true;
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Cart item to add:", cartStore.cart);
-    // debugger
-    await cartStore.addToCart(
-      currentDeal.id,
-      currentDeal.title,
-      currentDeal.discountedPrice,
-      currentDeal.originalPrice,
-      currentDeal.imageUrl1,
-      currentDeal.brand,
-      currentDeal.discount,
-      quantity.value || 1
-    )
-      // debugger
-      // cartStore.cart.push(currentDeal)
-      .then(() => {
-        // cartStore.cart.push(currentDeal)
-        // console.log('product in firestore', currentDeal)
-        // localStorage.setItem('cart', JSON.stringify(currentDeal));
-        console.log("Product added successfully");
-        console.log("Current Cart:", cartStore.cart)
-        setTimeout(() => {
-          productAdded.value = true;
-        }, 3000);
-      });
-  } catch (error) {
+    await todayDealStore.addToCart(currentDeal, quantity.value || 1);
+    productAdded.value = true;
     setTimeout(() => {
-      productNotAdded.value = true;
+      productAdded.value = false;
     }, 3000);
+  } catch (error) {
+    if (error.message.includes('authenticated')) {
+      notAuth.value = true;
+      setTimeout(() => {
+        notAuth.value = false;
+      }, 3000);
+    } else {
+      productNotAdded.value = true;
+      setTimeout(() => {
+        productNotAdded.value = false;
+      }, 3000);
+    }
   } finally {
     loading.value = false;
   }

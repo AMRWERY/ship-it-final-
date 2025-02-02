@@ -1,15 +1,6 @@
 <template>
   <div>
-    <div v-if="loading" class="flex items-center justify-center text-gray-500">
-      <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
-    </div>
-
-    <div v-else-if="productStore.products.length === 0"
-      class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
-      No Products found
-    </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-7" v-else>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-7">
       <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black"
         v-for="product in productStore.products" :key="product.id">
         <div class="w-full h-56">
@@ -108,16 +99,16 @@ const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast 
 const { t } = useI18n()
 
 onMounted(async () => {
-  loading.value = true;
-  setTimeout(() => {
+  // loading.value = true;
+  // setTimeout(() => {
     brandName.value = route.query.brand;
     if (brandName.value) {
       productStore.fetchProductsByBrand(brandName.value);
     } else {
       productStore.fetchProducts();
     }
-    loading.value = false;
-  }, 3000);
+    // loading.value = false;
+  // }, 3000);
 
   // Initialize tooltips
   const { Tooltip, Ripple, initTWE } = await import("tw-elements");

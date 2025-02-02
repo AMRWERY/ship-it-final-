@@ -8,21 +8,6 @@
                 </div>
 
                 <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-gray-200">Shopping Cart</h2>
-                <div v-if="loading" class="flex items-center justify-center text-gray-500">
-                    <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
-                </div>
-
-                <div class="p-4 space-y-4" v-else-if="cartStore.cart.length === 0">
-                    <p class="text-[13px] text-center text-gray-800 dark:text-gray-200">{{
-                        $t('cart.your_cart_is_currently_empty') }}</p>
-                    <nuxt-link to="/products" type="button"
-                        class="block text-sm font-medium text-center text-blue-500 dark:text-blue-200">
-                        <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
-                            <icon name="material-symbols:arrow-right-alt-rounded" class="rtl:rotate-180 ms-1" />
-                        </span>
-                    </nuxt-link>
-                </div>
-
                 <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
                     <div class="flex-none w-full mx-auto lg:max-w-2xl xl:max-w-4xl">
                         <div class="space-y-6">
@@ -98,7 +83,7 @@
                                             price</dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{
                                             totalOriginalPrice
-                                            }} egp</dd>
+                                        }} egp</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">

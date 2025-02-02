@@ -15,6 +15,7 @@ export const useTodayDealStore = defineStore("todayDealStore", {
     products: [],
     currentDeal: null,
     nextDeals: [],
+    cart: [],
   }),
 
   actions: {
@@ -140,5 +141,47 @@ export const useTodayDealStore = defineStore("todayDealStore", {
     //     return false;
     //   }
     // },
+
+    async addToCart(deal, quantity) {
+      const cartStore = useCartStore();
+      const authStore = useAuthStore();
+      const uid = authStore.user?.uid;
+      if (!uid) {
+        throw new Error("User not authenticated or uid not available");
+      }
+      try {
+        const cartResult = await cartStore.addToCart(
+          deal.id,
+          deal.title,
+          deal.discountedPrice,
+          deal.originalPrice,
+          deal.imageUrl1,
+          deal.brand,
+          deal.discount,
+          quantity
+        );
+        const product = {
+          productId: deal.id,
+          title: deal.title,
+          discountedPrice: deal.discountedPrice,
+          originalPrice: deal.originalPrice,
+          imageUrl1: deal.imageUrl1,
+          brand: deal.brand,
+          discount: deal.discount,
+          quantity,
+          uid,
+        };
+        const docRef = await addDoc(collection(db, "cart"), product);
+        this.cart.push({
+          docId: docRef.id,
+          ...product,
+        });
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        return { cartResult, docId: docRef.id };
+      } catch (error) {
+        console.error("Error adding deal to cart:", error);
+        throw error;
+      }
+    },
   },
 });
