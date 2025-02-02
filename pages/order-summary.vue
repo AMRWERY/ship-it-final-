@@ -136,12 +136,15 @@ const totalAmount = computed(() => {
 
 const storedCart = ref([]);
 
-onMounted(() => {
+onMounted(async () => {
   const savedCart = localStorage.getItem('cart');
   if (savedCart) {
     storedCart.value = JSON.parse(savedCart);
     // console.log('cart data', storedCart.value)
   }
+
+  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
+  initTWE({ Tooltip, Ripple });
 });
 
 // pdf file
@@ -173,10 +176,5 @@ const { t } = useI18n()
 
 useHead({
   titleTemplate: () => t("head.order_summary"),
-});
-
-onMounted(async () => {
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
 });
 </script>
