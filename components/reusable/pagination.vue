@@ -4,7 +4,7 @@
       <nav class="inline-flex">
         <button
           class="px-4 py-2 mx-1 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-          Previous
+          {{ $t('pagination.previous') }}
         </button>
         <button
           class="px-4 py-2 mx-1 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
@@ -20,7 +20,7 @@
         </button>
         <button
           class="px-4 py-2 mx-1 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-          Next
+          {{ $t('pagination.next') }}
         </button>
       </nav>
     </div>
