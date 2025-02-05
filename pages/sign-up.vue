@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- Overlay component -->
+    <Overlay :visible="authStore.isOverlayVisible" />
+
     <div class="py-6 mx-auto mb-5 max-w-7xl sm:px-6 lg:px-8">
       <!-- breadcrumb component -->
       <breadcrumb />

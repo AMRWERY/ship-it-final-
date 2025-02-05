@@ -1,24 +1,22 @@
 <template>
   <div>
-    <button type="button" class="text-sm text-white capitalize mb-0.5" data-twe-toggle="modal"
-      data-twe-target="#loginModal">
+    <!-- Overlay component -->
+    <Overlay :visible="authStore.isOverlayVisible" />
+
+    <button type="button" class="text-sm text-white capitalize mb-0.5" @click="openDialog">
       Sign in
     </button>
 
-    <!-- Modal -->
-    <div data-twe-modal-init
-      class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="loginModal"
-      tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div data-twe-modal-dialog-ref
-        class="fixed bottom-6 end-6 pointer-events-none translate-y-[100px] opacity-0 transition-all duration-300 ease-in-out w-[500px]">
-        <div
-          class="relative flex flex-col w-full text-current bg-white dark:bg-[#181a1b] border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
-          <!-- Modal body -->
-          <div class="relative flex-auto p-4" data-twe-modal-body-ref>
-            <div class="space-y-4">
-              <p class="text-2xl font-semibold text-center">Sign in to your account</p>
-            </div>
-
+    <Transition name="slide-fade">
+      <div class="fixed z-50 w-[450px] bottom-2 end-4" v-if="isOpen">
+        <div class="p-2 bg-white dark:bg-[#181a1b] rounded-lg shadow-lg">
+          <div class="flex justify-between px-4">
+            <p class="text-2xl font-semibold text-center">Sign in to your account</p>
+            <button @click="closeDialog" class="text-gray-700 transition dark:text-gray-200">
+              <icon name="material-symbols:close-small-outline-rounded" />
+            </button>
+          </div>
+          <div class="relative flex-auto p-4">
             <div class="grid mt-6 space-y-4">
               <button @click="googleLogin"
                 class="h-12 px-6 transition duration-300 border-2 border-gray-300 rounded-full group hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
@@ -79,7 +77,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
@@ -101,15 +99,12 @@ const handleLogin = async () => {
   loginFailed.value = false;
   try {
     await authStore.loginUser(email.value, password.value);
+    loginSuccessfully.value = true;
     if (authStore.user?.email === 'admin@ship.com') {
       navigateTo('/dashboard');
     } else {
       navigateTo('/');
     }
-    loginSuccessfully.value = true;
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
   } catch (error) {
     loginFailed.value = true;
     setTimeout(() => {
@@ -137,9 +132,33 @@ const googleLogin = async () => {
   }
 };
 
-onMounted(async () => {
+onMounted(() => {
   authStore.init();
-  const { Modal, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Modal, Ripple });
 });
+
+const isOpen = ref(false)
+
+const openDialog = () => {
+  isOpen.value = true
+};
+
+const closeDialog = () => {
+  isOpen.value = false
+};
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

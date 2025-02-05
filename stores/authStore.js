@@ -18,6 +18,7 @@ export const useAuthStore = defineStore("auth-store", {
     user: null,
     error: null,
     role: null,
+    isOverlayVisible: false,
   }),
 
   actions: {
@@ -49,6 +50,7 @@ export const useAuthStore = defineStore("auth-store", {
     },
 
     async registerUser(email, password, firstName, lastName, role = "user") {
+      this.isOverlayVisible = true;
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -78,6 +80,7 @@ export const useAuthStore = defineStore("auth-store", {
     },
 
     async loginUser(email, password) {
+      this.isOverlayVisible = true;
       try {
         await setPersistence(auth, browserLocalPersistence);
         const userCredential = await signInWithEmailAndPassword(
@@ -105,6 +108,9 @@ export const useAuthStore = defineStore("auth-store", {
           this.role = "user";
         }
         await this.fetchUserData(user.uid);
+        setTimeout(() => {
+          this.isOverlayVisible = false;
+        }, 3000);
         this.error = null;
       } catch (err) {
         this.error = err.message;
@@ -113,6 +119,7 @@ export const useAuthStore = defineStore("auth-store", {
     },
 
     async loginWithGoogle() {
+      this.isOverlayVisible = true;
       try {
         await setPersistence(auth, browserLocalPersistence);
         const provider = new GoogleAuthProvider();
@@ -147,6 +154,9 @@ export const useAuthStore = defineStore("auth-store", {
         localStorage.setItem("user", JSON.stringify(sessionUserData));
         this.role = userData.role || "user";
         await this.fetchUserData(user.uid);
+        setTimeout(() => {
+          this.isOverlayVisible = false;
+        }, 3000);
         this.error = null;
       } catch (err) {
         this.error = err.message;
@@ -155,12 +165,16 @@ export const useAuthStore = defineStore("auth-store", {
     },
 
     async logoutUser() {
+      this.isOverlayVisible = true;
       try {
         await signOut(auth);
         this.user = null;
         this.role = null;
         this.error = null;
         localStorage.clear();
+        setTimeout(() => {
+          this.isOverlayVisible = false;
+        }, 3000);
       } catch (err) {
         this.error = err.message;
         throw err;
