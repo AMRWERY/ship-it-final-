@@ -269,7 +269,11 @@
     "toggle_theme": "Toggle theme",
     "dashboard": "Dashboard",
     "logout": "Logout",
-    "your_cart": "Your Cart"
+    "your_cart": "Your Cart",
+    "notifications": "Notifications",
+    "messages": "Messages",
+    "quick_look": "Quick look",
+    "add_to_wishlist": "Add to Wishlist"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty",

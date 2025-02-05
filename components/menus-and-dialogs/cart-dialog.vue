@@ -1,13 +1,14 @@
 <template>
   <div>
-    <nuxt-link to="" role="button" @click="openCartSidebar" class="flex items-center text-white"
-      data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.your_cart')">
-      <icon name="material-symbols:shopping-cart" class="me-1" />
-      <span class="inline-block bg-red-600 text-white rounded-full px-1 py-0.5 text-xs font-bold"
-        v-if="cartStore.cart.length > 0">
-        {{ cartStore.cart.length }}
-      </span>
-    </nuxt-link>
+    <tooltip :text="$t('tooltip.your_cart')" position="bottom">
+      <nuxt-link to="" role="button" @click="openCartSidebar" class="flex items-center text-white">
+        <icon name="material-symbols:shopping-cart" class="me-1" />
+        <span class="inline-block bg-red-600 text-white rounded-full px-1 py-0.5 text-xs font-bold"
+          v-if="cartStore.cart.length > 0">
+          {{ cartStore.cart.length }}
+        </span>
+      </nuxt-link>
+    </tooltip>
 
     <div v-if="isSidebarOpen"
       class="fixed inset-0 w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] font-sans">
@@ -124,16 +125,13 @@ const saveCartToLocalStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cartStore.cart));
 };
 
-onMounted(async () => {
+onMounted(() => {
   loading.value = true;
   setTimeout(() => {
     cartStore.fetchCart();
     saveCartToLocalStorage();
     loading.value = false;
   }, 3000);
-
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
 });
 
 const totalAmount = computed(() => {

@@ -14,11 +14,13 @@
               orderId }}</span>
           </p>
         </div>
-        <button @click="downloadPDF" data-twe-toggle="tooltip" data-twe-placement="top" data-twe-ripple-init
-          :title="$t('tooltip.download_pdf')"
-          class="flex items-center px-4 py-4 text-blue-700 border border-blue-400 rounded-full dark:text-blue-700 dark:border-blue-400 hover:bg-blue-100">
-          <icon name="icon-park:printer" class="w-5 h-5" />
-        </button>
+
+        <tooltip :text="$t('tooltip.download_pdf')" position="bottom">
+          <button @click="downloadPDF"
+            class="flex items-center px-4 py-4 text-blue-700 border border-blue-400 rounded-full dark:text-blue-700 dark:border-blue-400 hover:bg-blue-100">
+            <icon name="icon-park:printer" class="w-5 h-5" />
+          </button>
+        </tooltip>
       </div>
 
       <!-- Product Details -->
@@ -136,15 +138,12 @@ const totalAmount = computed(() => {
 
 const storedCart = ref([]);
 
-onMounted(async () => {
+onMounted(() => {
   const savedCart = localStorage.getItem('cart');
   if (savedCart) {
     storedCart.value = JSON.parse(savedCart);
     // console.log('cart data', storedCart.value)
   }
-
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
 });
 
 // pdf file

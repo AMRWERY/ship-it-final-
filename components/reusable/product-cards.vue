@@ -13,19 +13,21 @@
             <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800">
               Up to {{ product.discount }}% off</span>
             <div class="flex items-center justify-end gap-1">
-              <nuxt-link :to="`/products/${product.id}`" type="button" data-twe-toggle="tooltip"
-                data-twe-placement="top" title="Quick Look"
-                class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300">
-                <span class="sr-only">Quick look</span>
-                <icon name="material-symbols:visibility-outline-rounded" class="w-6 h-6" aria-hidden="true" />
-              </nuxt-link>
+              <tooltip :text="$t('tooltip.quick_look')" position="bottom">
+                <nuxt-link :to="`/products/${product.id}`" type="button"
+                  class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300">
+                  <span class="sr-only">Quick look</span>
+                  <icon name="material-symbols:visibility-outline-rounded" class="w-6 h-6" aria-hidden="true" />
+                </nuxt-link>
+              </tooltip>
 
-              <button @click="toggleWishlist(product)"
-                class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300"
-                data-twe-toggle="tooltip" data-twe-placement="top" title="Add to wishlist">
-                <icon :name="wishlistIcon(product)" size="20px" :class="wishlistIconClass(product)"
-                  class="p-1 rounded-full" />
-              </button>
+              <tooltip :text="$t('tooltip.add_to_wishlist')" position="bottom">
+                <button @click="toggleWishlist(product)"
+                  class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300">
+                  <icon :name="wishlistIcon(product)" size="20px" :class="wishlistIconClass(product)"
+                    class="p-1 rounded-full" />
+                </button>
+              </tooltip>
             </div>
           </div>
 
@@ -103,10 +105,6 @@ onMounted(async () => {
   } else {
     productStore.fetchProducts();
   }
-
-  // Initialize tooltips
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
 })
 
 const quantity = ref(1)

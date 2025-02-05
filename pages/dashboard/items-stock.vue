@@ -106,11 +106,12 @@
               </nuxt-link>
             </td>
             <td class="p-4 py-5">
-              <button type="button" @click="deleteProduct(product.id)">
-                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="loading" />
-                <icon name="material-symbols:delete-sharp" class="text-red-700" data-twe-toggle="tooltip"
-                  data-twe-placement="top" :title="$t('tooltip.delete_item')" v-else />
-              </button>
+              <tooltip :text="$t('tooltip.delete_item')" position="bottom">
+                <button type="button" @click="deleteProduct(product.id)">
+                  <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="loading" />
+                  <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                </button>
+              </tooltip>
             </td>
           </tr>
         </tbody>
@@ -186,11 +187,6 @@ const deleteProduct = async (productId) => {
     loading.value = false;
   }
 };
-
-onMounted(async () => {
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
-});
 
 definePageMeta({
   layout: 'dashboard'

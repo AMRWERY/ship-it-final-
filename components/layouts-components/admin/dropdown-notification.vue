@@ -1,14 +1,16 @@
 <template>
   <div>
     <li class="relative" ref="target">
-      <nuxt-link
-        class="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray text-gray-700 cursor-pointer"
-        to="" @click.prevent="(dropdownOpen = !dropdownOpen), (notifying = false)">
-        <span :class="!notifying && 'hidden'" class="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1">
-          <span class="absolute inline-flex w-full h-full rounded-full opacity-75 -z-1 animate-ping bg-meta-1"></span>
-        </span>
-        <icon name="material-symbols:notifications-unread" class="w-[18px] h-[18px]" />
-      </nuxt-link>
+      <tooltip :text="$t('tooltip.notifications')" position="bottom">
+        <nuxt-link
+          class="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray text-gray-700 cursor-pointer"
+          to="" @click.prevent="(dropdownOpen = !dropdownOpen), (notifying = false)">
+          <span :class="!notifying && 'hidden'" class="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1">
+            <span class="absolute inline-flex w-full h-full rounded-full opacity-75 -z-1 animate-ping bg-meta-1"></span>
+          </span>
+          <icon name="material-symbols:notifications-unread" class="w-[18px] h-[18px]" />
+        </nuxt-link>
+      </tooltip>
 
       <!-- Dropdown Start -->
       <div v-show="dropdownOpen"

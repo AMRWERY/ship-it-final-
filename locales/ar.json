@@ -269,7 +269,11 @@
     "toggle_theme": "تبديل السمة",
     "dashboard": "لوحة التحكم",
     "logout": "تسجيل الخروج",
-    "your_cart": "عربة التسوق الخاصة بك"
+    "your_cart": "عربة التسوق الخاصة بك",
+    "notifications": "الإشعارات",
+    "messages": "الرسائل",
+    "quick_look": "نظرة سريعة",
+    "add_to_wishlist": "أضف إلى قائمة الرغبات"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",

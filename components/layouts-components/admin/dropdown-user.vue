@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="relative" ref="target">
-      <nuxt-link class="flex items-center gap-4 text-gray-700 cursor-pointer" to=""
-        @click.prevent="dropdownOpen = !dropdownOpen">
-        <span class="rounded-full">
-          <icon name="material-symbols:person" />
-        </span>
-      </nuxt-link>
+      <tooltip :text="$t('tooltip.profile')" position="bottom">
+        <nuxt-link class="flex items-center gap-4 text-gray-700 cursor-pointer" to=""
+          @click.prevent="dropdownOpen = !dropdownOpen">
+          <span class="rounded-full">
+            <icon name="material-symbols:person" />
+          </span>
+        </nuxt-link>
+      </tooltip>
       <!-- Dropdown Start -->
       <div v-show="dropdownOpen"
         class="absolute flex flex-col p-3 mt-4 bg-white border rounded-sm w-52 end-0 border-stroke shadow-default">

@@ -42,12 +42,13 @@
             </span>
           </nuxt-link>
 
-          <nuxt-link to="/" type="button" class="relative hidden text-gray-700 rounded-full sm:flex"
-            data-twe-toggle="tooltip" data-twe-placement="bottom" :title="$t('tooltip.back_to_home')">
-            <span class="absolute -inset-1.5" />
-            <span class="sr-only">Back to Home Page</span>
-            <icon name="material-symbols:house" />
-          </nuxt-link>
+          <tooltip :text="$t('tooltip.back_to_home')" position="bottom">
+            <nuxt-link to="/" type="button" class="relative hidden text-gray-700 rounded-full sm:flex">
+              <span class="absolute -inset-1.5" />
+              <span class="sr-only">Back to Home Page</span>
+              <icon name="material-symbols:house" />
+            </nuxt-link>
+          </tooltip>
 
           <nuxt-link to="/dashboard/login" class="text-neutral-600" v-if="!isAuthenticated && isAdmin">login</nuxt-link>
         </div>
@@ -94,9 +95,7 @@ const isAdmin = computed(() => {
   return user?.email === 'admin@ship.com';
 });
 
-onMounted(async () => {
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
+onMounted(() => {
   updatePageTitle()
 });
 </script>
