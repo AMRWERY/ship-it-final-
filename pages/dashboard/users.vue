@@ -61,13 +61,14 @@
             </td>
             <td class="p-4 py-5">
               <div class="flex space-s-2">
-                <button @click="removeUser(user.id)" data-twe-toggle="tooltip" data-twe-placement="top"
-                  :title="$t('tooltip.delete_user')"
-                  class="flex items-center justify-center w-8 h-8 text-red-500 rounded hover:text-red-600">
-                  <icon v-if="removingUser === user.id" name="svg-spinners:6-dots-rotate" size="20px"
-                    class="text-red-500" />
-                  <icon name="grommet-icons:form-trash" class="w-6 h-6" v-else />
-                </button>
+                <tooltip :text="$t('tooltip.delete_user')" position="bottom">
+                  <button @click="removeUser(user.id)"
+                    class="flex items-center justify-center w-8 h-8 text-red-500 rounded hover:text-red-600">
+                    <icon v-if="removingUser === user.id" name="svg-spinners:6-dots-rotate" size="20px"
+                      class="text-red-500" />
+                    <icon name="grommet-icons:form-trash" class="w-6 h-6" v-else />
+                  </button>
+                </tooltip>
 
                 <button @click="userStore.toggleBlockUser(user.id)"
                   :title="user.isBlocked ? $t('tooltip.unblock_user') : $t('tooltip.block_user')"
@@ -153,8 +154,6 @@ onMounted(() => {
 
 onMounted(async () => {
   await userStore.fetchUsers();
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
 });
 
 definePageMeta({

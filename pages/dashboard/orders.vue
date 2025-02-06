@@ -170,11 +170,12 @@
               </p>
             </td>
             <td class="p-4 py-5">
-              <button type="button" @click="deleteOrder(order.id)">
-                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="order.loading" />
-                <icon name="material-symbols:delete-sharp" class="text-red-700" data-twe-toggle="tooltip"
-                  data-twe-placement="top" :title="$t('tooltip.delete_order')" v-else />
-              </button>
+              <tooltip :text="$t('tooltip.delete_order')" position="bottom">
+                <button type="button" @click="deleteOrder(order.id)">
+                  <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="order.loading" />
+                  <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                </button>
+              </tooltip>
             </td>
           </tr>
         </tbody>
@@ -331,11 +332,6 @@ const getStatusTitle = (statusId) => {
   // console.log(currentStatus.value)
   return currentStatus.value
 }
-
-onMounted(async () => {
-  const { Tooltip, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip, Ripple });
-});
 
 definePageMeta({
   layout: 'dashboard'

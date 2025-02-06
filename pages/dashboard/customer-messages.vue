@@ -90,11 +90,12 @@
               </nuxt-link>
             </td>
             <td class="p-4 py-5">
-              <button type="button" @click="deleteMessage(message.id)">
-                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="message.loadingDelete" />
-                <icon name="material-symbols:delete-sharp" class="text-red-700" data-twe-toggle="tooltip"
-                  data-twe-placement="top" :title="$t('tooltip.delete_message')" v-else />
-              </button>
+              <tooltip :text="$t('tooltip.delete_message')" position="bottom">
+                <button type="button" @click="deleteMessage(message.id)">
+                  <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="message.loadingDelete" />
+                  <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                </button>
+              </tooltip>
             </td>
           </tr>
         </tbody>
@@ -215,11 +216,6 @@ const filterOrdersByDate = () => {
   });
   contactStore.paginatedMessages = filteredMessages;
 };
-
-onMounted(async () => {
-  const { Tooltip, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip });
-});
 
 definePageMeta({
   layout: 'dashboard'

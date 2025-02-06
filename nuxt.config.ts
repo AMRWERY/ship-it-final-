@@ -27,15 +27,7 @@ export default defineNuxtConfig({
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
   },
   veeValidate: {
-    // disable or enable auto imports
     autoImports: true,
-    // Use different names for components
-    // componentNames: {
-    //   Form: "VeeForm",
-    //   Field: "VeeField",
-    //   FieldArray: "VeeFieldArray",
-    //   ErrorMessage: "VeeErrorMessage",
-    // },
   },
   i18n: {
     vueI18n: "./i18n.config.js",
@@ -60,18 +52,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Ship-IT",
-      script: [
-        {
-          // src: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js",
-        },
-      ],
+      script: [{}],
       noscript: [],
-      link: [
-        {
-          // rel: "stylesheet",
-          // href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
-        },
-      ],
+      link: [{}],
       meta: [
         {
           name: "viewport",
