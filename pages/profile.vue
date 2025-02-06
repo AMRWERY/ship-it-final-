@@ -11,70 +11,67 @@
       </button>
 
       <div class="flex">
-        <!-- Tabs navigation -->
         <ul :class="[
-          'flex flex-col w-50 h-screen space-y-12 list-none me-4 ps-0', 'sm:block', isNavOpen ? 'block' : 'hidden']"
-          role="tablist" data-twe-nav-ref>
-          <li role="presentation">
-            <nuxt-link to=""
-              class="flex items-center gap-2 border-s-4 border-transparent px-4 py-2 text-sm font-medium leading-tight text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300 data-[twe-nav-active]:border-black dark:data-[twe-nav-active]:border-gray-300 data-[twe-nav-active]:text-black dark:data-[twe-nav-active]:text-gray-300 cursor-pointer"
-              data-twe-toggle="pill" data-twe-target="#tabs-profile03" data-twe-nav-active role="tab"
-              aria-controls="tabs-profile03" aria-selected="true">
+          'flex flex-col w-50 h-screen space-y-12 list-none me-4 ps-0', 'sm:block', isNavOpen ? 'block' : 'hidden']">
+          <li>
+            <nuxt-link to="" role="button" @click="activeTab = 'tab1'"
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium leading-tight border-transparent cursor-pointer border-s-4 text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300">
               <icon name="iconoir:user" />
               Profile
             </nuxt-link>
           </li>
-          <li role="presentation">
-            <nuxt-link to=""
-              class="flex items-center gap-2 border-s-4 border-transparent px-4 py-2 text-sm font-medium leading-tight text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300 data-[twe-nav-active]:border-black data-[twe-nav-active]:text-black dark:data-[twe-nav-active]:border-gray-300 dark:data-[twe-nav-active]:text-gray-300 cursor-pointer"
-              data-twe-toggle="pill" data-twe-target="#tabs-addresses03" role="tab" aria-controls="tabs-addresses03"
-              aria-selected="false">
+          <li>
+            <nuxt-link to="" role="button" @click="activeTab = 'tab2'"
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium leading-tight border-transparent cursor-pointer border-s-4 text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300">
               <icon name="iconoir:map-pin" />
               Addresses
             </nuxt-link>
           </li>
-          <li role="presentation">
-            <nuxt-link to=""
-              class="flex items-center gap-2 border-s-4 border-transparent px-4 py-2 text-sm font-medium leading-tight text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300 data-[twe-nav-active]:border-black data-[twe-nav-active]:text-black dark:data-[twe-nav-active]:border-gray-300 dark:data-[twe-nav-active]:text-gray-300 cursor-pointer"
-              data-twe-toggle="pill" data-twe-target="#tabs-order-tracking03" role="tab"
-              aria-controls="tabs-order-tracking03" aria-selected="false">
+          <li>
+            <nuxt-link to="" role="button" @click="activeTab = 'tab3'"
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium leading-tight border-transparent cursor-pointer border-s-4 text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300">
               <icon name="iconoir:numbered-list-left" />
               Orders Tracking
             </nuxt-link>
           </li>
-          <li role="presentation">
-            <nuxt-link to=""
-              class="flex items-center gap-2 border-s-4 border-transparent px-4 py-2 text-sm font-medium leading-tight text-neutral-600 dark:text-neutral-100 focus:border-black data-[twe-nav-active]:border-black dark:focus:border-gray-300 data-[twe-nav-active]:text-black dark:data-[twe-nav-active]:border-gray-300 dark:data-[twe-nav-active]:text-gray-300 cursor-pointer"
-              data-twe-toggle="pill" data-twe-target="#tabs-messages03" role="tab" aria-controls="tabs-messages03"
-              aria-selected="false">
+          <li>
+            <nuxt-link to="" role="button" @click="activeTab = 'tab4'"
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium leading-tight border-transparent cursor-pointer border-s-4 text-neutral-600 dark:text-neutral-100 focus:border-black dark:focus:border-gray-300">
               <icon name="tabler:messages" />
               Messages
             </nuxt-link>
           </li>
         </ul>
 
-        <!-- Tabs content -->
+        <!-- Tab Content -->
         <div class="flex-1 p-4 border rounded">
-          <div class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-            id="tabs-profile03" role="tabpanel" aria-labelledby="tabs-profile-tab03" data-twe-tab-active>
-            <!-- Profile component -->
-            <profile />
-          </div>
-          <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-            id="tabs-addresses03" role="tabpanel" aria-labelledby="tabs-addresses-tab03">
-            <!-- Addresses component -->
-            <addresses />
-          </div>
-          <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-            id="tabs-order-tracking03" role="tabpanel" aria-labelledby="tabs-order-tracking-tab03">
-            <!-- order-tracking component -->
-            <order-tracking />
-          </div>
-          <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-            id="tabs-messages03" role="tabpanel" aria-labelledby="tabs-messages-tab03">
-            <!-- messages component -->
-            <messages />
-          </div>
+          <Transition name="fade">
+            <div class="transition-opacity duration-150 ease-linear opacity-100" v-if="activeTab === 'tab1'">
+              <!-- Profile component -->
+              <profile />
+            </div>
+          </Transition>
+
+          <Transition name="fade">
+            <div class="transition-opacity duration-150 ease-linear opacity-100" v-if="activeTab === 'tab2'">
+              <!-- Addresses component -->
+              <addresses />
+            </div>
+          </Transition>
+
+          <Transition name="fade">
+            <div class="transition-opacity duration-150 ease-linear opacity-100" v-if="activeTab === 'tab3'">
+              <!-- order-tracking component -->
+              <order-tracking />
+            </div>
+          </Transition>
+
+          <Transition name="fade">
+            <div class="transition-opacity duration-150 ease-linear opacity-100" v-if="activeTab === 'tab4'">
+              <!-- messages component -->
+              <messages />
+            </div>
+          </Transition>
         </div>
       </div>
     </div>
@@ -88,8 +85,17 @@ const toggleNav = () => {
   isNavOpen.value = !isNavOpen.value;
 };
 
-onMounted(async () => {
-  const { Tab, initTWE } = await import("tw-elements");
-  initTWE({ Tab });
-});
+const activeTab = ref('tab1');
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
