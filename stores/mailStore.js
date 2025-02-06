@@ -1,4 +1,3 @@
-import { defineStore } from "pinia";
 import { db } from "@/firebase";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 

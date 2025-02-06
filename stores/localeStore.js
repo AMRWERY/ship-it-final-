@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-
 export const useLocaleStore = defineStore("locales", {
   state: () => ({
     locale: "en",

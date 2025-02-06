@@ -1,4 +1,3 @@
-import { defineStore } from "pinia";
 import { auth, db } from "~/firebase";
 import {
   createUserWithEmailAndPassword,

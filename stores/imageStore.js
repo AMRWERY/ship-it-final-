@@ -1,4 +1,3 @@
-import { defineStore } from "pinia";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "~/firebase";
 
