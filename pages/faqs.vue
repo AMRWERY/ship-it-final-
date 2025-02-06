@@ -3,7 +3,7 @@
     <div class="space-y-6">
       <div v-for="(item, index) in faqItems" :key="index" class="border border-gray-300 rounded-lg">
         <button @click="toggle(index)"
-          class="flex items-center justify-between w-full px-4 py-2 text-lg font-medium text-left text-gray-800 focus:outline-none">
+          class="flex items-center justify-between w-full px-4 py-2 text-lg font-medium text-gray-800 bg-gray-200 text-start focus:outline-none hover:bg-gray-300">
           <span>{{ item.question }}</span>
           <span :class="{ 'transform rotate-180': openStates[index], 'transform rotate-0': !openStates[index] }"
             class="transition-transform duration-200 ease-in-out">
