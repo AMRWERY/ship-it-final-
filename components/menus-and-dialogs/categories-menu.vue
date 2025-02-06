@@ -1,20 +1,18 @@
 <template>
   <div>
-    <div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto" id="navbarSupportedContent2"
-      data-twe-collapse-item>
-      <ul class="flex flex-row me-auto" data-twe-navbar-nav-ref>
-        <li class="static" data-twe-nav-item-ref data-twe-dropdown-ref>
-          <nuxt-link to="" role="button"
-            class="flex items-center py-2 text-white transition duration-200 whitespace-nowrap pe-2 hover:text-white hover:ease-in-out focus:text-white active:text-white motion-reduce:transition-none lg:px-2"
-            type="button" id="dropdownMenuButton1" data-twe-dropdown-toggle-ref aria-expanded="false"
-            data-twe-nav-link-ref>
-            <icon name="mingcute:grid-2-line" class="me-1" />
-            {{ $t('layout.categories') }}
-          </nuxt-link>
+    <div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto">
+      <div class="relative">
+        <!-- Button to Toggle Menu -->
+        <nuxt-link to="" role="button" @click="toggleMenu"
+          class="flex items-center py-2 text-white transition duration-200 whitespace-nowrap pe-2 hover:text-white hover:ease-in-out focus:text-white active:text-white motion-reduce:transition-none lg:px-2">
+          <icon name="mingcute:grid-2-line" class="me-1" />
+          {{ $t('layout.categories') }}
+        </nuxt-link>
 
-          <div
-            class="absolute start-0 end-0 top-full z-[1000] mt-0 hidden w-[1300px] border-none bg-white bg-clip-padding data-[twe-dropdown-show]:block dark:bg-gray-800"
-            aria-labelledby="dropdownMenuButton1" data-twe-dropdown-menu-ref>
+        <!-- Mega Menu -->
+        <Transition name="slide-fade">
+          <div v-if="isMenuOpen"
+            class="absolute start-0 end-0 top-full z-[1000] mt-0 w-[1300px] border-none bg-white bg-clip-padding dark:bg-gray-800">
             <div class="px-6 py-5 lg:px-8">
               <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
                 <div v-for="category in categoriesStore.subCategories" :key="category">
@@ -31,8 +29,8 @@
               </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
@@ -44,8 +42,25 @@ onMounted(() => {
   categoriesStore.fetchSubCategories();
 });
 
-onMounted(async () => {
-  const { Collapse, Dropdown, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Collapse, Dropdown, Ripple });
-});
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>
