@@ -25,12 +25,6 @@ onMounted(() => {
   }, 5000);
 });
 
-// tailwind-elements referance
-// onMounted(async () => {
-//   const { Tooltip, initTWE } = await import("tw-elements");
-//   initTWE({ Tooltip });
-// });
-
 //toggle locales
 const { locale } = useI18n();
 const localeStore = useLocaleStore()
