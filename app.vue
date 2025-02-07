@@ -20,9 +20,15 @@
 const isLoading = ref(true);
 
 onMounted(() => {
-  setTimeout(() => {
+  if (sessionStorage.getItem('visited')) {
+    isLoading.value = true;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 5000);
+  } else {
+    sessionStorage.setItem('visited', 'true');
     isLoading.value = false;
-  }, 5000);
+  }
 });
 
 //toggle locales
