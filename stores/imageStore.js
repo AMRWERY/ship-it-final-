@@ -60,7 +60,7 @@ export const useImageStore = defineStore("imageStore", {
         })
         .then((imageUrls) => {
           this.images = imageUrls;
-          //   console.log("Fetched Images:", this.images);
+            // console.log("Fetched Images:", this.images);
         })
         .catch((error) => {
           this.error = error.message;
