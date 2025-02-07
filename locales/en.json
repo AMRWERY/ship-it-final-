@@ -163,7 +163,8 @@
     "view_message": "View Message",
     "reply": "Reply",
     "send_reply": "Send Reply",
-    "sending_reply": "Sending reply"
+    "sending_reply": "Sending reply",
+    "go_back_home": "Go Back Home"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -353,5 +354,8 @@
     "categories": "Categories",
     "color": "Color",
     "size": "Size"
+  },
+  "error_page": {
+    "you_are_all_alone_here": "You are all alone here"
   }
 }

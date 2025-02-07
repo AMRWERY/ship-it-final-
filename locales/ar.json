@@ -163,7 +163,8 @@
     "view_message": "عرض الرسالة",
     "reply": "رد",
     "send_reply": "ارسل الرد",
-    "sending_reply": "جاري ارسال الرد"
+    "sending_reply": "جاري ارسال الرد",
+    "go_back_home": "العودة إلى الصفحة الرئيسية"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -351,5 +352,8 @@
     "categories": "الفئات",
     "color": "اللون",
     "size": "المقاس"
+  },
+  "error_page": {
+    "you_are_all_alone_here": "أنت وحدك هنا"
   }
 }
