@@ -1,30 +1,21 @@
 <template>
   <div>
+    <!-- Button to open the dialog -->
     <div class="h-8 bg-[#4f46e5] text-white">
       <nuxt-link to="" type="button" class="flex items-center justify-center py-1 capitalize cursor-pointer"
-        data-twe-toggle="modal" data-twe-target="#todayModalCenteredScrollable">{{
+        @click="openDialog">{{
           $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
     </div>
 
-    <!-- dialog -->
-    <div data-twe-modal-init
-      class="fixed left-0 top-10 z-[1055] hidden h-[80vh] w-full overflow-y-auto overflow-x-hidden outline-none custom-scroll p-8"
-      id="todayModalCenteredScrollable" tabindex="-1" aria-labelledby="todayModalCenteredScrollableLabel"
-      aria-modal="true" role="dialog">
-      <div data-twe-modal-dialog-ref
-        class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[1000px]">
-        <div
-          class="relative flex flex-col w-full text-current bg-white border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4 dark:bg-[#181a1b]">
-          <div class="p-3">
-            <p class="text-2xl font-semibold text-center text-gray-800 capitalize dark:text-gray-200">Today Deal</p>
-          </div>
-
-          <!-- Modal body -->
-          <div class="relative p-4">
+    <!-- Dialog Overlay and Container -->
+    <transition name="fade">
+      <div v-if="isDialogOpen"
+        class="fixed top-10 left-1/2 transform -translate-x-1/2 z-[1055] h-[80vh] w-full max-w-7xl overflow-y-auto overflow-x-hidden outline-none custom-scroll">
+        <div class="bg-white dark:bg-[#181a1b] rounded-lg shadow-lg p-4">
+          <div class="relative">
             <div class="font-sans tracking-wide max-md:mx-auto">
-              <div class="font-[sans-serif] p-4">
+              <div class="font-[sans-serif]">
                 <div class="max-w-xl mx-auto lg:max-w-6xl">
-
                   <!-- no deals available -->
                   <div v-if="!currentDeal">
                     <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">No deals available
@@ -54,14 +45,22 @@
 
                     <div class="w-full">
                       <div>
-                        <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ currentDeal?.title
-                          }}</h3>
+                        <div class="flex items-center justify-between">
+                          <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                            {{ currentDeal?.title }}
+                          </h3>
+                          <button @click="closeDialog"
+                            class="flex items-center justify-center p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <icon name="material-symbols:close-small" />
+                          </button>
+                        </div>
                         <p class="mt-3 mb-4 text-sm">{{ currentDeal?.brand }}</p>
 
                         <div class="flex flex-wrap items-center gap-2 mt-4">
                           <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
                             currentDeal?.originalPrice }} egp</p>
-                          <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice }}
+                          <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice
+                            }}
                             egp</h4>
                           <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
                             <span class="text-sm text-white">save {{ currentDeal?.discount }}%</span>
@@ -112,7 +111,6 @@
                           <input type="number" placeholder="1"
                             class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
                             v-model="quantity">
-                          <!-- <span class="px-3 text-sm font-semibold text-gray-800">1</span> -->
                           <button type="button" class="text-black border-none outline-none" @click="incrementQuantity">
                             <icon name="material-symbols:add" class="w-2.5 h-2.5" />
                           </button>
@@ -155,11 +153,11 @@
                         <div class="max-w-2xl mt-12 custom-scroll max-h-32">
                           <div class="mt-6">
                             <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Description</h3>
-                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ currentDeal?.description }}</p>
+                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ currentDeal?.description }}
+                            </p>
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
 
@@ -176,9 +174,11 @@
                           <h3 class="text-sm font-bold text-gray-800 truncate sm:text-base dark:text-gray-200">{{
                             deal.title }}</h3>
                           <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">{{ deal.brand }}</h4>
-                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount }}%
+                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount
+                            }}%
                           </h4>
-                          <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice }}
+                          <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice
+                            }}
                             egp
                           </h4>
                           <h4 class="mt-2 text-sm font-normal text-red-600 dark:text-red-400">{{
@@ -195,7 +195,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -391,13 +391,28 @@ const isInWishlist = computed(() =>
   wishlistStore.isInWishlist(currentDeal.id)
 );
 
-onMounted(async () => {
-  const { Modal, Ripple, initTWE } = await import("tw-elements");
-  initTWE({ Modal, Ripple });
-});
+const isDialogOpen = ref(false);
+
+const openDialog = () => {
+  isDialogOpen.value = true;
+};
+
+const closeDialog = () => {
+  isDialogOpen.value = false;
+};
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .custom-scroll {
   overflow-y: scroll;
 }
