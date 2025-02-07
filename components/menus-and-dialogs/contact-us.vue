@@ -1,35 +1,28 @@
 <template>
   <div>
-    <!-- Button trigger modal -->
-    <button type="button" v-if="isAuthenticated && !isAdmin && isEmailInList !== null && isEmailInList"
-      class="fixed z-50 flex items-center justify-center p-4 text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bottom-28 end-8 hover:from-purple-500 hover:via-pink-500 hover:to-yellow-500 focus:ring-4 focus:ring-purple-300 active:scale-90"
-      data-twe-toggle="modal" data-twe-target="#contactUsModalVarying">
+    <!-- Button to open the dialog -->
+    <button @click="openDialog" v-if="isAuthenticated && !isAdmin && isEmailInList !== null && isEmailInList"
+      class="fixed z-50 flex items-center justify-center p-4 text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bottom-28 end-8 hover:from-purple-500 hover:via-pink-500 hover:to-yellow-500 focus:ring-4 focus:ring-purple-300 active:scale-90">
       <icon name="ic:sharp-wechat" />
     </button>
 
-    <!-- Modal -->
-    <div data-twe-modal-init
-      class="fixed start-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-      id="contactUsModalVarying" tabindex="-1" aria-labelledby="contactUsModalVaryingLabel" aria-hidden="true">
-      <div data-twe-modal-dialog-ref
-        class="fixed bottom-6 end-6 pointer-events-none translate-y-[100px] opacity-0 transition-all duration-300 ease-in-out w-[400xpx]">
-        <div
-          class="relative flex flex-col w-full text-current bg-white dark:bg-[#181a1b] border-none rounded-md outline-none pointer-events-auto bg-clip-padding shadow-4">
+    <!-- Dialog Overlay and Container -->
+    <transition name="slide-fade">
+      <div v-if="isDialogOpen" class="fixed z-50 bottom-4 end-4">
+        <div class="bg-white dark:bg-[#181a1b] rounded-lg shadow-lg">
           <div class="flex items-center justify-between flex-shrink-0 p-4 border-b-2 rounded-t-md border-neutral-100">
             <h5 class="text-xl font-medium leading-normal text-surface dark:text-gray-100" id="contactUsModalLabel">
               {{ $t('form.new_message') }}
             </h5>
-            <button type="button"
-              class="box-content border-none rounded-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-gray-100 dark:hover:text-gray-200"
-              data-twe-modal-dismiss aria-label="Close">
+            <button type="button" @click="closeDialog"
+              class="box-content border-none rounded-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-gray-100 dark:hover:text-gray-200">
               <span class="[&>svg]:h-6 [&>svg]:w-6">
                 <icon name="ic:baseline-close" />
               </span>
             </button>
           </div>
 
-          <!-- Modal body -->
-          <div class="relative flex-auto p-4" data-twe-modal-body-ref>
+          <div class="relative flex-auto p-4">
             <ClientOnly>
               <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text" name="name"
                 :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:alternate-email"
@@ -63,12 +56,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <script setup>
-const authStore = useAuthStore();
+// const authStore = useAuthStore();
 const contactStore = useContactStore();
 const mailStore = useMailStore();
 const { t } = useI18n()
@@ -138,8 +131,29 @@ onMounted(() => {
   mailStore.fetchAllEmails()
 });
 
-onMounted(async () => {
-  const { Modal, initTWE } = await import("tw-elements");
-  initTWE({ Modal });
-});
+const isDialogOpen = ref(false);
+
+const openDialog = () => {
+  isDialogOpen.value = true;
+};
+
+const closeDialog = () => {
+  isDialogOpen.value = false;
+};
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>
