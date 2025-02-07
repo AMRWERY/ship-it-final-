@@ -2,7 +2,8 @@
   <div>
     <Form v-slot="{ errors }">
       <div class="my-4">
-        <label :for="id" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">
+        <label :for="id"
+          :class="['block mb-1 text-sm font-medium text-gray-700', errors[name] ? 'text-red-600' : 'text-slate-700']">
           {{ label }}
           <span v-if="required" class="text-red-600">*</span>
         </label>
@@ -10,13 +11,15 @@
         <div class="relative w-full">
           <!-- prefix-icon -->
           <span v-if="prefixIcon"
-            class="absolute inset-y-0 flex items-center text-gray-400 start-3 hover:text-gray-600">
+            :class="['absolute inset-y-0 flex items-center text-gray-400 start-3 hover:text-gray-600', errors[name] ? 'text-red-600' : 'text-slate-400']">
             <icon :name="prefixIcon" class="w-5 h-5" />
           </span>
           <!-- input -->
           <Field :type="showPassword ? 'text' : type" :name="name" :placeholder="placeholder" :id="id"
-            v-model="internalValue" :rules="rules"
-            class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9" />
+            v-model="internalValue" :rules="rules" :class="[
+              'w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9',
+              errors[name] ? 'border-red-600' : 'border-slate-200'
+            ]" />
           <!-- Eye icon -->
           <span v-if="type === 'password'" @click="togglePassword"
             class="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer end-3 hover:text-gray-600">
@@ -28,8 +31,11 @@
 
         <!-- error messages -->
         <div class="mt-1">
-          <ErrorMessage :name="name" class="text-red-600 dark:text-red-400" />
+          <span class="font-medium text-red-600">{{ errors[name] }}</span>
         </div>
+        <!-- <div class="mt-1">
+          <ErrorMessage :name="name" class="text-red-600 dark:text-red-400" />
+        </div> -->
       </div>
     </Form>
   </div>
