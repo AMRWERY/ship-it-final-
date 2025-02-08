@@ -131,7 +131,9 @@
     "availability_required": "التوفر مطلوب",
     "category_title": "اسم الفئة",
     "enter_category_title": "أدخل اسم الفئة",
-    "new_message": "رساله جديده"
+    "new_message": "رساله جديده",
+    "select_date": "اختر تاريخ",
+    "birth_date": "تاريخ الميلاد"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",

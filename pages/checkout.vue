@@ -132,10 +132,8 @@
                         <div class="mt-4 sm:col-span-full">
                           <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
                             $t('form.card_expiration') }} <span class="text-red-600">*</span></span>
-                          <VueDatePicker :name="t('form.card_expiration')"
-                            :placeholder="t('form.choose_card_expiration')" format="MM/dd/yyyy" cancel-text="Close"
-                            :teleport="true" :esc-close="false" :state="true"
-                            v-model="checkoutStore.paymentDetails.cardExpiration" />
+                          <!-- date-picker componenet -->
+                          <date-picker v-model="checkoutStore.paymentDetails.cardExpiration" />
                         </div>
                       </div>
 
@@ -237,8 +235,6 @@
 </template>
 
 <script setup>
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
 import dataBase from "@/assets/countries.json";
 
 const countriesData = ref(dataBase);
@@ -374,14 +370,6 @@ useHead({
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.dp__theme_light {
-  --dp-border-color: #28282a;
-}
-
-.dp__theme_light {
-  --dp-border-color: #28282a;
 }
 
 select {

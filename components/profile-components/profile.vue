@@ -29,15 +29,16 @@
             </div>
 
             <div class="sm:col-span-3" v-if="authStore.user">
-              <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">Birth Date</span>
-              <VueDatePicker :name="t('form.date_of_birth')" :placeholder="t('form.date_of_birth')" format="MM/dd/yyyy"
-                cancel-text="Close" :teleport="true" :esc-close="false" :state="true"
-                v-model="authStore.user.birthDate" />
+              <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.birth_date')
+                }}</span>
+              <!-- date-picker componenet -->
+              <date-picker v-model="authStore.user.birthDate" />
             </div>
           </ClientOnly>
 
           <div class="mt-5 sm:col-span-full" v-if="authStore.user">
-            <div class="flex items-center justify-center h-48 p-4 bg-gray-200 border rounded-md shadow-md dark:bg-gray-100 w-96">
+            <div
+              class="flex items-center justify-center h-48 p-4 bg-gray-200 border rounded-md shadow-md dark:bg-gray-100 w-96">
               <label for="upload" class="flex flex-col items-center gap-2 cursor-pointer">
                 <template v-if="imagePreview">
                   <img :src="imagePreview" alt="Profile Preview" class="object-cover w-full h-48 rounded-xl" />
@@ -110,9 +111,6 @@
 </template>
 
 <script setup>
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
-
 const authStore = useAuthStore();
 const currentPassword = ref("");
 const newPassword = ref("");
@@ -201,9 +199,3 @@ const changePassword = () => {
     });
 };
 </script>
-
-<style scoped>
-.dp__theme_light {
-  --dp-border-color: #28282a;
-}
-</style>

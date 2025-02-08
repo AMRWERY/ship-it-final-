@@ -131,7 +131,9 @@
     "availability_required": "Availability required",
     "category_title": "Category Title",
     "enter_category_title": "Enter category title",
-    "new_message": "New Message"
+    "new_message": "New Message",
+    "select_date": "Select date",
+    "birth_date": "Birth Date"
   },
   "btn": {
     "logging": "Logging",

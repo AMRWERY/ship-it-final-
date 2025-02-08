@@ -275,13 +275,15 @@
         <div class="mb-4">
           <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.start_time')
             }}</label>
-          <VueDatePicker v-model="product.startTime" range />
+          <!-- date-picker componenet -->
+          <date-picker v-model="product.startTime" />
         </div>
 
         <div class="mb-4">
           <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.end_time')
             }}</label>
-          <VueDatePicker v-model="product.endTime" range />
+          <!-- date-picker componenet -->
+          <date-picker v-model="product.endTime" />
         </div>
 
         <button type="submit" class="w-full px-4 py-2 btn-style">
@@ -306,8 +308,6 @@
 
 <script setup>
 import { Timestamp } from 'firebase/firestore';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
 
 const todayDealStore = useTodayDealStore();
 const categoryStore = useCategoriesStore()
@@ -435,9 +435,3 @@ useHead({
   titleTemplate: () => t('head.add_deal'),
 });
 </script>
-
-<style scoped>
-.dp__theme_light {
-  --dp-border-color: #28282a;
-}
-</style>
