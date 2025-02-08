@@ -7,7 +7,7 @@
       <!-- Tooltip -->
       <Transition name="fade">
         <div v-show="showTooltip"
-          class="absolute z-50 px-3 py-1.5 text-sm text-white transition-all duration-300 rounded-lg shadow-md"
+          class="absolute z-50 px-3 whitespace-nowrap py-1.5 text-sm text-white transition-all duration-300 rounded-lg shadow-md"
           :class="tooltipClasses" ref="tooltip">
           {{ text }}
           <div class="absolute w-2 h-2 rotate-45" :class="arrowClasses"></div>
