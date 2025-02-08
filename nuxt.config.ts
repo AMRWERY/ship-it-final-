@@ -31,6 +31,8 @@ export default defineNuxtConfig({
   },
   i18n: {
     vueI18n: "./i18n.config.js",
+    locales: ["en", "ar"],
+    defaultLocale: "en",
   },
   carousel: {
     prefix: "MyPrefix",
