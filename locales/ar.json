@@ -15,7 +15,9 @@
     "deals": "العروض",
     "all_deals": "كل العروض",
     "add_deal": "أضف عرض",
-    "customer_messages": "رسائل العملاء"
+    "customer_messages": "رسائل العملاء",
+    "create_account": "إنشاء حساب",
+    "sign_in": "تسجيل الدخول"
   },
   "footer": {
     "get_connected_with_us_on_social_networks": "تواصل معنا على وسائل التواصل الاجتماعي:",
@@ -133,7 +135,10 @@
     "enter_category_title": "أدخل اسم الفئة",
     "new_message": "رساله جديده",
     "select_date": "اختر تاريخ",
-    "birth_date": "تاريخ الميلاد"
+    "birth_date": "تاريخ الميلاد",
+    "or": "أو",
+    "create_free_account": "إنشاء حساب مجاني",
+    "or_continue_with": "أو المتابعة باستخدام"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
@@ -167,7 +172,8 @@
     "send_reply": "ارسل الرد",
     "sending_reply": "جاري ارسال الرد",
     "go_back_home": "العودة إلى الصفحة الرئيسية",
-    "save": "حفظ"
+    "save": "حفظ",
+    "continue_with_google": "المتابعة باستخدام جوجل"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",

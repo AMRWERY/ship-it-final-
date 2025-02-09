@@ -30,11 +30,13 @@ const route = useRoute();
 const { t } = useI18n();
 
 const breadcrumbLabel = computed(() => {
-  if (route.meta && route.meta.breadcrumb) {
+  if (route.meta?.breadcrumb) {
     return t(`breadcrumb.${route.meta.breadcrumb}`);
   }
   if (route.name) {
-    const formattedName = route.name
+    // Split route name to remove locale suffix (e.g., ___en)
+    const [baseRouteName] = route.name.split('___');
+    const formattedName = baseRouteName
       .replace(/-/g, '_')
       .toLowerCase();
     return t(`breadcrumb.${formattedName}`);
@@ -42,4 +44,18 @@ const breadcrumbLabel = computed(() => {
   const pathSegments = route.path.split('/');
   return pathSegments[pathSegments.length - 1] || 'Unknown';
 });
+
+// const breadcrumbLabel = computed(() => {
+//   if (route.meta && route.meta.breadcrumb) {
+//     return t(`breadcrumb.${route.meta.breadcrumb}`);
+//   }
+//   if (route.name) {
+//     const formattedName = route.name
+//       .replace(/-/g, '_')
+//       .toLowerCase();
+//     return t(`breadcrumb.${formattedName}`);
+//   }
+//   const pathSegments = route.path.split('/');
+//   return pathSegments[pathSegments.length - 1] || 'Unknown';
+// });
 </script>

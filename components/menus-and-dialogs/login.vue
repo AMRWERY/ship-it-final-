@@ -3,15 +3,15 @@
     <!-- Overlay component -->
     <Overlay :visible="authStore.isOverlayVisible" />
 
-    <button type="button" class="text-sm text-white capitalize mb-0.5" @click="openDialog">
-      Sign in
+    <button type="button" class="text-sm text-white capitalize mb-0.5 hover:text-gray-200" @click="openDialog">
+      {{ $t('layout.sign_in') }}
     </button>
 
     <Transition name="slide-fade">
       <div class="fixed z-50 w-[450px] bottom-2 end-4" v-if="isOpen">
         <div class="p-2 bg-white dark:bg-[#181a1b] rounded-lg shadow-lg">
           <div class="flex justify-between px-4">
-            <p class="text-2xl font-semibold text-center">Sign in to your account</p>
+            <p class="text-2xl font-semibold text-center">{{ $t('form.sign_in_to_your_account') }}</p>
             <button @click="closeDialog" class="text-gray-700 transition dark:text-gray-200">
               <icon name="material-symbols:close-small-outline-rounded" />
             </button>
@@ -23,15 +23,15 @@
                 <div class="relative flex items-center justify-center space-x-4">
                   <icon name="logos:google-icon" class="absolute w-12 start-0" />
                   <span
-                    class="block text-sm font-semibold tracking-wide text-gray-700 transition duration-300 w-max group-hover:text-blue-600 sm:text-base dark:text-gray-200 dark:group-hover:text-blue-300">Continue
-                    with Google</span>
+                    class="block text-sm font-semibold tracking-wide text-gray-700 transition duration-300 w-max group-hover:text-blue-600 sm:text-base dark:text-gray-200 dark:group-hover:text-blue-300">{{
+                      $t('btn.continue_with_google') }}</span>
                 </div>
               </button>
             </div>
 
             <div class="mt-5 text-center">
-              <p>or <nuxt-link to="/sign-up" class="text-blue-600 dark:text-blue-400">Create free
-                  account</nuxt-link>
+              <p>{{ $t('form.or') }} <nuxt-link to="/sign-up" class="text-blue-600 dark:text-blue-400">{{
+                $t('form.create_free_account') }}</nuxt-link>
               </p>
             </div>
 
@@ -40,7 +40,8 @@
                 <div class="w-full border-t border-gray-300"></div>
               </div>
               <div class="relative flex justify-center text-sm">
-                <span class="px-6 text-gray-500 bg-white dark:bg-gray-800 dark:text-gray-200">or continue with</span>
+                <span class="px-6 text-gray-500 bg-white dark:bg-gray-800 dark:text-gray-200">{{
+                  $t('form.or_continue_with') }}</span>
               </div>
             </div>
 
