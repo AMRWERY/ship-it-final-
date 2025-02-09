@@ -5,24 +5,24 @@
 
     <div class="max-w-full mx-auto sm:px-6 lg:px-8">
       <div class="flex flex-col p-6 bg-white sm:flex-row">
-        <div class="w-full pr-4 sm:w-2/3">
+        <div class="w-full pe-4 sm:w-2/3">
           <div class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
             <ClientOnly>
               <div class="sm:col-span-3" v-if="authStore.user">
                 <dynamic-inputs :label="t('form.first_name')" :placeholder="t('form.enter_your_first_name')" type="text"
-                  name="first_name" :rules="'required|alpha_spaces'" :required="true"
+                  name="first_name" :rules="'required|alpha_spaces'" :required="true" :readonly="true"
                   prefixIcon="material-symbols:person" v-model="authStore.user.firstName" />
               </div>
 
               <div class="sm:col-span-3" v-if="authStore.user">
                 <dynamic-inputs :label="t('form.last_name')" :placeholder="t('form.enter_your_last_name')" type="text"
-                  name="last name" :rules="'required|alpha_spaces'" :required="true"
+                  name="last name" :rules="'required|alpha_spaces'" :required="true" :readonly="true"
                   prefixIcon="material-symbols:person" v-model="authStore.user.lastName" />
               </div>
 
               <div class="sm:col-span-full" v-if="authStore.user">
                 <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
-                  name="email" :rules="'required|email'" :required="true" prefixIcon="material-symbols:alternate-email"
+                  name="email" :rules="'required|email'" :required="true" :readonly="true" prefixIcon="material-symbols:alternate-email"
                   v-model="authStore.user.email" />
               </div>
 
