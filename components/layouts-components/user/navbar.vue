@@ -117,6 +117,7 @@ const setLocale = (value) => {
     locale.value = value;
     localeStore.updateLocale(value);
 };
+
 computed(() => {
     const storedLocale = localeStore.locale;
     setLocale(storedLocale);
