@@ -117,13 +117,12 @@ const setLocale = (value) => {
     locale.value = value;
     localeStore.updateLocale(value);
 };
-
-const userProfileImg = computed(() => authStore.user?.profileImg || '')
-
 computed(() => {
     const storedLocale = localeStore.locale;
     setLocale(storedLocale);
 });
+
+const userProfileImg = computed(() => authStore.user?.profileImg || '')
 
 onMounted(() => {
     if (authStore.user?.profileImg) {
