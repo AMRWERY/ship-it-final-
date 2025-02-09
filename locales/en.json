@@ -250,7 +250,8 @@
     "add_category": "Add Category",
     "all_deals": "All Deals",
     "add_deal": "Add Deal",
-    "customer_messages": "Customer Messages"
+    "customer_messages": "Customer Messages",
+    "dashboard": "Dashboard"
   },
   "social_media": {
     "share_my": "Share my",
@@ -344,7 +345,11 @@
     "category_title": "Category Title",
     "image": "Image",
     "add_category": "Add Category",
-    "customer_messages": "Customer Messages"
+    "customer_messages": "Customer Messages",
+    "orders_placed": "Orders Placed",
+    "inventory": "Inventory",
+    "total_users": "Total Users",
+    "top_products": "Top Products"
   },
   "pagination": {
     "previous": "Previous",

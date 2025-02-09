@@ -19,6 +19,7 @@
     "@vee-validate/nuxt": "^4.15.0",
     "@vee-validate/rules": "^4.15.0",
     "@vueuse/nuxt": "^12.3.0",
+    "apexcharts": "^4.4.0",
     "firebase": "^11.1.0",
     "html2pdf.js": "^0.10.2",
     "json-server": "^1.0.0-beta.3",
@@ -27,6 +28,7 @@
     "tailwindcss-rtl": "^0.9.0",
     "vue": "latest",
     "vue-router": "latest",
+    "vue3-apexcharts": "^1.8.0",
     "vue3-carousel-nuxt": "^1.1.4"
   },
   "devDependencies": {

@@ -250,7 +250,8 @@
     "add_category": "إضافة فئة",
     "all_deals": "كل العروض",
     "add_deal": "أضف عرض",
-    "customer_messages": "رسائل العملاء"
+    "customer_messages": "رسائل العملاء",
+    "dashboard": "لوحة التحكم"
   },
   "social_media": {
     "share_my": "شارك",
@@ -342,7 +343,11 @@
     "category_title": "عنوان الفئة",
     "image": "صورة",
     "add_category": "إضافة فئة",
-    "customer_messages": "رسائل العملاء"
+    "customer_messages": "رسائل العملاء",
+    "orders_placed": "الطلبات المقدمة",
+    "inventory": "المخزون",
+    "total_users": "إجمالي المستخدمين",
+    "top_products": "أفضل المنتجات"
   },
   "pagination": {
     "previous": "السابق",
