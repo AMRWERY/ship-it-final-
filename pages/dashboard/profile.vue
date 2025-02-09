@@ -4,7 +4,7 @@
     <breadcrumb />
 
     <div class="max-w-full mx-auto sm:px-6 lg:px-8">
-      <div class="flex flex-col p-6 bg-white sm:flex-row">
+      <div class="flex flex-col p-6 bg-white sm:flex-row dark:bg-[#181a1b]">
         <div class="w-full pe-4 sm:w-2/3">
           <div class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
             <ClientOnly>
@@ -22,8 +22,8 @@
 
               <div class="sm:col-span-full" v-if="authStore.user">
                 <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
-                  name="email" :rules="'required|email'" :required="true" :readonly="true" prefixIcon="material-symbols:alternate-email"
-                  v-model="authStore.user.email" />
+                  name="email" :rules="'required|email'" :required="true" :readonly="true"
+                  prefixIcon="material-symbols:alternate-email" v-model="authStore.user.email" />
               </div>
 
               <div class="sm:col-span-3" v-if="authStore.user">
@@ -52,7 +52,7 @@
 
         <div class="w-full mt-4 sm:w-1/3 sm:mt-0">
           <div
-            class="max-w-2xl mx-4 mt-6 text-gray-900 bg-white rounded-lg shadow-xl sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto">
+            class="max-w-2xl mx-4 mt-6 text-gray-900 bg-white rounded-lg shadow-xl sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto dark:bg-[#181a1b]">
             <div class="h-32 overflow-hidden rounded-t-lg">
               <img class="object-cover object-top w-full"
                 src="https://justfields.com/storage/projects/7M5rV059/Mountain.jpg" alt="Mountain" />
@@ -62,8 +62,9 @@
                 src="https://justfields.com/storage/projects/7M5rV059/vector-avatar-02.jpg" alt="Profile" />
             </div>
             <div class="mt-2 text-center" v-if="authStore.user">
-              <h2 class="font-semibold">{{ authStore.user?.firstName }} {{ authStore.user?.lastName }}</h2>
-              <p class="pb-4 text-gray-500">{{ authStore.user?.role }}</p>
+              <h2 class="font-semibold dark:text-gray-200">{{ authStore.user?.firstName }} {{ authStore.user?.lastName
+                }}</h2>
+              <p class="pb-4 text-gray-500 dark:text-gray-100">{{ authStore.user?.role }}</p>
             </div>
           </div>
         </div>
