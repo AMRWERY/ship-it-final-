@@ -166,7 +166,8 @@
     "reply": "رد",
     "send_reply": "ارسل الرد",
     "sending_reply": "جاري ارسال الرد",
-    "go_back_home": "العودة إلى الصفحة الرئيسية"
+    "go_back_home": "العودة إلى الصفحة الرئيسية",
+    "save": "حفظ"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",

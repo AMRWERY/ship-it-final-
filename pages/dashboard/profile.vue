@@ -45,7 +45,7 @@
                 <span class="text-center me-2">{{ $t('btn.saving') }}</span>
                 <icon name="svg-spinners:270-ring-with-bg" />
               </div>
-              <span v-else>Save</span>
+              <span v-else>{{ $t('btn.save') }}</span>
             </button>
           </div>
         </div>

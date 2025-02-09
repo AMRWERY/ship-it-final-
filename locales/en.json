@@ -166,7 +166,8 @@
     "reply": "Reply",
     "send_reply": "Send Reply",
     "sending_reply": "Sending reply",
-    "go_back_home": "Go Back Home"
+    "go_back_home": "Go Back Home",
+    "save": "Save"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
