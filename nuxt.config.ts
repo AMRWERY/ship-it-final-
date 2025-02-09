@@ -42,6 +42,7 @@ export default defineNuxtConfig({
   carousel: {
     prefix: "MyPrefix",
   },
+  plugins: ['~/plugins/locale.client.js'],
   css: [
     "~/assets/css/main.css",
     "~/assets/css/google-fonts.css",
