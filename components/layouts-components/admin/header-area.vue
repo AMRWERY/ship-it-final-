@@ -17,30 +17,34 @@
         </div>
 
         <div class="flex items-center space-s-5 ms-auto">
-          <ul class="flex items-center space-s-5" v-if="isAuthenticated">
-            <!-- Notification Menu Area -->
+          <!-- <ul class="flex items-center space-s-5" v-if="isAuthenticated">
             <dropdown-notification />
-            <!-- Notification Menu Area -->
 
-            <!-- Chat Notification Area -->
             <dropdown-message />
-            <!-- Chat Notification Area -->
 
-            <!-- User Area -->
             <dropdown-user />
-            <!-- User Area -->
-          </ul>
+          </ul> -->
 
-          <nuxt-link class="me-4 text-neutral-600" to="" role="button" v-if="localeStore.isRTL">
+          <nuxt-link class="text-neutral-600" to="" role="button" v-if="localeStore.isRTL">
             <span class="[&>svg]:w-5" @click="setLocale('en')">
               En
             </span>
           </nuxt-link>
-          <nuxt-link class="me-4 text-neutral-600" to="" role="button" v-else>
+          <nuxt-link class="text-neutral-600" to="" role="button" v-else>
             <span class="[&>svg]:w-5" @click="setLocale('ar')">
               العربية
             </span>
           </nuxt-link>
+
+          <!--toggle theme -->
+          <tooltip :text="$t('tooltip.toggle_theme')" position="bottom">
+            <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
+              @click="$emit('toggle-theme')">
+              <span class="absolute -inset-1.5" />
+              <span class="sr-only">toggle theme</span>
+              <icon :name="isDark ? 'heroicons-solid:sun' : 'heroicons-solid:moon'" class="text-neutral-600" />
+            </nuxt-link>
+          </tooltip>
 
           <tooltip :text="$t('tooltip.back_to_home')" position="bottom">
             <nuxt-link to="/" type="button" class="relative hidden text-gray-700 rounded-full sm:flex">
@@ -97,5 +101,10 @@ const isAdmin = computed(() => {
 
 onMounted(() => {
   updatePageTitle()
+});
+
+//toggle themes
+defineProps({
+  isDark: Boolean,
 });
 </script>

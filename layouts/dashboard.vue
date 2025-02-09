@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- Overlay Component -->
+    <Overlay :visible="themeStore.showOverlay" />
+    
     <div :dir="isRTL ? 'rtl' : 'ltr'" :class="{ 'rtl': isRTL, 'ltr': !isRTL }">
       <div class="flex h-screen overflow-hidden">
         <!-- ===== Sidebar Start ===== -->
@@ -9,7 +12,7 @@
         <!-- ===== Content Area Start ===== -->
         <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
           <!-- ===== Header Start ===== -->
-          <header-area />
+          <header-area :is-dark="themeStore.isDark" @toggle-theme="themeStore.toggleTheme" />
           <!-- ===== Header End ===== -->
 
           <!-- ===== Main Content Start ===== -->
@@ -30,5 +33,12 @@ const { locale } = useI18n();
 
 const isRTL = computed(() => {
   return locale.value === 'ar';
+});
+
+//toggle themes
+const themeStore = useThemeStore();
+
+onMounted(() => {
+  themeStore.loadTheme();
 });
 </script>
