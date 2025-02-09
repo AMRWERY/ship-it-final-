@@ -232,7 +232,8 @@
     "dashboard_categories_add_category": "Add Category",
     "dashboard_deals_all_deals": "All Deals",
     "dashboard_deals_add_today_deals": "Add Deal",
-    "dashboard_customer_messages": "Customer Messages"
+    "dashboard_customer_messages": "Customer Messages",
+    "dashboard_profile": "Profile"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -251,7 +252,8 @@
     "all_deals": "All Deals",
     "add_deal": "Add Deal",
     "customer_messages": "Customer Messages",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "profile": "Profile"
   },
   "social_media": {
     "share_my": "Share my",

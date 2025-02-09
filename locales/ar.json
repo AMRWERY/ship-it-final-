@@ -232,7 +232,8 @@
     "dashboard_categories_add_category": "إضافة فئة",
     "dashboard_deals_all_deals": "كل العروض",
     "dashboard_deals_add_today_deals": "إضافة عرض",
-    "dashboard_customer_messages": "رسائل العملاء"
+    "dashboard_customer_messages": "رسائل العملاء",
+    "dashboard_profile": "الملف الشخصي"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -251,7 +252,8 @@
     "all_deals": "كل العروض",
     "add_deal": "أضف عرض",
     "customer_messages": "رسائل العملاء",
-    "dashboard": "لوحة التحكم"
+    "dashboard": "لوحة التحكم",
+    "profile": "الملف الشخصي"
   },
   "social_media": {
     "share_my": "شارك",
