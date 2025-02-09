@@ -35,8 +35,8 @@
               <div class="flex items-center gap-4 mt-3">
                 <div class="flex items-center">
                   <div class="flex space-s-2">
-                     <!-- ratings component -->
-              <ratings @ratingSelected="handleRating" :productId="productStore.selectedProduct?.id" />
+                    <!-- ratings component -->
+                    <ratings @ratingSelected="handleRating" :productId="productStore.selectedProduct?.id" />
                   </div>
                 </div>
               </div>
@@ -73,7 +73,7 @@
                 <p class="mt-3 space-y-1 text-gray-600 dark:text-gray-100">
                   Only <span class="font-semibold text-red-700 underline dark:text-red-400">{{
                     productStore.selectedProduct?.stock
-                    }}</span>
+                  }}</span>
                   left in stock - order soon.
                 </p>
               </div>
@@ -210,6 +210,9 @@
       </div>
     </div>
 
+    <!-- may-also-like component -->
+    <may-also-like />
+
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
@@ -236,6 +239,7 @@ onMounted(() => {
   // console.log('id', productId)
   if (productId) {
     productStore.fetchProductDetail(productId);
+    // addToProductHistory(productId);
   }
 });
 
