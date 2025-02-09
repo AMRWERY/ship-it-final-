@@ -8,11 +8,13 @@
       <div class="flex items-end space-s-4">
         <div class="flex flex-col">
           <label class="mb-1 text-sm font-medium">{{ $t('form.start_date') }}</label>
-          <input type="date" v-model="startDate" class="p-2 border rounded" :placeholder="$t('form.start_date')" />
+          <!-- date-picker componenet -->
+          <date-picker v-model="startDate" />
         </div>
         <div class="flex flex-col">
           <label class="mb-1 text-sm font-medium">{{ $t('form.end_date') }}</label>
-          <input type="date" v-model="endDate" class="p-2 border rounded" :placeholder="$t('form.end_date')" />
+          <!-- date-picker componenet -->
+          <date-picker v-model="endDate" />
         </div>
         <button @click="filterOrdersByDate" class="px-4 py-2 btn-style">
           {{ $t('btn.filter') }}
@@ -21,78 +23,78 @@
     </div>
 
     <div
-      class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
+      class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border dark:bg-black dark:text-gray-200">
       <table class="w-full table-auto text-start min-w-max">
         <thead>
           <tr>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 #
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.order_id') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.email') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.customer_name') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.date') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.phone_number') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.card_expiration') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.card_number') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.cvv') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.full_name_on_card') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.country') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.city') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.status') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
             </th>
           </tr>
         </thead>
@@ -107,49 +109,50 @@
         </tbody>
 
         <tbody v-else>
-          <tr class="border-b hover:bg-slate-50 border-slate-200"
+          <tr class="border-b hover:bg-slate-50 border-slate-200 dark:hover:bg-slate-600"
             v-for="(order, index) in checkoutStore.paginatedOrders" :key="order.id">
             <td class="p-4 py-5">
-              <p class="block text-sm text-slate-500">{{ (checkoutStore.currentPage - 1) *
+              <p class="block text-sm font-semibold text-slate-800 dark:text-slate-200">{{ (checkoutStore.currentPage -
+                1) *
                 checkoutStore.ordersPerPage +
                 index +
                 1 }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="block text-sm font-semibold text-slate-500">{{ order.orderId }}</p>
+              <p class="block text-sm font-semibold text-slate-500 dark:text-slate-100">{{ order.orderId }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="block text-sm text-slate-500">{{ order.deliveryDetails.email }}</p>
+              <p class="block text-sm text-slate-500 dark:text-slate-100">{{ order.deliveryDetails.email }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.deliveryDetails.name }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.deliveryDetails.name }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.date }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.date }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.deliveryDetails.phoneNumber }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.deliveryDetails.phoneNumber }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.paymentDetails.cardExpiration }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.paymentDetails.cardExpiration }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.paymentDetails.cardNumber }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.paymentDetails.cardNumber }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.paymentDetails.cvv }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.paymentDetails.cvv }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.paymentDetails.fullNameOnCard }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.paymentDetails.fullNameOnCard }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.deliveryDetails.country }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.deliveryDetails.country }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ order.deliveryDetails.city }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ order.deliveryDetails.city }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-blue-700 cursor-pointer" @click="openOrderDetails(order)">
+              <p class="text-sm text-blue-700 cursor-pointer dark:text-blue-400" @click="openOrderDetails(order)">
               <div class="flex items-center justify-center" v-if="order.loading">
                 <icon name="svg-spinners:tadpole" />
               </div>
@@ -158,11 +161,11 @@
             </td>
             <td class="p-4 py-5">
               <p class="text-sm font-semibold" :class="{
-                'text-green-700': getStatusTitle(order.statusId)?.status === 'Order Placed',
-                'text-red-700': getStatusTitle(order.statusId)?.status === 'Processing',
-                'text-blue-700': getStatusTitle(order.statusId)?.status === 'Shipped',
-                'text-blue-700': getStatusTitle(order.statusId)?.status === 'Out for Delivery',
-                'text-blue-700': getStatusTitle(order.statusId)?.status === 'Delivered',
+                'text-green-700 dark:text-green-400': getStatusTitle(order.statusId)?.status === 'Order Placed',
+                'text-red-700 dark:text-red-400': getStatusTitle(order.statusId)?.status === 'Processing',
+                'text-blue-700 dark:text-blue-400': getStatusTitle(order.statusId)?.status === 'Shipped',
+                'text-blue-700 dark:text-blue-400': getStatusTitle(order.statusId)?.status === 'Out for Delivery',
+                'text-blue-700 dark:text-blue-400': getStatusTitle(order.statusId)?.status === 'Delivered',
               }">
                 {{ getStatusTitle(order.statusId)?.status === 'Delivered' ? 'Completed' :
                   getStatusTitle(order.statusId)?.status }}
@@ -173,7 +176,7 @@
               <tooltip :text="$t('tooltip.delete_order')" position="bottom">
                 <button type="button" @click="deleteOrder(order.id)">
                   <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="order.loading" />
-                  <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                  <icon name="material-symbols:delete-sharp" class="text-red-700 dark:text-red-500" v-else />
                 </button>
               </tooltip>
             </td>

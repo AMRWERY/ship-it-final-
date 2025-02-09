@@ -8,51 +8,51 @@
     </div>
 
     <div
-      class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
+      class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border dark:bg-black dark:text-gray-200">
       <table class="w-full table-auto text-start min-w-max">
         <thead>
           <tr>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 #
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Image
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Product Title
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Brand
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Available Stock
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Original Price
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Price after Discount
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-semibold leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-semibold leading-none text-slate-500 dark:text-gray-100">
                 Discount
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
             </th>
           </tr>
         </thead>
@@ -68,40 +68,43 @@
         </tbody>
 
         <tbody>
-          <tr class="border-b hover:bg-slate-50 border-slate-200"
+          <tr class="border-b hover:bg-slate-50 border-slate-200 dark:hover:bg-slate-600"
             v-for="(product, index) in productStore.paginatedProducts" :key="product.id">
             <td class="p-4 py-5">
-              <p class="block text-sm text-slate-500">{{ (productStore.currentPage - 1) *
+              <p class="block text-sm font-semibold text-slate-800 dark:text-slate-200">{{ (productStore.currentPage -
+                1) *
                 productStore.productsPerPage +
                 index +
                 1 }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="block text-sm font-semibold text-slate-500">
+              <p class="block text-sm">
                 <img :src="product.imageUrl1" alt="" class="w-12 h-12 rounded-lg">
               </p>
             </td>
             <td class="p-4 py-5">
-              <p class="block text-sm text-slate-500">{{ product.title }}</p>
+              <p class="block text-sm text-slate-500 dark:text-slate-100">{{ product.title }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ product.brand }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ product.brand }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500"><span class="text-lg font-semibold text-green-600">{{ product.stock
+              <p class="text-sm text-slate-500 dark:text-slate-100"><span
+                  class="text-lg font-semibold text-green-600 dark:text-green-400">{{ product.stock
                   }}</span> available</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500" v-if="product.originalPrice">{{ product.originalPrice }} egp</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100" v-if="product.originalPrice">{{
+                product.originalPrice }} egp</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ product.discountedPrice }} egp</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ product.discountedPrice }} egp</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500" v-if="product.discount">{{ product.discount }}%</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100" v-if="product.discount">{{ product.discount }}%</p>
             </td>
             <td class="p-4 py-5">
-              <nuxt-link to="" class="text-sm text-blue-700">
+              <nuxt-link to="" class="text-sm text-blue-700 dark:text-blue-400">
                 Edit Product
               </nuxt-link>
             </td>
@@ -109,7 +112,7 @@
               <tooltip :text="$t('tooltip.delete_item')" position="bottom">
                 <button type="button" @click="deleteProduct(product.id)">
                   <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="loading" />
-                  <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                  <icon name="material-symbols:delete-sharp" class="text-red-700 dark:text-red-500" v-else />
                 </button>
               </tooltip>
             </td>

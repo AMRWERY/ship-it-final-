@@ -24,33 +24,33 @@
       </div>
     </div>
     <div
-      class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
+      class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border dark:bg-black dark:text-gray-200">
       <table class="w-full table-auto text-start min-w-max">
         <thead>
           <tr>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-normal leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-normal leading-none text-slate-500 dark:text-gray-100">
                 #
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-normal leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-normal leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.email') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-normal leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-normal leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.customer_name') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
-              <p class="text-sm font-normal leading-none text-slate-500">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
+              <p class="text-sm font-normal leading-none text-slate-500 dark:text-gray-100">
                 {{ $t('dashboard.date') }}
               </p>
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
             </th>
-            <th class="p-4 border-b border-slate-200 bg-slate-50">
+            <th class="p-4 border-b border-slate-200 bg-slate-50 dark:bg-black">
             </th>
           </tr>
         </thead>
@@ -66,25 +66,26 @@
         </tbody>
 
         <tbody v-else>
-          <tr class="border-b hover:bg-slate-50 border-slate-200"
+          <tr class="border-b hover:bg-slate-50 border-slate-200 dark:hover:bg-slate-600"
             v-for="(message, index) in contactStore.paginatedMessages" :key="message.id">
             <td class="p-4 py-5">
-              <p class="block text-sm text-slate-500">{{ (contactStore.currentPage - 1) *
+              <p class="block text-sm font-semibold text-slate-800 dark:text-slate-200">{{ (contactStore.currentPage -
+                1) *
                 contactStore.messagesPerPage +
                 index +
                 1 }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="block text-sm text-slate-500">{{ message.email }}</p>
+              <p class="block text-sm text-slate-500 dark:text-slate-100">{{ message.email }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ message.name }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ message.name }}</p>
             </td>
             <td class="p-4 py-5">
-              <p class="text-sm text-slate-500">{{ message.date }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-100">{{ message.date }}</p>
             </td>
             <td class="p-4 py-5">
-              <nuxt-link to="" role="button" class="text-sm text-blue-700 cursor-pointer"
+              <nuxt-link to="" role="button" class="text-sm text-blue-700 cursor-pointer dark:text-blue-400"
                 @click="openMessageDetails(message)">
                 <div class="flex items-center justify-center">
                   <icon name="svg-spinners:tadpole" v-if="message.loadingView" />
@@ -96,7 +97,7 @@
               <tooltip :text="$t('tooltip.delete_message')" position="bottom">
                 <button type="button" @click="deleteMessage(message.id)">
                   <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="message.loadingDelete" />
-                  <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                  <icon name="material-symbols:delete-sharp" class="text-red-700 dark:text-red-400" v-else />
                 </button>
               </tooltip>
             </td>
