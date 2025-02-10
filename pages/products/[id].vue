@@ -23,10 +23,10 @@
               </p>
               <div class="flex flex-wrap items-center gap-4 mt-4">
                 <h4 class="text-2xl font-bold text-gray-800 sm:text-3xl dark:text-gray-200">{{
-                  productStore.selectedProduct?.discountedPrice }} egp</h4>
+                  $n(parseFloat(productStore.selectedProduct?.discountedPrice) || 0, 'currency', currencyLocale) }}</h4>
                 <p class="text-lg text-gray-500 line-through dark:text-gray-100 mt-0.5"
                   v-if="productStore.selectedProduct?.originalPrice">{{
-                    productStore.selectedProduct?.originalPrice }} egp</p>
+                    $n(parseFloat(productStore.selectedProduct?.originalPrice) || 0, 'currency', currencyLocale) }}</p>
                 <span class="p-2 text-sm font-medium text-white bg-green-400 ms-8 rounded-xl dark:bg-orange-400"
                   v-if="productStore.selectedProduct?.discount">Save
                   {{ productStore.selectedProduct?.discount }}%</span>
@@ -393,6 +393,9 @@ const props = defineProps({
 const handleRating = (rating) => {
   productStore.updateProductRating(props.productId, rating);
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 </script>
 
 <style scoped>

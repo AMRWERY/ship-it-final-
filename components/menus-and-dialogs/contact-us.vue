@@ -9,7 +9,7 @@
     <!-- Dialog Overlay and Container -->
     <transition name="slide-fade">
       <div v-if="isDialogOpen" class="fixed z-[1000] bottom-4 end-4">
-        <div class="bg-white dark:bg-[#181a1b] rounded-lg shadow-lg">
+        <div class="bg-white dark:bg-[#181a1b] rounded-lg shadow-lg max-w-md w-full">
           <div class="flex items-center justify-between flex-shrink-0 p-4 border-b-2 rounded-t-md border-neutral-100">
             <h5 class="text-xl font-medium leading-normal text-surface dark:text-gray-100" id="contactUsModalLabel">
               {{ $t('form.new_message') }}

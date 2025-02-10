@@ -28,9 +28,9 @@
                         {{ card.title }}</h3>
                       <div class="flex items-center justify-center mt-2 space-s-2">
                         <h4 class="text-lg font-bold text-red-700 sm:text-base dark:text-red-400 lg:text-2xl">{{
-                          card.discountedPrice }} egp</h4>
+                        $n(parseFloat(card.discountedPrice), 'currency', currencyLocale) }}</h4>
                         <h4 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100 mt-0.5"
-                          v-if="card.originalPrice">{{ card.originalPrice }} egp</h4>
+                          v-if="card.originalPrice">{{ $n(parseFloat(card.originalPrice), 'currency', currencyLocale) }}</h4>
                       </div>
                     </div>
                     <div class="flex justify-center mt-4 max-sm:hidden">
@@ -140,4 +140,7 @@ const productStore = useProductsStore()
 const handleRating = (rating) => {
   productStore.updateProductRating(props.productId, rating);
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 </script>

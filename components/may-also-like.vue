@@ -14,7 +14,7 @@
               class="absolute left-0 right-0 w-11/12 p-2 mx-auto transition-all duration-300 rounded-lg bottom-2 lg:-bottom-80 lg:group-hover:bottom-2 bg-black/60 lg:bg-white lg:p-3">
               <div class="text-center">
                 <h3 class="text-sm font-bold text-white lg:text-base lg:text-gray-800">{{ product.title }}</h3>
-                <h4 class="mt-2 text-sm font-bold text-blue-600 lg:text-base">{{ product.discountedPrice }} egp</h4>
+                <h4 class="mt-2 text-sm font-bold text-blue-600 lg:text-base">{{ $n(parseFloat(product.discountedPrice) || 0, 'currency', currencyLocale) }}</h4>
               </div>
             </div>
           </nuxt-link>
@@ -40,4 +40,7 @@ const recommendedProducts = computed(() => {
   }
   return [];
 });
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 </script>

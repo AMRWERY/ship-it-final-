@@ -55,12 +55,12 @@
           </ul>
 
           <div class="flex items-center gap-2 mt-4">
-            <p class="text-2xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">{{ product.discountedPrice
-              }} egp</p>
+            <p class="text-2xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">{{
+              $n(parseFloat(product.discountedPrice), 'currency', currencyLocale) }}</p>
             <p class="mt-2 font-semibold leading-tight text-gray-400 line-through text-md dark:text-gray-100"
               v-if="product.originalPrice">
               {{
-                product.originalPrice }} egp</p>
+                $n(parseFloat(product.originalPrice), 'currency', currencyLocale) }}</p>
           </div>
         </div>
         <div class="mt-4">
@@ -209,4 +209,7 @@ const props = defineProps({
 const handleRating = (rating) => {
   productStore.updateProductRating(props.productId, rating);
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 </script>
