@@ -33,8 +33,8 @@
                 v-model="data.email" />
 
               <dynamic-inputs :label="t('form.your_message')" :placeholder="t('form.enter_your_message')"
-                type="textarea" :name="t('form.your_message')" :rules="'required|between:10,500'" :required="true"
-                prefixIcon="material-symbols:person" v-model="data.message" />
+                type="textarea" :name="t('form.your_message')" :rules="'required|length:100'" :required="true"
+                prefixIcon="material-symbols:chat-outline" v-model="data.message" />
 
               <div class="mt-6">
                 <button type="submit" class="w-[400px] px-4 py-2 btn-style" @click="sendMessage">

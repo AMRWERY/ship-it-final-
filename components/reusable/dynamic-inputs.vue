@@ -15,11 +15,25 @@
             <icon :name="prefixIcon" class="w-5 h-5" />
           </span>
           <!-- input -->
-          <Field :type="showPassword ? 'text' : type" :name="name" :placeholder="placeholder" :id="id"
+          <!-- <Field :type="showPassword ? 'text' : type" :name="name" :placeholder="placeholder" :id="id"
             :readonly="readonly" v-model="internalValue" :rules="rules" :class="[
               'w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 dark:placeholder:text-slate-100 text-slate-700 dark:text-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9',
               errors[name] ? 'border-red-600' : 'border-slate-200'
-            ]" />
+            ]" /> -->
+          <template v-if="type === 'textarea'">
+            <Field as="textarea" :name="name" :placeholder="placeholder" :id="id" :readonly="readonly"
+              v-model="internalValue" :rules="rules"
+              class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-100 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9"
+              rows="4" />
+          </template>
+
+          <template v-else>
+            <Field :type="showPassword ? 'text' : type" :name="name" :placeholder="placeholder" :id="id"
+              :readonly="readonly" v-model="internalValue" :rules="rules" :class="[
+                'w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 dark:placeholder:text-slate-100 text-slate-700 dark:text-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9',
+                errors[name] ? 'border-red-600' : 'border-slate-200'
+              ]" />
+          </template>
           <!-- Eye icon -->
           <span v-if="type === 'password'" @click="togglePassword"
             class="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer dark:text-gray-100 end-3 hover:text-gray-600 dark:hover:text-gray-300">

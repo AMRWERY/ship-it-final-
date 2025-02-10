@@ -7,6 +7,7 @@ import {
   regex,
   between,
   numeric,
+  length,
 } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
@@ -49,6 +50,7 @@ export default defineNuxtPlugin((app) => {
   defineRule("regex", regex);
   defineRule("between", between);
   defineRule("numeric", numeric);
+  defineRule("length", length);
 
   const localeStore = useLocaleStore();
   const updateValidationLocale = (locale) => {
@@ -63,6 +65,10 @@ export default defineNuxtPlugin((app) => {
           names: inputsAr.form,
         },
       }),
+      validateOnBlur: false,
+      validateOnChange: false,
+      validateOnInput: true,
+      validateOnModelUpdate: true,
     });
     setLocale(locale);
   };
