@@ -8,17 +8,22 @@
         }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
-          <label for="main-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.category') }}</label>
+          <label for="main-category" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.category') }}</label>
           <select id="main-category" name="main-category" v-model="selectedCategory"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
-            <option value="" disabled>{{ $t('form.select_category') }}</option>
-            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
+            class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200">
+            <option value="" disabled class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ $t('form.select_category') }}</option>
+            <option v-for="category in categories" :key="category.id" :value="category.id" class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ category.title }}</option>
           </select>
         </div>
 
         <div class="mb-4">
           <dynamic-inputs :label="t('form.brand')" :placeholder="t('form.enter_brand')" type="text" name="brand"
             :rules="'required|alpha_spaces'" :required="true" prefixIcon="cib:brand-ai" v-model="product.brand" />
+        </div>
+
+        <div class="mb-4">
+          <dynamic-inputs :label="t('form.brand_ar')" :placeholder="t('form.enter_brand_ar')" type="text" name="brand"
+            :rules="'required|alpha_spaces'" :required="true" prefixIcon="cib:brand-ai" v-model="product.brandAr" />
         </div>
 
         <div class="mb-4">
@@ -55,47 +60,49 @@
           <dynamic-inputs :label="t('form.product_title')" :placeholder="t('form.enter_product_title')" type="text"
             name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v" v-model="product.title" />
         </div>
-        
+
         <div class="mb-4">
-          <dynamic-inputs :label="t('form.product_title_ar')" :placeholder="t('form.enter_product_title_ar')" type="text"
-            name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v" v-model="product.titleAr" />
+          <dynamic-inputs :label="t('form.product_title_ar')" :placeholder="t('form.enter_product_title_ar')"
+            type="text" name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v"
+            v-model="product.titleAr" />
         </div>
 
         <div class="mb-4">
-            <dynamic-inputs :label="t('form.product_description')" :placeholder="t('form.enter_product_description')"
-                type="textarea" :name="t('form.product_description')" :rules="'required'" :required="true"
-                prefixIcon="pajamas:text-description" v-model="product.description" />
-        </div>
-        
-        <div class="mb-4">
-          <dynamic-inputs :label="t('form.product_description_ar')" :placeholder="t('form.enter_your_product_description_ar')"
-                type="textarea" :name="t('form.product_description_ar')" :rules="'required'" :required="true"
-                prefixIcon="pajamas:text-description" v-model="product.descriptionAr" />
+          <dynamic-inputs :label="t('form.product_description')" :placeholder="t('form.enter_product_description')"
+            type="textarea" :name="t('form.product_description')" :rules="'required'" :required="true"
+            prefixIcon="pajamas:text-description" v-model="product.description" />
         </div>
 
         <div class="mb-4">
-          <p class="block mb-2 font-medium text-gray-700">{{ $t('form.product_type') }}</p>
+          <dynamic-inputs :label="t('form.product_description_ar')"
+            :placeholder="t('form.enter_your_product_description_ar')" type="textarea"
+            :name="t('form.product_description_ar')" :rules="'required'" :required="true"
+            prefixIcon="pajamas:text-description" v-model="product.descriptionAr" />
+        </div>
+
+        <div class="mb-4">
+          <p class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.product_type') }}</p>
           <div class="grid grid-cols-3 gap-4">
-            <label for="new-arrival" class="block mb-2 font-medium text-gray-700">
+            <label for="new-arrival" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="new-arrival" name="new-arrival" value="New_Arrival" class="me-2"
                 v-model="product.productTypes">New Arrival
             </label>
 
-            <label for="express-deals" class="block mb-2 font-medium text-gray-700">
+            <label for="express-deals" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="express-deals" name="express-deals" value="Express_Deals" class="me-2"
                 v-model="product.productTypes">Express Deals
             </label>
 
-            <label for="sale" class="block mb-2 font-medium text-gray-700">
+            <label for="sale" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="sale" name="sale" value="Sale" class="me-2" v-model="product.productTypes">Sale
             </label>
 
-            <label for="bundle" class="block mb-2 font-medium text-gray-700">
+            <label for="bundle" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="bundle" name="bundle" value="Bundle" class="me-2"
                 v-model="product.productTypes">Bundle
             </label>
 
-            <label for="custom" class="block mb-2 font-medium text-gray-700">
+            <label for="custom" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="custom" name="custom" value="Custom" class="me-2"
                 v-model="product.productTypes">Custom
             </label>
@@ -103,89 +110,89 @@
         </div>
 
         <div class="mb-4">
-          <p class="block mb-2 font-medium text-gray-700">{{ $t('form.size') }}</p>
+          <p class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.size') }}</p>
           <div class="grid grid-cols-4 gap-4 md:grid-cols-5 sm:grid-cols-4">
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="XXS" class="me-2"
                 v-model="product.sizes">XXS
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="XS" class="me-2"
                 v-model="product.sizes">XS
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="S" class="me-2"
                 v-model="product.sizes">S
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="M" class="me-2"
                 v-model="product.sizes">M
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="L" class="me-2"
                 v-model="product.sizes">L
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="XL" class="me-2"
                 v-model="product.sizes">XL
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="XXL" class="me-2"
                 v-model="product.sizes">XXL
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="XXXL" class="me-2"
                 v-model="product.sizes">XXXL
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="6XL" class="me-2"
                 v-model="product.sizes">6XL
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="0 to 3" class="me-2"
                 v-model="product.sizes">0 to 3
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="6M" class="me-2"
                 v-model="product.sizes">6M
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="3t" class="me-2"
                 v-model="product.sizes">3t
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="26W/32L" class="me-2"
                 v-model="product.sizes">26W/32L
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="40 EU" class="me-2"
                 v-model="product.sizes">40 EU
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="40" class="me-2"
                 v-model="product.sizes">40
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="Mid_Rise" class="me-2"
                 v-model="product.sizes">Mid Rise
             </label>
 
-            <label for="size-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="size-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="size-choice" name="size-choice" value="10_Regular" class="me-2"
                 v-model="product.sizes">10 Regular
             </label>
@@ -194,54 +201,54 @@
 
         <!-- don't delete it -->
         <div class="mb-4">
-          <p class="block mb-2 font-medium text-gray-700">{{ $t('form.color') }}</p>
+          <p class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.color') }}</p>
           <div class="grid grid-cols-3 gap-4">
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Black" class="me-2"
                 v-model="product.colors">Black
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="White" class="me-2"
                 v-model="product.colors">White
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Denim Light" class="me-2"
                 v-model="product.colors">Denim Light
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Brown Windowpane" class="me-2"
                 v-model="product.colors">Brown Windowpane
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Blue" class="me-2"
                 v-model="product.colors">Blue
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Pink" class="me-2"
                 v-model="product.colors">Pink
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Dark_Wash" class="me-2"
                 v-model="product.colors">Dark Wash
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Maroon" class="me-2"
                 v-model="product.colors">Maroon
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Khaki" class="me-2"
                 v-model="product.colors">Khaki
             </label>
 
-            <label for="color-choice" class="block mb-2 font-medium text-gray-700">
+            <label for="color-choice" class="block mb-2 font-medium text-gray-700 dark:text-gray-200">
               <input type="checkbox" id="color-choice" name="color-choice" value="Luggage" class="me-2"
                 v-model="product.colors">Luggage
             </label>
@@ -274,12 +281,12 @@
         </div>
 
         <div class="mb-4">
-          <label for="availability" class="block mb-2 font-medium text-gray-700">{{ $t('form.availability') }}</label>
+          <label for="availability" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.availability') }}</label>
           <select id="availability" name="availability" v-model="product.availability"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
-            <option value="" disabled>{{ $t('form.select_availability') }}</option>
-            <option>In stock</option>
-            <option>Out of stock</option>
+            class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200">
+            <option value="" disabled class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ $t('form.select_availability') }}</option>
+            <option class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">In stock</option>
+            <option class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">Out of stock</option>
           </select>
         </div>
 
@@ -316,7 +323,7 @@ const store = useProductsStore()
 const loading = ref(false);
 const categories = ref([])
 const selectedCategory = ref('')
-const product = ref({ brand: '', title: '', titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
+const product = ref({ brand: '', brandAr: '', title: '', titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
 const selectedFiles = ref([]);
 const previewImages = ref([])
 
@@ -394,7 +401,7 @@ const handleSubmit = () => {
 };
 
 const resetForm = () => {
-  product.value = { brand: '', title: '',titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '' };
+  product.value = { brand: '', brandAr: '', title: '', titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '' };
   selectedCategory.value = '';
   selectedFiles.value = [];
   previewImages.value = [];

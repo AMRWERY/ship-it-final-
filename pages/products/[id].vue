@@ -20,7 +20,8 @@
               <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{
                 $i18n.locale === 'ar' ? productStore.selectedProduct?.titleAr :
                 productStore.selectedProduct?.title }}</h3>
-              <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">{{ productStore.selectedProduct?.brand }}
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">{{ $i18n.locale === 'ar' ? productStore.selectedProduct?.brandAr :
+                productStore.selectedProduct?.brand }}
               </p>
               <div class="flex flex-wrap items-center gap-4 mt-4">
                 <h4 class="text-2xl font-bold text-gray-800 sm:text-3xl dark:text-gray-200">{{
