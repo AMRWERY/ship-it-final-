@@ -64,7 +64,7 @@
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
           <nuxt-link v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
             class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105 dark:border-none">
-            <div class="block bg-white rounded-lg max-w-96 xs:min-w-full">
+            <div class="block max-w-full bg-white rounded-lg xs:min-w-full">
               <img :src="card.img" class="object-cover w-full h-full" />
             </div>
             <div
