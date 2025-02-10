@@ -15,9 +15,9 @@
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6" v-else>
                 <div v-for="product in productStore.paginatedProducts" :key="product"
-                    class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                    class="bg-white dark:bg-black flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
                     <div class="relative w-full h-full">
-                        <img :src="product.imageUrl1" alt="Product" class="object-cover object-top w-full" />
+                        <img :src="product.imageUrl1" alt="Product" class="object-cover object-top w-full h-full" />
                         <div class="absolute flex flex-col space-y-1 top-2 end-2">
                             <span class="px-2 py-1 text-xs font-bold text-center text-white bg-red-500 rounded-lg"
                                 v-if="product.discount">
@@ -34,18 +34,24 @@
 
                     <div class="flex flex-col flex-1 p-4">
                         <div class="flex-1">
-                            <h5 class="text-sm font-bold text-gray-800 sm:text-base line-clamp-2">{{ product.title }}
+                            <h5
+                                class="block w-full text-sm font-bold text-gray-800 truncate sm:text-base dark:text-gray-200">
+                                {{ product.title }}
                             </h5>
                             <div class="flex flex-wrap items-center gap-2 mt-2">
-                                <h6 class="text-lg font-bold text-gray-800 sm:text-md">{{ product.discountedPrice }} egp
+                                <h6 class="text-lg font-bold text-gray-800 sm:text-md dark:text-gray-200">{{
+                                    $n(parseFloat(product.discountedPrice), 'currency', currencyLocale) }}
                                 </h6>
-                                <h6 class="text-sm font-bold text-gray-500 line-through sm:text-base"
-                                    v-if="product.originalPrice">{{ product.originalPrice }} egp</h6>
+                                <h6 class="text-sm font-bold text-gray-500 line-through sm:text-base dark:text-gray-100"
+                                    v-if="product.originalPrice">{{ $n(parseFloat(product.originalPrice), 'currency',
+                                    currencyLocale) }}</h6>
                             </div>
                             <div class="mt-1 space-y-2">
                                 <div class="flex flex-wrap items-center justify-between">
-                                    <p>Stock: <span class="font-semibold text-green-600">{{ product.stock }}</span></p>
-                                    <p>Sku: <span class="font-semibold text-green-600">{{ product.sku }}</span></p>
+                                    <p>Stock: <span class="font-semibold text-green-600 dark:text-green-400">{{
+                                            product.stock }}</span></p>
+                                    <p>Sku: <span class="font-semibold text-green-600 dark:text-green-400">{{
+                                            product.sku }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -92,6 +98,9 @@ onMounted(() => {
         loading.value = false;
     }, 3000);
 })
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 definePageMeta({
     layout: "dashboard",
