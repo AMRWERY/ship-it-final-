@@ -274,7 +274,7 @@
 
 <script setup>
 const isSectionOpen = ref({
-  categories: false,
+  categories: true,
   colors: false,
   sizes: false,
 });
