@@ -3,13 +3,19 @@
     <!-- breadcrumb component -->
     <breadcrumb />
 
-    <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
+    <div class="max-w-2xl p-6 mx-auto mt-5 bg-white dark:bg-[#181a1b] border rounded-lg">
       <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('dashboard.add_category') }}</h2>
       <form @submit.prevent="handleAddCategory">
         <div class="mb-4">
           <dynamic-inputs :label="t('form.category_title')" :placeholder="t('form.enter_category_title')" type="text"
             name="category" :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:category"
             v-model="newCategoryTitle" />
+        </div>
+
+        <div class="mb-4">
+          <dynamic-inputs :label="t('form.category_title_ar')" :placeholder="t('form.enter_category_title_ar')"
+            type="text" name="category_title_ar" :rules="'required|alpha_spaces'" :required="true"
+            prefixIcon="material-symbols:category" v-model="newCategoryTitleAr" />
         </div>
 
         <div class="mb-4">
@@ -58,6 +64,7 @@
 const categoryStore = useCategoriesStore();
 const loadingOne = ref(false);
 const newCategoryTitle = ref('');
+const newCategoryTitleAr = ref('');
 const previewImage = ref("");
 const selectedFile = ref(null);
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
@@ -75,8 +82,8 @@ const handleImageUpload = (event) => {
 
 const handleAddCategory = () => {
   loadingOne.value = true;
-  if (newCategoryTitle.value.trim() && selectedFile.value) {
-    categoryStore.addCategory(newCategoryTitle.value.trim(), selectedFile.value)
+  if (newCategoryTitle.value.trim() && newCategoryTitleAr.value.trim() && selectedFile.value) {
+    categoryStore.addCategory(newCategoryTitle.value.trim(), newCategoryTitleAr.value.trim(), selectedFile.value)
       .then(() => {
         triggerToast({
           title: t('toast.great'),
@@ -85,6 +92,7 @@ const handleAddCategory = () => {
           icon: 'mdi-check-circle',
         });
         newCategoryTitle.value = '';
+        newCategoryTitleAr.value = '';
         previewImage.value = null;
         selectedFile.value = null;
       })

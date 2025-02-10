@@ -8,11 +8,14 @@
         }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
-          <label for="main-category" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.category') }}</label>
+          <label for="main-category" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
+            $t('form.category') }}</label>
           <select id="main-category" name="main-category" v-model="selectedCategory"
             class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200">
-            <option value="" disabled class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ $t('form.select_category') }}</option>
-            <option v-for="category in categories" :key="category.id" :value="category.id" class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ category.title }}</option>
+            <option value="" disabled class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{
+              $t('form.select_category') }}</option>
+            <option v-for="category in categories" :key="category.id" :value="category.id"
+              class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ category.title }}</option>
           </select>
         </div>
 
@@ -22,8 +25,9 @@
         </div>
 
         <div class="mb-4">
-          <dynamic-inputs :label="t('form.brand_ar')" :placeholder="t('form.enter_brand_ar')" type="text" name="brand"
-            :rules="'required|alpha_spaces'" :required="true" prefixIcon="cib:brand-ai" v-model="product.brandAr" />
+          <dynamic-inputs :label="t('form.brand_ar')" :placeholder="t('form.enter_brand_ar')" type="text"
+            name="brand_ar" :rules="'required|alpha_spaces'" :required="true" prefixIcon="cib:brand-ai"
+            v-model="product.brandAr" />
         </div>
 
         <div class="mb-4">
@@ -58,12 +62,13 @@
 
         <div class="mb-4">
           <dynamic-inputs :label="t('form.product_title')" :placeholder="t('form.enter_product_title')" type="text"
-            name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v" v-model="product.title" />
+            name="product_title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v"
+            v-model="product.title" />
         </div>
 
         <div class="mb-4">
           <dynamic-inputs :label="t('form.product_title_ar')" :placeholder="t('form.enter_product_title_ar')"
-            type="text" name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v"
+            type="text" name="product_title_ar" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v"
             v-model="product.titleAr" />
         </div>
 
@@ -281,10 +286,12 @@
         </div>
 
         <div class="mb-4">
-          <label for="availability" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.availability') }}</label>
+          <label for="availability" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
+            $t('form.availability') }}</label>
           <select id="availability" name="availability" v-model="product.availability"
             class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200">
-            <option value="" disabled class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{ $t('form.select_availability') }}</option>
+            <option value="" disabled class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">{{
+              $t('form.select_availability') }}</option>
             <option class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">In stock</option>
             <option class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">Out of stock</option>
           </select>

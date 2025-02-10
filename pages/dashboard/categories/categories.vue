@@ -47,7 +47,8 @@
             </td>
             <td class="p-4 py-5">
               <p class="font-semibold text-md text-slate-500 dark:text-slate-100">{{
-                category.title }}</p>
+                $i18n.locale === 'ar' ? category.titleAr :
+                  category.title }}</p>
             </td>
             <td class="p-4 py-5">
               <img :src="category.imgOne" class="w-12 h-12 rounded-lg">
