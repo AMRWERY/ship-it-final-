@@ -65,7 +65,7 @@ export default defineNuxtPlugin((app) => {
           names: inputsAr.form,
         },
       }),
-      validateOnBlur: false,
+      validateOnBlur: true,
       validateOnChange: false,
       validateOnInput: true,
       validateOnModelUpdate: true,

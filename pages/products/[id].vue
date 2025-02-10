@@ -18,6 +18,7 @@
           <div class="w-full">
             <div>
               <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{
+                $i18n.locale === 'ar' ? productStore.selectedProduct?.titleAr :
                 productStore.selectedProduct?.title }}</h3>
               <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">{{ productStore.selectedProduct?.brand }}
               </p>
@@ -143,7 +144,8 @@
                   </span>
                   <div class="px-4 pb-4 mt-2 text-gray-600 dark:text-gray-100 max-h-24 custom-scroll">
                     <p>
-                      {{ productStore.selectedProduct?.description }}
+                      {{ $i18n.locale === 'ar' ? productStore.selectedProduct?.descriptionAr :
+                productStore.selectedProduct?.description }}
                     </p>
                   </div>
                 </div>

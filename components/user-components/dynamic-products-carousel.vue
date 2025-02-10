@@ -25,7 +25,8 @@
                     <div class="text-center">
                       <h3
                         class="text-sm font-bold text-white lg:text-base lg:text-gray-800 dark:text-gray-200 dark:lg:text-gray-300">
-                        {{ card.title }}</h3>
+                        {{ $i18n.locale === 'ar' ? card.titleAr :
+                        card.title }}</h3>
                       <div class="flex items-center justify-center mt-2 space-s-2">
                         <h4 class="text-lg font-bold text-red-700 sm:text-base dark:text-red-400 lg:text-2xl">{{
                         $n(parseFloat(card.discountedPrice), 'currency', currencyLocale) }}</h4>

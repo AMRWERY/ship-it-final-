@@ -55,12 +55,22 @@
           <dynamic-inputs :label="t('form.product_title')" :placeholder="t('form.enter_product_title')" type="text"
             name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v" v-model="product.title" />
         </div>
+        
+        <div class="mb-4">
+          <dynamic-inputs :label="t('form.product_title_ar')" :placeholder="t('form.enter_product_title_ar')" type="text"
+            name="title" :rules="'required'" :required="true" prefixIcon="mdi:tshirt-v" v-model="product.titleAr" />
+        </div>
 
         <div class="mb-4">
-          <label for="description" class="block mb-2 font-medium text-gray-700">{{ $t('form.description') }}</label>
-          <textarea id="description" rows="4" name="description" :placeholder="$t('form.enter_product_description')"
-            v-model="product.description"
-            class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400" />
+            <dynamic-inputs :label="t('form.product_description')" :placeholder="t('form.enter_product_description')"
+                type="textarea" :name="t('form.product_description')" :rules="'required'" :required="true"
+                prefixIcon="pajamas:text-description" v-model="product.description" />
+        </div>
+        
+        <div class="mb-4">
+          <dynamic-inputs :label="t('form.product_description_ar')" :placeholder="t('form.enter_your_product_description_ar')"
+                type="textarea" :name="t('form.product_description_ar')" :rules="'required'" :required="true"
+                prefixIcon="pajamas:text-description" v-model="product.descriptionAr" />
         </div>
 
         <div class="mb-4">
@@ -306,7 +316,7 @@ const store = useProductsStore()
 const loading = ref(false);
 const categories = ref([])
 const selectedCategory = ref('')
-const product = ref({ brand: '', title: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
+const product = ref({ brand: '', title: '', titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
 const selectedFiles = ref([]);
 const previewImages = ref([])
 
@@ -384,7 +394,7 @@ const handleSubmit = () => {
 };
 
 const resetForm = () => {
-  product.value = { brand: '', title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '' };
+  product.value = { brand: '', title: '',titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '' };
   selectedCategory.value = '';
   selectedFiles.value = [];
   previewImages.value = [];

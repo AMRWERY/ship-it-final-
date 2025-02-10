@@ -33,7 +33,8 @@
 
           <nuxt-link to=""
             class="block w-full text-lg font-semibold leading-tight text-gray-900 capitalize truncate hover:underline dark:text-gray-200">
-            {{ product.title }}</nuxt-link>
+            {{ $i18n.locale === 'ar' ? product.titleAr :
+              product.title }}</nuxt-link>
           <div class="flex items-center gap-2 mt-2">
             <div class="flex items-center">
               <!-- ratings component -->
