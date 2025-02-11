@@ -46,27 +46,27 @@
                 <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="totes" v-model="filters.categories" value="Totes"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="totes" class="cursor-pointer">Totes</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="backpacks" v-model="filters.categories" value="Backpacks"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="backpacks" class="cursor-pointer">Backpacks</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="travel-bags" v-model="filters.categories" value="Travel Bags"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="travel-bags" class="cursor-pointer">Travel Bags</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="hip-bags" v-model="filters.categories" value="Hip Bags"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="hip-bags" class="cursor-pointer">Hip Bags</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="laptop-sleeves" v-model="filters.categories" value="Laptop Sleeves"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="laptop-sleeves" class="cursor-pointer">Laptop Sleeves</label>
                   </li>
                 </ul>
@@ -84,22 +84,22 @@
                 <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="red" v-model="filters.colors" value="Red"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="red" class="cursor-pointer">Red</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="blue" v-model="filters.colors" value="Blue"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="blue" class="cursor-pointer">Blue</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="green" v-model="filters.colors" value="Green"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="green" class="cursor-pointer">Green</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="black" v-model="filters.colors" value="Black"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="black" class="cursor-pointer">Black</label>
                   </li>
                 </ul>
@@ -117,22 +117,22 @@
                 <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="small" v-model="filters.sizes" value="Small"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="small" class="cursor-pointer">Small</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="medium" v-model="filters.sizes" value="Medium"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="medium" class="cursor-pointer">Medium</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="large" v-model="filters.sizes" value="Large"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="large" class="cursor-pointer">Large</label>
                   </li>
                   <li class="flex items-center space-s-2">
                     <input type="checkbox" id="extra-large" v-model="filters.sizes" value="Extra Large"
-                      class="text-black border-gray-300 rounded focus:ring-black">
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label for="extra-large" class="cursor-pointer">Extra Large</label>
                   </li>
                 </ul>
@@ -174,27 +174,27 @@
               <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="totes" v-model="filters.categories" value="Totes"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="totes" class="cursor-pointer">Totes</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="backpacks" v-model="filters.categories" value="Backpacks"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="backpacks" class="cursor-pointer">Backpacks</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="travel-bags" v-model="filters.categories" value="Travel Bags"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="travel-bags" class="cursor-pointer">Travel Bags</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="hip-bags" v-model="filters.categories" value="Hip Bags"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="hip-bags" class="cursor-pointer">Hip Bags</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="laptop-sleeves" v-model="filters.categories" value="Laptop Sleeves"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="laptop-sleeves" class="cursor-pointer">Laptop Sleeves</label>
                 </li>
               </ul>
@@ -212,22 +212,22 @@
               <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="red" v-model="filters.colors" value="Red"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="red" class="cursor-pointer">Red</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="blue" v-model="filters.colors" value="Blue"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="blue" class="cursor-pointer">Blue</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="green" v-model="filters.colors" value="Green"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="green" class="cursor-pointer">Green</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="black" v-model="filters.colors" value="Black"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="black" class="cursor-pointer">Black</label>
                 </li>
               </ul>
@@ -245,22 +245,22 @@
               <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="small" v-model="filters.sizes" value="Small"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="small" class="cursor-pointer">Small</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="medium" v-model="filters.sizes" value="Medium"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="medium" class="cursor-pointer">Medium</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="large" v-model="filters.sizes" value="Large"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="large" class="cursor-pointer">Large</label>
                 </li>
                 <li class="flex items-center space-s-2">
                   <input type="checkbox" id="extra-large" v-model="filters.sizes" value="Extra Large"
-                    class="text-black border-gray-300 rounded focus:ring-black">
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                   <label for="extra-large" class="cursor-pointer">Extra Large</label>
                 </li>
               </ul>

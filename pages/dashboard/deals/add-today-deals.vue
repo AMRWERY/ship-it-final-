@@ -67,26 +67,26 @@
           <p class="block mb-2 font-medium text-gray-700">Product Type</p>
           <div class="grid grid-cols-3 gap-4">
             <label for="new-arrival" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="new-arrival" name="new-arrival" value="New_Arrival" class="me-2"
+              <input type="checkbox" id="new-arrival" name="new-arrival" value="New_Arrival" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.productTypes">New Arrival
             </label>
 
             <label for="express-deals" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="express-deals" name="express-deals" value="Express_Deals" class="me-2"
+              <input type="checkbox" id="express-deals" name="express-deals" value="Express_Deals" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.productTypes">Express Deals
             </label>
 
             <label for="sale" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="sale" name="sale" value="Sale" class="me-2" v-model="product.productTypes">Sale
+              <input type="checkbox" id="sale" name="sale" value="Sale" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent" v-model="product.productTypes">Sale
             </label>
 
             <label for="bundle" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="bundle" name="bundle" value="Bundle" class="me-2"
+              <input type="checkbox" id="bundle" name="bundle" value="Bundle" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.productTypes">Bundle
             </label>
 
             <label for="custom" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="custom" name="custom" value="Custom" class="me-2"
+              <input type="checkbox" id="custom" name="custom" value="Custom" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.productTypes">Custom
             </label>
           </div>
@@ -96,87 +96,87 @@
           <p class="block mb-2 font-medium text-gray-700">Size</p>
           <div class="grid grid-cols-4 gap-4 md:grid-cols-5 sm:grid-cols-4">
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="XXS" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="XXS" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">XXS
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="XS" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="XS" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">XS
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="S" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="S" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">S
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="M" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="M" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">M
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="L" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="L" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">L
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="XL" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="XL" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">XL
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="XXL" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="XXL" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">XXL
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="XXXL" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="XXXL" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">XXXL
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="6XL" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="6XL" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">6XL
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="0 to 3" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="0 to 3" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">0 to 3
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="6M" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="6M" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">6M
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="3t" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="3t" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">3t
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="26W/32L" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="26W/32L" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">26W/32L
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="40 EU" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="40 EU" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">40 EU
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="40" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="40" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">40
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="Mid_Rise" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="Mid_Rise" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">Mid Rise
             </label>
 
             <label for="size-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="size-choice" name="size-choice" value="10_Regular" class="me-2"
+              <input type="checkbox" id="size-choice" name="size-choice" value="10_Regular" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.sizes">10 Regular
             </label>
           </div>
@@ -187,52 +187,52 @@
           <p class="block mb-2 font-medium text-gray-700">Color</p>
           <div class="grid grid-cols-3 gap-4">
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Black" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Black" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Black
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="White" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="White" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">White
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Denim Light" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Denim Light" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Denim Light
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Brown Windowpane" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Brown Windowpane" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Brown Windowpane
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Blue" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Blue" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Blue
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Pink" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Pink" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Pink
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Dark_Wash" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Dark_Wash" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Dark Wash
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Maroon" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Maroon" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Maroon
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Khaki" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Khaki" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Khaki
             </label>
 
             <label for="color-choice" class="block mb-2 font-medium text-gray-700">
-              <input type="checkbox" id="color-choice" name="color-choice" value="Luggage" class="me-2"
+              <input type="checkbox" id="color-choice" name="color-choice" value="Luggage" class="text-gray-500 transition duration-150 ease-in-out me-2 form-checkbox checked:bg-gray-700 checked:border-transparent"
                 v-model="product.colors">Luggage
             </label>
           </div>
