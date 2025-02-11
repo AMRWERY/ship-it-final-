@@ -144,25 +144,6 @@ export const useProductsStore = defineStore("new-products", {
           console.error("Error fetching products by category:", error);
         });
     },
-    // async fetchProductsByCategory(catId) {
-    //   if (!catId) {
-    //     // console.log("Category ID is required to fetch products by category");
-    //     return;
-    //   }
-    //   try {
-    //     const querySnap = await getDocs(
-    //       query(collection(db, "products"), where("catId", "==", catId))
-    //     );
-    //     const filteredProducts = querySnap.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     this.products = filteredProducts;
-    //     // console.log('products', this.products)
-    //   } catch (error) {
-    //     console.error("Error fetching products by category:", error);
-    //   }
-    // },
 
     fetchProductDetail(productId) {
       if (!productId) {
