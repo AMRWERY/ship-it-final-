@@ -49,6 +49,12 @@
             </div>
           </div>
         </div>
+
+        <!-- Error message below the file input -->
+        <div v-if="fileUploadError" class="font-medium text-red-600 dark:text-red-500">
+          {{ fileUploadError }}
+        </div>
+
         <div class="grid grid-cols-2 gap-4 mb-4 sm:grid-cols-3 md:grid-cols-4" v-if="previewImages.length > 0">
           <div v-for="(image, index) in previewImages" :key="index" class="p-1 border border-gray-200 rounded-lg">
             <img :src="image" class="object-cover w-full h-32 rounded-lg" />
@@ -335,9 +341,17 @@ const selectedCategory = ref('')
 const product = ref({ brand: '', brandAr: '', title: '', titleAr: '', description: '', descriptionAr: '', discountedPrice: '', originalPrice: '', discount: '', sku: '', stock: '', productTypes: [], sizes: [], colors: [] })
 const selectedFiles = ref([]);
 const previewImages = ref([])
+const fileUploadError = ref('');
 
 const handleImageUpload = (event) => {
   const files = event.target.files;
+  if (files.length > 4) {
+    fileUploadError.value = t("form.maximum_four_images_allowed");
+    event.target.value = "";
+    return;
+  } else {
+    fileUploadError.value = "";
+  }
   if (files.length > 0) {
     selectedFiles.value = Array.from(files);
     previewImages.value = [];

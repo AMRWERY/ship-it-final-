@@ -147,7 +147,8 @@
     "birth_date": "تاريخ الميلاد",
     "or": "أو",
     "create_free_account": "إنشاء حساب مجاني",
-    "or_continue_with": "أو المتابعة باستخدام"
+    "or_continue_with": "أو المتابعة باستخدام",
+    "maximum_four_images_allowed": "يمكنك تحميل 4 صور كحد أقصى"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
