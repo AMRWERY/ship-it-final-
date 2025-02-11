@@ -125,6 +125,7 @@
     "start_date": "Start date",
     "end_date": "End date",
     "add_product": "Add Product",
+    "edit_product": "Edit Product",
     "description": "Description",
     "discounted_price": "Discounted Price",
     "enter_discounted_price": "Enter discounted price",
@@ -174,6 +175,7 @@
     "view_details": "View details",
     "close": "Close",
     "add_product": "Add Product",
+    "edit_product": "Edit Product",
     "add_category": "Add Category",
     "view_message": "View Message",
     "reply": "Reply",
@@ -229,7 +231,8 @@
     "category_added_successfully": "Category added successfully",
     "failed_to_add_category": "Failed to add category",
     "message_deleted": "Message deleted",
-    "message_deletion_failed": "Message deletion failed"
+    "message_deletion_failed": "Message deletion failed",
+    "product_updated_successfully": "Product updated successfully"
   },
   "breadcrumb": {
     "home": "Home",
@@ -248,7 +251,9 @@
     "dashboard_deals_all_deals": "All Deals",
     "dashboard_deals_add_today_deals": "Add Deal",
     "dashboard_customer_messages": "Customer Messages",
-    "dashboard_profile": "Profile"
+    "dashboard_profile": "Profile",
+    "add_product": "Add Product",
+    "edit_product": "Edit Product"
   },
   "head": {
     "sign_up": "Sign Up",
@@ -261,6 +266,7 @@
     "orders": "Orders",
     "items_stock": "Items Stock",
     "add_product": "Add Product",
+    "edit_product": "Edit Product",
     "products": "Products",
     "categories": "Categories",
     "add_category": "Add Category",
@@ -294,7 +300,8 @@
     "notifications": "Notifications",
     "messages": "Messages",
     "quick_look": "Quick look",
-    "add_to_wishlist": "Add to Wishlist"
+    "add_to_wishlist": "Add to Wishlist",
+    "edit_product": "Edit Product"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty",

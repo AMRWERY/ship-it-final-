@@ -125,6 +125,7 @@
     "start_date": "تاريخ البدء",
     "end_date": "تاريخ الأنتهاء",
     "add_product": "إضافة منتج",
+    "edit_product": "تعديل منتج",
     "description": "الوصف",
     "discounted_price": "السعر بعد الخصم",
     "enter_discounted_price": "أدخل السعر بعد الخصم",
@@ -174,6 +175,7 @@
     "view_details": "عرض التفاصيل",
     "close": "غلق",
     "add_product": "إضافة منتج",
+    "edit_product": "تعديل منتج",
     "add_category": "إضافة فئة",
     "view_message": "عرض الرسالة",
     "reply": "رد",
@@ -229,7 +231,8 @@
     "category_added_successfully": "تمت إضافة الفئة بنجاح",
     "failed_to_add_category": "فشل في إضافة الفئة",
     "message_deleted": "تم حذف الرسالة",
-    "message_deletion_failed": "فشل حذف الرسالة"
+    "message_deletion_failed": "فشل حذف الرسالة",
+    "product_updated_successfully": "تم تحديث المنتج بنجاح"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -248,7 +251,9 @@
     "dashboard_deals_all_deals": "كل العروض",
     "dashboard_deals_add_today_deals": "إضافة عرض",
     "dashboard_customer_messages": "رسائل العملاء",
-    "dashboard_profile": "الملف الشخصي"
+    "dashboard_profile": "الملف الشخصي",
+    "add_product": "إضافة منتج",
+    "edit_product": "تعديل منتج"
   },
   "head": {
     "sign_up": "إنشاء حساب",
@@ -261,6 +266,7 @@
     "orders": "الطلبات",
     "items_stock": "مخزون العناصر",
     "add_product": "إضافة منتج",
+    "edit_product": "تعديل منتج",
     "products": "المنتجات",
     "categories": "الفئات",
     "add_category": "إضافة فئة",
@@ -294,7 +300,8 @@
     "notifications": "الإشعارات",
     "messages": "الرسائل",
     "quick_look": "نظرة سريعة",
-    "add_to_wishlist": "أضف إلى قائمة الرغبات"
+    "add_to_wishlist": "أضف إلى قائمة الرغبات",
+    "edit_product": "تعديل منتج"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",

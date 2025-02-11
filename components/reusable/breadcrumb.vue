@@ -30,6 +30,13 @@ const route = useRoute();
 const { t } = useI18n();
 
 const breadcrumbLabel = computed(() => {
+  if (route.params.id) {
+    if (route.params.id === 'add-product') {
+      return t('breadcrumb.add_product')
+    } else {
+      return t('breadcrumb.edit_product')
+    }
+  }
   if (route.meta?.breadcrumb) {
     return t(`breadcrumb.${route.meta.breadcrumb}`);
   }
@@ -44,18 +51,4 @@ const breadcrumbLabel = computed(() => {
   const pathSegments = route.path.split('/');
   return pathSegments[pathSegments.length - 1] || 'Unknown';
 });
-
-// const breadcrumbLabel = computed(() => {
-//   if (route.meta && route.meta.breadcrumb) {
-//     return t(`breadcrumb.${route.meta.breadcrumb}`);
-//   }
-//   if (route.name) {
-//     const formattedName = route.name
-//       .replace(/-/g, '_')
-//       .toLowerCase();
-//     return t(`breadcrumb.${formattedName}`);
-//   }
-//   const pathSegments = route.path.split('/');
-//   return pathSegments[pathSegments.length - 1] || 'Unknown';
-// });
 </script>

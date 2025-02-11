@@ -4,8 +4,11 @@
     <breadcrumb />
 
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white dark:bg-[#181a1b] border rounded-lg">
-      <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
-        }}</h2>
+      <!-- <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
+        }}</h2> -->
+      <h2 class="mb-4 text-2xl font-medium text-center">
+        {{ isEditMode ? $t('form.edit_product') : $t('form.add_product') }}
+      </h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
           <label for="main-category" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{
@@ -262,9 +265,8 @@
 
         <div class="mb-4">
           <dynamic-inputs :label="t('form.original_price')" :placeholder="t('form.enter_original_price')" type="text"
-            name="price" :rules="'required'" :required="true" prefixIcon="solar:dollar-linear"
-            @input="(event) => handleInput(event, 'originalPrice')" @blur="() => handleBlur('originalPrice')"
-            v-model="product.originalPrice" />
+            name="price" prefixIcon="solar:dollar-linear" @input="(event) => handleInput(event, 'originalPrice')"
+            @blur="() => handleBlur('originalPrice')" v-model="product.originalPrice" />
         </div>
 
         <div class="mb-4">
@@ -276,8 +278,7 @@
 
         <div class="mb-4">
           <dynamic-inputs :label="t('form.discount')" :placeholder="t('form.enter_the_discount_percentage')" type="text"
-            name="discount" :rules="'required'" :required="true" prefixIcon="ri:discount-percent-fill"
-            v-model="product.discount" />
+            name="discount" prefixIcon="ri:discount-percent-fill" v-model="product.discount" />
         </div>
 
         <div class="mb-4">
@@ -309,7 +310,10 @@
               <span class="text-center me-2">{{ $t('btn.please_wait') }}...</span>
               <icon name="svg-spinners:270-ring-with-bg" />
             </div>
-            <span v-else>{{ $t('btn.add_product') }}</span>
+            <span v-else>
+              {{ isEditMode ? $t('btn.edit_product') : $t('btn.add_product') }}
+            </span>
+            <!-- <span v-else>{{ $t('btn.add_product') }}</span> -->
           </button>
         </div>
       </form>
@@ -354,6 +358,11 @@ const handleImageUpload = (event) => {
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n();
+const route = useRoute()
+
+const isEditMode = computed(() => {
+  return route.params.id && route.params.id !== 'add-product'
+})
 
 const handleSubmit = () => {
   loading.value = true;
@@ -382,29 +391,73 @@ const handleSubmit = () => {
     ...filteredProductData,
     categoryId: selectedCategory.value,
   };
-  store
-    .createProduct(productData, selectedFiles.value)
-    .then(() => {
-      triggerToast({
-        title: t("toast.success"),
-        message: t("toast.product_added_successfully"),
-        type: "success",
-        icon: "mdi-check-circle",
+  if (isEditMode.value) {
+    store.updateProduct(route.params.id, productData)
+      .then(() => {
+        triggerToast({
+          title: t("toast.success"),
+          message: t("toast.product_updated_successfully"),
+          type: "success",
+          icon: "mdi-check-circle",
+        });
+      })
+      .catch((error) => {
+        triggerToast({
+          title: t("toast.error"),
+          message: t("toast.something_went_wrong_please_try_again"),
+          type: "error",
+          icon: "mdi-alert-circle",
+        });
+      })
+      .finally(() => {
+        loading.value = false;
       });
-      resetForm();
-    })
-    .catch((error) => {
-      // console.error("Error submitting product:", error);
-      triggerToast({
-        title: t("toast.error"),
-        message: t("toast.something_went_wrong_please_try_again"),
-        type: "error",
-        icon: "mdi-alert-circle",
+  } else {
+    store.createProduct(productData, selectedFiles.value)
+      .then(() => {
+        triggerToast({
+          title: t("toast.success"),
+          message: t("toast.product_added_successfully"),
+          type: "success",
+          icon: "mdi-check-circle",
+        });
+        resetForm();
+      })
+      .catch((error) => {
+        triggerToast({
+          title: t("toast.error"),
+          message: t("toast.something_went_wrong_please_try_again"),
+          type: "error",
+          icon: "mdi-alert-circle",
+        });
+      })
+      .finally(() => {
+        loading.value = false;
       });
-    })
-    .finally(() => {
-      loading.value = false;
-    });
+  }
+  // store
+  //   .createProduct(productData, selectedFiles.value)
+  //   .then(() => {
+  //     triggerToast({
+  //       title: t("toast.success"),
+  //       message: t("toast.product_added_successfully"),
+  //       type: "success",
+  //       icon: "mdi-check-circle",
+  //     });
+  //     resetForm();
+  //   })
+  //   .catch((error) => {
+  //     // console.error("Error submitting product:", error);
+  //     triggerToast({
+  //       title: t("toast.error"),
+  //       message: t("toast.something_went_wrong_please_try_again"),
+  //       type: "error",
+  //       icon: "mdi-alert-circle",
+  //     });
+  //   })
+  //   .finally(() => {
+  //     loading.value = false;
+  //   });
 };
 
 const resetForm = () => {
@@ -419,6 +472,30 @@ const categoryStore = useCategoriesStore()
 onMounted(async () => {
   await categoryStore.fetchCategories();
   categories.value = categoryStore.categories;
+
+  if (isEditMode.value) {
+    const productId = route.params.id;
+    try {
+      const fetchedProduct = await store.fetchProductDetail(productId);
+      // console.log("Fetched Product:", fetchedProduct);
+      if (fetchedProduct) {
+        product.value = { ...fetchedProduct };
+        selectedCategory.value = fetchedProduct.categoryId;
+      } else {
+        console.error("Product not found");
+      }
+    } catch (error) {
+      console.error("Failed to fetch product details:", error);
+    }
+  }
+});
+
+watch(() => route.params.id, (newId) => {
+  if (newId) {
+    productStore.fetchProductDetail(newId).then((data) => {
+      product.value = data;
+    });
+  }
 });
 
 const { formatDecimal, enforceTwoDecimalPlaces } = useFormatter();
@@ -441,7 +518,15 @@ definePageMeta({
   layout: "dashboard",
 });
 
-useHead({
-  titleTemplate: () => t('head.add_product'),
+onMounted(() => {
+  watch(
+    () => isEditMode.value,
+    () => {
+      useHead({
+        titleTemplate: isEditMode.value ? t("head.edit_product") : t("head.add_product"),
+      });
+    },
+    { immediate: true }
+  );
 });
 </script>

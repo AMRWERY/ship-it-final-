@@ -58,7 +58,7 @@
 <script setup>
 const props = defineProps({
   modelValue: {
-    type: String,
+    type: [String, Number],
     // required: true
   },
   label: {
