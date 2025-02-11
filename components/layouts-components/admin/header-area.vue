@@ -11,7 +11,7 @@
             toggleSidebar()
           }">
             <span class="relative block h-[1.375rem] w-[1.375rem] cursor-pointer">
-              <icon name="meteor-icons:bars" />
+              <icon name="meteor-icons:bars" class="text-gray-800" />
             </span>
           </button>
         </div>

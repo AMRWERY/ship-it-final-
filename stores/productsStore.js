@@ -74,7 +74,8 @@ export const useProductsStore = defineStore("new-products", {
 
     updateProduct(productId, updatedData) {
       const productRef = doc(db, "products", productId);
-      updateDoc(productRef, updatedData)
+      // updateDoc(productRef, updatedData)
+      return updateDoc(productRef, updatedData)
         .then(() => {
           const index = this.products.findIndex(
             (product) => product.id === productId
@@ -84,7 +85,8 @@ export const useProductsStore = defineStore("new-products", {
           }
         })
         .catch((error) => {
-          console.error("Error updating product:", error);
+          // console.error("Error updating product:", error);
+          return error
         });
     },
 
