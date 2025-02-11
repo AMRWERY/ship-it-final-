@@ -49,15 +49,16 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center justify-center mb-4 space-s-6" v-if="previewImages.length > 0">
-          <div v-for="(image, index) in previewImages" :key="index" class="mr-4">
-            <img :src="image" class="w-48 h-32 rounded-lg" />
+        <div class="grid grid-cols-2 gap-4 mb-4 sm:grid-cols-3 md:grid-cols-4" v-if="previewImages.length > 0">
+          <div v-for="(image, index) in previewImages" :key="index" class="p-1 border border-gray-200 rounded-lg">
+            <img :src="image" class="object-cover w-full h-32 rounded-lg" />
           </div>
         </div>
 
-        <div class="flex items-center justify-center mb-4 space-s-6">
-          <div v-if="product.imgOne" class="mt-4 border border-gray-200">
-            <img :src="product.imgOne" class="w-48 h-32 rounded-lg">
+        <div v-if="isEditMode && productImages.length"
+          class="grid grid-cols-2 gap-4 mb-4 sm:grid-cols-3 md:grid-cols-4">
+          <div v-for="(img, index) in productImages" :key="index" class="p-1 border border-gray-200 rounded-lg">
+            <img :src="img" alt="Product Image" class="object-cover w-full h-32 rounded-lg" />
           </div>
         </div>
 
@@ -352,6 +353,15 @@ const handleImageUpload = (event) => {
     previewImages.value = [];
   }
 };
+
+const productImages = computed(() => {
+  const images = [];
+  if (product.value.imageUrl1) images.push(product.value.imageUrl1);
+  if (product.value.imageUrl2) images.push(product.value.imageUrl2);
+  if (product.value.imageUrl3) images.push(product.value.imageUrl3);
+  if (product.value.imageUrl4) images.push(product.value.imageUrl4);
+  return images;
+});
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n();
