@@ -4,8 +4,6 @@
     <breadcrumb />
 
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white dark:bg-[#181a1b] border rounded-lg">
-      <!-- <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
-        }}</h2> -->
       <h2 class="mb-4 text-2xl font-medium text-center">
         {{ isEditMode ? $t('form.edit_product') : $t('form.add_product') }}
       </h2>
@@ -313,7 +311,6 @@
             <span v-else>
               {{ isEditMode ? $t('btn.edit_product') : $t('btn.add_product') }}
             </span>
-            <!-- <span v-else>{{ $t('btn.add_product') }}</span> -->
           </button>
         </div>
       </form>
@@ -435,29 +432,6 @@ const handleSubmit = () => {
         loading.value = false;
       });
   }
-  // store
-  //   .createProduct(productData, selectedFiles.value)
-  //   .then(() => {
-  //     triggerToast({
-  //       title: t("toast.success"),
-  //       message: t("toast.product_added_successfully"),
-  //       type: "success",
-  //       icon: "mdi-check-circle",
-  //     });
-  //     resetForm();
-  //   })
-  //   .catch((error) => {
-  //     // console.error("Error submitting product:", error);
-  //     triggerToast({
-  //       title: t("toast.error"),
-  //       message: t("toast.something_went_wrong_please_try_again"),
-  //       type: "error",
-  //       icon: "mdi-alert-circle",
-  //     });
-  //   })
-  //   .finally(() => {
-  //     loading.value = false;
-  //   });
 };
 
 const resetForm = () => {
