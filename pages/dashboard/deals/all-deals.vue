@@ -16,11 +16,12 @@
                             </div>
 
                             <div class="w-full mt-2 lg:order-1 lg:w-32 lg:flex-shrink-0">
-                                <div class="flex flex-row items-start lg:flex-col">
+                                <div class="flex flex-row items-start gap-2 lg:flex-col">
                                     <button type="button" v-for="(image, index) in imageList" :key="index"
                                         @click="setSelectedImage(image)"
-                                        class="w-24 h-20 mb-3 overflow-hidden text-center border-2 border-gray-400 rounded-lg flex-0 aspect-square">
-                                        <img class="object-cover w-full h-full" :src="image" alt="product-img-2" />
+                                        class="w-24 h-20 p-1 mb-3 overflow-hidden text-center border border-gray-200 rounded-lg flex-0 aspect-square">
+                                        <img class="object-cover w-full h-full rounded-lg" :src="image"
+                                            alt="product-img-2" />
                                     </button>
                                 </div>
                             </div>
@@ -38,9 +39,10 @@
 
                             <div class="flex mb-6 item-center gap-x-6">
                                 <div class="flex items-center space-s-2">
-                                    <p class="text-2xl font-bold text-red-600">{{ currentDeal?.discountedPrice }}
+                                    <p class="text-2xl font-bold text-red-600 dark:text-red-500">{{
+                                        currentDeal?.discountedPrice }}
                                         epg</p>
-                                    <p class="text-base font-semibold text-gray-600 line-through"
+                                    <p class="text-base font-semibold text-gray-600 line-through dark:text-gray-300"
                                         v-if="currentDeal?.originalPrice">{{ currentDeal?.originalPrice
                                         }} epg</p>
                                 </div>
@@ -75,14 +77,14 @@
 
                             <div class="gap-4 border-b border-gray-300">
                                 <div class="py-6">
-                                    <p class="mb-2 text-lg font-semibold dark:text-gray-400">
+                                    <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                         Color
                                     </p>
                                     <div class="flex flex-wrap items-center gap-2 mt-3 select-none">
                                         <label v-for="color in currentDeal?.colors" :key="color">
                                             <input type="radio" name="type" value="" class="sr-only peer" />
                                             <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
+                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white dark:border-gray-400">
                                                 {{ color }}
                                             </p>
                                         </label>
@@ -92,14 +94,14 @@
 
                             <div class="gap-4 border-b border-gray-300">
                                 <div class="py-6">
-                                    <p class="mb-2 text-lg font-semibold dark:text-gray-400">
+                                    <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                         Size
                                     </p>
                                     <div class="flex flex-wrap items-center gap-2 mt-3 select-none">
                                         <label v-for="size in currentDeal?.sizes" :key="size">
                                             <input type="radio" name="type" value="" class="sr-only peer" />
                                             <p
-                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white">
+                                                class="px-6 py-2 font-bold border border-black rounded-lg peer-checked:bg-black peer-checked:text-white dark:border-gray-400">
                                                 {{ size }}
                                             </p>
                                         </label>
@@ -112,7 +114,7 @@
                     <div class="lg:col-span-full">
                         <nav class="flex gap-4">
                             <nuxt-link to=""
-                                class="py-2 text-sm font-semibold text-gray-900 border-b-2 border-gray-900 hover:border-gray-400 hover:text-gray-800">
+                                class="py-2 text-sm font-semibold text-gray-900 border-b-2 border-gray-900 dark:border-gray-200 dark:text-gray-200">
                                 Upcoming Deals
                             </nuxt-link>
                         </nav>
@@ -126,12 +128,16 @@
                                             class="object-contain w-full h-full" />
                                     </div>
                                     <div class="max-sm:text-center">
-                                        <h3 class="text-sm font-bold text-gray-800 sm:text-base">{{ deal.title }}</h3>
-                                        <h4 class="mt-1 text-xs font-bold text-blue-600">{{ deal.brand }}</h4>
-                                        <h4 class="mt-1 text-xs font-bold text-blue-600">Save {{ deal.discount }}%</h4>
-                                        <h4 class="mt-1 text-xs font-bold text-blue-600">{{ deal.discountedPrice }} egp
+                                        <h3 class="text-sm font-bold text-gray-800 sm:text-base dark:text-gray-200">{{
+                                            deal.title }}</h3>
+                                        <h4 class="mt-1 text-xs font-bold text-blue-600 dark:text-blue-400">{{
+                                            deal.brand }}</h4>
+                                        <h4 class="mt-1 text-xs font-bold text-blue-600 dark:text-blue-400">Save {{
+                                            deal.discount }}%</h4>
+                                        <h4 class="mt-1 text-xs font-bold text-blue-600 dark:text-blue-400">{{
+                                            deal.discountedPrice }} egp
                                         </h4>
-                                        <h4 class="mt-1 text-xs font-bold text-red-600">{{
+                                        <h4 class="mt-1 text-xs font-bold text-red-600 dark:text-red-400">{{
                                             formatRemainingTime(deal.remainingTime) }}</h4>
                                     </div>
                                 </div>
@@ -248,7 +254,6 @@ const imageList = computed(() =>
         todayDealStore.currentDeal?.imageUrl2,
         todayDealStore.currentDeal?.imageUrl3,
         todayDealStore.currentDeal?.imageUrl4,
-        todayDealStore.currentDeal?.imageUrl5,
     ].filter(Boolean)
 );
 

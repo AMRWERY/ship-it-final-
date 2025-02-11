@@ -8,7 +8,7 @@
                     <icon name="material-symbols:calendar-today" class="w-5 h-5 text-slate-400" />
                 </span>
                 <input type="text" readonly :value="formattedDate" @click="toggleCalendar"
-                    class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-100 text-slate-700 dark:text-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9"
+                    class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-300 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9"
                     :placeholder="$t('form.select_date')" />
             </div>
 

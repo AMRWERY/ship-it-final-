@@ -34,10 +34,10 @@
                           <img :src="selectedImage" class="w-full  aspect-[11/8] object-cover object-top" />
                         </div>
                         <div class="w-full max-w-full p-2 overflow-auto bg-white dark:bg-[#181a1b]">
-                          <div class="flex flex-row gap-4 shrink-0">
+                          <div class="flex flex-row gap-4 shrink-0 space-s-2">
                             <img v-for="(image, index) in imageList" :key="index" :src="image"
                               @click="setSelectedImage(image)"
-                              class="object-cover object-top w-16 h-16 border-b-2 border-black shadow-md cursor-pointer aspect-square" />
+                              class="object-cover object-top w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-md cursor-pointer aspect-square" />
                           </div>
                         </div>
                       </div>
@@ -302,7 +302,6 @@ const imageList = computed(() =>
     todayDealStore.currentDeal?.imageUrl2,
     todayDealStore.currentDeal?.imageUrl3,
     todayDealStore.currentDeal?.imageUrl4,
-    todayDealStore.currentDeal?.imageUrl5,
   ].filter(Boolean)
 );
 

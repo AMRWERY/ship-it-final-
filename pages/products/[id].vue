@@ -7,10 +7,10 @@
             <div class="flex flex-row gap-4">
               <div class="flex flex-col w-16 space-y-4 max-sm:w-14 shrink-0">
                 <img v-for="(image, index) in imageList" :key="index" :src="image" @click="setSelectedImage(image)"
-                  class="aspect-[64/85] object-cover object-top w-full cursor-pointer border-b-2 border-black rounded-xl" />
+                  class="aspect-[64/85] object-cover object-top w-full cursor-pointer p-1 border border-gray-200 rounded-lg" />
               </div>
               <div class="flex-1">
-                <img :src="selectedImage" class="w-full aspect-[548/712] object-cover rounded-xl" />
+                <img :src="selectedImage" class="w-full aspect-[548/712] object-cover rounded-lg" />
               </div>
             </div>
           </div>
@@ -19,8 +19,9 @@
             <div>
               <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{
                 $i18n.locale === 'ar' ? productStore.selectedProduct?.titleAr :
-                productStore.selectedProduct?.title }}</h3>
-              <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">{{ $i18n.locale === 'ar' ? productStore.selectedProduct?.brandAr :
+                  productStore.selectedProduct?.title }}</h3>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">{{ $i18n.locale === 'ar' ?
+                productStore.selectedProduct?.brandAr :
                 productStore.selectedProduct?.brand }}
               </p>
               <div class="flex flex-wrap items-center gap-4 mt-4">
@@ -146,7 +147,7 @@
                   <div class="px-4 pb-4 mt-2 text-gray-600 dark:text-gray-100 max-h-24 custom-scroll">
                     <p>
                       {{ $i18n.locale === 'ar' ? productStore.selectedProduct?.descriptionAr :
-                productStore.selectedProduct?.description }}
+                        productStore.selectedProduct?.description }}
                     </p>
                   </div>
                 </div>
@@ -260,7 +261,6 @@ const imageList = computed(() =>
     productStore.selectedProduct?.imageUrl2,
     productStore.selectedProduct?.imageUrl3,
     productStore.selectedProduct?.imageUrl4,
-    productStore.selectedProduct?.imageUrl5,
   ].filter(Boolean)
 );
 
