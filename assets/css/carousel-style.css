@@ -24,3 +24,12 @@
 .carousel__item {
   width: 100%;
 }
+
+.carousel__prev,
+.carousel__next {
+  @apply p-1 text-white bg-gray-800 rounded-full hover:text-white;
+}
+
+.carousel__pagination-button--active {
+  @apply bg-gray-800;
+}
