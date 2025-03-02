@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Button to open the dialog -->
-    <button @click="openDialog" v-if="isAuthenticated && !isAdmin && isEmailInList !== null && isEmailInList"
+    <button @click="openDialog" v-if="isAuthenticated && isEmailInList !== null && isEmailInList"
       class="fixed z-50 flex items-center justify-center p-4 text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bottom-28 end-8 hover:from-purple-500 hover:via-pink-500 hover:to-yellow-500 focus:ring-4 focus:ring-purple-300 active:scale-90">
       <icon name="ic:sharp-wechat" />
     </button>
@@ -67,11 +67,6 @@ const mailStore = useMailStore();
 const { t } = useI18n()
 
 const isAuthenticated = computed(() => localStorage.getItem('user'));
-
-const isAdmin = computed(() => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  return user?.role === 'admin';
-});
 
 const loading = ref(false);
 const messageSent = ref(false);
