@@ -12,7 +12,7 @@ import {
 import { db, storage } from "@/firebase";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 
-export const useProductsStore = defineStore("new-products", {
+export const useProductsStore = defineStore("products", {
   state: () => ({
     products: [],
     selectedProduct: null,

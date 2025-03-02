@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 
-export const useContactStore = defineStore("contact", {
+export const useContactStore = defineStore("contact-us", {
   state: () => ({
     yourName: "",
     email: "",

@@ -1,7 +1,7 @@
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "~/firebase";
 
-export const useImageStore = defineStore("imageStore", {
+export const useImageStore = defineStore("images", {
   state: () => ({
     images: [],
     isLoading: false,

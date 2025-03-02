@@ -1,15 +1,4 @@
-import { db } from "@/firebase";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  doc,
-  query,
-  where,
-} from "firebase/firestore";
-
-export const useWishlistStore = defineStore("wishlistStore", {
+export const useWishlistStore = defineStore("wishlist", {
   state: () => ({
     wishlist: [],
     loading: false,
@@ -21,47 +10,32 @@ export const useWishlistStore = defineStore("wishlistStore", {
       const authStore = useAuthStore();
       const userId = authStore.user?.uid;
       if (!userId) {
-        // console.error("User ID not found. Cannot fetch wishlist.");
         this.loading = false;
         return;
       }
-      const wishlistQuery = query(
-        collection(db, "wishlist"),
-        where("userId", "==", userId)
-      );
-      getDocs(wishlistQuery)
-        .then((querySnapshot) => {
-          this.wishlist = querySnapshot.docs.map((doc) => ({
-            docId: doc.id,
-            productId: doc.data().id,
-            title: doc.data().title,
-            discountedPrice: doc.data().discountedPrice,
-            originalPrice: doc.data().originalPrice,
-            brand: doc.data().brand,
-            imageUrl1: doc.data().imageUrl1,
-          }));
-          // console.log("Fetched wishlist:", this.wishlist);
-        })
-        .catch((error) => {
-          console.error("Error fetching wishlist:", error);
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      try {
+        const storedWishlist = localStorage.getItem(`wishlist_${userId}`);
+        this.wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
+      } catch (error) {
+        console.error("Error fetching wishlist from localStorage:", error);
+        this.wishlist = [];
+      } finally {
+        this.loading = false;
+      }
     },
 
     addToWishlist(id, title, discountedPrice, originalPrice, brand, imageUrl1) {
-      if (this.wishlist.some((item) => item.productId === id)) {
-        throw new Error("Item already added to the wishlist.");
-      }
       const authStore = useAuthStore();
       const userId = authStore.user?.uid;
       if (!userId) {
-        // console.error("User ID not found. Cannot add to wishlist.");
-        return;
+        throw new Error("User not authenticated");
       }
-      const product = {
-        id,
+      if (this.wishlist.some((item) => item.productId === id)) {
+        throw new Error("Item already added to the wishlist.");
+      }
+      const newItem = {
+        docId: Date.now().toString(),
+        productId: id,
         title,
         discountedPrice,
         originalPrice,
@@ -69,27 +43,27 @@ export const useWishlistStore = defineStore("wishlistStore", {
         imageUrl1,
         userId,
       };
-      addDoc(collection(db, "wishlist"), product)
-        .then((docRef) => {
-          this.wishlist.push({ docId: docRef.id, productId: id, ...product });
-          // console.log("Product added to wishlist:", product);
-        })
-        .catch((error) => {
-          console.error("Error adding to wishlist:", error);
-        });
+      this.wishlist.push(newItem);
+      this.persistWishlist(userId);
     },
 
     removeFromWishlist(docId) {
-      const docRef = doc(db, "wishlist", docId);
-      deleteDoc(docRef)
-        .then(() => {
-          // console.log("Item deleted successfully.");
-          this.wishlist = this.wishlist.filter((item) => item.docId !== docId);
-          // console.log("Updated wishlist:", this.wishlist);
-        })
-        .catch((error) => {
-          console.error("Error removing from wishlist:", error);
-        });
+      const authStore = useAuthStore();
+      const userId = authStore.user?.uid;
+      if (!userId) return;
+      this.wishlist = this.wishlist.filter((item) => item.docId !== docId);
+      this.persistWishlist(userId);
+    },
+
+    persistWishlist(userId) {
+      try {
+        localStorage.setItem(
+          `wishlist_${userId}`,
+          JSON.stringify(this.wishlist)
+        );
+      } catch (error) {
+        console.error("Error saving wishlist to localStorage:", error);
+      }
     },
   },
 

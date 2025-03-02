@@ -163,7 +163,6 @@ const toggleWishlist = async (product) => {
   }
   const userId = authStore.user?.uid;
   if (!userId) {
-    // console.error('User ID is not available');
     return;
   }
   if (wishlistStore.isInWishlist(product.id)) {

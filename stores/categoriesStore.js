@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 
-export const useCategoriesStore = defineStore("categoriesStore", {
+export const useCategoriesStore = defineStore("categories", {
   state: () => ({
     categories: [],
     subCategories: [],

@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 
-export const useCheckoutStore = defineStore("checkout", {
+export const useCheckoutStore = defineStore("checkouts", {
   state: () => ({
     orders: [],
     paginatedOrders: [],

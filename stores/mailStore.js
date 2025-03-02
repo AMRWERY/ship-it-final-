@@ -1,7 +1,7 @@
 import { db } from "@/firebase";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
-export const useMailStore = defineStore("mail", {
+export const useMailStore = defineStore("mails", {
   state: () => ({
     email: "",
     emailList: [],

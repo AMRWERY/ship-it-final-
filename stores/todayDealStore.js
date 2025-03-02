@@ -9,7 +9,7 @@ import {
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/firebase";
 
-export const useTodayDealStore = defineStore("todayDealStore", {
+export const useTodayDealStore = defineStore("today-deals", {
   state: () => ({
     products: [],
     currentDeal: null,
