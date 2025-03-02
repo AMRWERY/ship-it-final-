@@ -389,5 +389,12 @@
   },
   "error_page": {
     "you_are_all_alone_here": "You are all alone here"
+  },
+  "menu": {
+    "profile": "Profile",
+    "messages": "Messages",
+    "addresses": "Addresses",
+    "order_tracking": "Order Tracking",
+    "logout": "Logout"
   }
 }

@@ -41,18 +41,8 @@
                     </div>
 
                     <div class="flex items-center space-s-1">
-                        <!-- profile -->
-                        <tooltip :text="$t('tooltip.profile')" position="bottom">
-                            <nuxt-link to="/profile" type="button" class="relative flex text-white rounded-full"
-                                v-if="isAuthenticated">
-                                <span class="absolute -inset-1.5" />
-                                <span class="sr-only">View Profile</span>
-                                <img :src="userProfileImg" alt="profile-img" class="rounded-full h-7 w-7 me-2"
-                                    v-if="userProfileImg">
-                                <img src="https://justfields.com/storage/projects/7M5rV059/vector-avatar-02.jpg"
-                                    alt="profile-img" class="rounded-full h-7 w-7 me-2" v-else>
-                            </nuxt-link>
-                        </tooltip>
+                        <!-- profile-menu component -->
+                        <profile-menu />
 
                         <!-- cart-dialog component -->
                         <cart-dialog v-if="isAuthenticated" />
@@ -79,19 +69,6 @@
                             </nuxt-link>
                         </tooltip>
                     </div>
-
-                    <!-- admin dashboard - display for admin only -->
-                    <div class="flex items-center space-s-4">
-                        <!--logout -->
-                        <tooltip :text="$t('tooltip.logout')" position="bottom">
-                            <nuxt-link to="/" type="button" class="relative flex text-white rounded-full cursor-pointer"
-                                @click="logout" v-if="isAuthenticated">
-                                <span class="absolute -inset-1.5" />
-                                <span class="sr-only">Logout</span>
-                                <icon name="mynaui:logout" class="ms-2" />
-                            </nuxt-link>
-                        </tooltip>
-                    </div>
                 </div>
             </div>
         </nav>
@@ -102,7 +79,6 @@
 const wishlistStore = useWishlistStore();
 const authStore = useAuthStore();
 const localeStore = useLocaleStore();
-
 const { locale } = useI18n();
 
 const setLocale = (value) => {
@@ -115,24 +91,7 @@ computed(() => {
     setLocale(storedLocale);
 });
 
-const userProfileImg = computed(() => authStore.user?.profileImg || '')
-
-onMounted(() => {
-    if (authStore.user?.profileImg) {
-        userProfileImg.value = authStore.user?.profileImg;
-        // console.log('img', userProfileImg.value)
-    }
-});
-
 const isAuthenticated = computed(() => authStore.isAuthenticated);
-
-const logout = async () => {
-    try {
-        await authStore.logoutUser();
-    } catch (err) {
-        console.error('Error during logout:', err);
-    }
-};
 
 //toggle themes
 defineProps({

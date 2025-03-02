@@ -387,5 +387,12 @@
   },
   "error_page": {
     "you_are_all_alone_here": "أنت وحدك هنا"
+  },
+  "menu": {
+    "profile": "الملف الشخصي",
+    "messages": "الرسائل",
+    "addresses": "العناوين",
+    "order_tracking": "تتبع الطلب",
+    "logout": "نسجيل خروج"
   }
 }

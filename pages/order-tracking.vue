@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="max-w-xl p-2">
-      <h1 class="text-3xl font-semibold">Order history</h1>
+      <h1 class="text-3xl font-semibold text-center">Order history</h1>
     </div>
+    
     <div class="flex items-center flex-1 h-full">
       <div class="flex-1 w-full mt-5 text-center" v-if="!showOrders">
         <icon name="streamline:interface-file-clipboard-work-plain-clipboard-task-list-company-office"

@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="flex flex-col gap-2 sm:flex-row">
+    <div class="flex flex-col gap-2 px-4 mx-auto max-w-7xl sm:flex-row">
       <div class="flex-1">
         <h1 class="text-3xl font-semibold">Addresses</h1>
         <p class="mt-2 text-sm text-gray-500 dark:text-gray-100">Add, edit, and remove addresses</p>
       </div>
     </div>
+    
     <div class="flex items-center flex-1 h-full" v-if="!showForm">
       <div class="flex-1 w-full mt-12 text-center">
         <icon name="ic:sharp-map" class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-100" />

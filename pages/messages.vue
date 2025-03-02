@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="flex flex-col h-screen">
+    <div
+      class="flex flex-col h-screen max-w-5xl mx-auto overflow-hidden rounded-md shadow-md dark:border-gray-500 dark:border">
       <!-- Chat Messages -->
       <div class="flex-1 p-8 space-y-4 overflow-y-auto">
         <div v-if="loading" class="flex items-center justify-center text-gray-500">
@@ -23,9 +24,9 @@
           </div>
 
           <!-- Received Message -->
-          <div class="flex items-end justify-end space-s-3">
+          <div class="flex items-end justify-end space-s-3" v-if="msg.reply">
             <div class="p-3 text-white bg-blue-400 rounded-lg dark:bg-blue-300 dark:text-gray-800">
-              <p class="text-sm" v-if="msg.reply">{{ msg.reply }}</p>
+              <p class="text-sm">{{ msg.reply }}</p>
               <small class="font-semibold text-gray-100" v-if="msg.repliedAt">{{ formatDate(msg.repliedAt) }}</small>
             </div>
             <img src="https://justfields.com/storage/projects/7M5rV059/vector-avatar-02.jpg" alt="Avatar"
@@ -40,9 +41,10 @@
 <script setup>
 const contactStore = useContactStore()
 const authStore = useAuthStore()
-const userProfileImg = ref('');
 const currentUserUid = ref(null)
 const loading = ref(true);
+
+const userProfileImg = computed(() => authStore.user?.profileImg || '')
 
 onMounted(() => {
   if (authStore.user?.profileImg) {
