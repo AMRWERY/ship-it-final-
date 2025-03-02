@@ -37,7 +37,6 @@
         </div>
       </div>
 
-
       <!-- Progress Tracker -->
       <div class="p-6 rounded-lg shadow">
         <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">Order Status</h2>
