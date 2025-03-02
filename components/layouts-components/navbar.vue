@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Overlay Component -->
-        <Overlay :visible="localeStore.isOverlayVisible" />
+        <overlay :visible="localeStore.isOverlayVisible" />
 
         <!-- today-deal component -->
         <today-deal />
