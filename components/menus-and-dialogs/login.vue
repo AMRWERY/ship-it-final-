@@ -101,11 +101,7 @@ const handleLogin = async () => {
   try {
     await authStore.loginUser(email.value, password.value);
     loginSuccessfully.value = true;
-    if (authStore.user?.email === 'admin@ship.com') {
-      navigateTo('/dashboard');
-    } else {
-      navigateTo('/');
-    }
+    navigateTo('/');
   } catch (error) {
     loginFailed.value = true;
     setTimeout(() => {

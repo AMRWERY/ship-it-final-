@@ -170,7 +170,15 @@ export const useAuthStore = defineStore("auth-store", {
         this.user = null;
         this.role = null;
         this.error = null;
-        localStorage.clear();
+        [
+          "cart",
+          "withlist",
+          "order-summary",
+          "theme",
+          "locale",
+        ].forEach((key) => {
+          localStorage.removeItem(key);
+        });
         setTimeout(() => {
           this.isOverlayVisible = false;
         }, 3000);

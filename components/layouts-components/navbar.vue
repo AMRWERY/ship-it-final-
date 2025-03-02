@@ -36,14 +36,15 @@
                         <!-- login dialog -->
                         <login v-if="!isAuthenticated" />
 
-                        <nuxt-link to="/sign-up" class="text-sm text-white capitalize hover:text-gray-200" v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link>
+                        <nuxt-link to="/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
+                            v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link>
                     </div>
 
                     <div class="flex items-center space-s-1">
                         <!-- profile -->
                         <tooltip :text="$t('tooltip.profile')" position="bottom">
                             <nuxt-link to="/profile" type="button" class="relative flex text-white rounded-full"
-                                v-if="isAuthenticated && !isAdmin">
+                                v-if="isAuthenticated">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View Profile</span>
                                 <img :src="userProfileImg" alt="profile-img" class="rounded-full h-7 w-7 me-2"
@@ -54,12 +55,12 @@
                         </tooltip>
 
                         <!-- cart-dialog component -->
-                        <cart-dialog v-if="isAuthenticated && !isAdmin" />
+                        <cart-dialog v-if="isAuthenticated" />
 
                         <!--wishlist -->
                         <tooltip :text="$t('tooltip.your_wishlist')" position="bottom">
                             <nuxt-link to="/wishlist" type="button" class="relative flex text-white rounded-full"
-                                v-if="isAuthenticated && !isAdmin">
+                                v-if="isAuthenticated">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View wishlist</span>
                                 <icon name="heroicons-solid:heart" class="ms-2" />
@@ -81,19 +82,10 @@
 
                     <!-- admin dashboard - display for admin only -->
                     <div class="flex items-center space-s-4">
-                        <tooltip :text="$t('tooltip.dashboard')" position="bottom">
-                            <nuxt-link to="/dashboard" v-if="isAdmin" type="button"
-                                class="relative flex text-white rounded-full cursor-pointer">
-                                <span class="absolute -inset-1.5" />
-                                <span class="sr-only">admin dashboard</span>
-                                <icon name="heroicons-solid:presentation-chart-line" class="ms-2" />
-                            </nuxt-link>
-                        </tooltip>
-
                         <!--logout -->
                         <tooltip :text="$t('tooltip.logout')" position="bottom">
                             <nuxt-link to="/" type="button" class="relative flex text-white rounded-full cursor-pointer"
-                                @click="logout" v-if="isAuthenticated && !isAdmin">
+                                @click="logout" v-if="isAuthenticated">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">Logout</span>
                                 <icon name="mynaui:logout" class="ms-2" />
@@ -133,11 +125,6 @@ onMounted(() => {
 });
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
-
-const isAdmin = computed(() => {
-    const user = authStore.user;
-    return user?.email === 'admin@ship.com';
-});
 
 const logout = async () => {
     try {
