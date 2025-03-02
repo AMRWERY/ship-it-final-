@@ -10,9 +10,9 @@
         </div>
         <div class="pt-6">
           <div class="flex items-center justify-between gap-4 mb-4">
-            <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800">
+            <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800" v-if="product.discount">
               Up to {{ product.discount }}% off</span>
-            <div class="flex items-center justify-end gap-1">
+            <div class="flex items-center justify-end gap-1 ms-auto">
               <tooltip :text="$t('tooltip.quick_look')" position="bottom">
                 <nuxt-link :to="`/products/${product.id}`" type="button"
                   class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300">

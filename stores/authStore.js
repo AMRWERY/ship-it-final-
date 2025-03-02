@@ -12,7 +12,7 @@ import {
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export const useAuthStore = defineStore("auth-store", {
+export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null,
     error: null,
