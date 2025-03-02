@@ -30,6 +30,13 @@
   @apply p-1 text-white bg-gray-800 rounded-full hover:text-white;
 }
 
+.carousel__pagination-button {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: white;
+}
+
 .carousel__pagination-button--active {
-  @apply bg-gray-800;
+  background-color: black;
 }

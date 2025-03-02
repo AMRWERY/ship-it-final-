@@ -147,7 +147,7 @@
           <product-cards />
 
           <!-- pagination component -->
-          <pagination />
+          <pagination-component />
         </div>
       </div>
 

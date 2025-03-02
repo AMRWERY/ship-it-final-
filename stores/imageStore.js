@@ -9,22 +9,6 @@ export const useImageStore = defineStore("images", {
   }),
 
   actions: {
-    // async uploadImage(file) {
-    //   this.isLoading = true;
-    //   this.error = null;
-    //   try {
-    //     const storageRef = ref(storage, `images/${file.name}`);
-    //     const snapshot = await uploadBytes(storageRef, file);
-    //     const downloadURL = await getDownloadURL(snapshot.ref);
-    //     this.images.push(downloadURL);
-    //     return downloadURL;
-    //   } catch (error) {
-    //     this.error = error.message;
-    //     console.error("Image upload failed:", error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
-    // },
     uploadImage(file) {
       this.isLoading = true;
       this.error = null;
@@ -60,7 +44,7 @@ export const useImageStore = defineStore("images", {
         })
         .then((imageUrls) => {
           this.images = imageUrls;
-            // console.log("Fetched Images:", this.images);
+          // console.log("Fetched Images:", this.images);
         })
         .catch((error) => {
           this.error = error.message;
@@ -70,26 +54,5 @@ export const useImageStore = defineStore("images", {
           this.isLoading = false;
         });
     },
-    // async fetchImages(folderName) {
-    //   this.isLoading = true;
-    //   this.error = null;
-    //   try {
-    //     const storageRef = ref(storage, folderName || "/");
-    //     const listResult = await listAll(storageRef);
-    //     const imageUrls = await Promise.all(
-    //       listResult.items.map(async (item) => {
-    //         const url = await getDownloadURL(item);
-    //         return url;
-    //       })
-    //     );
-    //     this.images = imageUrls;
-    //     //   console.log("Fetched Images:", this.images);
-    //   } catch (error) {
-    //     this.error = error.message;
-    //     //   console.error("Failed to fetch images dynamically:", error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
-    // },
   },
 });
