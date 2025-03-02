@@ -1,66 +1,23 @@
-import { db } from "@/firebase";
-import {
-  collection,
-  addDoc,
-  deleteDoc,
-  getDocs,
-  getDoc,
-  doc,
-  updateDoc,
-  query,
-  where,
-} from "firebase/firestore";
-
 export const useCartStore = defineStore("cart", {
   state: () => ({
     cart: [],
     isLoading: false,
+    storedUser: JSON.parse(localStorage.getItem('user'))
   }),
 
   actions: {
     fetchCart() {
       this.isLoading = true;
-      const authStore = useAuthStore();
-      const uid = authStore.user?.uid;
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        try {
-          this.cart = JSON.parse(savedCart);
-          // console.log('savedCart', this.cart)
-        } catch (error) {
-          // console.error("Error parsing saved cart data", error);
-          this.cart = [];
-        }
-      }
-      if (!uid) {
+      const uid = this.storedUser?.uid
+      try {
+        const savedCart = localStorage.getItem('cart');
+        this.cart = savedCart ? JSON.parse(savedCart) : [];
+      } catch (error) {
+        console.error("Error loading cart from localStorage:", error);
         this.cart = [];
+      } finally {
         this.isLoading = false;
-        return;
       }
-      const cartRef = collection(db, "cart");
-      const cartQuery = query(cartRef, where("uid", "==", uid));
-      getDocs(cartQuery)
-        .then((querySnapshot) => {
-          if (querySnapshot.empty) {
-            // console.log("No cart data found for this user.");
-          }
-          this.cart = querySnapshot.docs.map((doc) => ({
-            docId: doc.id,
-            ...doc.data(),
-            quantity: doc.data().quantity || 1,
-          }));
-        })
-        .catch((error) => {
-          if (error.name === "BloomFilterError") {
-            console.error("BloomFilterError encountered:", error);
-            // Implement logic to handle the error, e.g., retry the operation with a delay
-          } else {
-            console.error("Error fetching cart:", error);
-          }
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
     },
 
     async addToCart(
@@ -71,50 +28,15 @@ export const useCartStore = defineStore("cart", {
       imageUrl1,
       brand,
       discount,
-      quantity
+      quantity = 1
     ) {
-      const authStore = useAuthStore();
-      const uid = authStore.user?.uid;
-      if (!uid) {
-        return;
-      }
-      if (!Array.isArray(this.cart)) {
-        this.cart = [];
-      }
-      if (this.cart.length === 0) {
-        this.fetchCart();
-      }
-      const existingProduct = this.cart.find(
-        (item) => item.productId === id && item.uid === uid
-      );
-      const productRef = doc(db, "products", id);
-      const productSnap = await getDoc(productRef);
-      if (!productSnap.exists()) {
-        return;
-      }
-      const productData = productSnap.data();
-      const stock = productData.stock || 0;
-      if (quantity > stock) {
-        return;
-      }
-      const newStock = stock - quantity;
-      try {
-        await updateDoc(productRef, { stock: newStock });
-        // console.log("Stock updated successfully.");
-      } catch (error) {
-        return;
-      }
+      const uid = this.storedUser?.uid
+      const existingProduct = this.cart.find((item) => item.productId === id);
       if (existingProduct) {
-        try {
-          const docRef = doc(db, "cart", existingProduct.docId);
-          const newQuantity = (existingProduct.quantity || 0) + quantity;
-          await updateDoc(docRef, { quantity: newQuantity });
-          existingProduct.quantity = newQuantity;
-        } catch (error) {
-          console.error("Error updating product quantity in Firestore:", error);
-        }
+        existingProduct.quantity += quantity;
       } else {
-        const product = {
+        this.cart.push({
+          docId: Date.now().toString(),
           productId: id,
           title,
           discountedPrice,
@@ -122,79 +44,43 @@ export const useCartStore = defineStore("cart", {
           imageUrl1,
           brand,
           discount,
-          quantity: quantity || 1,
+          quantity,
           uid,
-        };
-        try {
-          const docRef = await addDoc(collection(db, "cart"), product);
-          this.cart.push({
-            docId: docRef.id,
-            ...product,
-          });
-        } catch (error) {
-          console.error("Error adding new product to Firestore:", error);
-        }
+        });
       }
-      localStorage.setItem("cart", JSON.stringify(this.cart));
+      this.persistCart(uid);
     },
 
     updateQuantityInCart(productId, newQuantity) {
+      const uid = this.storedUser?.uid
       const product = this.cart.find((item) => item.productId === productId);
-      if (!product) return;
-      const docRef = doc(db, "cart", product.docId);
-      updateDoc(docRef, { quantity: newQuantity })
-        .then(() => {
-          product.quantity = newQuantity;
-          const productRef = doc(db, "products", productId);
-          return getDoc(productRef).then((productSnap) => {
-            if (productSnap.exists()) {
-              const productData = productSnap.data();
-              const stock = productData.stock;
-              if (newQuantity <= stock) {
-                const stockUpdate = stock - newQuantity;
-                return updateDoc(productRef, { stock: stockUpdate });
-              } else {
-                console.error("Not enough stock available");
-              }
-            }
-          });
-        })
-        .catch((error) => {
-          console.error("Error updating product quantity in Firestore:", error);
-        });
+      if (product) {
+        product.quantity = newQuantity;
+        this.persistCart(uid);
+      }
     },
 
     removeFromCart(docId) {
-      if (!docId) return;
-      const docRef = doc(db, "cart", docId);
-      deleteDoc(docRef)
-        .then(() => {
-          if (Array.isArray(this.cart)) {
-            this.cart = this.cart.filter((item) => item.docId !== docId);
-          } else {
-            console.error("Cart is not an array:", this.cart);
-          }
-        })
-        .catch((error) => {
-          console.error("Error removing from cart:", error);
-        });
+      const uid = this.storedUser?.uid
+      this.cart = this.cart.filter((item) => item.docId !== docId);
+      this.persistCart(uid);
     },
 
     clearCart() {
-      const cartRef = collection(db, "cart");
-      getDocs(cartRef)
-        .then((querySnapshot) => {
-          const deletePromises = querySnapshot.docs.map((doc) =>
-            deleteDoc(doc.ref)
-          );
-          return Promise.all(deletePromises);
-        })
-        .then(() => {
-          this.cart = [];
-        })
-        .catch((error) => {
-          console.error("Error clearing cart from Firestore:", error);
-        });
+      const uid = this.storedUser?.uid
+      this.cart = [];
+      localStorage.removeItem(uid);
+    },
+
+    persistCart(cartKey) {
+      try {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+      } catch (error) {
+        console.error("Error saving cart to localStorage:", error);
+        if (error.name === "QuotaExceededError") {
+          alert("Local storage quota exceeded. Please clear some space.");
+        }
+      }
     },
   },
 

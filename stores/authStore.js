@@ -172,7 +172,7 @@ export const useAuthStore = defineStore("auth", {
         this.error = null;
         [
           "cart",
-          "withlist",
+          "wishlist",
           "order-summary",
           "theme",
           "locale",

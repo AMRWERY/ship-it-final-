@@ -2,19 +2,19 @@ export const useWishlistStore = defineStore("wishlist", {
   state: () => ({
     wishlist: [],
     loading: false,
+    storedUser: JSON.parse(localStorage.getItem('user'))
   }),
 
   actions: {
     fetchWishlist() {
       this.loading = true;
-      const authStore = useAuthStore();
-      const userId = authStore.user?.uid;
+      const userId = this.storedUser?.uid
       if (!userId) {
         this.loading = false;
         return;
       }
       try {
-        const storedWishlist = localStorage.getItem(`wishlist_${userId}`);
+        const storedWishlist = localStorage.getItem(`wishlist`);
         this.wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
       } catch (error) {
         console.error("Error fetching wishlist from localStorage:", error);
@@ -25,8 +25,7 @@ export const useWishlistStore = defineStore("wishlist", {
     },
 
     addToWishlist(id, title, discountedPrice, originalPrice, brand, imageUrl1) {
-      const authStore = useAuthStore();
-      const userId = authStore.user?.uid;
+      const userId = this.storedUser?.uid
       if (!userId) {
         throw new Error("User not authenticated");
       }
@@ -48,8 +47,7 @@ export const useWishlistStore = defineStore("wishlist", {
     },
 
     removeFromWishlist(docId) {
-      const authStore = useAuthStore();
-      const userId = authStore.user?.uid;
+      const userId = this.storedUser?.uid
       if (!userId) return;
       this.wishlist = this.wishlist.filter((item) => item.docId !== docId);
       this.persistWishlist(userId);
@@ -58,7 +56,7 @@ export const useWishlistStore = defineStore("wishlist", {
     persistWishlist(userId) {
       try {
         localStorage.setItem(
-          `wishlist_${userId}`,
+          "wishlist",
           JSON.stringify(this.wishlist)
         );
       } catch (error) {

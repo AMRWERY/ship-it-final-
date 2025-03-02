@@ -42,7 +42,7 @@
               <!-- add to cart Button -->
               <button type="button" @click="moveToCart(item)"
                 class="flex items-center justify-center w-full px-5 py-2.5 btn-style">
-                <div class="flex items-center justify-center" v-if="loading[item.productId]">
+                <div class="flex items-center justify-center" v-if="itemLoading[item.docId]">
                   <span class="text-center me-2">{{ $t('btn.adding_to_cart') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div>
@@ -68,6 +68,7 @@
 const wishlistStore = useWishlistStore();
 const cartStore = useCartStore();
 const { t } = useI18n()
+const loading = ref(false)
 
 onMounted(() => {
   loading.value = true;
@@ -88,22 +89,21 @@ const removeItem = async (docId) => {
   }, 3000);
 };
 
-const loading = ref({});
+const itemLoading = ref({});
 
 const moveToCart = async (item) => {
-  loading.value[item.productId] = true;
+  itemLoading.value[item.docId] = true;
   setTimeout(async () => {
-    const { productId, title, originalPrice, discountedPrice, imageUrl1, brand, discount = null } = item;
-    const existingProduct = cartStore.cart.find((product) => product.productId === productId);
+    const { docId, title, originalPrice, discountedPrice, imageUrl1, brand, discount = null } = item;
+    const existingProduct = cartStore.cart.find((product) => product.docId === docId);
     if (existingProduct) {
       const newQuantity = existingProduct.quantity + 1;
-      await cartStore.updateQuantityInCart(productId, newQuantity);
+      await cartStore.updateQuantityInCart(docId, newQuantity);
     } else {
-      await cartStore.addToCart(productId, title, originalPrice, discountedPrice, imageUrl1, brand, discount, 1);
+      await cartStore.addToCart(docId, title, discountedPrice, originalPrice, imageUrl1, brand, discount, 1);
     }
-    localStorage.setItem('cart', JSON.stringify(cartStore.cart));
     await wishlistStore.removeFromWishlist(item.docId);
-    loading.value[item.productId] = false;
+    itemLoading.value[item.docId] = false;
   }, 3000);
 };
 
