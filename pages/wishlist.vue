@@ -94,13 +94,13 @@ const itemLoading = ref({});
 const moveToCart = async (item) => {
   itemLoading.value[item.docId] = true;
   setTimeout(async () => {
-    const { docId, title, originalPrice, discountedPrice, imageUrl1, brand, discount = null } = item;
-    const existingProduct = cartStore.cart.find((product) => product.docId === docId);
+    const { productId, docId, title, originalPrice, discountedPrice, imageUrl1, brand, discount = null } = item;
+    const existingProduct = cartStore.cart.find((product) => product.productId === productId);
     if (existingProduct) {
       const newQuantity = existingProduct.quantity + 1;
-      await cartStore.updateQuantityInCart(docId, newQuantity);
+      await cartStore.updateQuantityInCart(productId, newQuantity);
     } else {
-      await cartStore.addToCart(docId, title, discountedPrice, originalPrice, imageUrl1, brand, discount, 1);
+      await cartStore.addToCart(productId, title, discountedPrice, originalPrice, imageUrl1, brand, discount, 1);
     }
     await wishlistStore.removeFromWishlist(item.docId);
     itemLoading.value[item.docId] = false;
