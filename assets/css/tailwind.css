@@ -4,7 +4,7 @@
 
 @layer utilities {
   .title {
-    @apply mb-2 text-3xl font-semibold leading-10 text-center capitalize;
+    @apply mb-2 text-sm font-semibold leading-10 text-center capitalize sm:text-2xl md:text-4xl;
   }
 
   .no-scrollbar::-webkit-scrollbar {

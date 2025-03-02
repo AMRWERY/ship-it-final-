@@ -51,7 +51,7 @@
       </ClientOnly>
 
       <div class="flex flex-col items-center pb-2 mt-16 space-y-2 bg-home/40 md:pb-4 md:space-y-4" v-if="imageSrc">
-        <div class="relative w-full h-[100px] md:h-[180px] lg:h-[360px]">
+        <div class="relative w-full h-auto">
           <canvas width="10" height="10"
             class="inset-0 object-contain object-center w-full h-full !absolute !object-cover !object-top">
           </canvas>

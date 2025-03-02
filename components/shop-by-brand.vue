@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="max-w-5xl py-6 mx-auto sm:px-6 lg:px-8">
-      <section class="max-w-full m-10 mx-auto">
-        <div class="flex items-center justify-center mt-8 mb-3">
+      <section class="max-w-full mx-auto mb-10">
+        <div class="flex items-center justify-center mt-2 mb-3 md:mt-8">
           <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
           <span class="mx-4 title title-font">{{ $t('home.shop_by_brand') }}</span>
           <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
@@ -16,7 +16,7 @@
             <Slide v-for="category in categoriesStore.categories" :key="category.catId">
               <div class="carousel__item">
                 <nuxt-link :to="{ path: '/products', query: { brand: category.title } }"
-                  class="relative flex justify-center flex-shrink-0 w-40 h-40 mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
+                  class="relative flex justify-center flex-shrink-0 w-auto h-auto mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
                   <div class="relative overflow-hidden bg-no-repeat bg-cover">
                     <img class="h-full rounded-t-lg" :src="category.imgOne" />
                   </div>
@@ -32,11 +32,11 @@
       </section>
     </div>
 
-    <div class="px-4 mx-auto mb-8 -mt-8 sm:px-6 lg:max-w-full lg:px-8">
-      <div class="grid max-w-full grid-cols-1 gap-6 px-4 mx-auto sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mx-auto mb-8 -mt-8 lg:max-w-full">
+      <div class="grid max-w-full grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-4">
         <nuxt-link class="relative border rounded-lg shadow-md group dark:border-none" v-for="card in cards" :key="card"
           :to="{ path: '/products', query: { brand: card.brand } }">
-          <div class="overflow-hidden h-80 sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1">
+          <div class="h-auto overflow-hidden sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1">
             <img :src="card.img"
               class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105" />
           </div>
@@ -54,7 +54,7 @@
     </div>
 
     <div class="flex flex-col items-center pb-2 space-y-2 bg-home/40 md:pb-4 md:space-y-4">
-      <div class="relative w-full h-[100px] md:h-[180px] lg:h-[360px]">
+      <div class="relative w-full h-auto ">
         <canvas width="10" height="10"
           class="inset-0 object-contain object-center w-full h-full !absolute !object-cover !object-top">
         </canvas>
@@ -76,18 +76,31 @@ onMounted(() => {
 });
 
 const config = ref({
-  itemsToShow: 5,
   snapAlign: 'center',
-  warpAround: true,
-  gap: 7,
-  // autoplay: 3000,
+  wrapAround: true,
   transition: 400,
-  // breakpointMode: 'carousel',
   breakpoints: {
-    200: { itemsToShow: 1.5, snapAlign: 'center' },
-    400: { itemsToShow: 2.5, snapAlign: 'start' },
-    700: { itemsToShow: 3, snapAlign: 'center' },
-    1024: { itemsToShow: 5, snapAlign: 'center' },
+    200: {
+      itemsToShow: 1,
+      snapAlign: 'center',
+      itemsToScroll: 1,
+      peek: 0
+    },
+    400: {
+      itemsToShow: 2.5,
+      snapAlign: 'center',
+      peek: 20
+    },
+    700: {
+      itemsToShow: 3.5,
+      snapAlign: 'center',
+      peek: 40
+    },
+    1024: {
+      itemsToShow: 5,
+      snapAlign: 'center',
+      peek: 60
+    },
   }
 });
 
@@ -98,3 +111,21 @@ const cards = computed(() => [
   { title: t('home.accessories_and_bags'), subtitle: t('home.sharpening_up_your_fashion_look_with_these_statement'), brand: 'XD_Design', img: 'https://justfields.com/storage/projects/7M5rV059/bagssss.jpg', route: '' },
 ]);
 </script>
+
+<style scoped>
+.carousel__track {
+  justify-content: center !important;
+}
+
+@media (max-width: 400px) {
+  .carousel__item {
+    width: 80% !important;
+    margin: 0 10% !important;
+  }
+}
+
+.carousel__viewport {
+  width: 100%;
+  overflow: hidden;
+}
+</style>
