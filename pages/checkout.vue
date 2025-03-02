@@ -320,7 +320,7 @@ const submitCheckoutForm = () => {
       return checkoutStore.saveCheckoutData(cartData);
     })
     .then(() => {
-      localStorage.setItem("cart", JSON.stringify(cartData));
+      localStorage.setItem("order-summary", JSON.stringify(cartData));
       cartStore.clearCart();
     })
     .then(() => {

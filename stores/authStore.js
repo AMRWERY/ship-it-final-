@@ -171,11 +171,12 @@ export const useAuthStore = defineStore("auth", {
         this.role = null;
         this.error = null;
         [
-          "cart",
-          "wishlist",
-          "order-summary",
-          "theme",
-          "locale",
+          // "cart",
+          // "wishlist",
+          // "order-summary",
+          // "theme",
+          // "locale",
+          "user",
         ].forEach((key) => {
           localStorage.removeItem(key);
         });

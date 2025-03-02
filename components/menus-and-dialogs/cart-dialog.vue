@@ -107,7 +107,6 @@ const loading = ref(false)
 
 const removeItem = async (docId, quantityToRemove) => {
   if (!docId) {
-    console.error("No docId provided for removal.");
     return;
   }
   try {

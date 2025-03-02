@@ -30,10 +30,10 @@
         </div>
         <div class="col-span-10">
           <p class="text-lg font-semibold text-gray-900 dark:text-gray-200">{{ item.title }}</p>
-          <p class="text-sm font-semibold text-gray-700 dark:text-gray-100"><span class="me-1">{{
+          <p class="text-sm font-semibold text-gray-700 dark:text-gray-100"><span class="font-medium me-1">{{
             $t('order_summary.brand') }} </span>{{
                 item.brand }}</p>
-          <p class="mt-8 text-sm font-semibold text-gray-700 dark:text-gray-100"><span class="me-1">{{
+          <p class="mt-8 text-sm font-semibold text-blue-700 dark:text-blue-400"><span class="text-gray-700 me-1 dark:text-gray-100">{{
             $t('order_summary.quantity') }}
             </span>{{
               item.quantity }}</p>
@@ -139,7 +139,7 @@ const totalAmount = computed(() => {
 const storedCart = ref([]);
 
 onMounted(() => {
-  const savedCart = localStorage.getItem('cart');
+  const savedCart = localStorage.getItem('order-summary');
   if (savedCart) {
     storedCart.value = JSON.parse(savedCart);
     // console.log('cart data', storedCart.value)

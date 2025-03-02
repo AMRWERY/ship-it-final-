@@ -28,7 +28,7 @@
             <p class="mt-1 text-gray-500 dark:text-gray-100">Brand: {{ item.brand }}</p>
             <div class="flex items-center mt-2 space-s-2">
               <p class="mt-1 text-xl font-bold text-gray-900 dark:text-gray-200">{{ item.discountedPrice }} egp</p>
-              <p class="mt-2 text-sm text-gray-500 line-through dark:text-gray-100">{{ item.originalPrice }} egp</p>
+              <p class="mt-2 text-sm text-gray-500 line-through dark:text-gray-100" v-if="item.originalPrice">{{ item.originalPrice }} egp</p>
             </div>
 
             <div class="flex mt-2 space-s-5">

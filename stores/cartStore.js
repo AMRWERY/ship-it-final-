@@ -56,7 +56,7 @@ export const useCartStore = defineStore("cart", {
       const product = this.cart.find((item) => item.productId === productId);
       if (product) {
         product.quantity = newQuantity;
-        this.persistCart(uid);
+        // this.persistCart(uid);
       }
     },
 
@@ -69,7 +69,7 @@ export const useCartStore = defineStore("cart", {
     clearCart() {
       const uid = this.storedUser?.uid
       this.cart = [];
-      localStorage.removeItem(uid);
+      localStorage.removeItem('cart');
     },
 
     persistCart(cartKey) {
