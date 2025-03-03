@@ -8,10 +8,40 @@
       </div>
 
       <!-- skeleton-loader component -->
-      <skeleton-loader v-if="filteredProducts.length === 0" />
+      <!-- <skeleton-loader v-if="filteredProducts.length === 0" /> -->
 
       <ClientOnly>
-        <Carousel v-bind="config">
+        <!-- skeleton-loader -->
+        <Carousel v-if="loading || filteredProducts.length === 0" v-bind="config">
+          <Slide v-for="i in 5" :key="i">
+            <div class="px-2 carousel__item">
+              <skeleton-loader type="rectangle" :css-class="'w-full bg-gray-200 dark:bg-gray-700 rounded-lg'">
+                <div class="relative p-2 space-y-4">
+                  <div class="w-full h-[200px] sm:h-[300px] bg-gray-300 dark:bg-gray-600 rounded-lg animate-pulse">
+                  </div>
+
+                  <div class="absolute left-0 right-0 w-11/12 mx-auto space-y-3 bottom-2">
+                    <div class="w-3/4 h-4 mx-auto bg-gray-400 rounded dark:bg-gray-500"></div>
+                    <div class="flex items-center justify-center space-x-2">
+                      <div class="w-1/4 h-4 bg-gray-400 rounded dark:bg-gray-500"></div>
+                      <div class="w-1/5 h-3 bg-gray-400 rounded dark:bg-gray-500"></div>
+                    </div>
+                    <div class="flex justify-center mt-4 space-x-1 max-sm:hidden">
+                      <div class="w-4 h-4 bg-gray-400 rounded-full dark:bg-gray-500"></div>
+                      <div class="w-4 h-4 bg-gray-400 rounded-full dark:bg-gray-500"></div>
+                      <div class="w-4 h-4 bg-gray-400 rounded-full dark:bg-gray-500"></div>
+                    </div>
+                  </div>
+                </div>
+              </skeleton-loader>
+            </div>
+          </Slide>
+          <template #addons>
+            <Navigation />
+          </template>
+        </Carousel>
+
+        <Carousel v-bind="config" v-else>
           <Slide v-for="card in filteredProducts" :key="card.id">
             <div class="carousel__item">
               <nuxt-link :to="`/products/${card.id}`">
@@ -26,12 +56,13 @@
                       <h3
                         class="text-sm font-bold text-white lg:text-base lg:text-gray-800 dark:text-gray-200 dark:lg:text-gray-300">
                         {{ $i18n.locale === 'ar' ? card.titleAr :
-                        card.title }}</h3>
+                          card.title }}</h3>
                       <div class="flex items-center justify-center mt-2 space-s-2">
                         <h4 class="text-lg font-bold text-red-700 sm:text-base dark:text-red-400 lg:text-2xl">{{
-                        $n(parseFloat(card.discountedPrice), 'currency', currencyLocale) }}</h4>
+                          $n(parseFloat(card.discountedPrice), 'currency', currencyLocale) }}</h4>
                         <h4 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100 mt-0.5"
-                          v-if="card.originalPrice">{{ $n(parseFloat(card.originalPrice), 'currency', currencyLocale) }}</h4>
+                          v-if="card.originalPrice">{{ $n(parseFloat(card.originalPrice), 'currency', currencyLocale) }}
+                        </h4>
                       </div>
                     </div>
                     <div class="flex justify-center mt-4 max-sm:hidden">
@@ -50,14 +81,15 @@
         </Carousel>
       </ClientOnly>
 
-      <div class="flex flex-col items-center pb-2 mt-4 space-y-2 bg-home/40 md:pb-4 md:space-y-4 sm:mt-5 md:mt-7" v-if="imageSrc">
-      <div class="relative w-full">
-        <div class="w-full h-auto overflow-hidden shadow-md aspect-video">
-          <img :src="imageSrc" alt="img" loading="lazy"
-            class="object-cover object-center w-full h-full transition-transform duration-300 hover:scale-105">
+      <div class="flex flex-col items-center pb-2 mt-4 space-y-2 bg-home/40 md:pb-4 md:space-y-4 sm:mt-5 md:mt-7"
+        v-if="imageSrc">
+        <div class="relative w-full">
+          <div class="w-full h-auto overflow-hidden shadow-md aspect-video">
+            <img :src="imageSrc" alt="img" loading="lazy"
+              class="object-cover object-center w-full h-full transition-transform duration-300 hover:scale-105">
+          </div>
         </div>
       </div>
-    </div>
 
       <div class="max-w-2xl mx-auto my-2 lg:max-w-full sm:my-5 md:my-7">
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
@@ -109,6 +141,7 @@ const props = defineProps({
 const productsStore = useProductsStore()
 const products = ref([])
 const filteredProducts = ref([])
+const loading = ref(true)
 
 onMounted(() => {
   productsStore.fetchProducts();
@@ -121,6 +154,9 @@ onMounted(() => {
     );
     // console.log('Filtered Products:', filteredProducts.value);
   }
+  setTimeout(() => {
+    loading.value = false
+  }, 3000)
 });
 
 watch(

@@ -8,11 +8,22 @@
           <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
         </div>
 
-        <!-- skeleton-loader component-->
-        <skeleton-loader v-if="categoriesStore.categories.length === 0" />
+        <ClientOnly>
+          <!-- skeleton-loader -->
+          <Carousel v-if="loading || categoriesStore.categories.length === 0" v-bind="config">
+            <Slide v-for="i in 5" :key="i">
+              <div class="px-2 carousel__item">
+                <skeleton-loader type="rectangle" :css-class="'h-56 w-full mx-2 rounded-xl'"
+                  :bg-class="'bg-gray-200 dark:bg-gray-700'">
+                </skeleton-loader>
+              </div>
+            </Slide>
+            <template #addons>
+              <Navigation />
+            </template>
+          </Carousel>
 
-        <ClientOnly v-else>
-          <Carousel v-bind="config">
+          <Carousel v-bind="config" v-else>
             <Slide v-for="category in categoriesStore.categories" :key="category.catId">
               <div class="carousel__item">
                 <nuxt-link :to="{ path: '/products', query: { brand: category.title } }"
@@ -68,9 +79,13 @@
 <script setup>
 const { t } = useI18n()
 const categoriesStore = useCategoriesStore()
+const loading = ref(true)
 
 onMounted(() => {
   categoriesStore.fetchCategoriesByRange(1, 5);
+  setTimeout(() => {
+    loading.value = false
+  }, 3000)
 });
 
 const config = ref({
