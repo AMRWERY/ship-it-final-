@@ -9,7 +9,7 @@
         <nav class="py-3.5 bg-black border-gray-200">
             <div class="flex items-center justify-between mx-auto px-7">
                 <nuxt-link to="/" class="flex items-center">
-                    <span class="text-2xl text-white me-3 head">Ship-IT</span>
+                    <span class="text-base text-white me-3 head sm:text-lg md:text-2xl">Ship-IT</span>
                 </nuxt-link>
 
                 <!-- categories-menu component -->
@@ -20,27 +20,35 @@
                         <span></span>
                     </div>
 
-                    <div class="flex items-center space-s-4">
+                    <div class="flex items-center justify-center space-s-3">
                         <!-- toggle locales -->
-                        <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-if="localeStore.isRTL">
-                            <span class="[&>svg]:w-5" @click="setLocale('en')">
+                        <nuxt-link to="" class="font-semibold text-white" role="button" v-if="localeStore.isRTL">
+                            <span class="w-5" @click="setLocale('en')">
                                 En
                             </span>
                         </nuxt-link>
-                        <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-else>
-                            <span class="[&>svg]:w-5" @click="setLocale('ar')">
+                        <nuxt-link to="" class="font-semibold text-white" role="button" v-else>
+                            <span class="w-5" @click="setLocale('ar')">
                                 العربية
                             </span>
                         </nuxt-link>
 
+                         <!--toggle theme -->
+                         <tooltip :text="$t('tooltip.toggle_theme')" position="bottom">
+                            <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
+                                @click="$emit('toggle-theme')">
+                                <span class="absolute -inset-1.5" />
+                                <span class="sr-only">toggle theme</span>
+                                <icon :name="isDark ? 'heroicons-solid:sun' : 'heroicons-solid:moon'" class="ms-2" />
+                            </nuxt-link>
+                        </tooltip>
+                        
                         <!-- login dialog -->
                         <login v-if="!isAuthenticated" />
 
                         <nuxt-link to="/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
                             v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link>
-                    </div>
 
-                    <div class="flex items-center space-s-1">
                         <!-- profile-menu component -->
                         <profile-menu />
 
@@ -56,16 +64,6 @@
                                 <icon name="heroicons-solid:heart" class="ms-2" />
                                 <span v-if="wishlistStore.wishlist.length > 0"
                                     class="absolute top-0 end-0 w-2.5 h-2.5 bg-red-600 rounded-full"></span>
-                            </nuxt-link>
-                        </tooltip>
-
-                        <!--toggle theme -->
-                        <tooltip :text="$t('tooltip.toggle_theme')" position="bottom">
-                            <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
-                                @click="$emit('toggle-theme')">
-                                <span class="absolute -inset-1.5" />
-                                <span class="sr-only">toggle theme</span>
-                                <icon :name="isDark ? 'heroicons-solid:sun' : 'heroicons-solid:moon'" class="ms-2" />
                             </nuxt-link>
                         </tooltip>
                     </div>

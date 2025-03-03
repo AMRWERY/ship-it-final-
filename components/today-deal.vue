@@ -2,7 +2,7 @@
   <div>
     <!-- Button to open the dialog -->
     <div class="h-8 bg-[#4f46e5] text-white">
-      <nuxt-link to="" type="button" class="flex items-center justify-center py-1 capitalize cursor-pointer"
+      <nuxt-link to="" type="button" class="flex items-center justify-center py-1 text-sm capitalize cursor-pointer sm:text-medium md:text-lg"
         @click="openDialog">{{
           $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
     </div>

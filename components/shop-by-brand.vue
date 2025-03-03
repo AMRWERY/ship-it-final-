@@ -34,9 +34,10 @@
 
     <div class="mx-auto mb-8 -mt-8 lg:max-w-full">
       <div class="grid max-w-full grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-4">
-        <nuxt-link class="relative border rounded-lg shadow-md group dark:border-none" v-for="card in cards" :key="card"
-          :to="{ path: '/products', query: { brand: card.brand } }">
-          <div class="h-auto overflow-hidden sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1">
+        <nuxt-link class="relative border rounded-lg shadow-md group dark:border-none 
+             h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px]
+             w-full" v-for="card in cards" :key="card" :to="{ path: '/products', query: { brand: card.brand } }">
+          <div class="h-full overflow-hidden">
             <img :src="card.img"
               class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105" />
           </div>
@@ -54,14 +55,11 @@
     </div>
 
     <div class="flex flex-col items-center pb-2 space-y-2 bg-home/40 md:pb-4 md:space-y-4">
-      <div class="relative w-full h-auto ">
-        <canvas width="10" height="10"
-          class="inset-0 object-contain object-center w-full h-full !absolute !object-cover !object-top">
-        </canvas>
-        <img src="https://justfields.com/storage/projects/7M5rV059/expressss.webp" alt="img" decoding="async"
-          data-nimg="future-fill"
-          class="!object-contain !object-center !w-full !h-full !object-cover !object-top w-full h-full img"
-          loading="lazy" style="">
+      <div class="relative w-full">
+        <div class="w-full h-auto overflow-hidden shadow-md aspect-video">
+          <img src="https://justfields.com/storage/projects/7M5rV059/expressss.webp" alt="img" loading="lazy"
+            class="object-cover object-center w-full h-full transition-transform duration-300 hover:scale-105">
+        </div>
       </div>
     </div>
   </div>
@@ -87,8 +85,8 @@ const config = ref({
       peek: 0
     },
     400: {
-      itemsToShow: 2.5,
-      snapAlign: 'center',
+      itemsToShow: 2,
+      snapAlign: 'start',
       peek: 20
     },
     700: {

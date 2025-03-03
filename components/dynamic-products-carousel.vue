@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="max-w-full mx-auto">
-      <div class="flex items-center justify-center mt-8 mb-3">
+      <div class="flex items-center justify-center mb-3">
         <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
         <span class="mx-4 title title-font">{{ title }}</span>
         <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
@@ -50,18 +50,16 @@
         </Carousel>
       </ClientOnly>
 
-      <div class="flex flex-col items-center pb-2 mt-16 space-y-2 bg-home/40 md:pb-4 md:space-y-4" v-if="imageSrc">
-        <div class="relative w-full h-auto">
-          <canvas width="10" height="10"
-            class="inset-0 object-contain object-center w-full h-full !absolute !object-cover !object-top">
-          </canvas>
-          <img :src="imageSrc" decoding="async" data-nimg="future-fill"
-            class="!object-contain !object-center !w-full !h-full !object-cover !object-top w-full h-full img"
-            loading="lazy" style="">
+      <div class="flex flex-col items-center pb-2 mt-4 space-y-2 bg-home/40 md:pb-4 md:space-y-4 sm:mt-5 md:mt-7" v-if="imageSrc">
+      <div class="relative w-full">
+        <div class="w-full h-auto overflow-hidden shadow-md aspect-video">
+          <img :src="imageSrc" alt="img" loading="lazy"
+            class="object-cover object-center w-full h-full transition-transform duration-300 hover:scale-105">
         </div>
       </div>
+    </div>
 
-      <div class="max-w-2xl mx-auto lg:max-w-full my-7">
+      <div class="max-w-2xl mx-auto my-2 lg:max-w-full sm:my-5 md:my-7">
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
           <nuxt-link v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
             class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105 dark:border-none">
