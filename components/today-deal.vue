@@ -2,7 +2,8 @@
   <div>
     <!-- Button to open the dialog -->
     <div class="h-8 bg-[#4f46e5] text-white">
-      <nuxt-link to="" type="button" class="flex items-center justify-center py-1 text-sm capitalize cursor-pointer sm:text-medium md:text-lg"
+      <nuxt-link to="" type="button"
+        class="flex items-center justify-center py-1 text-sm capitalize cursor-pointer sm:text-medium md:text-lg"
         @click="openDialog">{{
           $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
     </div>
@@ -10,8 +11,8 @@
     <!-- Dialog Overlay and Container -->
     <transition name="fade">
       <div v-if="isDialogOpen"
-        class="fixed top-10 left-1/2 transform -translate-x-1/2 z-[1055] h-[80vh] w-full max-w-7xl overflow-y-auto overflow-x-hidden outline-none custom-scroll">
-        <div class="bg-white dark:bg-[#181a1b] rounded-lg shadow-lg p-4">
+        class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-xl shadow-2xl border-double border-2 z-[1050] h-[80vh] w-max overflow-y-auto overflow-x-hidden outline-none custom-scroll max-w-full">
+        <div class="bg-gray-50 dark:bg-[#181a1b] p-4">
           <div class="relative">
             <div class="font-sans tracking-wide max-md:mx-auto">
               <div class="font-[sans-serif]">
@@ -30,10 +31,15 @@
                   <div class="grid items-start grid-cols-1 gap-8 lg:grid-cols-2 max-lg:gap-12 max-sm:gap-8" v-else>
                     <div class="top-0 w-full lg:sticky">
                       <div class="flex flex-col gap-4">
-                        <div class="p-2 bg-white shadow">
-                          <img :src="selectedImage" class="w-full  aspect-[11/8] object-cover object-top" />
+                        <div class="relative shadow-lg">
+                          <img :src="selectedImage" class="w-full aspect-[11/8] object-cover object-center h-[450px]" />
+                          <button @click="closeDialog"
+                            class="absolute top-2 right-2 p-1.5 sm:hidden bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors">
+                            <icon name="material-symbols:close-small"
+                              class="w-6 h-6 text-gray-800 dark:text-gray-200" />
+                          </button>
                         </div>
-                        <div class="w-full max-w-full p-2 overflow-auto bg-white dark:bg-[#181a1b]">
+                        <div class="w-full max-w-full p-2 overflow-auto dark:bg-[#181a1b]">
                           <div class="flex flex-row gap-4 shrink-0 space-s-2">
                             <img v-for="(image, index) in imageList" :key="index" :src="image"
                               @click="setSelectedImage(image)"
@@ -50,7 +56,7 @@
                             {{ currentDeal?.title }}
                           </h3>
                           <button @click="closeDialog"
-                            class="flex items-center justify-center p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            class="flex items-center justify-center p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white max-sm:hidden">
                             <icon name="material-symbols:close-small" />
                           </button>
                         </div>
@@ -60,7 +66,7 @@
                           <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
                             currentDeal?.originalPrice }} egp</p>
                           <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice
-                            }}
+                          }}
                             egp</h4>
                           <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
                             <span class="text-sm text-white">save {{ currentDeal?.discount }}%</span>
@@ -104,7 +110,7 @@
                       </div>
 
                       <div class="mt-4">
-                        <div class="flex gap-2 items-center border border-gray-300 bg-white px-3 py-2.5 w-max">
+                        <div class="flex gap-2 items-center border border-gray-300 px-3 py-2.5 w-max">
                           <button type="button" class="text-black border-none outline-none" @click="decrementQuantity">
                             <icon name="ic:round-minus" class="w-2.5 h-2.5" />
                           </button>
@@ -146,7 +152,7 @@
                           </div>
                           <div v-if="productNotAdded">
                             <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.failed_to_add_to_cart')
-                              }}</p>
+                            }}</p>
                           </div>
                         </div>
 
@@ -175,10 +181,10 @@
                             deal.title }}</h3>
                           <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">{{ deal.brand }}</h4>
                           <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount
-                            }}%
+                          }}%
                           </h4>
                           <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice
-                            }}
+                          }}
                             egp
                           </h4>
                           <h4 class="mt-2 text-sm font-normal text-red-600 dark:text-red-400">{{
@@ -409,6 +415,16 @@ const closeDialog = () => {
 
 .fade-enter-from,
 .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active .bg-black\/50,
+.fade-leave-active .bg-black\/50 {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from .bg-black\/50,
+.fade-leave-to .bg-black\/50 {
   opacity: 0;
 }
 
