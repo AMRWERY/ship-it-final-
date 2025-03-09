@@ -1,49 +1,71 @@
 <template>
     <div>
-        <ClientOnly>
-            <div class="relative px-4 xs:px-4 md:px-0">
-                <Carousel v-bind="config">
-                    <Slide v-for="banner in images" :key="banner">
-                        <div class="carousel__item">
-                            <img :src="banner" alt="image" class="object-cover w-full h-auto rounded-md" />
-                        </div>
-                    </Slide>
-
-                    <template #addons>
-                        <Navigation />
-                        <Pagination />
-                    </template>
-                </Carousel>
+        <div class="w-full overflow-hidden relative
+         h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[500px] px-4 sm:px-0">
+            <div v-for="(image, index) in images" :key="index" :class="['carousel-item absolute w-full transition-opacity duration-500',
+                { 'opacity-100 z-10': activeSlide === index },
+                { 'opacity-0 z-0': activeSlide !== index }
+            ]" style="top: 0; left: 0; right: 0; bottom: 0;">
+                <img :src="image" class="object-cover w-full h-full" />
+                <div
+                    class="absolute flex justify-between -translate-y-1/2 left-4 right-4 sm:left-5 sm:right-5 lg:left-8 lg:right-8 top-1/2">
+                    <button
+                        class="inline-flex items-center justify-center w-10 h-10 rounded-full rtl:rotate-180 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+                        @click="prevSlide">
+                        <icon name="ic:baseline-keyboard-arrow-left" class="rtl:rotate-180" />
+                    </button>
+                    <button
+                        class="inline-flex items-center justify-center w-10 h-10 rounded-full rtl:rotate-180 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+                        @click="nextSlide">
+                        <icon name="ic:baseline-keyboard-arrow-right" class="rtl:rotate-180" />
+                    </button>
+                </div>
             </div>
-        </ClientOnly>
+        </div>
     </div>
 </template>
 
 <script setup>
-const imageStore = useImageStore();
-const images = computed(() => imageStore.images);
+const imageStore = useImageStore()
+const images = computed(() => imageStore.images)
 
-onMounted(() => {
-    imageStore.fetchImages("home-banner");
-});
+const activeSlide = ref(0)
+const autoPlayInterval = ref(null)
 
-const config = {
-    itemsToShow: 1,
-    wrapAround: true,
-    autoplay: 4000,
-    transition: 500,
-    pauseAutoplayOnHover: true
-};
-</script>
-
-<style>
-.carousel__item {
-    width: 100%;
-    flex-shrink: 0;
+const nextSlide = () => {
+    if (images.value.length === 0) return
+    activeSlide.value = (activeSlide.value + 1) % images.value.length
+    resetAutoPlay()
 }
 
-.carousel__track {
-    display: flex;
-    transition: transform 0.5s ease;
+const prevSlide = () => {
+    if (images.value.length === 0) return
+    activeSlide.value = (activeSlide.value - 1 + images.value.length) % images.value.length
+    resetAutoPlay()
+}
+
+const startAutoPlay = () => {
+    if (images.value.length === 0) return
+    autoPlayInterval.value = setInterval(nextSlide, 4000)
+}
+
+const resetAutoPlay = () => {
+    clearInterval(autoPlayInterval.value)
+    startAutoPlay()
+}
+
+onMounted(async () => {
+    await imageStore.fetchImages("home-banner")
+    startAutoPlay()
+})
+
+onBeforeUnmount(() => {
+    clearInterval(autoPlayInterval.value)
+})
+</script>
+
+<style scoped>
+.carousel-item {
+    transition: opacity 0.5s ease-in-out;
 }
 </style>

@@ -53,23 +53,26 @@
                       <div>
                         <div class="flex items-center justify-between">
                           <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
-                            {{ currentDeal?.title }}
+                            {{ $i18n.locale ===
+                              'ar' ? currentDeal?.titleAr :
+                              currentDeal?.title }}
                           </h3>
                           <button @click="closeDialog"
                             class="flex items-center justify-center p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white max-sm:hidden">
                             <icon name="material-symbols:close-small" />
                           </button>
                         </div>
-                        <p class="mt-3 mb-4 text-sm">{{ currentDeal?.brand }}</p>
+                        <p class="mt-3 mb-4 text-sm">{{ $i18n.locale ===
+                          'ar' ? currentDeal?.brandAr :
+                          currentDeal?.brand }}</p>
 
                         <div class="flex flex-wrap items-center gap-2 mt-4">
                           <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
-                            currentDeal?.originalPrice }} egp</p>
-                          <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{ currentDeal?.discountedPrice
-                          }}
-                            egp</h4>
+                            $n(parseFloat(currentDeal?.originalPrice), 'currency', currencyLocale) }}</p>
+                          <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{
+                            $n(parseFloat(currentDeal?.discountedPrice), 'currency', currencyLocale) }}</h4>
                           <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
-                            <span class="text-sm text-white">save {{ currentDeal?.discount }}%</span>
+                            <span class="text-sm text-white">{{ $t('home.save') }} {{ currentDeal?.discount }}%</span>
                           </div>
                         </div>
 
@@ -405,6 +408,9 @@ const openDialog = () => {
 const closeDialog = () => {
   isDialogOpen.value = false;
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 </script>
 
 <style scoped>
