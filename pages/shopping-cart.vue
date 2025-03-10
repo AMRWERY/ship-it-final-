@@ -38,7 +38,8 @@
                                         </div>
                                         <div class="text-end md:order-4 md:w-32">
                                             <p class="text-base font-bold text-gray-900 dark:text-gray-200">{{
-                                                item.discountedPrice }} egp
+                                                $n(parseFloat(item.discountedPrice),
+                                                    'currency', currencyLocale) }}
                                             </p>
                                         </div>
                                     </div>
@@ -46,18 +47,18 @@
                                     <div class="flex-1 w-full min-w-0 space-y-4 md:order-2 md:max-w-md">
                                         <nuxt-link to=""
                                             class="text-base font-medium text-gray-900 dark:text-gray-200 hover:underline">
-                                            {{ item.title }}</nuxt-link>
+                                            {{ $i18n.locale ===
+                                                'ar' ? item.titleAr :
+                                                item.title }}</nuxt-link>
+                                        <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Brand:
+                                            {{ $i18n.locale ===
+                                                'ar' ? item.brandAr :
+                                                item.brand }}</p>
                                         <p>Quantity: <span class="font-semibold text-blue-700 dark:text-blue-400">{{
                                             item.quantity
                                                 }}</span></p>
 
                                         <div class="flex items-center gap-4">
-                                            <button type="button"
-                                                class="inline-flex items-center text-sm font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 hover:underline">
-                                                <icon name="heroicons-outline:heart" class="me-1.5 h-5 w-5" />
-                                                Add to Favorites
-                                            </button>
-
                                             <button type="button" @click.stop="removeItem(item.docId)"
                                                 class="inline-flex items-center text-sm font-medium text-red-600 dark:text-red-400 hover:underline">
                                                 <icon v-if="removingItem === item.docId"
@@ -82,34 +83,39 @@
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-100">Original
                                             price</dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{
-                                            totalOriginalPrice
-                                            }} egp</dd>
+                                            $n(parseFloat(totalDsicoutedPrice),
+                                                'currency', currencyLocale)
+                                        }}</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-100">Savings</dt>
                                         <dd class="text-base font-medium text-green-600 dark:text-green-400">-{{
-                                            totalSavings }} egp</dd>
+                                            totalSavings }} {{ $t('products.egp') }}</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-200">Store Pickup
                                         </dt>
-                                        <dd class="text-base font-medium text-gray-900 dark:text-gray-200">15.00 egp
+                                        <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{
+                                            $t('products.15_00') }} {{ $t('products.egp') }}
                                         </dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-100">Tax</dt>
-                                        <dd class="text-base font-medium text-gray-900 dark:text-gray-200">12.00 egp
+                                        <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{
+                                            $t('products.12_00') }} {{ $t('products.egp') }}
                                         </dd>
                                     </dl>
                                 </div>
 
-                                <dl class="flex items-center justify-between gap-4 pt-2 border-t border-gray-200">
+                                <dl class="flex items-center justify-between gap-4 pt-2 border-t border-gray-400">
                                     <dt class="text-base font-bold text-gray-900 dark:text-gray-200">Total</dt>
-                                    <dd class="text-base font-bold text-gray-900 dark:text-gray-200">{{ totalAmount }}
-                                        egp</dd>
+                                    <dd class="text-base font-bold text-gray-900 dark:text-gray-200">{{
+                                        $n(parseFloat(totalAmount),
+                                            'currency', currencyLocale) }}
+                                    </dd>
                                 </dl>
                             </div>
 
@@ -222,17 +228,22 @@ const updateQuantityInStore = (productId, newQuantity) => {
     }
 };
 
-const totalOriginalPrice = computed(() => {
+const totalDsicoutedPrice = computed(() => {
     return cartStore.cart.reduce((total, item) => {
-        return total + (parseFloat(item.originalPrice) || 0) * item.quantity;
+        return total + (parseFloat(item.discountedPrice) || 0) * item.quantity;
     }, 0).toFixed(2);
 });
 
 const totalSavings = computed(() => {
     return cartStore.cart.reduce((total, item) => {
-        return total + (parseFloat(item.originalPrice) - parseFloat(item.discountedPrice)) * item.quantity;
+        const original = parseFloat(item.originalPrice) || 0;
+        const discounted = parseFloat(item.discountedPrice) || 0;
+        return total + (original - discounted) * (item.quantity || 1);
     }, 0).toFixed(2);
 });
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 useHead({
     titleTemplate: () => t("head.shopping_cart"),

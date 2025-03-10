@@ -29,12 +29,17 @@
           <img :src="item.imageUrl1" class="w-full h-auto rounded-lg shadow-md" />
         </div>
         <div class="col-span-10">
-          <p class="text-lg font-semibold text-gray-900 dark:text-gray-200">{{ item.title }}</p>
+          <p class="text-lg font-semibold text-gray-900 dark:text-gray-200">{{ $i18n.locale ===
+            'ar' ? item.titleAr :
+            item.title }}</p>
           <p class="text-sm font-semibold text-gray-700 dark:text-gray-100"><span class="font-medium me-1">{{
             $t('order_summary.brand') }} </span>{{
-                item.brand }}</p>
-          <p class="mt-8 text-sm font-semibold text-blue-700 dark:text-blue-400"><span class="text-gray-700 me-1 dark:text-gray-100">{{
-            $t('order_summary.quantity') }}
+                $i18n.locale ===
+                  'ar' ? item.brandAr :
+                  item.brand }}</p>
+          <p class="mt-8 text-sm font-semibold text-blue-700 dark:text-blue-400"><span
+              class="text-gray-700 me-1 dark:text-gray-100">{{
+                $t('order_summary.quantity') }}
             </span>{{
               item.quantity }}</p>
         </div>
@@ -46,7 +51,8 @@
           <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.subtotal') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ subTotalAmount }} egp</dd>
+          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ $n(parseFloat(subTotalAmount),
+            'currency', currencyLocale) }}</dd>
         </div>
       </div>
 
@@ -66,7 +72,8 @@
           <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.store_pickup') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">25.00 egp</dd>
+          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ $t('products.15_00') }} {{
+            $t('products.egp') }}</dd>
         </div>
       </div>
 
@@ -76,7 +83,8 @@
           <dt class="text-sm font-medium text-gray-500 dark:text-gray-100">{{ $t('order_summary.tax') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">18.00 egp</dd>
+          <dd class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ $t('products.12_00') }} {{
+            $t('products.egp') }}</dd>
         </div>
       </div>
 
@@ -86,7 +94,8 @@
           <dt class="text-xl">{{ $t('order_summary.total') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ totalAmount }} egp</dd>
+          <dd class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ $n(parseFloat(totalAmount),
+            'currency', currencyLocale) }}</dd>
         </div>
       </div>
     </div>
@@ -170,6 +179,9 @@ const downloadPDF = () => {
     html2pdf().from(pdfContent).set(options).save();
   }
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 const { t } = useI18n()
 

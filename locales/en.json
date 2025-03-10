@@ -399,7 +399,10 @@
     "filter_options": "Filter Options",
     "categories": "Categories",
     "color": "Color",
-    "size": "Size"
+    "size": "Size",
+    "egp": "EGP",
+    "15_00": "15.00",
+    "12_00": "12.00"
   },
   "error_page": {
     "you_are_all_alone_here": "You are all alone here"
