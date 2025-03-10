@@ -2,13 +2,13 @@ export const useWishlistStore = defineStore("wishlist", {
   state: () => ({
     wishlist: [],
     loading: false,
-    storedUser: JSON.parse(localStorage.getItem('user'))
+    storedUser: JSON.parse(localStorage.getItem("user")),
   }),
 
   actions: {
     fetchWishlist() {
       this.loading = true;
-      const userId = this.storedUser?.uid
+      const userId = this.storedUser?.uid;
       if (!userId) {
         this.loading = false;
         return;
@@ -24,8 +24,10 @@ export const useWishlistStore = defineStore("wishlist", {
       }
     },
 
-    addToWishlist(id, title, discountedPrice, originalPrice, brand, imageUrl1) {
-      const userId = this.storedUser?.uid
+    addToWishlist(wishlistItems) {
+      const { id, title, titleAr, discountedPrice, originalPrice, brand, brandAr, imageUrl1 } =
+        wishlistItems;
+      const userId = this.storedUser?.uid;
       if (!userId) {
         throw new Error("User not authenticated");
       }
@@ -36,9 +38,11 @@ export const useWishlistStore = defineStore("wishlist", {
         docId: Date.now().toString(),
         productId: id,
         title,
+        titleAr,
         discountedPrice,
         originalPrice,
         brand,
+        brandAr,
         imageUrl1,
         userId,
       };
@@ -47,7 +51,7 @@ export const useWishlistStore = defineStore("wishlist", {
     },
 
     removeFromWishlist(docId) {
-      const userId = this.storedUser?.uid
+      const userId = this.storedUser?.uid;
       if (!userId) return;
       this.wishlist = this.wishlist.filter((item) => item.docId !== docId);
       this.persistWishlist(userId);
@@ -55,10 +59,7 @@ export const useWishlistStore = defineStore("wishlist", {
 
     persistWishlist(userId) {
       try {
-        localStorage.setItem(
-          "wishlist",
-          JSON.stringify(this.wishlist)
-        );
+        localStorage.setItem("wishlist", JSON.stringify(this.wishlist));
       } catch (error) {
         console.error("Error saving wishlist to localStorage:", error);
       }

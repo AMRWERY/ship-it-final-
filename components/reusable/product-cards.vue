@@ -10,7 +10,8 @@
         </div>
         <div class="pt-6">
           <div class="flex items-center justify-between gap-4 mb-4">
-            <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800" v-if="product.discount">
+            <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800"
+              v-if="product.discount">
               Up to {{ product.discount }}% off</span>
             <div class="flex items-center justify-end gap-1 ms-auto">
               <tooltip :text="$t('tooltip.quick_look')" position="bottom">
@@ -126,16 +127,10 @@ const handleAddToCart = async (product) => {
   try {
     loading.value[product.id] = true;
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    await cartStore.addToCart(
-      product.id,
-      product.title,
-      product.discountedPrice,
-      product.originalPrice || null,
-      product.imageUrl1,
-      product.brand,
-      product.discount || null,
-      quantity.value,
-    );
+    await cartStore.addToCart({
+      ...product,
+      quantity: 1
+    });
     triggerToast({
       title: t('toast.great'),
       message: t('toast.item_added_to_your_cart'),
@@ -170,15 +165,11 @@ const toggleWishlist = async (product) => {
     setTimeout(() => (errorMessage.value = ""), 3000);
   } else {
     try {
-      await wishlistStore.addToWishlist(
-        product.id,
-        product.title,
-        product.discountedPrice,
-        product.originalPrice || null,
-        product.brand,
-        product.imageUrl1,
-        userId
-      );
+      await wishlistStore.addToWishlist({
+        ...product,
+        userId,
+        quantity: 1
+      });
       itemAdded.value = "Product added to wishlist!";
       setTimeout(() => (itemAdded.value = ""), 3000);
       triggerToast({ title: t('toast.great'), message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
