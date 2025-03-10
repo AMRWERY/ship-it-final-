@@ -100,23 +100,27 @@ export const useTodayDealStore = defineStore("today-deals", {
         throw new Error("User not authenticated or uid not available");
       }
       try {
-        const product = {
-          docId: Date.now().toString(),
-          productId: deal.id,
-          title: deal.title,
-          discountedPrice: deal.discountedPrice,
-          originalPrice: deal.originalPrice,
-          imageUrl1: deal.imageUrl1,
-          brand: deal.brand,
-          discount: deal.discount,
-          quantity,
-          uid,
-        };
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push(product);
-        this.cart = cart;
-        localStorage.setItem("cart", JSON.stringify(cart));
-        return { cartResult: true, product };
+        const existingIndex = this.cart.findIndex(
+          (item) => item.productId === deal.id && item.uid === uid
+        );
+        if (existingIndex !== -1) {
+          this.cart[existingIndex].quantity += quantity;
+        } else {
+          const product = {
+            productId: deal.id,
+            title: deal.title,
+            discountedPrice: deal.discountedPrice,
+            originalPrice: deal.originalPrice,
+            imageUrl1: deal.imageUrl1,
+            brand: deal.brand,
+            discount: deal.discount,
+            quantity,
+            uid,
+          };
+          this.cart.push(product);
+        }
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        return { success: true };
       } catch (error) {
         console.error("Error adding deal to cart:", error);
         throw error;

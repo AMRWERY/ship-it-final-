@@ -19,8 +19,8 @@
                 <div class="max-w-xl mx-auto lg:max-w-6xl">
                   <!-- no deals available -->
                   <div v-if="!currentDeal">
-                    <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">No deals available
-                      right now</p>
+                    <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">{{
+                      $t('home.no_deals_available_right_now') }}</p>
                     <p v-if="nextDealStartTime"
                       class="mt-2 text-xl font-medium text-center text-gray-500 dark:text-gray-100">
                       Next deal will start in <span class="font-semibold text-red-500 dark:text-red-400">{{
@@ -79,11 +79,11 @@
                         <div class="flex items-center justify-around gap-5 mt-5">
                           <div v-for="(value, key) in currentDealTime" :key="key"
                             class="flex flex-col items-center space-y-2">
-                            <div class="flex items-center justify-center w-10 h-10 border-2 rounded-full"
+                            <div class="flex items-center justify-center w-12 h-12 border-2 rounded-full"
                               :class="`border-${key}`">
                               <span class="text-lg font-bold">{{ value }}</span>
                             </div>
-                            <span class="text-sm capitalize">{{ key }}</span>
+                            <span class="text-sm font-medium capitalize">{{ $t('home.' + key) }}</span>
                           </div>
                         </div>
                       </div>
@@ -91,7 +91,7 @@
                       <hr class="my-6 border-gray-300" />
 
                       <div class="mt-4">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Color</h3>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.color') }}</h3>
                         <div class="flex flex-wrap gap-2 mt-2">
                           <button type="button" v-for="color in currentDeal?.colors" :key="color"
                             class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
@@ -100,7 +100,7 @@
                       </div>
 
                       <div class="mt-4">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Size</h3>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.size') }}</h3>
                         <div class="flex flex-wrap gap-2 mt-2">
                           <button type="button" v-for="size in currentDeal?.sizes" :key="size"
                             class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
@@ -109,32 +109,40 @@
                       </div>
 
                       <div class="mt-4">
-                        <p class="text-sm">SKU: <span class="font-semibold">{{ currentDeal?.sku }}</span></p>
+                        <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
+                        }}</span></p>
                       </div>
 
                       <div class="mt-4">
-                        <div class="flex gap-2 items-center border border-gray-300 px-3 py-2.5 w-max">
-                          <button type="button" class="text-black border-none outline-none" @click="decrementQuantity">
-                            <icon name="ic:round-minus" class="w-2.5 h-2.5" />
-                          </button>
-                          <input type="number" placeholder="1"
-                            class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
-                            v-model="quantity">
-                          <button type="button" class="text-black border-none outline-none" @click="incrementQuantity">
-                            <icon name="material-symbols:add" class="w-2.5 h-2.5" />
-                          </button>
+                        <div>
+                          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.quantity') }}</h3>
+                          <div class="flex mt-4 overflow-hidden border divide-x rounded w-max">
+                            <button type="button" class="w-12 h-10 font-semibold bg-gray-100"
+                              @click="decrementQuantity">
+                              <icon name="ic:round-minus" class="w-4 h-4" />
+                            </button>
+                            <input type="number" placeholder="1"
+                              class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
+                              v-model="quantity">
+                            <button type="button" class="w-12 h-10 font-semibold text-white bg-gray-800"
+                              @click="incrementQuantity">
+                              <icon name="material-symbols:add" class="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
 
                         <div class="flex flex-wrap gap-4 mt-4">
                           <!-- Add to Cart -->
                           <button class="flex items-center justify-center gap-2 px-6 py-2 btn-style w-[60%]"
                             @click="handleAddToCart(currentDeal)">
-                            <icon name="material-symbols:add-shopping-cart-sharp" class="w-5 h-5" />
                             <div class="flex items-center justify-center" v-if="loading">
                               <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
                               <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
                             </div>
-                            <span v-else>{{ $t('btn.add_to_cart') }}</span>
+                            <span v-else class="flex items-center">
+                              <icon name="material-symbols:add-shopping-cart-sharp" class="me-2" />
+                              {{ $t('btn.add_to_cart') }}
+                            </span>
                           </button>
 
                           <!-- Add to Wishlist -->
@@ -161,8 +169,11 @@
 
                         <div class="max-w-2xl mt-12 custom-scroll max-h-32">
                           <div class="mt-6">
-                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Description</h3>
-                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ currentDeal?.description }}
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.description') }}
+                            </h3>
+                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ $i18n.locale ===
+                              'ar' ? currentDeal?.descriptionAr :
+                              currentDeal?.description }}
                             </p>
                           </div>
                         </div>
@@ -214,9 +225,6 @@ const updateCurrentDealTime = () => {
     currentDealTime.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
   }
 };
-
-
-
 
 let interval;
 
@@ -284,33 +292,32 @@ const handleAddToCart = async (currentDeal) => {
     productAdded.value = true;
     setTimeout(() => {
       productAdded.value = false;
+      loading.value = false;
     }, 3000);
   } catch (error) {
     if (error.message.includes('authenticated')) {
       notAuth.value = true;
       setTimeout(() => {
         notAuth.value = false;
+        loading.value = false;
       }, 3000);
     } else {
       productNotAdded.value = true;
       setTimeout(() => {
         productNotAdded.value = false;
+        loading.value = false;
       }, 3000);
     }
-  } finally {
-    loading.value = false;
   }
 };
 
 const incrementQuantity = () => {
   quantity.value++;
-  // updateQuantityInStore(quantity.value);
 };
 
 const decrementQuantity = () => {
   if (quantity.value > 1) {
     quantity.value--;
-    // updateQuantityInStore(quantity.value);
   }
 };
 
