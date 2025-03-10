@@ -244,7 +244,10 @@
     "failed_to_add_category": "Failed to add category",
     "message_deleted": "Message deleted",
     "message_deletion_failed": "Message deletion failed",
-    "product_updated_successfully": "Product updated successfully"
+    "product_updated_successfully": "Product updated successfully",
+    "product_added_to_wishlist": "Product added to wishlist",
+    "failed_add_product_to_wishlist": "Failed add Product to wishlist",
+    "product_already_added_to_the_wishlist": "Product already added to the wishlist"
   },
   "breadcrumb": {
     "home": "Home",
