@@ -83,7 +83,7 @@
                                             price</dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{
                                             totalOriginalPrice
-                                        }} egp</dd>
+                                            }} egp</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
@@ -163,7 +163,6 @@ const loading = ref(false)
 
 const removeItem = async (docId) => {
     if (!docId) {
-        console.error("No docId provided for removal.");
         return;
     }
     try {
