@@ -161,7 +161,7 @@ const toggleWishlist = async (product) => {
     return;
   }
   if (wishlistStore.isInWishlist(product.id)) {
-    errorMessage.value = "Product already added to the wishlist.";
+    errorMessage.value = t('toast.product_already_added_to_the_wishlist');
     setTimeout(() => (errorMessage.value = ""), 3000);
   } else {
     try {
@@ -170,11 +170,11 @@ const toggleWishlist = async (product) => {
         userId,
         quantity: 1
       });
-      itemAdded.value = "Product added to wishlist!";
+      itemAdded.value = t('toast.product_added_to_wishlist');
       setTimeout(() => (itemAdded.value = ""), 3000);
       triggerToast({ title: t('toast.great'), message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
     } catch (error) {
-      if (error.message === "Product already added to the wishlist.") {
+      if (error.message === t('toast.product_already_added_to_the_wishlist')) {
         errorMessage.value = error.message;
         setTimeout(() => (errorMessage.value = ""), 3000);
       } else {
