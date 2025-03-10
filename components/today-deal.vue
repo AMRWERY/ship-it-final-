@@ -110,7 +110,7 @@
 
                       <div class="mt-4">
                         <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
-                        }}</span></p>
+                            }}</span></p>
                       </div>
 
                       <div class="mt-4">
@@ -152,7 +152,13 @@
                               :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
                           </button>
 
-                          <!-- Success Message -->
+                          <!-- actions Message -->
+                          <div v-if="wishlistAdded" class="font-medium text-green-700 dark:text-green-400">
+                            {{ $t('toast.product_added_to_wishlist') }}
+                          </div>
+                          <div v-if="wishlistNotAdded" class="font-medium text-red-700 dark:text-red-400">
+                            {{ $t('toast.failed_add_product_to_wishlist') }}
+                          </div>
                           <div v-if="productAdded">
                             <p class="font-medium text-green-700 dark:text-green-400">{{
                               $t('toast.product_added_to_cart') }}</p>
@@ -281,34 +287,40 @@ const wishlistStore = useWishlistStore();
 const productAdded = ref('');
 const notAuth = ref(false)
 const productNotAdded = ref('')
+const wishlistAdded = ref('');
+const wishlistNotAdded = ref('');
 const quantity = ref(1);
 const loading = ref(false);
 
-const handleAddToCart = async (currentDeal) => {
+const handleAddToCart = (currentDeal) => {
   if (!currentDeal) return;
-  try {
-    loading.value = true;
-    await todayDealStore.addToCart(currentDeal, quantity.value || 1);
-    productAdded.value = true;
-    setTimeout(() => {
-      productAdded.value = false;
-      loading.value = false;
-    }, 3000);
-  } catch (error) {
-    if (error.message.includes('authenticated')) {
-      notAuth.value = true;
+  loading.value = true;
+  todayDealStore
+    .addToCart(currentDeal, quantity.value || 1)
+    .then(() => {
       setTimeout(() => {
-        notAuth.value = false;
         loading.value = false;
+        productAdded.value = true;
+        setTimeout(() => {
+          productAdded.value = false;
+        }, 3000);
       }, 3000);
-    } else {
-      productNotAdded.value = true;
-      setTimeout(() => {
-        productNotAdded.value = false;
-        loading.value = false;
-      }, 3000);
-    }
-  }
+    })
+    .catch((error) => {
+      if (error.message.includes("authenticated")) {
+        notAuth.value = true;
+        setTimeout(() => {
+          notAuth.value = false;
+          loading.value = false;
+        }, 3000);
+      } else {
+        productNotAdded.value = true;
+        setTimeout(() => {
+          productNotAdded.value = false;
+          loading.value = false;
+        }, 3000);
+      }
+    });
 };
 
 const incrementQuantity = () => {
@@ -340,11 +352,11 @@ const toggleWishlist = async (currentDeal) => {
       currentDeal.imageUrl1,
     );
     setTimeout(() => {
-      productAdded.value = "Product added to wishlist!";
+      wishlistAdded.value = true;
     }, 3000);
   } catch (error) {
     setTimeout(() => {
-      productNotAdded.value = "Failed add Product to wishlist!";
+      wishlistNotAdded.value = false;
     }, 3000);
   }
 };
