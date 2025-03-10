@@ -60,7 +60,17 @@
     "explore_an_incredible_collection_of_trendy_clothing_at_amazing_prices": "استكشف مجموعة مذهلة من الأزياء العصرية بأسعار رائعة",
     "find_the_best_womens_Winter_boots_around": "اكتشف أفضل أحذية الشتاء النسائية",
     "make_a_statement_with_our_stunning_selection_of_womens_boots_they_re_the_best": "تميزي بإطلالة رائعة مع مجموعتنا المذهلة من أحذية النساء، فهي الأفضل!",
-    "save": "وفر"
+    "save": "وفر",
+    "no_deals_available_right_now": "لا توجد عروض متاحه حاليا",
+    "color": "اللون",
+    "size": "المقاس / الحجم",
+    "sku": "الرمز المرجعي للمنتج:",
+    "quantity": "الكمية",
+    "description": "الوصف",
+    "days": "ايام",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "ثواني"
   },
   "form": {
     "email": "البريد الإلكتروني",
