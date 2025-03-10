@@ -30,14 +30,14 @@
           </ol>
 
           <!-- Stepper Content -->
-          <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <transition name="fade">
             <div v-if="step === 1">
               <!-- Checkout Form -->
               <div class="mt-2 lg:flex lg:items-start lg:gap-12 xl:gap-16">
                 <div class="flex-1 min-w-0 space-y-8">
                   <div class="space-y-4">
                     <h2 class="text-xl font-semibold text-gray-900">{{ $t('checkout.delivery_details')
-                      }}</h2>
+                    }}</h2>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
                         name="cvv" :rules="'required|alpha_spaces'" :required="true"
@@ -55,7 +55,7 @@
                         </div>
                         <select id="country" name="country" autocomplete="country-name" v-model="selectedCountry"
                           class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9">
-                          <option v-for=" country in countriesData" :key="country.country" :value="country.country"
+                          <option v-for="country in countriesData" :key="country.country" :value="country.country"
                             class="bg-white dark:bg-[#181a1b] text-slate-700 dark:text-slate-200">
                             {{ country.country }}</option>
                         </select>
@@ -110,7 +110,7 @@
             </div>
           </transition>
 
-          <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <transition name="fade">
             <div v-if="step === 2">
               <!-- Payment Form -->
               <div class="mt-2 lg:flex lg:items-start lg:gap-12 xl:gap-16">
@@ -178,7 +178,8 @@
               <div class="-my-3 divide-y divide-gray-200">
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.subtotal') }}</dt>
-                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ subTotalAmount }}</dd>
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ $n(parseFloat(subTotalAmount),
+                    'currency', currencyLocale) }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.savings') }}</dt>
@@ -187,15 +188,18 @@
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.store_pickup') }}
                   </dt>
-                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">$25.00</dd>
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ $t('products.15_00') }} {{
+                    $t('products.egp') }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.tax') }}</dt>
-                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">$18.00</dd>
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ $t('products.12_00') }} {{
+                    $t('products.egp') }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $t('checkout.total') }}</dt>
-                  <dd class="text-base font-bold text-gray-900 dark:text-gray-200">${{ totalAmount }}</dd>
+                  <dd class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $n(parseFloat(totalAmount),
+                    'currency', currencyLocale) }}</dd>
                 </dl>
               </div>
             </div>
@@ -339,22 +343,8 @@ const submitCheckoutForm = () => {
     });
 };
 
-function beforeEnter(el) {
-  el.style.opacity = 0;
-}
-
-function enter(el, done) {
-  el.offsetHeight;
-  el.style.transition = 'opacity 0.5s ease';
-  el.style.opacity = 1;
-  done();
-}
-
-function leave(el, done) {
-  el.style.transition = 'opacity 0.5s ease';
-  el.style.opacity = 0;
-  done();
-}
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 useHead({
   titleTemplate: () => t("head.checkout"),
@@ -367,7 +357,7 @@ useHead({
   transition: opacity 0.5s ease;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
