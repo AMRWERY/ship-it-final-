@@ -34,7 +34,7 @@
                         <div class="relative shadow-lg">
                           <img :src="selectedImage" class="w-full aspect-[11/8] object-cover object-center h-[450px]" />
                           <button @click="closeDialog"
-                            class="absolute top-2 right-2 p-1.5 sm:hidden bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors">
+                            class="absolute top-2 end-2 p-1.5 flex bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors lg:hidden">
                             <icon name="material-symbols:close-small"
                               class="w-6 h-6 text-gray-800 dark:text-gray-200" />
                           </button>
@@ -58,7 +58,7 @@
                               currentDeal?.title }}
                           </h3>
                           <button @click="closeDialog"
-                            class="flex items-center justify-center p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white max-sm:hidden">
+                            class="items-center justify-center hidden p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white max-sm:hidden lg:flex">
                             <icon name="material-symbols:close-small" />
                           </button>
                         </div>
@@ -169,35 +169,6 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- Upcoming Deals Section -->
-                  <div class="mt-12 border-t-2" v-if="currentDeal">
-                    <h3 class="mt-4 text-lg font-bold text-gray-800 dark:text-gray-200">Upcoming Deals</h3>
-                    <div class="grid grid-cols-2 gap-4 md:grid-cols-2 max-sm:justify-center gap-y-8 sm:gap-x-6">
-                      <div class="flex items-center gap-6 overflow-hidden cursor-pointer max-sm:flex-col"
-                        v-for="(deal, index) in nextDeals" :key="index">
-                        <div class="w-24 h-24 overflow-hidden rounded-lg shrink-0">
-                          <img :src="deal.imageUrl1" class="object-contain w-full h-full" />
-                        </div>
-                        <div class="max-sm:text-center">
-                          <h3 class="text-sm font-bold text-gray-800 truncate sm:text-base dark:text-gray-200">{{
-                            deal.title }}</h3>
-                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">{{ deal.brand }}</h4>
-                          <h4 class="mt-2 text-xs font-bold text-gray-700 dark:text-gray-200">Save {{ deal.discount
-                          }}%
-                          </h4>
-                          <h4 class="mt-2 text-sm font-bold text-blue-600 dark:text-blue-400">{{ deal.discountedPrice
-                          }}
-                            egp
-                          </h4>
-                          <h4 class="mt-2 text-sm font-normal text-red-600 dark:text-red-400">{{
-                            formatRemainingTime(deal.remainingTime)
-                          }}
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -212,7 +183,6 @@
 const todayDealStore = useTodayDealStore();
 
 const currentDeal = computed(() => todayDealStore.currentDeal);
-const nextDeals = computed(() => todayDealStore.nextDeals);
 
 const nextDealStartTime = ref(null);
 
@@ -245,24 +215,8 @@ const updateCurrentDealTime = () => {
   }
 };
 
-const updateNextDealsTimes = () => {
-  nextDeals.value.forEach((deal) => {
-    deal.remainingTime = calculateRemainingTime(deal.startTime);
-  });
-};
 
-const updateNextDealStartTime = () => {
-  if (!nextDeals.value || nextDeals.value.length === 0) {
-    nextDealStartTime.value = null;
-    return;
-  }
-  const nextDeal = nextDeals.value.find(
-    (deal) => new Date(deal.startTime.seconds * 1000) > new Date()
-  );
-  nextDealStartTime.value = nextDeal
-    ? calculateRemainingTime(nextDeal.startTime)
-    : null;
-};
+
 
 let interval;
 
@@ -274,14 +228,8 @@ onMounted(() => {
       if (firstImage) selectedImage.value = firstImage;
       interval = setInterval(() => {
         updateCurrentDealTime();
-        updateNextDealsTimes();
       }, 1000);
       updateCurrentDealTime();
-      updateNextDealsTimes();
-      updateNextDealStartTime();
-      setInterval(() => {
-        updateNextDealStartTime();
-      }, 1000);
     })
     .catch((error) => {
       console.error("Error fetching deals:", error);
@@ -320,7 +268,6 @@ const setSelectedImage = (image) => {
   selectedImage.value = image;
 };
 
-const cartStore = useCartStore();
 const authStore = useAuthStore();
 const wishlistStore = useWishlistStore();
 const productAdded = ref('');
