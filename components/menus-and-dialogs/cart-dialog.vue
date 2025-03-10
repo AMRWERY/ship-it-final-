@@ -28,7 +28,7 @@
 
           <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
             <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty')
-              }}</p>
+            }}</p>
             <nuxt-link to="/products" @click="closeCartSidebar" type="button"
               class="block text-sm font-medium text-center text-blue-500 dark:text-blue-300">
               <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
@@ -45,8 +45,12 @@
                 </div>
 
                 <div class="flex flex-col">
-                  <h3 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.title }}</h3>
-                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Brand: {{ item.brand }}</p>
+                  <h3 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ $i18n.locale ===
+                    'ar' ? item.titleAr :
+                    item.title }}</h3>
+                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Brand: {{ $i18n.locale ===
+                    'ar' ? item.brandAr :
+                    item.brand }}</p>
                   <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Quantity: {{ item.quantity }}
                   </p>
 
@@ -61,8 +65,10 @@
               </div>
 
               <div class="ms-auto">
-                <h4 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ item.discountedPrice
-                  }} egp</h4>
+                <h4 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{
+                  $n(parseFloat(item.discountedPrice),
+                    'currency', currencyLocale)
+                  }}</h4>
                 <div class="flex items-center gap-3 mt-10">
                   <button type="button" @click.stop="decrementQuantity(item)"
                     class="flex items-center justify-center w-5 h-5 bg-gray-400 rounded-full outline-none dark:bg-gray-200">
@@ -81,8 +87,10 @@
 
         <div class="absolute bottom-0 w-full p-4 bg-white dark:bg-[#181a1b] border-t" v-if="cartStore.cart.length > 0">
           <ul class="text-gray-800 divide-y dark:text-gray-200">
-            <li class="flex flex-wrap gap-4 text-lg font-bold">Subtotal <span class="ms-auto">{{ totalAmount }}
-                egp</span>
+            <li class="flex flex-wrap gap-4 text-lg font-bold">Subtotal <span class="ms-auto">{{
+              $n(parseFloat(totalAmount),
+                'currency', currencyLocale) }}
+              </span>
             </li>
           </ul>
           <div class="space-y-3">
@@ -175,6 +183,9 @@ const openCartSidebar = () => {
 const closeCartSidebar = () => {
   isSidebarOpen.value = false;
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 </script>
 
 <style scoped>

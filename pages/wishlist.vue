@@ -24,12 +24,15 @@
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-black">
           <img :src="item.imageUrl1" class="object-cover w-full h-48">
           <div class="p-4">
-            <h3 class="text-lg font-semibold truncate">{{ item.title }}</h3>
-            <p class="mt-1 text-gray-500 dark:text-gray-100">Brand: {{ item.brand }}</p>
+            <h3 class="text-lg font-semibold truncate">{{ $i18n.locale === 'ar' ? item.titleAr :
+              item.title }}</h3>
+            <p class="mt-1 text-gray-500 dark:text-gray-100">Brand: {{ $i18n.locale === 'ar' ? item.brandAr :
+              item.brand }}</p>
             <div class="flex items-center mt-2 space-s-2">
-              <p class="mt-1 text-xl font-bold text-gray-900 dark:text-gray-200">{{ item.discountedPrice }} egp</p>
+              <p class="mt-1 text-xl font-bold text-gray-900 dark:text-gray-200">{{ $n(parseFloat(item.discountedPrice),
+                'currency', currencyLocale) }}</p>
               <p class="mt-2 text-sm text-gray-500 line-through dark:text-gray-100" v-if="item.originalPrice">{{
-                item.originalPrice }} egp</p>
+                $n(parseFloat(item.originalPrice), 'currency', currencyLocale) }}</p>
             </div>
 
             <div class="flex mt-2 space-s-5">
@@ -110,6 +113,9 @@ const moveToCart = async (item) => {
     itemLoading.value[item.docId] = false;
   }, 3000);
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 useHead({
   titleTemplate: () => t("head.wishlist"),
