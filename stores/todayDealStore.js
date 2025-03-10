@@ -109,12 +109,16 @@ export const useTodayDealStore = defineStore("today-deals", {
           const product = {
             productId: deal.id,
             title: deal.title,
+            titleAr: deal.titleAr,
             discountedPrice: deal.discountedPrice,
             originalPrice: deal.originalPrice,
             imageUrl1: deal.imageUrl1,
             brand: deal.brand,
+            brandAr: deal.brandAr,
             discount: deal.discount,
             quantity,
+            color: deal.color,
+            size: deal.size,
             uid,
           };
           this.cart.push(product);
