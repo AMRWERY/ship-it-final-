@@ -8,179 +8,183 @@
           $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
     </div>
 
-    <!-- Dialog Overlay and Container -->
     <transition name="fade">
       <div v-if="isDialogOpen"
-        class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-xl shadow-2xl border-double border-2 z-[1050] h-[80vh] w-max overflow-y-auto overflow-x-hidden outline-none custom-scroll max-w-full">
-        <div class="bg-gray-50 dark:bg-[#181a1b] p-4">
-          <div class="relative">
-            <div class="font-sans tracking-wide max-md:mx-auto">
-              <div class="font-[sans-serif]">
-                <div class="max-w-xl mx-auto lg:max-w-6xl">
-                  <!-- no deals available -->
-                  <div v-if="!currentDeal">
-                    <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">{{
-                      $t('home.no_deals_available_right_now') }}</p>
-                    <p v-if="nextDealStartTime"
-                      class="mt-2 text-xl font-medium text-center text-gray-500 dark:text-gray-100">
-                      Next deal will start in <span class="font-semibold text-red-500 dark:text-red-400">{{
-                        formatRemainingTime(nextDealStartTime) }}</span>
-                    </p>
-                  </div>
-
-                  <div class="grid items-start grid-cols-1 gap-8 lg:grid-cols-2 max-lg:gap-12 max-sm:gap-8" v-else>
-                    <div class="top-0 w-full lg:sticky">
-                      <div class="flex flex-col gap-4">
-                        <div class="relative shadow-lg">
-                          <img :src="selectedImage" class="w-full aspect-[11/8] object-cover object-center h-[450px]" />
-                          <button @click="closeDialog"
-                            class="absolute top-2 end-2 p-1.5 flex bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors lg:hidden">
-                            <icon name="material-symbols:close-small"
-                              class="w-6 h-6 text-gray-800 dark:text-gray-200" />
-                          </button>
-                        </div>
-                        <div class="w-full max-w-full p-2 overflow-auto dark:bg-[#181a1b]">
-                          <div class="flex flex-row gap-4 shrink-0 space-s-2">
-                            <img v-for="(image, index) in imageList" :key="index" :src="image"
-                              @click="setSelectedImage(image)"
-                              class="object-cover object-top w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-md cursor-pointer aspect-square" />
-                          </div>
-                        </div>
-                      </div>
+        class="fixed inset-0 p-4 flex flex-wrap justify-center items-center z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+        <div class="relative max-w-6xl bg-white rounded-lg shadow-xl custom-scroll h-[550px]">
+          <div class="bg-gray-50 dark:bg-[#181a1b] p-4">
+            <div class="relative">
+              <div class="font-sans tracking-wide max-md:mx-auto">
+                <div class="font-[sans-serif]">
+                  <div class="max-w-xl mx-auto lg:max-w-6xl">
+                    <!-- no deals available -->
+                    <div v-if="!currentDeal">
+                      <p class="text-3xl font-semibold text-center text-gray-600 dark:text-gray-100">{{
+                        $t('home.no_deals_available_right_now') }}</p>
+                      <p v-if="nextDealStartTime"
+                        class="mt-2 text-xl font-medium text-center text-gray-500 dark:text-gray-100">
+                        Next deal will start in <span class="font-semibold text-red-500 dark:text-red-400">{{
+                          formatRemainingTime(nextDealStartTime) }}</span>
+                      </p>
                     </div>
 
-                    <div class="w-full">
-                      <div>
-                        <div class="flex items-center justify-between">
-                          <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
-                            {{ $i18n.locale ===
-                              'ar' ? currentDeal?.titleAr :
-                              currentDeal?.title }}
-                          </h3>
-                          <button @click="closeDialog"
-                            class="items-center justify-center hidden p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white max-sm:hidden lg:flex">
-                            <icon name="material-symbols:close-small" />
-                          </button>
-                        </div>
-                        <p class="mt-3 mb-4 text-sm">{{ $i18n.locale ===
-                          'ar' ? currentDeal?.brandAr :
-                          currentDeal?.brand }}</p>
-
-                        <div class="flex flex-wrap items-center gap-2 mt-4">
-                          <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
-                            $n(parseFloat(currentDeal?.originalPrice), 'currency', currencyLocale) }}</p>
-                          <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{
-                            $n(parseFloat(currentDeal?.discountedPrice), 'currency', currencyLocale) }}</h4>
-                          <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
-                            <span class="text-sm text-white">{{ $t('home.save') }} {{ currentDeal?.discount }}%</span>
+                    <div class="grid items-start grid-cols-1 gap-8 lg:grid-cols-2 max-lg:gap-12 max-sm:gap-8" v-else>
+                      <div class="top-0 w-full lg:sticky">
+                        <div class="flex flex-col gap-4">
+                          <div class="relative shadow-lg">
+                            <img :src="selectedImage"
+                              class="w-full aspect-[11/8] object-cover object-center h-[450px]" />
+                            <button @click="closeDialog"
+                              class="absolute top-2 end-2 p-1.5 flex bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors lg:hidden">
+                              <icon name="material-symbols:close-small"
+                                class="w-6 h-6 text-gray-800 dark:text-gray-200" />
+                            </button>
                           </div>
-                        </div>
-
-                        <div class="flex items-center justify-around gap-5 mt-5">
-                          <div v-for="(value, key) in currentDealTime" :key="key"
-                            class="flex flex-col items-center space-y-2">
-                            <div class="flex items-center justify-center w-12 h-12 border-2 rounded-full"
-                              :class="`border-${key}`">
-                              <span class="text-lg font-bold">{{ value }}</span>
+                          <div class="w-full max-w-full p-2 overflow-auto dark:bg-[#181a1b]">
+                            <div class="flex flex-row gap-4 shrink-0 space-s-2">
+                              <img v-for="(image, index) in imageList" :key="index" :src="image"
+                                @click="setSelectedImage(image)"
+                                class="object-cover object-top w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-md cursor-pointer aspect-square" />
                             </div>
-                            <span class="text-sm font-medium capitalize">{{ $t('home.' + key) }}</span>
                           </div>
                         </div>
                       </div>
 
-                      <hr class="my-6 border-gray-300" />
-
-                      <div class="mt-4">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.color') }}</h3>
-                        <div class="flex flex-wrap gap-2 mt-2">
-                          <button type="button" v-for="color in currentDeal?.colors" :key="color"
-                            class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
-                              color }}</button>
-                        </div>
-                      </div>
-
-                      <div class="mt-4">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.size') }}</h3>
-                        <div class="flex flex-wrap gap-2 mt-2">
-                          <button type="button" v-for="size in currentDeal?.sizes" :key="size"
-                            class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
-                              size }}</button>
-                        </div>
-                      </div>
-
-                      <div class="mt-4">
-                        <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
-                            }}</span></p>
-                      </div>
-
-                      <div class="mt-4">
+                      <div class="w-full">
                         <div>
-                          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.quantity') }}</h3>
-                          <div class="flex mt-4 overflow-hidden border divide-x rounded w-max">
-                            <button type="button" class="w-12 h-10 font-semibold bg-gray-100"
-                              @click="decrementQuantity">
-                              <icon name="ic:round-minus" class="w-4 h-4" />
-                            </button>
-                            <input type="number" placeholder="1"
-                              class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
-                              v-model="quantity">
-                            <button type="button" class="w-12 h-10 font-semibold text-white bg-gray-800"
-                              @click="incrementQuantity">
-                              <icon name="material-symbols:add" class="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-4 mt-4">
-                          <!-- Add to Cart -->
-                          <button class="flex items-center justify-center gap-2 px-6 py-2 btn-style w-[60%]"
-                            @click="handleAddToCart(currentDeal)">
-                            <div class="flex items-center justify-center" v-if="loading">
-                              <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
-                              <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
-                            </div>
-                            <span v-else class="flex items-center">
-                              <icon name="material-symbols:add-shopping-cart-sharp" class="me-2" />
-                              {{ $t('btn.add_to_cart') }}
-                            </span>
-                          </button>
-
-                          <!-- Add to Wishlist -->
-                          <button @click="toggleWishlist(currentDeal)"
-                            class="flex items-center justify-center h-10 p-2 text-gray-700 border border-gray-300 dark:text-gray-200 w-11 hover:text-gray-50 hover:bg-black dark:hover:bg-gray-700">
-                            <icon :name="isInWishlist ? 'clarity:heart-solid' : 'clarity:heart-line'" size="20px"
-                              :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
-                          </button>
-
-                          <!-- actions Message -->
-                          <div v-if="wishlistAdded" class="font-medium text-green-700 dark:text-green-400">
-                            {{ $t('toast.product_added_to_wishlist') }}
-                          </div>
-                          <div v-if="wishlistNotAdded" class="font-medium text-red-700 dark:text-red-400">
-                            {{ $t('toast.failed_add_product_to_wishlist') }}
-                          </div>
-                          <div v-if="productAdded">
-                            <p class="font-medium text-green-700 dark:text-green-400">{{
-                              $t('toast.product_added_to_cart') }}</p>
-                          </div>
-                          <div v-if="notAuth">
-                            <p class="font-medium text-red-700 dark:text-red-400">{{
-                              $t('toast.please_log_in_first_to_add_to_cart') }}</p>
-                          </div>
-                          <div v-if="productNotAdded">
-                            <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.failed_to_add_to_cart')
-                            }}</p>
-                          </div>
-                        </div>
-
-                        <div class="max-w-2xl mt-12 custom-scroll max-h-32">
-                          <div class="mt-6">
-                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.description') }}
+                          <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                              {{ $i18n.locale ===
+                                'ar' ? currentDeal?.titleAr :
+                                currentDeal?.title }}
                             </h3>
-                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ $i18n.locale ===
-                              'ar' ? currentDeal?.descriptionAr :
-                              currentDeal?.description }}
-                            </p>
+                            <button @click="closeDialog"
+                              class="items-center justify-center hidden p-2 text-gray-600 border border-gray-300 rounded-full hover:text-gray-900 dark:text-gray-300 dark:hover:text-white max-sm:hidden lg:flex">
+                              <icon name="material-symbols:close-small" />
+                            </button>
+                          </div>
+                          <p class="mt-3 mb-4 text-sm">{{ $i18n.locale ===
+                            'ar' ? currentDeal?.brandAr :
+                            currentDeal?.brand }}</p>
+
+                          <div class="flex flex-wrap items-center gap-2 mt-4">
+                            <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
+                              $n(parseFloat(currentDeal?.originalPrice), 'currency', currencyLocale) }}</p>
+                            <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{
+                              $n(parseFloat(currentDeal?.discountedPrice), 'currency', currencyLocale) }}</h4>
+                            <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
+                              <span class="text-sm text-white">{{ $t('home.save') }} {{ currentDeal?.discount }}%</span>
+                            </div>
+                          </div>
+
+                          <div class="flex items-center justify-around gap-5 mt-5">
+                            <div v-for="(value, key) in currentDealTime" :key="key"
+                              class="flex flex-col items-center space-y-2">
+                              <div class="flex items-center justify-center w-12 h-12 border-2 rounded-full"
+                                :class="`border-${key}`">
+                                <span class="text-lg font-bold">{{ value }}</span>
+                              </div>
+                              <span class="text-sm font-medium capitalize">{{ $t('home.' + key) }}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <hr class="my-6 border-gray-300" />
+
+                        <div class="mt-4">
+                          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.color') }}</h3>
+                          <div class="flex flex-wrap gap-2 mt-2">
+                            <button type="button" v-for="color in currentDeal?.colors" :key="color"
+                              class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
+                                color }}</button>
+                          </div>
+                        </div>
+
+                        <div class="mt-4">
+                          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.size') }}</h3>
+                          <div class="flex flex-wrap gap-2 mt-2">
+                            <button type="button" v-for="size in currentDeal?.sizes" :key="size"
+                              class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
+                                size }}</button>
+                          </div>
+                        </div>
+
+                        <div class="mt-4">
+                          <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
+                          }}</span></p>
+                        </div>
+
+                        <div class="mt-4">
+                          <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.quantity') }}
+                            </h3>
+                            <div class="flex mt-4 overflow-hidden border divide-x rounded w-max">
+                              <button type="button" class="w-12 h-10 font-semibold bg-gray-100"
+                                @click="decrementQuantity">
+                                <icon name="ic:round-minus" class="w-4 h-4" />
+                              </button>
+                              <input type="number" placeholder="1"
+                                class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
+                                v-model="quantity">
+                              <button type="button" class="w-12 h-10 font-semibold text-white bg-gray-800"
+                                @click="incrementQuantity">
+                                <icon name="material-symbols:add" class="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="flex flex-wrap gap-4 mt-4">
+                            <!-- Add to Cart -->
+                            <button class="flex items-center justify-center gap-2 px-6 py-2 btn-style w-[60%]"
+                              @click="handleAddToCart(currentDeal)">
+                              <div class="flex items-center justify-center" v-if="loading">
+                                <span class="text-center">{{ $t('btn.adding_to_cart') }}...</span>
+                                <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
+                              </div>
+                              <span v-else class="flex items-center">
+                                <icon name="material-symbols:add-shopping-cart-sharp" class="me-2" />
+                                {{ $t('btn.add_to_cart') }}
+                              </span>
+                            </button>
+
+                            <!-- Add to Wishlist -->
+                            <button @click="toggleWishlist(currentDeal)"
+                              class="flex items-center justify-center h-10 p-2 text-gray-700 border border-gray-300 dark:text-gray-200 w-11 hover:text-gray-50 hover:bg-black dark:hover:bg-gray-700">
+                              <icon :name="isInWishlist ? 'clarity:heart-solid' : 'clarity:heart-line'" size="20px"
+                                :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
+                            </button>
+
+                            <!-- actions Message -->
+                            <div v-if="wishlistAdded" class="font-medium text-green-700 dark:text-green-400">
+                              {{ $t('toast.product_added_to_wishlist') }}
+                            </div>
+                            <div v-if="wishlistNotAdded" class="font-medium text-red-700 dark:text-red-400">
+                              {{ $t('toast.failed_add_product_to_wishlist') }}
+                            </div>
+                            <div v-if="productAdded">
+                              <p class="font-medium text-green-700 dark:text-green-400">{{
+                                $t('toast.product_added_to_cart') }}</p>
+                            </div>
+                            <div v-if="notAuth">
+                              <p class="font-medium text-red-700 dark:text-red-400">{{
+                                $t('toast.please_log_in_first_to_add_to_cart') }}</p>
+                            </div>
+                            <div v-if="productNotAdded">
+                              <p class="font-medium text-red-700 dark:text-red-400">{{ $t('toast.failed_to_add_to_cart')
+                              }}</p>
+                            </div>
+                          </div>
+
+                          <div class="max-w-2xl mt-12 custom-scroll max-h-32">
+                            <div class="mt-6">
+                              <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.description')
+                              }}
+                              </h3>
+                              <p class="mt-4 text-sm text-gray-600 dark:text-gray-100">{{ $i18n.locale ===
+                                'ar' ? currentDeal?.descriptionAr :
+                                currentDeal?.description }}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
