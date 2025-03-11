@@ -231,7 +231,7 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
           :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
@@ -297,7 +297,7 @@ onMounted(() => {
 });
 
 const { t } = useI18n()
-const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
+const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 const step = ref(1);
 const loading = ref(false);
@@ -329,7 +329,6 @@ const submitCheckoutForm = () => {
     })
     .then(() => {
       triggerToast({
-        title: t('toast.payment_successful'),
         message: t('toast.your_payment_was_processed_successfully_thank_you_for_your_purchase'),
         type: 'success',
         icon: 'mdi-check-circle',

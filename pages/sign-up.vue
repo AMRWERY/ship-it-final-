@@ -82,7 +82,7 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
           :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
@@ -98,7 +98,7 @@ const password = ref('');
 const loading = ref(false);
 const errorMessage = ref('');
 const { t } = useI18n()
-const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
+const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 const handleSignup = async () => {
   if (!email.value || !password.value || !firstName.value || !lastName.value) {
@@ -113,7 +113,6 @@ const handleSignup = async () => {
       lastName.value
     );
     triggerToast({
-      title: t('toast.successfully_signed_up'),
       message: t('toast.your_account_has_been_successfully_signed_up'),
       type: 'success',
       icon: 'mdi-check-circle',
@@ -123,7 +122,6 @@ const handleSignup = async () => {
     }, 3000);
   } catch (error) {
     triggerToast({
-      title: t('toast.error'),
       message: t('toast.failed_to_sign_up'),
       type: 'error',
       icon: 'material-symbols:error-outline-rounded',
@@ -138,7 +136,6 @@ const googleSignup = async () => {
   try {
     await authStore.loginWithGoogle();
     triggerToast({
-      title: t('toast.successfully_signed_up'),
       message: t('toast.your_account_has_been_successfully_signed_up'),
       type: 'success',
       icon: 'mdi-check-circle',

@@ -82,7 +82,7 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
           :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
@@ -98,7 +98,7 @@ const brandName = ref("");
 const loading = ref({});
 const errorMessage = ref("");
 const itemAdded = ref('')
-const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
+const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
 
 onMounted(async () => {
@@ -117,7 +117,6 @@ const handleAddToCart = async (product) => {
   const authStore = useAuthStore();
   if (!authStore.isAuthenticated) {
     triggerToast({
-      title: t('toast.ah_ah'),
       message: t('toast.please_log_in_first_to_add_to_cart'),
       type: 'warning',
       icon: 'material-symbols:warning-outline-rounded'
@@ -132,14 +131,12 @@ const handleAddToCart = async (product) => {
       quantity: 1
     });
     triggerToast({
-      title: t('toast.great'),
       message: t('toast.item_added_to_your_cart'),
       type: 'success',
       icon: 'clarity:shopping-cart-line'
     });
   } catch (error) {
     triggerToast({
-      title: t('toast.error'),
       message: t('toast.failed_to_add_to_cart'),
       type: 'error',
       icon: 'material-symbols:error-outline-rounded'
@@ -153,7 +150,7 @@ const toggleWishlist = async (product) => {
   if (!product) return;
   const authStore = useAuthStore();
   if (!authStore.isAuthenticated) {
-    triggerToast({ title: t('toast.ah_ah'), message: t('toast.please_log_in_first_to_add_to_wishlist'), type: 'warning', icon: 'material-symbols:warning-outline-rounded' });
+    triggerToast({ message: t('toast.please_log_in_first_to_add_to_wishlist'), type: 'warning', icon: 'material-symbols:warning-outline-rounded' });
     return;
   }
   const userId = authStore.user?.uid;
@@ -172,7 +169,7 @@ const toggleWishlist = async (product) => {
       });
       itemAdded.value = t('toast.product_added_to_wishlist');
       setTimeout(() => (itemAdded.value = ""), 3000);
-      triggerToast({ title: t('toast.great'), message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
+      triggerToast({ message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
     } catch (error) {
       if (error.message === t('toast.product_already_added_to_the_wishlist')) {
         errorMessage.value = error.message;

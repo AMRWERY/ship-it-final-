@@ -103,7 +103,7 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
           :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
@@ -118,7 +118,7 @@ const confirmNewPassword = ref("");
 const { t } = useI18n()
 const loading = ref(false);
 const loadingTwo = ref(false);
-const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
+const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 onMounted(() => {
   if (authStore.user) {
@@ -145,7 +145,6 @@ const saveProfile = () => {
     .saveProfile(selectedFile.value)
     .then((message) => {
       triggerToast({
-        title: t('toast.successfully_updated'),
         message: t('toast.your_profile_has_been_successfully_updated'),
         type: 'success',
         icon: 'mdi-check-circle',
@@ -153,7 +152,6 @@ const saveProfile = () => {
     })
     .catch((error) => {
       triggerToast({
-        title: t('toast.error'),
         message: t('toast.failed_to_update_profile'),
         type: 'error',
         icon: 'material-symbols:error-outline-rounded',
@@ -168,7 +166,6 @@ const changePassword = () => {
   loadingTwo.value = true;
   if (newPassword.value !== confirmNewPassword.value) {
     triggerToast({
-      title: t('toast.error'),
       message: t('toast.new_passwords_do_not_match'),
       type: 'error',
       icon: 'material-symbols:error-outline-rounded',
@@ -180,7 +177,6 @@ const changePassword = () => {
     .changePassword(currentPassword.value, newPassword.value)
     .then((message) => {
       triggerToast({
-        title: t('toast.successfully_updated'),
         message: t('toast.your_password_has_been_successfully_updated'),
         type: 'success',
         icon: 'mdi-check-circle',
@@ -188,7 +184,6 @@ const changePassword = () => {
     })
     .catch((error) => {
       triggerToast({
-        title: t('toast.error'),
         message: t('toast.failed_to_update_password'),
         type: 'error',
         icon: 'material-symbols:error-outline-rounded',
