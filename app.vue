@@ -7,7 +7,6 @@
     <ClientOnly v-else>
       <NuxtLayout :dir="isRTL ? 'rtl' : 'ltr'" :class="{ 'rtl': isRTL, 'ltr': !isRTL }">
         <progress-bar />
-        <chat-list />
         <NuxtPage />
         <scroll-to-top />
         <contact-us />

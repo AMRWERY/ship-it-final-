@@ -34,7 +34,8 @@
     "help_center": "Help Center",
     "maadi_cairo_egypt": "Maadi, Cairo, Egypt",
     "quick_links": "Quick Links",
-    "contact": "Contact"
+    "contact": "Contact",
+    "get_updates": "Get Updates"
   },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "Get Free delivery on orders over EGP 1,000",
@@ -195,7 +196,8 @@
     "sending_reply": "Sending reply",
     "go_back_home": "Go Back Home",
     "save": "Save",
-    "continue_with_google": "Continue with Google"
+    "continue_with_google": "Continue with Google",
+    "subscribe_now": "Subscribe Now"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",

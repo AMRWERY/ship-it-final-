@@ -32,6 +32,14 @@
             <p class="text-lg">
               Ship-IT {{ $t('footer.is_your_trusted_ecommerce_solution_for_the_best_shopping_experience') }}
             </p>
+
+            <div class="mt-10">
+              <p class="text-xl font-medium leading-5 text-gray-100">{{ $t('footer.get_updates') }}</p>
+              <div class="flex justify-center mt-3 md:justify-start">
+                <!-- chat-list  component -->
+                <chat-list />
+              </div>
+            </div>
           </div>
 
           <!-- Useful links section 1 -->

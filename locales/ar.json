@@ -34,7 +34,8 @@
     "help_center": "مركز المساعدة",
     "maadi_cairo_egypt": "المعادي، القاهرة، مصر",
     "quick_links": "روابط سريعة",
-    "contact": "اتصل بنا"
+    "contact": "اتصل بنا",
+    "get_updates": "احصل على التحديثات"
   },
   "home": {
     "get_free_delivery_on_orders_over_egp1000": "احصل على توصيل مجاني على الطلبات التي تزيد عن 1000 جنيه مصري",
@@ -195,7 +196,8 @@
     "sending_reply": "جاري ارسال الرد",
     "go_back_home": "العودة إلى الصفحة الرئيسية",
     "save": "حفظ",
-    "continue_with_google": "المتابعة باستخدام جوجل"
+    "continue_with_google": "المتابعة باستخدام جوجل",
+    "subscribe_now": "اشترك الآن"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -400,7 +402,7 @@
     "size": "المقاس",
     "egp": "ج.م.",
     "15_00": "١٥.٠٠",
-  "12_00": "١٢.٠٠"
+    "12_00": "١٢.٠٠"
   },
   "error_page": {
     "you_are_all_alone_here": "أنت وحدك هنا"

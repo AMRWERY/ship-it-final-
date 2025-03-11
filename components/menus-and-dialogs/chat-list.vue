@@ -1,8 +1,15 @@
 <template>
   <div>
-    <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50" v-if="showDialog">
+    <button @click="openModal"
+      class="flex items-center justify-center px-8 py-3 text-xs text-center text-black bg-gray-300 rounded-lg">
+      <icon name="heroicons-solid:envelope" class="me-1" />
+      <span>{{ $t('btn.subscribe_now') }}</span>
+    </button>
+
+    <div v-if="showDialog"
+      class="fixed inset-0 flex flex-wrap justify-center items-center w-full h-full z-[1000] bg-gray-800 bg-opacity-50 before:fixed before:inset-0 before:w-full before:h-full overflow-auto font-[sans-serif]">
       <div
-        class="flex flex-col w-full max-w-xl p-5 bg-white rounded-lg shadow-lg custom-scroll h-[600px] overflow-y-auto dark:bg-[#181a1b]">
+        class="flex flex-col w-full max-w-xl p-4 bg-white rounded-lg shadow-lg custom-scroll h-[600px] overflow-y-auto dark:bg-[#181a1b]">
         <div class="relative">
           <div class="relative">
             <img src="https://justfields.com/storage/projects/7M5rV059/chat-logo.jpg"
@@ -21,7 +28,7 @@
             <p class="mt-5 text-xs font-semibold">{{
               $t('mail.get_the_latest_updates_on_new_products_and_upcoming_sales') }}</p>
             <span class="text-xs text-gray-800 dark:text-gray-200">{{ $t('mail.we_promise_to_only_send_you_good_things')
-              }}</span>
+            }}</span>
           </div>
           <div class="w-full max-w-sm min-w-[200px] mx-auto mt-4 mb-8">
             <div class="relative">
@@ -70,6 +77,10 @@ const subscribe = async () => {
     loading.value = false;
   }
 };
+
+const openModal = () => {
+  showDialog.value = true
+}
 
 const closeModal = () => {
   showDialog.value = false
