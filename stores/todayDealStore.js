@@ -107,6 +107,7 @@ export const useTodayDealStore = defineStore("today-deals", {
           this.cart[existingIndex].quantity += quantity;
         } else {
           const product = {
+            docId: Date.now().toString(),
             productId: deal.id,
             title: deal.title,
             titleAr: deal.titleAr,
