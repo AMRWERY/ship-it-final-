@@ -47,11 +47,22 @@
             </ClientOnly>
 
             <!--toast messages -->
-            <div v-if="messageSent" class="w-full mt-2">
-              <p class="font-normal text-center text-green-800">{{ $t('toast.your_message_sent_successfully') }}</p>
-            </div>
-            <div v-else-if="messageAttempted && !messageSent" class="w-full mt-2">
-              <p class="font-normal text-center text-red-800">{{ $t('toast.failed_to_send_message') }}</p>
+            <div>
+              <div v-if="messageSent" class="w-full mt-2">
+                <p class="font-normal text-center text-green-800">
+                  {{ $t('toast.your_message_sent_successfully') }}
+                </p>
+              </div>
+              <div v-else-if="errorType === 'failed'" class="w-full mt-2">
+                <p class="font-normal text-center text-red-800">
+                  {{ $t('toast.failed_to_send_message') }}
+                </p>
+              </div>
+              <div v-else-if="errorType === 'incomplete'" class="w-full mt-2">
+                <p class="font-normal text-center text-red-800">
+                  {{ $t('toast.please_fill_all_required_fields') }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -64,12 +75,11 @@
 const contactStore = useContactStore();
 const mailStore = useMailStore();
 const { t } = useI18n()
-
-const isAuthenticated = computed(() => localStorage.getItem('user'));
-
 const loading = ref(false);
 const messageSent = ref(false);
-const messageAttempted = ref(false);
+const errorType = ref('');
+
+const isAuthenticated = computed(() => localStorage.getItem('user'));
 
 const data = ref({
   yourName: '',
@@ -78,43 +88,46 @@ const data = ref({
 });
 
 const sendMessage = () => {
+  if (!data.value.yourName || !data.value.email || !data.value.message) {
+    errorType.value = 'incomplete';
+    return;
+  }
+  errorType.value = '';
   loading.value = true;
   messageSent.value = false;
-  messageAttempted.value = false;
   contactStore
     .submitForm(data.value)
     .then(() => {
       messageSent.value = true;
       setTimeout(() => {
         messageSent.value = false;
+        resetForm();
       }, 3000);
       // resetForm();
     })
     .catch((error) => {
-      messageAttempted.value = true;
+      errorType.value = 'failed';
       setTimeout(() => {
-        messageAttempted.value = false;
+        errorType.value = '';
       }, 3000);
-      // console.error("Error sending message:", error);
     })
     .finally(() => {
       loading.value = false;
     });
 };
 
-// const resetForm = () => {
-//   data.value = {
-//     yourName: '',
-//     email: '',
-//     message: ''
-//   };
-// };
+const resetForm = () => {
+  data.value = {
+    yourName: '',
+    email: '',
+    message: ''
+  };
+};
 
 const isEmailInList = ref(null);
 
 onMounted(() => {
   const email = localStorage.getItem('user');
-  // const email = authStore.user?.email;
   if (email) {
     isEmailInList.value = mailStore.checkEmailInMailList(email);
     // console.log(email)
