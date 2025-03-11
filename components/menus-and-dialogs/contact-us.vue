@@ -6,23 +6,22 @@
       <icon name="ic:sharp-wechat" />
     </button>
 
-    <!-- Dialog Overlay and Container -->
     <transition name="slide-fade">
-      <div v-if="isDialogOpen" class="fixed z-[1000] bottom-4 end-4">
-        <div class="bg-white dark:bg-[#181a1b] rounded-lg shadow-lg max-w-md w-full">
-          <div class="flex items-center justify-between flex-shrink-0 p-4 border-b-2 rounded-t-md border-neutral-100">
-            <h5 class="text-xl font-medium leading-normal text-surface dark:text-gray-100" id="contactUsModalLabel">
-              {{ $t('form.new_message') }}
-            </h5>
+      <div v-if="isDialogOpen"
+        class="fixed inset-0 p-4 flex flex-wrap justify-end items-end w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+        <div class="relative w-full max-w-lg p-4 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center pb-3 border-b border-gray-300">
+            <h3 class="flex-1 text-xl font-medium leading-normal text-surface dark:text-gray-100">{{
+              $t('form.new_message') }}</h3>
             <button type="button" @click="closeDialog"
               class="box-content border-none rounded-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-gray-100 dark:hover:text-gray-200">
-              <span class="[&>svg]:h-6 [&>svg]:w-6">
+              <span class="w-5 h-5">
                 <icon name="ic:baseline-close" />
               </span>
             </button>
           </div>
 
-          <div class="relative flex-auto p-4">
+          <div class="relative flex-auto">
             <ClientOnly>
               <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text" name="name"
                 :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:alternate-email"
@@ -37,7 +36,7 @@
                 prefixIcon="material-symbols:chat-outline" v-model="data.message" />
 
               <div class="mt-6">
-                <button type="submit" class="w-[400px] px-4 py-2 btn-style" @click="sendMessage">
+                <button type="submit" class="block w-full px-4 py-2 btn-style" @click="sendMessage">
                   <div class="flex items-center justify-center" v-if="loading">
                     <span class="text-center me-2">{{ $t('btn.sending') }}...</span>
                     <icon name="svg-spinners:270-ring-with-bg" />
@@ -47,6 +46,7 @@
               </div>
             </ClientOnly>
 
+            <!--toast messages -->
             <div v-if="messageSent" class="w-full mt-2">
               <p class="font-normal text-center text-green-800">{{ $t('toast.your_message_sent_successfully') }}</p>
             </div>
@@ -61,7 +61,6 @@
 </template>
 
 <script setup>
-// const authStore = useAuthStore();
 const contactStore = useContactStore();
 const mailStore = useMailStore();
 const { t } = useI18n()
