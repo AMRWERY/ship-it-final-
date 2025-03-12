@@ -18,12 +18,6 @@
           class="p-0.5 text-white bg-red-500 border rounded-md" />
       </div>
     </div>
-
-    <!-- share via email only -->
-    <!-- <a href="mailto:?subject=My Wishlist&body=Check out my wishlist!" class="flex items-center space-s-2 mt-7">
-        <icon name="ic:outline-mail" class="text-gray-700" size="19px" />
-        <p class="text-[13px] text-gray-700">Share my Wishlist Via Email</p>
-      </a> -->
   </div>
 </template>
 
@@ -34,13 +28,10 @@ const itemName = computed(() => {
   if (route.meta && route.meta.itemName) {
     return route.meta.itemName;
   }
-  if (route.name) {
-    return route.name
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (char) => char.toLowerCase());
-  }
-  const pathSegments = route.path.split('/');
-  return pathSegments[pathSegments.length - 1] || 'Unknown';
+  const baseName = route.name?.split('___')[0] || '';
+  return baseName
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (char) => char.toLowerCase());
 });
 
 const normalizedItemName = computed(() => {
