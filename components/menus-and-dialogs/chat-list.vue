@@ -95,14 +95,3 @@ onMounted(() => {
   }
 });
 </script>
-
-<style scoped>
-.custom-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.custom-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

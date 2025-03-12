@@ -398,18 +398,3 @@ const handleRating = (rating) => {
 //currency composable
 const { currencyLocale } = useCurrencyLocale();
 </script>
-
-<style scoped>
-.custom-scroll {
-  overflow-y: scroll;
-}
-
-.custom-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.custom-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

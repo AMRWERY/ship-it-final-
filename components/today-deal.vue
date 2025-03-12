@@ -408,17 +408,4 @@ const { currencyLocale } = useCurrencyLocale();
 .fade-leave-to .bg-black\/50 {
   opacity: 0;
 }
-
-.custom-scroll {
-  overflow-y: scroll;
-}
-
-.custom-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.custom-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 </style>
