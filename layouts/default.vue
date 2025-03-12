@@ -1,23 +1,36 @@
 <template>
   <div>
-    <!-- Overlay Component -->
-    <Overlay :visible="themeStore.showOverlay" />
+    <!-- overlay Component -->
+    <overlay :visible="themeStore.showOverlay" />
 
-    <main>
+    <div :dir="isRTL ? 'rtl' : 'ltr'" :class="{ 'rtl': isRTL, 'ltr': !isRTL }">
+
+      <!-- navbar componenet -->
       <navbar :is-dark="themeStore.isDark" @toggle-theme="themeStore.toggleTheme" />
+
       <div class="max-w-full py-6 mx-auto sm:px-6 lg:px-8">
-        <slot />
+        <main>
+          <slot />
+        </main>
       </div>
+
+      <!-- footer componenet -->
       <Footer />
-    </main>
+
+    </div>
   </div>
 </template>
 
 <script setup>
-//toggle themes
+const { locale } = useI18n();
+const localeStore = useLocaleStore();
 const themeStore = useThemeStore();
 
 onMounted(() => {
   themeStore.loadTheme();
+  
+  locale.value = localeStore.local
 });
+
+const isRTL = computed(() => locale.value === 'ar');
 </script>

@@ -5,6 +5,12 @@ export const useLocaleStore = defineStore("locales", {
   }),
 
   actions: {
+    async hydrate() {
+      if (process.client) {
+        this.locale = localStorage.getItem('locale') || 'en';
+      }
+    },
+    
     updateLocale(value) {
       this.isOverlayVisible = true;
       this.locale = value;
@@ -14,12 +20,6 @@ export const useLocaleStore = defineStore("locales", {
       setTimeout(() => {
         this.isOverlayVisible = false;
       }, 3000);
-    },
-
-    loadLocale() {
-      if (process.client) {
-        this.locale = localStorage.getItem("locale") || "en";
-      }
     },
   },
 

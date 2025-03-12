@@ -35,14 +35,13 @@ export default defineNuxtConfig({
     defaultLocale: "en",
     detectBrowserLanguage: {
       useCookie: false,
-      fallbackLocale: 'en',
-      redirectOn: 'root'
+      fallbackLocale: "en",
+      redirectOn: "root",
     },
   },
   carousel: {
     prefix: "MyPrefix",
   },
-  plugins: ['~/plugins/locale.client.js'],
   css: [
     "~/assets/css/main.css",
     "~/assets/css/google-fonts.css",

@@ -33,8 +33,8 @@
                             </span>
                         </nuxt-link>
 
-                         <!--toggle theme -->
-                         <tooltip :text="$t('tooltip.toggle_theme')" position="bottom">
+                        <!--toggle theme -->
+                        <tooltip :text="$t('tooltip.toggle_theme')" position="bottom">
                             <nuxt-link to="" type="button" class="relative flex text-white rounded-full cursor-pointer"
                                 @click="$emit('toggle-theme')">
                                 <span class="absolute -inset-1.5" />
@@ -42,7 +42,7 @@
                                 <icon :name="isDark ? 'heroicons-solid:sun' : 'heroicons-solid:moon'" class="ms-2" />
                             </nuxt-link>
                         </tooltip>
-                        
+
                         <!-- login dialog -->
                         <login v-if="!isAuthenticated" />
 
@@ -79,14 +79,24 @@ const authStore = useAuthStore();
 const localeStore = useLocaleStore();
 const { locale } = useI18n();
 
+watchEffect(() => {
+  if (localeStore.locale) {
+    locale.value = localeStore.locale;
+  }
+});
+
 const setLocale = (value) => {
-    locale.value = value;
     localeStore.updateLocale(value);
+    locale.value = value;
 };
 
 computed(() => {
     const storedLocale = localeStore.locale;
     setLocale(storedLocale);
+});
+
+onMounted(() => {
+    locale.value = localeStore.locale;
 });
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
