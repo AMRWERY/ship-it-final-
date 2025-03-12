@@ -112,7 +112,7 @@ export const useTodayDealStore = defineStore("today-deals", {
         } else {
           const product = {
             docId: Date.now().toString(),
-            productId: item.id, // Use item.id
+            productId: item.id,
             title: item.title,
             titleAr: item.titleAr,
             discountedPrice: item.discountedPrice,
