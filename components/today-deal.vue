@@ -317,12 +317,10 @@ const selectedSize = ref(null);
 
 const setSelectedColor = (color) => {
   selectedColor.value = color;
-  console.log('selected color:', selectedColor.value)
 };
 
 const setSelectedSize = (size) => {
   selectedSize.value = size;
-  console.log('selected size:', selectedSize.value)
 };
 
 const authStore = useAuthStore();
