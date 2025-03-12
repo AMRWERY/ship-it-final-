@@ -61,9 +61,7 @@
                                 v-if="isAuthenticated">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View wishlist</span>
-                                <icon name="heroicons-solid:heart" class="ms-2" />
-                                <span v-if="wishlistStore.wishlist.length > 0"
-                                    class="absolute top-0 end-0 w-2.5 h-2.5 bg-red-600 rounded-full"></span>
+                                <icon :name="wishlistIcon" size="20px" :class="[wishlistIconClass]" class="ms-2" />
                             </nuxt-link>
                         </tooltip>
                     </div>
@@ -79,10 +77,18 @@ const authStore = useAuthStore();
 const localeStore = useLocaleStore();
 const { locale } = useI18n();
 
+const wishlistIcon = computed(() =>
+    wishlistStore.wishlist.length > 0 ? 'clarity:heart-solid' : 'clarity:heart-line'
+);
+
+const wishlistIconClass = computed(() =>
+    wishlistStore.wishlist.length > 0 ? 'bg-red-600' : ''
+);
+
 watchEffect(() => {
-  if (localeStore.locale) {
-    locale.value = localeStore.locale;
-  }
+    if (localeStore.locale) {
+        locale.value = localeStore.locale;
+    }
 });
 
 const setLocale = (value) => {
