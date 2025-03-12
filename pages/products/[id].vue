@@ -50,16 +50,38 @@
             <div>
               <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Sizes</h3>
               <div class="flex flex-wrap gap-4 mt-4">
-                <button type="button" v-for="size in productStore.selectedProduct?.sizes" :key="size"
-                  class="flex items-center justify-center w-auto px-3 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
-                    size }}</button>
+                <button v-for="size in productStore.selectedProduct?.sizes" :key="size" @click="setSelectedSize(size)"
+                  :class="{
+                    'border-blue-600 bg-blue-50': selectedSize === size,
+                    'border-gray-300': selectedSize !== size
+                  }"
+                  class="relative flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                  {{ size }}
+                  <div v-if="selectedSize === size"
+                    class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                    <div class="flex items-center justify-center w-4 h-4 bg-blue-600 rounded-full">
+                      <icon name="heroicons:check-20-solid" class="w-3 h-3 text-white" />
+                    </div>
+                  </div>
+                </button>
               </div>
 
               <h3 class="mt-8 text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Colors</h3>
               <div class="flex flex-wrap gap-4 mt-4">
-                <button type="button" v-for="color in productStore.selectedProduct?.colors" :key="color"
-                  class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
-                    color }}</button>
+                <button v-for="color in productStore.selectedProduct?.colors" :key="color"
+                  @click="setSelectedColor(color)" :class="{
+                    'border-blue-600 bg-blue-50': selectedColor === color,
+                    'border-gray-300': selectedColor !== color
+                  }"
+                  class="relative flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                  {{ color }}
+                  <div v-if="selectedColor === color"
+                    class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                    <div class="flex items-center justify-center w-4 h-4 bg-blue-600 rounded-full">
+                      <icon name="heroicons:check-20-solid" class="w-3 h-3 text-white" />
+                    </div>
+                  </div>
+                </button>
               </div>
 
               <!-- SKU -->
@@ -220,8 +242,8 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType" :duration="5000"
+          :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
   </div>
@@ -280,6 +302,17 @@ watch(
   { immediate: true }
 );
 
+const selectedColor = ref(null);
+const selectedSize = ref(null);
+
+const setSelectedColor = (color) => {
+  selectedColor.value = color;
+};
+
+const setSelectedSize = (size) => {
+  selectedSize.value = size;
+};
+
 const handleAddToCart = () => {
   const product = productStore.selectedProduct;
   if (!product) return;
@@ -289,16 +322,21 @@ const handleAddToCart = () => {
     return;
   }
   loading.value = true;
-  cartStore.addToCart(
-    product.id,
-    product.title,
-    product.discountedPrice,
-    product.originalPrice,
-    product.imageUrl1,
-    product.brand,
-    product.discount,
-    quantity.value
-  )
+  const cartItem = {
+    id: product.id,
+    title: product.title,
+    titleAr: product.titleAr,
+    discountedPrice: product.discountedPrice,
+    originalPrice: product.originalPrice,
+    imageUrl1: product.imageUrl1,
+    brand: product.brand,
+    brandAr: product.brandAr,
+    discount: product.discount,
+    quantity: quantity.value,
+    color: selectedColor.value,
+    size: selectedSize.value
+  };
+  cartStore.addToCart(cartItem)
     .then(() => {
       triggerToast({ message: t('toast.item_added_to_your_cart'), type: 'success', icon: 'clarity:shopping-cart-line' });
     })

@@ -32,10 +32,15 @@ export const useCartStore = defineStore("cart", {
         brandAr,
         discount,
         quantity = 1,
+        color,
+        size,
       } = cartItem;
       const uid = this.storedUser?.uid;
       const existingProduct = this.cart.find(
-        (item) => item.productId === cartItem.productId
+        (item) =>
+          item.productId === cartItem.productId &&
+          item.color === color &&
+          item.size === size
       );
       if (existingProduct) {
         existingProduct.quantity += quantity;
@@ -52,6 +57,8 @@ export const useCartStore = defineStore("cart", {
           brandAr,
           discount,
           quantity,
+          color,
+          size,
           uid,
         });
       }
