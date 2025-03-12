@@ -22,5 +22,11 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
+
 defineProps(['error'])
+
+useHead({
+  titleTemplate: () => t("head.page_not_found"),
+});
 </script>
