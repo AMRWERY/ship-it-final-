@@ -9,7 +9,20 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        heartbeat: "heartbeat 1.5s ease-in-out infinite",
+      },
+      keyframes: {
+        heartbeat: {
+          "0%": { transform: "scale(1)" },
+          "15%": { transform: "scale(1.2)" },
+          "30%": { transform: "scale(1)" },
+          "45%": { transform: "scale(1.1)" },
+          "60%": { transform: "scale(1)" },
+        },
+      },
+    },
   },
   darkMode: "class",
   corePlugins: {

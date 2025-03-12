@@ -3,8 +3,8 @@
     <tooltip :text="$t('tooltip.your_cart')" position="bottom">
       <nuxt-link to="" role="button" @click="openCartSidebar" class="flex items-center text-white">
         <icon name="material-symbols:shopping-cart" class="me-1" />
-        <span class="inline-block bg-red-600 text-white rounded-full px-1 py-0.5 text-xs font-bold"
-          v-if="cartStore.cart.length > 0">
+        <span :class="[cartAnimationClass]"
+          class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white transition-transform duration-300 bg-red-600 rounded-full">
           {{ cartStore.cart.length }}
         </span>
       </nuxt-link>
@@ -68,7 +68,7 @@
                 <h4 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{
                   $n(parseFloat(item.discountedPrice),
                     'currency', currencyLocale)
-                  }}</h4>
+                }}</h4>
                 <div class="flex items-center gap-3 mt-10">
                   <button type="button" @click.stop="decrementQuantity(item)"
                     class="flex items-center justify-center w-5 h-5 bg-gray-400 rounded-full outline-none dark:bg-gray-200">
@@ -186,6 +186,23 @@ const closeCartSidebar = () => {
 
 //currency composable
 const { currencyLocale } = useCurrencyLocale();
+
+const showAnimation = ref(false);
+
+watch(() => cartStore.cart.length, (newVal, oldVal) => {
+  if (newVal > oldVal) {
+    showAnimation.value = true;
+    setTimeout(() => {
+      showAnimation.value = false;
+    }, 3000);
+  }
+});
+
+const cartAnimationClass = computed(() =>
+  showAnimation.value && cartStore.cart.length > 0
+    ? 'animate-bounce'
+    : ''
+);
 </script>
 
 <style scoped>

@@ -61,7 +61,9 @@
                                 v-if="isAuthenticated">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View wishlist</span>
-                                <icon :name="wishlistIcon" size="20px" :class="[wishlistIconClass]" class="ms-2" />
+                                <icon :name="wishlistIcon" size="20px"
+                                    :class="[wishlistIconClass, wishlistAnimationClass]"
+                                    class="transition-transform duration-300 ms-2" />
                             </nuxt-link>
                         </tooltip>
                     </div>
@@ -83,6 +85,23 @@ const wishlistIcon = computed(() =>
 
 const wishlistIconClass = computed(() =>
     wishlistStore.wishlist.length > 0 ? 'bg-red-600' : ''
+);
+
+const showAnimation = ref(false);
+
+watch(() => wishlistStore.wishlist.length, (newVal, oldVal) => {
+    if (newVal > oldVal) {
+        showAnimation.value = true;
+        setTimeout(() => {
+            showAnimation.value = false;
+        }, 3000);
+    }
+});
+
+const wishlistAnimationClass = computed(() =>
+    showAnimation.value && wishlistStore.wishlist.length > 0
+        ? 'animate-bounce'
+        : ''
 );
 
 watchEffect(() => {

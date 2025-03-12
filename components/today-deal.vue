@@ -137,7 +137,7 @@
 
                         <div class="mt-4">
                           <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
-                              }}</span></p>
+                          }}</span></p>
                         </div>
 
                         <div class="mt-4">
