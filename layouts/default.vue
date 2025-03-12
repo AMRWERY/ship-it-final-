@@ -28,7 +28,7 @@ const themeStore = useThemeStore();
 
 onMounted(() => {
   themeStore.loadTheme();
-  
+
   locale.value = localeStore.local
 });
 
