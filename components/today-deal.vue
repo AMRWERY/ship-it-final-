@@ -103,13 +103,18 @@
                                 'border-blue-600 bg-blue-50': selectedColor === color,
                                 'border-gray-300': selectedColor !== color
                               }"
-                              class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                              class="relative flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
                               {{ color }}
+                              <div v-if="selectedColor === color"
+                                class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                                <div class="flex items-center justify-center w-4 h-4 bg-blue-600 rounded-full">
+                                  <icon name="heroicons:check-20-solid" class="w-3 h-3 text-white" />
+                                </div>
+                              </div>
                             </button>
                           </div>
                         </div>
 
-                        <!-- Size selection -->
                         <div class="mt-4">
                           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.size') }}</h3>
                           <div class="flex flex-wrap gap-2 mt-2">
@@ -118,8 +123,14 @@
                                 'border-blue-600 bg-blue-50': selectedSize === size,
                                 'border-gray-300': selectedSize !== size
                               }"
-                              class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                              class="relative flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
                               {{ size }}
+                              <div v-if="selectedSize === size"
+                                class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                                <div class="flex items-center justify-center w-4 h-4 bg-blue-600 rounded-full">
+                                  <icon name="heroicons:check-20-solid" class="w-3 h-3 text-white" />
+                                </div>
+                              </div>
                             </button>
                           </div>
                         </div>
@@ -165,8 +176,8 @@
                             <!-- Add to Wishlist -->
                             <button @click="toggleWishlist(currentDeal)"
                               class="flex items-center justify-center h-10 p-2 text-gray-700 border border-gray-300 dark:text-gray-200 w-11 hover:text-gray-50 hover:bg-black dark:hover:bg-gray-700">
-                              <icon :name="isInWishlist ? 'clarity:heart-solid' : 'clarity:heart-line'" size="20px"
-                                :class="isInWishlist ? 'bg-red-600' : ''" class="p-1 rounded-full" />
+                              <icon :name="wishlistIcon(currentDeal)" size="20px"
+                                :class="wishlistIconClass(currentDeal)" class="p-1 rounded-full" />
                             </button>
 
                             <!-- actions Message -->
@@ -404,9 +415,13 @@ const toggleWishlist = async (currentDeal) => {
   }
 };
 
-const isInWishlist = computed(() =>
-  wishlistStore.isInWishlist(currentDeal.id)
-);
+const wishlistIcon = (currentDeal) => {
+  return wishlistStore.isInWishlist(currentDeal.id) ? 'clarity:heart-solid' : 'clarity:heart-line';
+};
+
+const wishlistIconClass = (currentDeal) => {
+  return wishlistStore.isInWishlist(currentDeal.id) ? 'text-red-600' : '';
+};
 
 const isDialogOpen = ref(false);
 
