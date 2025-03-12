@@ -370,15 +370,20 @@ const toggleWishlist = () => {
     errorMessage.value = "Product already added to the wishlist.";
     setTimeout(() => (errorMessage.value = ""), 3000);
   } else {
-    wishlistStore.addToWishlist(
-      product.id,
-      product.title,
-      product.discountedPrice,
-      product.originalPrice,
-      product.brand,
-      product.imageUrl1,
+    const wishlistItems = {
+      id: product.id,
+      title: product.title,
+      titleAr: product.titleAr,
+      discountedPrice: product.discountedPrice,
+      originalPrice: product.originalPrice,
+      brand: product.brand,
+      brandAr: product.brandAr,
+      imageUrl1: product.imageUrl1,
+      selectedColor: selectedColor.value,
+      selectedSize: selectedSize.value,
       userId
-    )
+    }
+    wishlistStore.addToWishlist(wishlistItems)
       .then(() => {
         itemAdded.value = "Product added to wishlist!";
         setTimeout(() => (itemAdded.value = ""), 3000);
