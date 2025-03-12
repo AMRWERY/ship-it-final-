@@ -4,8 +4,11 @@
     <div class="h-8 bg-[#4f46e5] text-white">
       <nuxt-link to="" type="button"
         class="flex items-center justify-center py-1 text-sm capitalize cursor-pointer sm:text-medium md:text-lg"
-        @click="openDialog">{{
-          $t('home.get_free_delivery_on_orders_over_egp1000') }}</nuxt-link>
+        @click="openDialog">
+        <span>{{
+          $t('home.get_free_delivery_on_orders_over_egp1000') }}</span>
+        <icon name="svg-spinners:clock" class="w-5 h-5 ms-1" />
+      </nuxt-link>
     </div>
 
     <transition name="fade">
@@ -111,7 +114,7 @@
 
                         <div class="mt-4">
                           <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
-                          }}</span></p>
+                              }}</span></p>
                         </div>
 
                         <div class="mt-4">
@@ -347,14 +350,16 @@ const toggleWishlist = async (currentDeal) => {
     return;
   }
   try {
-    wishlistStore.addToWishlist(
-      currentDeal.id,
-      currentDeal.title,
-      currentDeal.discountedPrice,
-      currentDeal.originalPrice,
-      currentDeal.brand,
-      currentDeal.imageUrl1,
-    );
+    await wishlistStore.addToWishlist({
+      id: currentDeal.id,
+      title: currentDeal.title,
+      titleAr: currentDeal.titleAr,
+      discountedPrice: currentDeal.discountedPrice,
+      originalPrice: currentDeal.originalPrice,
+      brand: currentDeal.brand,
+      brandAr: currentDeal.brandAr,
+      imageUrl1: currentDeal.imageUrl1
+    });
     setTimeout(() => {
       wishlistAdded.value = true;
     }, 3000);
