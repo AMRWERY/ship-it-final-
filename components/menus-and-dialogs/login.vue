@@ -8,7 +8,8 @@
     </button>
 
     <Transition name="slide-fade">
-      <div class="fixed z-50 w-[450px] bottom-2 end-4" v-if="isOpen">
+      <div v-if="isOpen" class="fixed inset-0 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+        <div class="fixed z-50 w-[450px] bottom-2 end-4">
         <div class="p-2 bg-white dark:bg-[#181a1b] rounded-lg shadow-lg">
           <div class="flex justify-between px-4">
             <p class="text-2xl font-semibold text-center">{{ $t('form.sign_in_to_your_account') }}</p>
@@ -77,6 +78,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </Transition>
   </div>
