@@ -92,6 +92,8 @@ const config = ref({
   snapAlign: 'center',
   wrapAround: true,
   transition: 400,
+  autoplay: 3000,
+  itemsToShow: 1,
   breakpoints: {
     200: {
       itemsToShow: 1,
