@@ -3,7 +3,7 @@
     <tooltip :text="$t('tooltip.your_cart')" position="bottom">
       <nuxt-link to="" role="button" @click="openCartSidebar" class="flex items-center text-white">
         <icon name="material-symbols:shopping-cart" class="me-1" />
-        <span :class="[cartAnimationClass]"
+        <span v-if="cartStore.cart.length > 0" :class="[cartAnimationClass]"
           class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white transition-transform duration-300 bg-red-600 rounded-full">
           {{ cartStore.cart.length }}
         </span>
