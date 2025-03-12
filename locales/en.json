@@ -52,7 +52,11 @@
     "size": "Size",
     "sku": "SKU:",
     "quantity": "Quantity",
-    "description": "Description"
+    "description": "Description",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
   },
   "form": {
     "email": "Email",
