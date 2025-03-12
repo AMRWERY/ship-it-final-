@@ -95,45 +95,34 @@
 
                         <hr class="my-6 border-gray-300" />
 
-                        <div class="flex flex-wrap gap-2 mt-2">
-                          <button v-for="color in currentDeal?.colors" :key="color" @click="setSelectedColor(color)"
-                            :class="{
-                              'border-blue-600 bg-blue-50': selectedColor === color,
-                              'border-gray-300': selectedColor !== color
-                            }"
-                            class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
-                            {{ color }}
-                          </button>
+                        <div class="mt-4">
+                          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.color') }}</h3>
+                          <div class="flex flex-wrap gap-2 mt-2">
+                            <button v-for="color in currentDeal?.colors" :key="color" @click="setSelectedColor(color)"
+                              :class="{
+                                'border-blue-600 bg-blue-50': selectedColor === color,
+                                'border-gray-300': selectedColor !== color
+                              }"
+                              class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                              {{ color }}
+                            </button>
+                          </div>
                         </div>
 
                         <!-- Size selection -->
-                        <div class="flex flex-wrap gap-2 mt-2">
-                          <button v-for="size in currentDeal?.sizes" :key="size" @click="setSelectedSize(size)" :class="{
-                            'border-blue-600 bg-blue-50': selectedSize === size,
-                            'border-gray-300': selectedSize !== size
-                          }"
-                            class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
-                            {{ size }}
-                          </button>
-                        </div>
-
-                        <!-- <div class="mt-4">
-                          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.color') }}</h3>
-                          <div class="flex flex-wrap gap-2 mt-2">
-                            <button type="button" v-for="color in currentDeal?.colors" :key="color"
-                              class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
-                                color }}</button>
-                          </div>
-                        </div>
-
                         <div class="mt-4">
                           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.size') }}</h3>
                           <div class="flex flex-wrap gap-2 mt-2">
-                            <button type="button" v-for="size in currentDeal?.sizes" :key="size"
-                              class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
-                                size }}</button>
+                            <button v-for="size in currentDeal?.sizes" :key="size" @click="setSelectedSize(size)"
+                              :class="{
+                                'border-blue-600 bg-blue-50': selectedSize === size,
+                                'border-gray-300': selectedSize !== size
+                              }"
+                              class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                              {{ size }}
+                            </button>
                           </div>
-                        </div> -->
+                        </div>
 
                         <div class="mt-4">
                           <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku

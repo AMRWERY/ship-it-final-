@@ -25,8 +25,18 @@ export const useWishlistStore = defineStore("wishlist", {
     },
 
     addToWishlist(wishlistItems) {
-      const { id, title, titleAr, discountedPrice, originalPrice, brand, brandAr, imageUrl1 } =
-        wishlistItems;
+      const {
+        id,
+        title,
+        titleAr,
+        discountedPrice,
+        originalPrice,
+        brand,
+        brandAr,
+        imageUrl1,
+        selectedColor,
+        selectedSize,
+      } = wishlistItems;
       const userId = this.storedUser?.uid;
       if (!userId) {
         throw new Error("User not authenticated");
@@ -44,6 +54,8 @@ export const useWishlistStore = defineStore("wishlist", {
         brand,
         brandAr,
         imageUrl1,
+        selectedColor,
+        selectedSize,
         userId,
       };
       this.wishlist.push(newItem);

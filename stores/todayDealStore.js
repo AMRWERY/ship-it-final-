@@ -100,10 +100,9 @@ export const useTodayDealStore = defineStore("today-deals", {
         throw new Error("User not authenticated or uid not available");
       }
       try {
-        // Use item.id instead of item.productId because the product object contains id.
         const existingIndex = this.cart.findIndex(
           (cartItem) =>
-            cartItem.productId === item.id && // Changed from item.productId to item.id
+            cartItem.productId === item.id &&
             cartItem.color === item.selectedColor &&
             cartItem.size === item.selectedSize &&
             cartItem.uid === uid
@@ -123,8 +122,8 @@ export const useTodayDealStore = defineStore("today-deals", {
             brandAr: item.brandAr,
             discount: item.discount,
             quantity: item.quantity,
-            color: item.selectedColor,  // Selected color
-            size: item.selectedSize,    // Selected size
+            color: item.selectedColor,
+            size: item.selectedSize,
             uid,
           };
           this.cart.push(product);
@@ -135,45 +134,6 @@ export const useTodayDealStore = defineStore("today-deals", {
         console.error("Error adding deal to cart:", error);
         throw error;
       }
-    }
-    
-    // async addToCart(deal, quantity) {
-    //   const authStore = useAuthStore();
-    //   const uid = authStore.user?.uid;
-    //   if (!uid) {
-    //     throw new Error("User not authenticated or uid not available");
-    //   }
-    //   try {
-    //     const existingIndex = this.cart.findIndex(
-    //       (item) => item.productId === deal.id && item.uid === uid
-    //     );
-    //     if (existingIndex !== -1) {
-    //       this.cart[existingIndex].quantity += quantity;
-    //     } else {
-    //       const product = {
-    //         docId: Date.now().toString(),
-    //         productId: deal.id,
-    //         title: deal.title,
-    //         titleAr: deal.titleAr,
-    //         discountedPrice: deal.discountedPrice,
-    //         originalPrice: deal.originalPrice,
-    //         imageUrl1: deal.imageUrl1,
-    //         brand: deal.brand,
-    //         brandAr: deal.brandAr,
-    //         discount: deal.discount,
-    //         quantity,
-    //         color: deal.color,
-    //         size: deal.size,
-    //         uid,
-    //       };
-    //       this.cart.push(product);
-    //     }
-    //     localStorage.setItem("cart", JSON.stringify(this.cart));
-    //     return { success: true };
-    //   } catch (error) {
-    //     console.error("Error adding deal to cart:", error);
-    //     throw error;
-    //   }
-    // },
+    },
   },
 });
