@@ -83,7 +83,8 @@
                           <div class="flex items-center justify-around gap-5 mt-5">
                             <div v-for="(value, key) in currentDealTime" :key="key"
                               class="flex flex-col items-center space-y-2">
-                              <div class="flex items-center justify-center w-12 h-12 border-2 rounded-full bg-gradient-to-r from-violet-400 to-purple-300"
+                              <div
+                                class="flex items-center justify-center w-12 h-12 border-2 rounded-full bg-gradient-to-r from-violet-400 to-purple-300"
                                 :class="`border-${key}`">
                                 <span class="text-lg font-bold">{{ value }}</span>
                               </div>
@@ -94,7 +95,29 @@
 
                         <hr class="my-6 border-gray-300" />
 
-                        <div class="mt-4">
+                        <div class="flex flex-wrap gap-2 mt-2">
+                          <button v-for="color in currentDeal?.colors" :key="color" @click="setSelectedColor(color)"
+                            :class="{
+                              'border-blue-600 bg-blue-50': selectedColor === color,
+                              'border-gray-300': selectedColor !== color
+                            }"
+                            class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                            {{ color }}
+                          </button>
+                        </div>
+
+                        <!-- Size selection -->
+                        <div class="flex flex-wrap gap-2 mt-2">
+                          <button v-for="size in currentDeal?.sizes" :key="size" @click="setSelectedSize(size)" :class="{
+                            'border-blue-600 bg-blue-50': selectedSize === size,
+                            'border-gray-300': selectedSize !== size
+                          }"
+                            class="flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
+                            {{ size }}
+                          </button>
+                        </div>
+
+                        <!-- <div class="mt-4">
                           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.color') }}</h3>
                           <div class="flex flex-wrap gap-2 mt-2">
                             <button type="button" v-for="color in currentDeal?.colors" :key="color"
@@ -110,7 +133,7 @@
                               class="flex items-center justify-center w-auto px-2 py-1 text-sm border border-gray-300 h-11 hover:border-blue-600 shrink-0">{{
                                 size }}</button>
                           </div>
-                        </div>
+                        </div> -->
 
                         <div class="mt-4">
                           <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
@@ -289,6 +312,19 @@ const setSelectedImage = (image) => {
   selectedImage.value = image;
 };
 
+const selectedColor = ref(null);
+const selectedSize = ref(null);
+
+const setSelectedColor = (color) => {
+  selectedColor.value = color;
+  console.log('selected color:', selectedColor.value)
+};
+
+const setSelectedSize = (size) => {
+  selectedSize.value = size;
+  console.log('selected size:', selectedSize.value)
+};
+
 const authStore = useAuthStore();
 const wishlistStore = useWishlistStore();
 const productAdded = ref('');
@@ -302,8 +338,14 @@ const loading = ref(false);
 const handleAddToCart = (currentDeal) => {
   if (!currentDeal) return;
   loading.value = true;
+  const itemData = {
+    ...currentDeal,
+    quantity: quantity.value || 1,
+    selectedColor: selectedColor.value,
+    selectedSize: selectedSize.value
+  };
   todayDealStore
-    .addToCart(currentDeal, quantity.value || 1)
+    .addToCart(itemData)
     .then(() => {
       setTimeout(() => {
         loading.value = false;
@@ -358,10 +400,13 @@ const toggleWishlist = async (currentDeal) => {
       originalPrice: currentDeal.originalPrice,
       brand: currentDeal.brand,
       brandAr: currentDeal.brandAr,
-      imageUrl1: currentDeal.imageUrl1
+      imageUrl1: currentDeal.imageUrl1,
+      selectedColor: selectedColor.value,
+      selectedSize: selectedSize.value
     });
+    wishlistAdded.value = true;
     setTimeout(() => {
-      wishlistAdded.value = true;
+      wishlistAdded.value = false;
     }, 3000);
   } catch (error) {
     setTimeout(() => {
