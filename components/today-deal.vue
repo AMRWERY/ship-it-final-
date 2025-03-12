@@ -83,7 +83,7 @@
                           <div class="flex items-center justify-around gap-5 mt-5">
                             <div v-for="(value, key) in currentDealTime" :key="key"
                               class="flex flex-col items-center space-y-2">
-                              <div class="flex items-center justify-center w-12 h-12 border-2 rounded-full"
+                              <div class="flex items-center justify-center w-12 h-12 border-2 rounded-full bg-gradient-to-r from-violet-400 to-purple-300"
                                 :class="`border-${key}`">
                                 <span class="text-lg font-bold">{{ value }}</span>
                               </div>
