@@ -79,12 +79,18 @@ const authStore = useAuthStore();
 const localeStore = useLocaleStore();
 const { locale } = useI18n();
 
-const wishlistIcon = computed(() =>
-    wishlistStore.wishlist.length > 0 ? 'clarity:heart-solid' : 'clarity:heart-line'
-);
+const checkLocalStorageWishlist = () => {
+    const storedWishlist = localStorage.getItem('wishlist');
+    return storedWishlist && JSON.parse(storedWishlist).length > 0;
+};
+
+const wishlistIcon = computed(() => {
+    const hasItems = wishlistStore.wishlist.length > 0 || checkLocalStorageWishlist();
+    return hasItems ? 'clarity:heart-solid' : 'clarity:heart-line';
+});
 
 const wishlistIconClass = computed(() =>
-    wishlistStore.wishlist.length > 0 ? 'bg-red-600' : ''
+    wishlistIcon.value === 'clarity:heart-solid' ? 'bg-red-600' : ''
 );
 
 const showAnimation = ref(false);
