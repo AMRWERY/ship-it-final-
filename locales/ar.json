@@ -249,6 +249,11 @@
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",
     "continue_shopping": "متابعة التسوق"
   },
+  "wishlist": {
+    "your_wishlist": "قائمة الرغبات",
+    "your_wishlist_is_empty": "قائمة الرغبات الخاصه بك فارغه",
+    "Start_adding_products": "ابدأ بإضافة المنتجات!"
+  },
   "checkout": {
     "checkout": "إتمام الشراء",
     "payment_details": "تفاصيل الدفع",

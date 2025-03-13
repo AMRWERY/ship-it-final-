@@ -6,15 +6,15 @@
         <breadcrumb />
       </div>
 
-      <h2 class="mb-8 text-3xl font-semibold text-center">Your Wishlist</h2>
+      <h2 class="mb-8 text-3xl font-semibold text-center">{{ $t('wishlist.your_wishlist') }}</h2>
       <div v-if="loading" class="flex items-center justify-center text-gray-500">
         <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
       </div>
 
       <!-- Check if wishlist is empty -->
       <div v-else-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500 dark:text-gray-100">
-        <p>Your wishlist is empty. <nuxt-link to="/products" class="text-blue-500 dark:text-blue-300">Start adding
-            products!</nuxt-link>
+        <p>{{ $t('wishlist.your_wishlist_is_empty') }} <nuxt-link to="/products"
+            class="text-blue-500 dark:text-blue-300">{{ $t('wishlist.Start_adding_products') }}</nuxt-link>
         </p>
       </div>
 
@@ -69,9 +69,9 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
 const wishlistStore = useWishlistStore();
 const cartStore = useCartStore();
-const { t } = useI18n()
 const loading = ref(false)
 
 onMounted(() => {

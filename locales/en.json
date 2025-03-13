@@ -249,6 +249,11 @@
     "your_cart_is_currently_empty": "Your cart is currently empty",
     "continue_shopping": "Continue shopping"
   },
+  "wishlist": {
+    "your_wishlist": "Your Wishlist",
+    "your_wishlist_is_empty": "Your wishlist is empty.",
+    "Start_adding_products": "Start adding products!"
+  },
   "checkout": {
     "checkout": "Checkout",
     "payment_details": "Payment details",

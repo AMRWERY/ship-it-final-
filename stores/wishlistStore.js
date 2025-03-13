@@ -11,17 +11,19 @@ export const useWishlistStore = defineStore("wishlist", {
       const userId = this.storedUser?.uid;
       if (!userId) {
         this.loading = false;
-        return;
+        return Promise.resolve();
       }
-      try {
-        const storedWishlist = localStorage.getItem(`wishlist`);
-        this.wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
-      } catch (error) {
-        console.error("Error fetching wishlist from localStorage:", error);
-        this.wishlist = [];
-      } finally {
-        this.loading = false;
-      }
+      return Promise.resolve(localStorage.getItem("wishlist"))
+        .then((storedWishlist) => {
+          this.wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
+        })
+        .catch((error) => {
+          console.error("Error fetching wishlist from localStorage:", error);
+          this.wishlist = [];
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
 
     addToWishlist(wishlistItems) {
