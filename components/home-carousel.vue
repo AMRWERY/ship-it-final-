@@ -10,12 +10,12 @@
                 <div
                     class="absolute flex justify-between -translate-y-1/2 left-4 right-4 sm:left-5 sm:right-5 lg:left-8 lg:right-8 top-1/2">
                     <button
-                        class="inline-flex items-center justify-center w-10 h-10 rounded-full rtl:rotate-180 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
                         @click="prevSlide">
                         <icon name="ic:baseline-keyboard-arrow-left" class="rtl:rotate-180" />
                     </button>
                     <button
-                        class="inline-flex items-center justify-center w-10 h-10 rounded-full rtl:rotate-180 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
                         @click="nextSlide">
                         <icon name="ic:baseline-keyboard-arrow-right" class="rtl:rotate-180" />
                     </button>
