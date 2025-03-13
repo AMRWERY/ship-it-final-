@@ -252,7 +252,8 @@
   "wishlist": {
     "your_wishlist": "Your Wishlist",
     "your_wishlist_is_empty": "Your wishlist is empty.",
-    "Start_adding_products": "Start adding products!"
+    "Start_adding_products": "Start adding products!",
+    "brand": "Brand:"
   },
   "checkout": {
     "checkout": "Checkout",

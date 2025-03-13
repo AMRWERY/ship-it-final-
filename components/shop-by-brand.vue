@@ -9,7 +9,7 @@
         </div>
 
         <ClientOnly>
-          <!-- skeleton-loader -->
+          <!-- skeleton-loader componenet -->
           <Carousel v-if="loading || categoriesStore.categories.length === 0" v-bind="config">
             <Slide v-for="i in 5" :key="i">
               <div class="px-2 carousel__item">

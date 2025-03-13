@@ -252,7 +252,8 @@
   "wishlist": {
     "your_wishlist": "قائمة الرغبات",
     "your_wishlist_is_empty": "قائمة الرغبات الخاصه بك فارغه",
-    "Start_adding_products": "ابدأ بإضافة المنتجات!"
+    "Start_adding_products": "ابدأ بإضافة المنتجات!",
+    "brand": "العلامة التجارية:"
   },
   "checkout": {
     "checkout": "إتمام الشراء",

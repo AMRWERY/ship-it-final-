@@ -7,8 +7,23 @@
       </div>
 
       <h2 class="mb-8 text-3xl font-semibold text-center">{{ $t('wishlist.your_wishlist') }}</h2>
-      <div v-if="loading" class="flex items-center justify-center text-gray-500">
-        <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+      <!-- skeleton-loader componenet -->
+      <div v-if="loading" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div v-for="i in 4" :key="i" class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-black">
+          <skeleton-loader type="rectangle" class="w-full h-48 bg-gray-200 rounded-none dark:bg-gray-800" />
+          <div class="p-4">
+            <skeleton-loader type="rectangle" class="w-3/4 h-6 mb-2 bg-gray-200 dark:bg-gray-700" />
+            <skeleton-loader type="rectangle" class="w-1/2 h-4 bg-gray-200 dark:bg-gray-700" />
+            <div class="flex items-center mt-2 space-s-2">
+              <skeleton-loader type="rectangle" class="w-1/3 h-6 bg-gray-200 dark:bg-gray-700" />
+              <skeleton-loader type="rectangle" class="w-1/4 h-4 bg-gray-200 dark:bg-gray-700" />
+            </div>
+            <div class="flex mt-2 space-s-5">
+              <skeleton-loader type="circle" class="w-10 h-10 bg-gray-200 dark:bg-gray-700" />
+              <skeleton-loader type="rectangle" class="w-full h-10 bg-gray-200 dark:bg-gray-700" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Check if wishlist is empty -->
@@ -26,7 +41,8 @@
           <div class="p-4">
             <h3 class="text-lg font-semibold truncate">{{ $i18n.locale === 'ar' ? item.titleAr :
               item.title }}</h3>
-            <p class="mt-1 text-gray-500 dark:text-gray-100">Brand: {{ $i18n.locale === 'ar' ? item.brandAr :
+            <p class="mt-1 text-gray-500 dark:text-gray-100">{{ $t('wishlist.brand') }} {{ $i18n.locale === 'ar' ?
+              item.brandAr :
               item.brand }}</p>
             <div class="flex items-center mt-2 space-s-2">
               <p class="mt-1 text-xl font-bold text-gray-900 dark:text-gray-200">{{ $n(parseFloat(item.discountedPrice),
@@ -87,8 +103,8 @@ const removingItem = ref(null);
 
 const removeItem = async (docId) => {
   removingItem.value = docId;
-  await wishlistStore.removeFromWishlist(docId);
-  setTimeout(() => {
+  setTimeout(async () => {
+    await wishlistStore.removeFromWishlist(docId);
     removingItem.value = null;
   }, 3000);
 };
