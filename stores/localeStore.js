@@ -7,10 +7,10 @@ export const useLocaleStore = defineStore("locales", {
   actions: {
     async hydrate() {
       if (process.client) {
-        this.locale = localStorage.getItem('locale') || 'en';
+        this.locale = localStorage.getItem("locale") || "en";
       }
     },
-    
+
     updateLocale(value) {
       this.isOverlayVisible = true;
       this.locale = value;
