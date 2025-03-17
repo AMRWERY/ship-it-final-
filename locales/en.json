@@ -95,7 +95,8 @@
     "birth_date": "Birth Date",
     "or": "or",
     "create_free_account": "Create free account",
-    "or_continue_with": "or continue with"
+    "or_continue_with": "or continue with",
+    "enter_your_voucher_code_here": "enter your voucher code here"
   },
   "btn": {
     "logging": "Logging",
@@ -132,7 +133,10 @@
     "go_back_home": "Go Back Home",
     "save": "Save",
     "continue_with_google": "Continue with Google",
-    "subscribe_now": "Subscribe Now"
+    "subscribe_now": "Subscribe Now",
+    "remove": "Remove",
+    "proceed_to_checkout": "Proceed to Checkout",
+    "apply_code": "Apply Code"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -247,7 +251,19 @@
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty",
-    "continue_shopping": "Continue shopping"
+    "continue_shopping": "Continue shopping",
+    "quantity": "Quantity:",
+    "brand": "Brand:",
+    "subtotal": "Subtotal",
+    "shopping_cart": "Shopping Cart",
+    "order_summary": "Order Summary",
+    "or": "or",
+    "original_price": "Original price",
+    "savings": "Savings",
+    "store_pickup": "Store Pickup",
+    "tax": "Tax",
+    "do_you_have_a_voucher_or_gift_card": "Do you have a voucher or gift card?",
+    "total": "Total"
   },
   "wishlist": {
     "your_wishlist": "Your Wishlist",

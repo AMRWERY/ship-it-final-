@@ -95,7 +95,8 @@
     "birth_date": "تاريخ الميلاد",
     "or": "أو",
     "create_free_account": "إنشاء حساب مجاني",
-    "or_continue_with": "أو المتابعة باستخدام"
+    "or_continue_with": "أو المتابعة باستخدام",
+    "enter_your_voucher_code_here": "أدخل رمز قسيمتك هنا"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
@@ -132,7 +133,10 @@
     "go_back_home": "العودة إلى الصفحة الرئيسية",
     "save": "حفظ",
     "continue_with_google": "المتابعة باستخدام جوجل",
-    "subscribe_now": "اشترك الآن"
+    "subscribe_now": "اشترك الآن",
+    "remove": "أزاله",
+    "proceed_to_checkout": "إتمام الشراء",
+    "apply_code": "تطبيق الكود"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -247,7 +251,19 @@
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حالياً",
-    "continue_shopping": "متابعة التسوق"
+    "continue_shopping": "متابعة التسوق",
+    "quantity": "كمية:",
+    "brand": "العلامة التجارية:",
+    "subtotal": "المجموع الفرعي",
+    "shopping_cart": "عربة التسوق",
+    "order_summary": "ملخص الطلب",
+    "or": "أو",
+    "original_price": "السعر الأصلي",
+    "savings": "التوفير",
+    "store_pickup": "الاستلام من المتجر",
+    "tax": "الضريبة",
+    "do_you_have_a_voucher_or_gift_card": "هل لديك قسيمة أو بطاقة هدية؟",
+    "total": "الإجمالي"
   },
   "wishlist": {
     "your_wishlist": "قائمة الرغبات",
@@ -273,8 +289,8 @@
     "brand": "العلامة التجارية",
     "quantity": "الكمية",
     "subtotal": "المجموع الفرعي",
-    "savings": "المدخرات",
-    "store_pickup": "استلام من المتجر",
+    "savings": "التوفير",
+    "store_pickup": "الاستلام من المتجر",
     "tax": "الضريبة",
     "total": "المجموع الكلي"
   },

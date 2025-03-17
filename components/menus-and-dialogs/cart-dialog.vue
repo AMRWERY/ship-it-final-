@@ -15,7 +15,7 @@
       <div class="relative w-full h-screen max-w-lg bg-white shadow-lg ms-auto dark:bg-[#181a1b]">
         <div class="overflow-auto p-6 h-[calc(100vh-124px)] scroll-hidden">
           <div class="flex items-center gap-4 text-gray-800 dark:text-gray-200">
-            <h3 class="flex-1 text-2xl font-bold">Shopping cart</h3>
+            <h3 class="flex-1 text-2xl font-bold">{{ $t('cart.shopping_cart') }}</h3>
             <button @click="closeCartSidebar">
               <icon name="material-symbols:close-rounded"
                 class="w-4 h-4 cursor-pointer ms-2 shrink-0 fill-black hover:fill-red-500" />
@@ -48,10 +48,12 @@
                   <h3 class="text-base font-bold text-gray-800 max-sm:text-sm dark:text-gray-200">{{ $i18n.locale ===
                     'ar' ? item.titleAr :
                     item.title }}</h3>
-                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Brand: {{ $i18n.locale ===
-                    'ar' ? item.brandAr :
+                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">{{ $t('cart.brand') }} {{
+                    $i18n.locale ===
+                      'ar' ? item.brandAr :
                     item.brand }}</p>
-                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">Quantity: {{ item.quantity }}
+                  <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">{{ $t('cart.quantity') }} {{
+                    item.quantity }}
                   </p>
 
                   <button type="button" @click.stop="removeItem(item.docId, item.quantity)"
@@ -59,7 +61,7 @@
                     <icon v-if="removingItem === item.docId" name="svg-spinners:6-dots-rotate"
                       class="inline w-4 fill-curren" />
                     <icon name="material-symbols:delete-outline-rounded" class="inline w-4 fill-current" v-else />
-                    Remove
+                    {{ $t('btn.remove') }}
                   </button>
                 </div>
               </div>
@@ -87,7 +89,7 @@
 
         <div class="absolute bottom-0 w-full p-4 bg-white dark:bg-[#181a1b] border-t" v-if="cartStore.cart.length > 0">
           <ul class="text-gray-800 divide-y dark:text-gray-200">
-            <li class="flex flex-wrap gap-4 text-lg font-bold">Subtotal <span class="ms-auto">{{
+            <li class="flex flex-wrap gap-4 text-lg font-bold">{{ $t('cart.subtotal') }} <span class="ms-auto">{{
               $n(parseFloat(totalAmount),
                 'currency', currencyLocale) }}
               </span>
@@ -95,8 +97,8 @@
           </ul>
           <div class="space-y-3">
             <nuxt-link to="/checkout" type="button" @click="closeCartSidebar"
-              class="flex items-center justify-center w-full px-5 py-2 mt-6 text-sm font-medium text-white transition duration-300 border rounded-md bg-rose-500">Proceed
-              to Checkout</nuxt-link>
+              class="flex items-center justify-center w-full px-5 py-2 mt-6 text-sm font-medium text-white transition duration-300 border rounded-md bg-rose-500">{{
+                $t('btn.proceed_to_checkout') }}</nuxt-link>
             <nuxt-link to="/shopping-cart" type="button" @click="closeCartSidebar"
               class="block w-full px-5 py-2 text-center btn-style">
               {{ $t('btn.view_cart') }}
