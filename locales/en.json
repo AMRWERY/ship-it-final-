@@ -188,7 +188,8 @@
     "product_updated_successfully": "Product updated successfully",
     "product_added_to_wishlist": "Product added to wishlist",
     "failed_add_product_to_wishlist": "Failed add Product to wishlist",
-    "product_already_added_to_the_wishlist": "Product already added to the wishlist"
+    "product_already_added_to_the_wishlist": "Product already added to the wishlist",
+    "please_enter_a_valid_email_address": "Please enter a valid email address"
   },
   "breadcrumb": {
     "home": "Home",

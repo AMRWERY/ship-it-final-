@@ -25,16 +25,16 @@
               {{ $t('mail.join_our_mailing_list') }}
             </p>
             <div class="w-12 h-0.5 mx-auto my-2 bg-red-500 dark:bg-red-300"></div>
-            <p class="mt-5 text-xs font-semibold">{{
+            <p class="mt-5 text-base font-semibold text-gray-800 dark:text-gray-200">{{
               $t('mail.get_the_latest_updates_on_new_products_and_upcoming_sales') }}</p>
-            <span class="text-xs text-gray-800 dark:text-gray-200">{{ $t('mail.we_promise_to_only_send_you_good_things')
+            <span class="text-sm text-gray-800 dark:text-gray-200">{{ $t('mail.we_promise_to_only_send_you_good_things')
             }}</span>
           </div>
           <div class="w-full max-w-sm min-w-[200px] mx-auto mt-4 mb-8">
             <div class="relative">
               <input type="email" v-model="email"
                 class="w-full py-3 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm ps-3 pe-16 placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200"
-                placeholder="Your Email Address" />
+                :placeholder="t('form.enter_your_email')" />
               <button @click="subscribe"
                 class="absolute end-1 top-1 rounded bg-black py-2 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="submit">
@@ -47,7 +47,7 @@
             </div>
 
             <div v-if="subscribeFailed" class="mt-2">
-              <p class="font-normal text-center text-red-800">Please enter a valid email address</p>
+              <p class="font-normal text-center text-red-800">{{ $t('toast.please_enter_a_valid_email_address') }}</p>
             </div>
           </div>
         </div>
@@ -57,6 +57,7 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
 const mailStore = useMailStore();
 const email = ref('');
 const showDialog = ref(false);

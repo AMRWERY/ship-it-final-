@@ -37,7 +37,7 @@
                 <div class="flex-1 min-w-0 space-y-8">
                   <div class="space-y-4">
                     <h2 class="text-xl font-semibold text-gray-900">{{ $t('checkout.delivery_details')
-                    }}</h2>
+                      }}</h2>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
                         name="cvv" :rules="'required|alpha_spaces'" :required="true"
@@ -178,7 +178,8 @@
               <div class="-my-3 divide-y divide-gray-200">
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-100">{{ $t('checkout.subtotal') }}</dt>
-                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ $n(parseFloat(subTotalAmount),
+                  <dd class="text-base font-medium text-gray-900 dark:text-gray-200">{{ $n(parseFloat(subTotalAmount) ||
+                    0,
                     'currency', currencyLocale) }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
@@ -198,7 +199,7 @@
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $t('checkout.total') }}</dt>
-                  <dd class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $n(parseFloat(totalAmount),
+                  <dd class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $n(parseFloat(totalAmount) || 0,
                     'currency', currencyLocale) }}</dd>
                 </dl>
               </div>
@@ -231,8 +232,8 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType" :duration="5000"
+          :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
   </div>

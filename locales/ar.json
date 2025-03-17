@@ -188,7 +188,8 @@
     "product_updated_successfully": "تم تحديث المنتج بنجاح",
     "product_added_to_wishlist": "تم اضافه المنتج الي قائمة الرغبات",
     "failed_add_product_to_wishlist": "فشل اضافه المنتج الي قائمة الرغبات",
-    "product_already_added_to_the_wishlist": "المنتج تم اضافته بالفعل الي قائمة الرغبات"
+    "product_already_added_to_the_wishlist": "المنتج تم اضافته بالفعل الي قائمة الرغبات",
+    "please_enter_a_valid_email_address": "يرجى إدخال عنوان بريد إلكتروني صالح"
   },
   "breadcrumb": {
     "home": "الرئيسية",
