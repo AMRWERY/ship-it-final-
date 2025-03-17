@@ -1,133 +1,34 @@
 <template>
   <div>
-    <div class="py-6 bg-white sm:py-8 lg:py-12">
+    <div class="py-6 rounded-lg shadow-lg sm:py-8 lg:py-12 dark:border dark:border-gray-100">
       <div class="max-w-screen-xl px-4 mx-auto md:px-8">
-        <!-- text - start -->
         <div class="mb-10 md:mb-16">
-          <h2 class="mb-4 text-2xl font-bold text-center text-gray-800 md:mb-6 lg:text-3xl">Blog</h2>
-
-          <p class="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg">This is a section of some simple
-            filler text, also known as placeholder text. It shares some characteristics of a real written text but
-            is random or otherwise generated.</p>
+          <h2 class="mb-4 text-2xl font-bold text-center text-gray-800 md:mb-6 lg:text-3xl dark:text-gray-200">Shipping
+            Insights & Updates
+          </h2>
+          <p class="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg dark:text-gray-100">Stay informed with
+            the latest trends,
+            tips, and innovations in global logistics and e-commerce shipping.</p>
         </div>
-        <!-- text - end -->
 
         <div class="grid gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-2 xl:grid-cols-2 xl:gap-16">
-          <!-- article - start -->
-          <div class="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-            <a href="#"
+          <div class="flex flex-col items-center gap-4 md:flex-row lg:gap-6" v-for="blog in blogs" :key="blog">
+            <router-link to=""
               class="relative self-start block w-full h-56 overflow-hidden bg-gray-100 rounded-lg shadow-lg group shrink-0 md:h-24 md:w-24 lg:h-40 lg:w-40">
-              <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600"
-                loading="lazy" alt="Photo by Minh Pham"
+              <img :src="blog.img" loading="lazy" alt="Shipping technology"
                 class="absolute inset-0 object-cover object-center w-full h-full transition duration-200 group-hover:scale-110" />
-            </a>
-
+            </router-link>
             <div class="flex flex-col gap-2">
-              <span class="text-sm text-gray-400">July 19, 2021</span>
-
-              <h2 class="text-xl font-bold text-gray-800">
-                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">New
-                  trends in Tech</a>
+              <span class="text-sm text-gray-400 dark:text-gray-100">{{ blog.date }}</span>
+              <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                <router-link to="" class="transition duration-100 hover:text-blue-600 active:text-blue-700">{{
+                  blog.title }}</router-link>
               </h2>
-
-              <p class="text-gray-500">This is a section of some simple filler text, also known as placeholder
-                text.</p>
-
+              <p class="text-gray-500 dark:text-gray-100">{{ blog.desc }}</p>
               <div>
-                <a href="#"
-                  class="font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Read
-                  more</a>
               </div>
             </div>
           </div>
-          <!-- article - end -->
-
-          <!-- article - start -->
-          <div class="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-            <a href="#"
-              class="relative self-start block w-full h-56 overflow-hidden bg-gray-100 rounded-lg shadow-lg group shrink-0 md:h-24 md:w-24 lg:h-40 lg:w-40">
-              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600"
-                loading="lazy" alt="Photo by Lorenzo Herrera"
-                class="absolute inset-0 object-cover object-center w-full h-full transition duration-200 group-hover:scale-110" />
-            </a>
-
-            <div class="flex flex-col gap-2">
-              <span class="text-sm text-gray-400">April 07, 2021</span>
-
-              <h2 class="text-xl font-bold text-gray-800">
-                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">Working
-                  with legacy stacks</a>
-              </h2>
-
-              <p class="text-gray-500">This is a section of some simple filler text, also known as placeholder
-                text.</p>
-
-              <div>
-                <a href="#"
-                  class="font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Read
-                  more</a>
-              </div>
-            </div>
-          </div>
-          <!-- article - end -->
-
-          <!-- article - start -->
-          <div class="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-            <a href="#"
-              class="relative self-start block w-full h-56 overflow-hidden bg-gray-100 rounded-lg shadow-lg group shrink-0 md:h-24 md:w-24 lg:h-40 lg:w-40">
-              <img src="https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=600"
-                loading="lazy" alt="Photo by Magicle"
-                class="absolute inset-0 object-cover object-center w-full h-full transition duration-200 group-hover:scale-110" />
-            </a>
-
-            <div class="flex flex-col gap-2">
-              <span class="text-sm text-gray-400">March 15, 2021</span>
-
-              <h2 class="text-xl font-bold text-gray-800">
-                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">10 best
-                  smartphones for devs</a>
-              </h2>
-
-              <p class="text-gray-500">This is a section of some simple filler text, also known as placeholder
-                text.</p>
-
-              <div>
-                <a href="#"
-                  class="font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Read
-                  more</a>
-              </div>
-            </div>
-          </div>
-          <!-- article - end -->
-
-          <!-- article - start -->
-          <div class="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-            <a href="#"
-              class="relative self-start block w-full h-56 overflow-hidden bg-gray-100 rounded-lg shadow-lg group shrink-0 md:h-24 md:w-24 lg:h-40 lg:w-40">
-              <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600"
-                loading="lazy" alt="Photo by Martin Sanchez"
-                class="absolute inset-0 object-cover object-center w-full h-full transition duration-200 group-hover:scale-110" />
-            </a>
-
-            <div class="flex flex-col gap-2">
-              <span class="text-sm text-gray-400">January 27, 2021</span>
-
-              <h2 class="text-xl font-bold text-gray-800">
-                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">8 High
-                  performance Notebooks</a>
-              </h2>
-
-              <p class="text-gray-500">This is a section of some simple filler text, also known as placeholder
-                text.</p>
-
-              <div>
-                <a href="#"
-                  class="font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Read
-                  more</a>
-              </div>
-            </div>
-          </div>
-          <!-- article - end -->
         </div>
       </div>
     </div>
@@ -135,5 +36,30 @@
 </template>
 
 <script setup>
-
+const blogs = computed(() => [
+  {
+    date: 'March 15, 2024',
+    title: '5 Ways to Optimize Your Shipping Workflow',
+    desc: 'Discover how smart packaging choices and route optimization can reduce costs by up to 30%.',
+    img: 'https://justfields.com/storage/projects/7M5rV059/blog-photo.jpg'
+  },
+  {
+    date: 'March 12, 2024',
+    title: 'Mastering International Shipping Regulations',
+    desc: 'Essential guide to navigating customs, duties, and cross-border logistics.',
+    img: 'https://justfields.com/storage/projects/7M5rV059/post-2.jpg'
+  },
+  {
+    date: 'March 8, 2024',
+    title: 'Sustainable Shipping: Our Green Initiative',
+    desc: "How we're reducing carbon footprint with biodegradable materials and electric fleets.",
+    img: 'https://justfields.com/storage/projects/7M5rV059/post-1.jpg'
+  },
+  {
+    date: 'March 1, 2024',
+    title: 'Real-Time Tracking: Enhancing Customer Experience',
+    desc: "Learn how our new tracking system improves delivery transparency and satisfaction.",
+    img: 'https://justfields.com/storage/projects/7M5rV059/blog-img.jpg'
+  }
+]);
 </script>
