@@ -72,12 +72,6 @@
               <nuxt-link to="/blogs" class="text-white">{{ $t('footer.blogs') }}</nuxt-link>
             </p>
             <p class="mb-4">
-              <nuxt-link to="/customer-support" class="text-white">{{ $t('footer.customer_support') }}</nuxt-link>
-            </p>
-            <p class="mb-4">
-              <nuxt-link to="/faqs" class="text-white">{{ $t('footer.faqs') }}</nuxt-link>
-            </p>
-            <p class="mb-4">
               <nuxt-link to="/help-center" class="text-white">{{ $t('footer.help_center') }}</nuxt-link>
             </p>
           </div>
