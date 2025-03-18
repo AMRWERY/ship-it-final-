@@ -4,14 +4,14 @@
       <!-- Header -->
       <header class="p-6 text-white bg-blue-600 dark:bg-blue-400">
         <div class="container flex items-center justify-between mx-auto">
-          <h1 class="text-3xl font-bold">Help Center</h1>
+          <h1 class="text-3xl font-bold">{{ $t('help_center.help_center') }}</h1>
         </div>
       </header>
 
       <div class="container flex flex-col flex-grow px-6 mx-auto mt-8 md:flex-row">
         <!-- Updated Sidebar with tab navigation -->
         <div class="w-full p-4 mb-8 rounded-lg shadow-lg md:w-1/4 md:mb-0">
-          <h2 class="mb-4 text-xl font-semibold">Categories</h2>
+          <h2 class="mb-4 text-xl font-semibold">{{ $t('help_center.categories') }}</h2>
           <ul class="space-y-3">
             <li v-for="tab in tabs" :key="tab.id">
               <nuxt-link :to="`#${tab.id}`" @click.prevent="activeTab = tab.id"
@@ -67,14 +67,15 @@
 </template>
 
 <script setup>
-const tabs = ref([
-  { id: 'account-management', title: 'Account Management' },
-  { id: 'orders-shipping', title: 'Orders & Shipping' },
-  { id: 'returns-exchanges', title: 'Returns & Exchanges' },
-  { id: 'payment-issues', title: 'Payment Issues' },
-  { id: 'genral-questions', title: 'Genral Questions' }
-]);
+const { t } = useI18n()
 
+const tabs = computed(() => [
+  { id: 'account-management', title: t('help_center.account_management') },
+  { id: 'orders-shipping', title: t('help_center.orders_shipping') },
+  { id: 'returns-exchanges', title: t('help_center.returns_exchanges') },
+  { id: 'payment-issues', title: t('help_center.payment_issues') },
+  { id: 'genral-questions', title: t('help_center.genral_questions') }
+]);
 const activeTab = ref('account-management');
 </script>
 
