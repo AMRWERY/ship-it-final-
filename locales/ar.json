@@ -96,7 +96,9 @@
     "or": "أو",
     "create_free_account": "إنشاء حساب مجاني",
     "or_continue_with": "أو المتابعة باستخدام",
-    "enter_your_voucher_code_here": "أدخل رمز قسيمتك هنا"
+    "enter_your_voucher_code_here": "أدخل رمز قسيمتك هنا",
+    "your_comment": "تعليقك",
+    "write_your_comments_here": "اكتب تعليقاتك هنا..."
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",

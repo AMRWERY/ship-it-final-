@@ -210,6 +210,13 @@
                     eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
               </div>
+              <div class="mt-3">
+                <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                  $t('form.your_comment') }}</label>
+                <textarea id="comment" rows="4"
+                  class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-300 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                  :placeholder="t('form.write_your_comments_here')"></textarea>
+              </div>
             </div>
           </div>
         </div>

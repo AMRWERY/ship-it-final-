@@ -96,7 +96,9 @@
     "or": "or",
     "create_free_account": "Create free account",
     "or_continue_with": "or continue with",
-    "enter_your_voucher_code_here": "enter your voucher code here"
+    "enter_your_voucher_code_here": "enter your voucher code here",
+    "your_comment": "Your Comment",
+    "write_your_comments_here": "Write your comments here..."
   },
   "btn": {
     "logging": "Logging",
