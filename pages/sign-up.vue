@@ -1,12 +1,9 @@
 <template>
   <div>
-    <!-- Overlay component -->
-    <Overlay :visible="authStore.isOverlayVisible" />
+    <!-- overlay component -->
+    <overlay :visible="authStore.isOverlayVisible" />
 
     <div class="py-6 mx-auto mb-5 max-w-7xl sm:px-6 lg:px-8">
-      <!-- breadcrumb component -->
-      <breadcrumb />
-
       <section class="relative flex flex-wrap my-12 lg:h-screen lg:items-center">
         <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -82,8 +79,8 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType" :duration="5000"
+          :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
   </div>
@@ -149,6 +146,10 @@ const googleSignup = async () => {
     loading.value = false;
   }
 };
+
+definePageMeta({
+  layout: false
+});
 
 useHead({
   titleTemplate: () => t("head.sign_up"),
