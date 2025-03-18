@@ -125,7 +125,8 @@
     "subscribe_now": "اشترك الآن",
     "remove": "أزاله",
     "proceed_to_checkout": "إتمام الشراء",
-    "apply_code": "تطبيق الكود"
+    "apply_code": "تطبيق الكود",
+    "submit": "تقديم"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -149,7 +150,11 @@
     "product_added_to_wishlist": "تم اضافه المنتج الي قائمة الرغبات",
     "failed_add_product_to_wishlist": "فشل اضافه المنتج الي قائمة الرغبات",
     "product_already_added_to_the_wishlist": "المنتج تم اضافته بالفعل الي قائمة الرغبات",
-    "please_enter_a_valid_email_address": "يرجى إدخال عنوان بريد إلكتروني صالح"
+    "please_enter_a_valid_email_address": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "please_log_in_to_comment": "الرجاء تسجيل الدخول للتعليق",
+    "comment_cannot_be_empty": "لا يمكن أن يكون التعليق فارغا",
+    "comment_added_success": "تمت إضافة التعليق بنجاح",
+    "failed_to_add_comment": "فشل في إضافة التعليق"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -259,7 +264,8 @@
     "product_information": "معلومات المنتج",
     "customer_reviews": "آراء العملاء",
     "votes": "الأصوات",
-    "save": "وفر"
+    "save": "وفر",
+    "no_comments_yet": "لا توجد تعليقات حتى الآن."
   },
   "error_page": {
     "you_are_all_alone_here": "أنت وحدك هنا"

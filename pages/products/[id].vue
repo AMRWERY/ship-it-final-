@@ -205,17 +205,28 @@
                 <img :src="profileImg" alt="user" class="w-12 h-12 border-2 border-white rounded-full" />
                 <div class="ms-3">
                   <h4 class="text-sm font-bold">{{ firstName }} {{ lastName }}</h4>
-                  <p class="mt-4 text-sm text-gray-500 dark:text-gray-200">Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p class="mt-4 text-sm text-gray-500 dark:text-gray-200">{{ productStore.selectedProduct?.userComment
+                    || t('products.no_comments_yet') }}</p>
                 </div>
               </div>
               <div class="mt-3">
-                <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                  $t('form.your_comment') }}</label>
-                <textarea id="comment" rows="4"
-                  class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-300 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                  :placeholder="t('form.write_your_comments_here')"></textarea>
+                <form @submit.prevent="handleCommentSubmit">
+                  <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                    $t('form.your_comment') }}</label>
+                  <div class="relative">
+                    <textarea id="comment" rows="4" v-model="commentText"
+                      class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-300 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                      :placeholder="t('form.write_your_comments_here')" :disabled="commentLoading"></textarea>
+                    <div class="absolute bottom-4 end-2">
+                      <button type="submit" class="px-4 py-1.5 btn-style" :disabled="commentLoading">
+                        <div v-if="commentLoading" class="flex items-center">
+                          <icon name="svg-spinners:270-ring-with-bg" class="w-5 h-5" />
+                        </div>
+                        <span v-else>{{ $t('btn.submit') }}</span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -430,4 +441,51 @@ const handleRating = (rating) => {
 
 //currency composable
 const { currencyLocale } = useCurrencyLocale();
+
+//add comment
+const commentText = ref('');
+const commentLoading = ref(false);
+
+const handleCommentSubmit = async () => {
+  if (!authStore.isAuthenticated) {
+    triggerToast({
+      message: t('toast.please_log_in_to_comment'),
+      type: 'warning',
+      icon: 'material-symbols:warning-outline-rounded'
+    });
+    return;
+  }
+  if (!commentText.value.trim()) {
+    triggerToast({
+      message: t('toast.comment_cannot_be_empty'),
+      type: 'error',
+      icon: 'material-symbols:error-outline-rounded'
+    });
+    return;
+  }
+  commentLoading.value = true;
+  try {
+    const success = await productStore.addProductComment(
+      productStore.selectedProduct.id,
+      commentText.value.trim()
+    );
+    if (success) {
+      commentText.value = '';
+      triggerToast({
+        message: t('toast.comment_added_success'),
+        type: 'success',
+        icon: 'material-symbols:comment-outline-rounded'
+      });
+      await productStore.fetchProductDetail(route.params.id);
+    }
+  } catch (error) {
+    triggerToast({
+      message: t('toast.failed_to_add_comment'),
+      type: 'error',
+      icon: 'material-symbols:error-outline-rounded'
+    });
+  } finally {
+    commentLoading.value = false;
+  }
+};
 </script>

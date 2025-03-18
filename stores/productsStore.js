@@ -86,7 +86,7 @@ export const useProductsStore = defineStore("products", {
         })
         .catch((error) => {
           // console.error("Error updating product:", error);
-          return error
+          return error;
         });
     },
 
@@ -168,6 +168,21 @@ export const useProductsStore = defineStore("products", {
           // console.error("Error fetching product details:", error);
           return null;
         });
+    },
+
+    async addProductComment(productId, commentText) {
+      try {
+        const productRef = doc(db, "products", productId);
+        await updateDoc(productRef, { userComment: commentText });
+        if (this.selectedProduct) {
+          this.selectedProduct.userComment = commentText;
+        }
+        // console.log("Comment updated successfully");
+        return true;
+      } catch (error) {
+        // console.error("Error updating comment:", error);
+        return false;
+      }
     },
 
     updatePagination() {

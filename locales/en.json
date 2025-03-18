@@ -125,7 +125,8 @@
     "subscribe_now": "Subscribe Now",
     "remove": "Remove",
     "proceed_to_checkout": "Proceed to Checkout",
-    "apply_code": "Apply Code"
+    "apply_code": "Apply Code",
+    "submit": "Submit"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -149,7 +150,11 @@
     "product_added_to_wishlist": "Product added to wishlist",
     "failed_add_product_to_wishlist": "Failed add Product to wishlist",
     "product_already_added_to_the_wishlist": "Product already added to the wishlist",
-    "please_enter_a_valid_email_address": "Please enter a valid email address"
+    "please_enter_a_valid_email_address": "Please enter a valid email address",
+    "please_log_in_to_comment": "Please login to comment",
+    "comment_cannot_be_empty": "Comment cannot be empty",
+    "comment_added_success": "Comment added success",
+    "failed_to_add_comment": "Failed to add comment"
   },
   "breadcrumb": {
     "home": "Home",
@@ -259,7 +264,8 @@
     "product_information": "Product Information",
     "customer_reviews": "Customer Reviews",
     "votes": "votes",
-    "save": "Save"
+    "save": "Save",
+    "no_comments_yet": "No comments yet."
   },
   "error_page": {
     "you_are_all_alone_here": "You are all alone here"
