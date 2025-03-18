@@ -248,7 +248,15 @@
     "size": "Size",
     "egp": "EGP",
     "15_00": "15.00",
-    "12_00": "12.00"
+    "12_00": "12.00",
+    "sku": "SKU",
+    "stock": "Stock",
+    "only": "Only",
+    "left_in_stock_order_soon": "left in stock - order soon.",
+    "quantity": "Quantity",
+    "product_information": "Product Information",
+    "customer_reviews": "Customer Reviews",
+    "votes": "votes"
   },
   "error_page": {
     "you_are_all_alone_here": "You are all alone here"

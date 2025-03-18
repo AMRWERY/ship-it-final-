@@ -45,11 +45,11 @@
               </div>
             </div>
 
-            <hr class="my-6 border-gray-300" />
+            <hr class="my-3 border-gray-300" />
 
             <div>
-              <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Sizes</h3>
-              <div class="flex flex-wrap gap-4 mt-4">
+              <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ $t('products.size') }}</h3>
+              <div class="flex flex-wrap gap-4 mt-1">
                 <button v-for="size in productStore.selectedProduct?.sizes" :key="size" @click="setSelectedSize(size)"
                   :class="{
                     'border-blue-600 bg-blue-50': selectedSize === size,
@@ -66,8 +66,9 @@
                 </button>
               </div>
 
-              <h3 class="mt-8 text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Colors</h3>
-              <div class="flex flex-wrap gap-4 mt-4">
+              <h3 class="mt-8 text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ $t('products.color') }}
+              </h3>
+              <div class="flex flex-wrap gap-4 mt-1">
                 <button v-for="color in productStore.selectedProduct?.colors" :key="color"
                   @click="setSelectedColor(color)" :class="{
                     'border-blue-600 bg-blue-50': selectedColor === color,
@@ -86,26 +87,28 @@
 
               <!-- SKU -->
               <div class="mt-8">
-                <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200 sm:text-xl">SKU</h2>
-                <p class="mt-4 space-y-1 text-gray-600 dark:text-gray-100">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200 sm:text-xl">{{ $t('products.sku') }}</h2>
+                <p class="mt-1 space-y-1 text-gray-600 dark:text-gray-100">
                   {{ productStore.selectedProduct?.sku }}
                 </p>
               </div>
 
               <!-- Stock -->
               <div class="mt-8">
-                <h2 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Stock</h2>
-                <p class="mt-3 space-y-1 text-gray-600 dark:text-gray-100">
-                  Only <span class="font-semibold text-red-700 underline dark:text-red-400">{{
+                <h2 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{ $t('products.stock') }}
+                </h2>
+                <p class="mt-1 space-y-1 text-gray-600 dark:text-gray-100">
+                  {{ $t('products.only') }} <span class="font-semibold text-red-700 underline dark:text-red-400">{{
                     productStore.selectedProduct?.stock
                   }}</span>
-                  left in stock - order soon.
+                  {{ $t('products.left_in_stock_order_soon') }}
                 </p>
               </div>
 
               <div class="mt-8">
-                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 sm:text-xl">Quantity</h3>
-                <div class="flex mt-5 overflow-hidden border divide-x rounded w-max">
+                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 sm:text-xl">{{ $t('products.quantity') }}
+                </h3>
+                <div class="flex mt-1 overflow-hidden border divide-x rounded w-max">
                   <button type="button" class="w-12 h-10 font-semibold bg-gray-100 dark:bg-gray-300"
                     @click="decrementQuantity">
                     <icon name="material-symbols:remove" class="w-5 h-5 mt-1 text-black" />
@@ -161,7 +164,8 @@
             <hr class="my-6 border-gray-300" /> -->
 
             <div>
-              <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Product Information</h3>
+              <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{
+                $t('products.product_information') }}</h3>
               <div class="mt-2" role="accordion">
                 <div class="transition-all">
                   <span class="text-sm font-semibold text-gray-800 text-start dark:text-gray-200">
@@ -201,30 +205,20 @@
               </div>
             </div>
 
-            <hr class="my-6 border-gray-300" />
+            <hr class="border-gray-300" />
 
             <div>
-              <h3 class="mb-4 text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">Customer Reviews</h3>
+              <h3 class="mt-4 text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{
+                $t('products.customer_reviews') }}</h3>
               <!-- ratings component -->
-              <ratings />
-
-              <div class="flex flex-wrap items-center gap-4 mt-4">
-                <h4 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 sm:text-3xl">4.0 / 5</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-100">Based on 253 ratings</p>
-              </div>
+              <ratings :productId="productStore.selectedProduct?.id" />
             </div>
 
             <div class="mt-6">
               <div class="flex items-start">
-                <img src="https://readymadeui.com/team-2.webp" alt="user"
-                  class="w-12 h-12 border-2 border-white rounded-full" />
+                <img :src="profileImg" alt="user" class="w-12 h-12 border-2 border-white rounded-full" />
                 <div class="ms-3">
-                  <h4 class="text-sm font-bold">Amr Mohamed</h4>
-                  <div class="flex mt-1 space-s-1">
-                    <!-- ratings component -->
-                    <ratings />
-                    <p class="text-xs text-gray-500 !ms-2 mt-0.5 dark:text-gray-200">2 months ago</p>
-                  </div>
+                  <h4 class="text-sm font-bold">{{ firstName }} {{ lastName }}</h4>
                   <p class="mt-4 text-sm text-gray-500 dark:text-gray-200">Lorem ipsum dolor sit amet, consectetur
                     adipiscing elit. Sed do
                     eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -259,10 +253,15 @@ const errorMessage = ref("");
 const itemAdded = ref('')
 const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+
+const firstName = computed(() => user.value?.firstName);
+const lastName = computed(() => user.value?.lastName);
+const profileImg = computed(() => user.value?.profileImg);
 
 onMounted(() => {
   const productId = route.params.id;
-  // console.log('id', productId)
   if (productId) {
     productStore.fetchProductDetail(productId);
     // addToProductHistory(productId);
@@ -341,7 +340,6 @@ const handleAddToCart = () => {
       triggerToast({ message: t('toast.product_added_to_cart'), type: 'success', icon: 'clarity:shopping-cart-line' });
     })
     .catch((error) => {
-      // console.error("Error adding product to cart:", error);
       triggerToast({ message: t('toast.failed_to_add_to_cart'), type: 'error', icon: 'material-symbols:error-outline-rounded' });
     })
     .finally(() => {
@@ -363,7 +361,6 @@ const toggleWishlist = () => {
   }
   const userId = authStore.user?.uid;
   if (!userId) {
-    // console.error('User ID is not available');
     return;
   }
   if (wishlistStore.isInWishlist(product.id)) {

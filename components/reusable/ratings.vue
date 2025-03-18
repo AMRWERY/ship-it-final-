@@ -1,19 +1,21 @@
 <template>
   <div>
-    <div class="flex">
-      <span v-for="star in 5" :key="star" @click="rateProduct(star)" class="cursor-pointer">
-        <icon name="material-symbols:kid-star" aria-hidden="true" class="w-4 h-4" :class="{
-          'text-yellow-300': star <= productRating,
-          'text-gray-300': star > productRating
-        }" />
-      </span>
-      <div class="flex space-s-2 ms-2">
-        <span class="text-sm font-medium text-gray-900 dark:text-gray-200">
-          {{ productRating }}
+    <div class="flex items-center">
+      <div class="flex">
+        <span v-for="star in 5" :key="star" @click="rateProduct(star)" class="cursor-pointer">
+          <icon name="material-symbols:kid-star" aria-hidden="true" class="w-4 h-4" :class="{
+            'text-yellow-300': star <= productRating,
+            'text-gray-300': star > productRating
+          }" />
         </span>
-        <span class="text-sm font-medium text-gray-500 dark:text-gray-100">
-          ({{ productVotes }} votes)
-        </span>
+        <div class="flex space-s-2 ms-2">
+          <span class="text-sm font-medium text-gray-900 dark:text-gray-200">
+            {{ productRating }}
+          </span>
+          <span class="text-sm font-medium text-gray-500 dark:text-gray-100">
+            ({{ productVotes }} {{ $t('products.votes') }})
+          </span>
+        </div>
       </div>
     </div>
   </div>

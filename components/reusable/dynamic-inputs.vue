@@ -15,11 +15,6 @@
             <icon :name="prefixIcon" class="w-5 h-5" />
           </span>
           <!-- input -->
-          <!-- <Field :type="showPassword ? 'text' : type" :name="name" :placeholder="placeholder" :id="id"
-            :readonly="readonly" v-model="internalValue" :rules="rules" :class="[
-              'w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 dark:placeholder:text-slate-100 text-slate-700 dark:text-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow ps-9',
-              errors[name] ? 'border-red-600' : 'border-slate-200'
-            ]" /> -->
           <template v-if="type === 'textarea'">
             <Field as="textarea" :name="name" :placeholder="placeholder" :id="id" :readonly="readonly"
               v-model="internalValue" :rules="rules"
@@ -47,9 +42,6 @@
         <div class="mt-1">
           <span class="font-medium text-red-600 dark:text-red-500">{{ errors[name] }}</span>
         </div>
-        <!-- <div class="mt-1">
-          <ErrorMessage :name="name" class="text-red-600 dark:text-red-400" />
-        </div> -->
       </div>
     </Form>
   </div>
