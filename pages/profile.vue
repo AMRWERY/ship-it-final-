@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="max-w-5xl mx-auto mt-6 overflow-hidden rounded-md shadow-md">
+    <!-- breadcrumb component -->
+    <breadcrumb />
+
+    <div class="max-w-5xl mx-auto mt-6 overflow-hidden rounded-lg shadow-md dark:border dark:border-gray-100">
       <div class="p-4">
         <p>Edit your Profile</p>
         <div class="grid grid-cols-1 mt-6 gap-x-6 sm:grid-cols-6">
@@ -30,7 +33,7 @@
 
             <div class="sm:col-span-3" v-if="authStore.user">
               <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.birth_date')
-                }}</span>
+              }}</span>
               <!-- date-picker componenet -->
               <date-picker v-model="authStore.user.birthDate" />
             </div>
@@ -65,7 +68,7 @@
       </div>
     </div>
 
-    <div class="max-w-5xl mx-auto mt-6 overflow-hidden rounded-md shadow-md">
+    <div class="max-w-5xl mx-auto mt-6 overflow-hidden rounded-lg shadow-md dark:border dark:border-gray-100">
       <div class="p-4">
         <p>Change your Password</p>
         <div class="grid grid-cols-1 mt-6 gap-x-6 sm:grid-cols-6">
@@ -103,8 +106,8 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType" :duration="5000"
+          :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
   </div>
@@ -145,7 +148,7 @@ const saveProfile = () => {
     .saveProfile(selectedFile.value)
     .then((message) => {
       triggerToast({
-        message: t('toast.your_profile_has_been_successfully_updated'),
+        message: t('toast.successfully_updated'),
         type: 'success',
         icon: 'mdi-check-circle',
       });
@@ -193,4 +196,8 @@ const changePassword = () => {
       loadingTwo.value = false;
     });
 };
+
+useHead({
+  titleTemplate: () => t("head.profile"),
+});
 </script>

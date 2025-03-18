@@ -338,7 +338,7 @@ const handleAddToCart = () => {
   };
   cartStore.addToCart(cartItem)
     .then(() => {
-      triggerToast({ message: t('toast.item_added_to_your_cart'), type: 'success', icon: 'clarity:shopping-cart-line' });
+      triggerToast({ message: t('toast.product_added_to_cart'), type: 'success', icon: 'clarity:shopping-cart-line' });
     })
     .catch((error) => {
       // console.error("Error adding product to cart:", error);
@@ -388,7 +388,7 @@ const toggleWishlist = () => {
         itemAdded.value = "Product added to wishlist!";
         setTimeout(() => (itemAdded.value = ""), 3000);
         triggerToast({
-          message: t('toast.item_added_to_your_wishlist'),
+          message: t('toast.product_added_to_wishlist'),
           type: 'success',
           icon: 'clarity:heart-line'
         });

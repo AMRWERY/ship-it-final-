@@ -330,7 +330,7 @@ const submitCheckoutForm = () => {
     })
     .then(() => {
       triggerToast({
-        message: t('toast.your_payment_was_processed_successfully_thank_you_for_your_purchase'),
+        message: t('toast.payment_successful'),
         type: 'success',
         icon: 'mdi-check-circle',
       });

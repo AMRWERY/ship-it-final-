@@ -30,13 +30,6 @@ const route = useRoute();
 const { t } = useI18n();
 
 const breadcrumbLabel = computed(() => {
-  if (route.params.id) {
-    if (route.params.id === 'add-product') {
-      return t('breadcrumb.add_product')
-    } else {
-      return t('breadcrumb.edit_product')
-    }
-  }
   if (route.meta?.breadcrumb) {
     return t(`breadcrumb.${route.meta.breadcrumb}`);
   }

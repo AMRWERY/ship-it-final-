@@ -131,7 +131,7 @@ const handleAddToCart = async (product) => {
       quantity: 1
     });
     triggerToast({
-      message: t('toast.item_added_to_your_cart'),
+      message: t('toast.product_added_to_cart'),
       type: 'success',
       icon: 'clarity:shopping-cart-line'
     });
@@ -169,7 +169,7 @@ const toggleWishlist = async (product) => {
       });
       itemAdded.value = t('toast.product_added_to_wishlist');
       setTimeout(() => (itemAdded.value = ""), 3000);
-      triggerToast({ message: t('toast.item_added_to_your_wishlist'), type: 'success', icon: 'clarity:heart-line' });
+      triggerToast({ message: t('toast.product_added_to_wishlist'), type: 'success', icon: 'clarity:heart-line' });
     } catch (error) {
       if (error.message === t('toast.product_already_added_to_the_wishlist')) {
         errorMessage.value = error.message;

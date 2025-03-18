@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="mb-6">
+      <!-- breadcrumb component -->
+      <breadcrumb />
+    </div>
+
     <div class="flex flex-col gap-2 px-4 mx-auto max-w-7xl sm:flex-row">
       <div class="flex-1">
         <h1 class="text-3xl font-semibold">Addresses</h1>
@@ -7,7 +12,7 @@
       </div>
     </div>
 
-    <div class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:pb-24 lg:px-8">
+    <div class="px-4 pt-6 pb-16 mx-auto max-w-7xl sm:px-6 lg:pb-24 lg:px-8">
       <div class="max-w-xl">
         <p class="mt-2 text-base text-gray-500 dark:text-gray-100">Add a new address</p>
       </div>
@@ -66,8 +71,8 @@
     <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+        <dynamic-toast v-if="showToast" :message="toastMessage" :toastType="toastType" :duration="5000"
+          :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
   </div>
@@ -112,6 +117,10 @@ const saveProfile = () => {
       loading.value = false;
     });
 };
+
+useHead({
+  titleTemplate: () => t("head.addresses"),
+});
 </script>
 
 <style scoped>

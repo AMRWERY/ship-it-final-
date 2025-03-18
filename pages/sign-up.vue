@@ -113,7 +113,7 @@ const handleSignup = async () => {
       lastName.value
     );
     triggerToast({
-      message: t('toast.your_account_has_been_successfully_signed_up'),
+      message: t('toast.successfully_signed_up'),
       type: 'success',
       icon: 'mdi-check-circle',
     });
@@ -136,7 +136,7 @@ const googleSignup = async () => {
   try {
     await authStore.loginWithGoogle();
     triggerToast({
-      message: t('toast.your_account_has_been_successfully_signed_up'),
+      message: t('toast.successfully_signed_up'),
       type: 'success',
       icon: 'mdi-check-circle',
     });

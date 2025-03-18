@@ -1,9 +1,14 @@
 <template>
   <div>
+    <div class="mb-6">
+      <!-- breadcrumb component -->
+      <breadcrumb />
+    </div>
+
     <div class="max-w-xl p-2">
       <h1 class="text-3xl font-semibold text-center">Order history</h1>
     </div>
-    
+
     <div class="flex items-center flex-1 h-full">
       <div class="flex-1 w-full mt-5 text-center" v-if="!showOrders">
         <icon name="streamline:interface-file-clipboard-work-plain-clipboard-task-list-company-office"
@@ -103,6 +108,7 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
 const checkoutStore = useCheckoutStore();
 const showOrders = ref(false);
 
@@ -141,4 +147,8 @@ const isOrderCompleted = (statusId) => {
   const deliveredStatus = checkoutStore.status.find((s) => s.status === "Delivered")?.id;
   return statusId === deliveredStatus;
 };
+
+useHead({
+  titleTemplate: () => t("head.order_tracking"),
+});
 </script>

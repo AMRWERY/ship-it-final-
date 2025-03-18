@@ -1,7 +1,12 @@
 <template>
   <div>
+    <div class="mb-6">
+      <!-- breadcrumb component -->
+      <breadcrumb />
+    </div>
+
     <div
-      class="flex flex-col h-screen max-w-5xl mx-auto overflow-hidden rounded-md shadow-xl dark:border-gray-500 dark:border">
+      class="flex flex-col h-screen max-w-5xl mx-auto overflow-hidden rounded-md shadow-xl dark:border-gray-100 dark:border">
       <!-- Chat Messages -->
       <div class="flex-1 p-8 space-y-4 overflow-y-auto">
         <div v-if="loading" class="flex items-center justify-center text-gray-500">
@@ -83,4 +88,8 @@ const formatDate = (timestamp) => {
   if (!timestamp?.seconds) return '';
   return new Date(timestamp.seconds * 1000).toLocaleDateString();
 };
+
+useHead({
+  titleTemplate: () => t("head.messages"),
+});
 </script>
