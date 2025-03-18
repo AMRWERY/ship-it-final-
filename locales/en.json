@@ -256,7 +256,8 @@
     "quantity": "Quantity",
     "product_information": "Product Information",
     "customer_reviews": "Customer Reviews",
-    "votes": "votes"
+    "votes": "votes",
+    "save": "Save"
   },
   "error_page": {
     "you_are_all_alone_here": "You are all alone here"

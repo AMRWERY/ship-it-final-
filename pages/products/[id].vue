@@ -31,7 +31,7 @@
                   v-if="productStore.selectedProduct?.originalPrice">{{
                     $n(parseFloat(productStore.selectedProduct?.originalPrice) || 0, 'currency', currencyLocale) }}</p>
                 <span class="p-2 text-sm font-medium text-white bg-green-400 ms-8 rounded-xl dark:bg-orange-400"
-                  v-if="productStore.selectedProduct?.discount">Save
+                  v-if="productStore.selectedProduct?.discount">{{ $t('products.save') }}
                   {{ productStore.selectedProduct?.discount }}%</span>
               </div>
 
@@ -149,20 +149,6 @@
 
             <hr class="my-6 border-gray-300" />
 
-            <!-- don't delete it -->
-            <!-- <div>
-              <h3 class="text-lg font-bold text-gray-800 sm:text-xl">Select Delivery Location</h3>
-              <p class="mt-1 text-sm text-gray-500">Enter the pin code of your area to check product
-                availability.</p>
-              <div class='flex items-center max-w-sm gap-2 mt-4'>
-                <input type='number' placeholder='Enter pincode'
-                  class='bg-gray-100 px-4 py-2.5 text-sm w-full  border-0 outline-0' />
-                <button type='button'
-                  class='border-0 outline-0 bg-blue-600 hover:bg-blue-700 text-white  px-4 py-2.5 text-sm'>Apply</button>
-              </div>
-            </div>
-            <hr class="my-6 border-gray-300" /> -->
-
             <div>
               <h3 class="text-lg font-bold text-gray-800 sm:text-xl dark:text-gray-200">{{
                 $t('products.product_information') }}</h3>
@@ -178,26 +164,26 @@
                   </div>
                 </div>
 
-                <!-- don't delete it -->
-                <!-- <div class="mt-3 transition-all hover:bg-gray-100">
+                <!-- don't delete it (Vendor details) -->
+                <!-- <div class="mt-3">
                   <p
-                    class="w-full text-sm font-semibold text-left px-4 py-2.5 text-gray-800 flex items-center">
-                    <span class="mr-4">Vendor details</span>
+                    class="w-full text-sm font-semibold text-start px-4 py-2.5 text-gray-800 dark:text-gray-200 flex items-center">
+                    <span class="me-4">Vendor details</span>
                   </p>
                   <div class="px-4 pb-4">
-                    <p class="text-sm leading-relaxed text-gray-500">Lorem ipsum dolor sit amet,
+                    <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-100">Lorem ipsum dolor sit amet,
                       consectetur adipiscing
                       elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   </div>
                 </div>
 
-                <div class="transition-all hover:bg-gray-100">
+                <div>
                   <p
-                    class="w-full text-sm font-semibold text-left px-4 py-2.5 text-gray-800 flex items-center">
-                    <span class="mr-4">Return and exchange policy</span>
+                    class="w-full text-sm font-semibold text-start px-4 py-2.5 text-gray-800 dark:text-gray-200 flex items-center">
+                    <span class="me-4">Return and exchange policy</span>
                   </p>
                   <div class="px-4 pb-4">
-                    <p class="text-sm leading-relaxed text-gray-500">Lorem ipsum dolor sit amet,
+                    <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-100">Lorem ipsum dolor sit amet,
                       consectetur adipiscing
                       elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   </div>

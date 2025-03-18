@@ -256,7 +256,8 @@
     "quantity": "الكمية",
     "product_information": "معلومات المنتج",
     "customer_reviews": "آراء العملاء",
-    "votes": "الأصوات"
+    "votes": "الأصوات",
+    "save": "وفر"
   },
   "error_page": {
     "you_are_all_alone_here": "أنت وحدك هنا"
