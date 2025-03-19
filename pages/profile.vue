@@ -197,6 +197,10 @@ const changePassword = () => {
     });
 };
 
+definePageMeta({
+  middleware: 'auth'
+});
+
 useHead({
   titleTemplate: () => t("head.profile"),
 });

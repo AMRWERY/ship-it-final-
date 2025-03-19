@@ -37,7 +37,7 @@
                 <div class="flex-1 min-w-0 space-y-8">
                   <div class="space-y-4">
                     <h2 class="text-xl font-semibold text-gray-900">{{ $t('checkout.delivery_details')
-                      }}</h2>
+                    }}</h2>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
                         name="cvv" :rules="'required|alpha_spaces'" :required="true"
@@ -345,6 +345,10 @@ const submitCheckoutForm = () => {
 
 //currency composable
 const { currencyLocale } = useCurrencyLocale();
+
+definePageMeta({
+  middleware: 'auth'
+});
 
 useHead({
   titleTemplate: () => t("head.checkout"),

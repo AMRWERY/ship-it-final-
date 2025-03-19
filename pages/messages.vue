@@ -89,6 +89,10 @@ const formatDate = (timestamp) => {
   return new Date(timestamp.seconds * 1000).toLocaleDateString();
 };
 
+definePageMeta({
+  middleware: 'auth'
+});
+
 useHead({
   titleTemplate: () => t("head.messages"),
 });

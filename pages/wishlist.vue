@@ -133,6 +133,10 @@ const moveToCart = async (item) => {
 //currency composable
 const { currencyLocale } = useCurrencyLocale();
 
+definePageMeta({
+  middleware: 'auth'
+});
+
 useHead({
   titleTemplate: () => t("head.wishlist"),
 });

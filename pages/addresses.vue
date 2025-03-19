@@ -118,6 +118,10 @@ const saveProfile = () => {
     });
 };
 
+definePageMeta({
+  middleware: 'auth'
+});
+
 useHead({
   titleTemplate: () => t("head.addresses"),
 });

@@ -185,6 +185,10 @@ const { currencyLocale } = useCurrencyLocale();
 
 const { t } = useI18n()
 
+definePageMeta({
+  middleware: 'auth'
+});
+
 useHead({
   titleTemplate: () => t("head.order_summary"),
 });
