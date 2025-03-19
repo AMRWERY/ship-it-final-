@@ -5,16 +5,23 @@
 
     <div class="flex flex-col items-center justify-center min-h-screen px-4 py-6">
       <div class="grid items-center w-full max-w-6xl gap-10 md:grid-cols-2 max-md:max-w-md">
+        <div class="w-full h-full">
+          <div class="relative w-full h-64 sm:h-96 lg:h-full">
+            <img src="https://justfields.com/storage/projects/7M5rV059/slider01.jpg" alt="img"
+              class="absolute inset-0 object-cover w-full h-full sm:max-w-md md:max-w-full" />
+          </div>
+        </div>
+
         <div class="w-full max-w-full py-6 border border-gray-100 rounded-lg shadow-lg md:me-auto">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="w-auto h-16 mx-auto" src="@/public/shopping-bags.svg" />
             <h2 class="mt-5 text-2xl font-bold leading-9 tracking-tight text-center text-gray-800 dark:text-gray-200">
-              {{ $t('form.create_free_account') }}</h2>
+              {{ $t('form.sign_in_to_your_account') }}</h2>
           </div>
 
-          <div class="w-full max-w-full px-4 mx-auto mt-10">
+          <div class="w-full max-w-full px-4 mx-auto">
             <div class="grid my-6 space-y-4">
-              <button @click="googleSignup"
+              <button @click="googleLogin"
                 class="h-12 px-6 transition duration-300 border-2 border-gray-300 rounded-full group hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
                 <div class="relative flex items-center justify-center space-s-4">
                   <icon name="logos:google-icon" class="absolute w-12 start-0" />
@@ -36,14 +43,6 @@
             </div>
 
             <ClientOnly>
-              <dynamic-inputs :label="t('form.first_name')" :placeholder="t('form.enter_your_first_name')" type="text"
-                name="first_name" :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:person"
-                v-model="firstName" />
-
-              <dynamic-inputs :label="t('form.last_name')" :placeholder="t('form.enter_your_last_name')" type="text"
-                name="last_name" :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:person"
-                v-model="lastName" />
-
               <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
                 name="email" :rules="'required|email'" :required="true" prefixIcon="material-symbols:alternate-email"
                 v-model="email" />
@@ -54,12 +53,12 @@
             </ClientOnly>
 
             <div>
-              <button type="submit" :disabled="loading" @click="handleSignup" class="block w-full px-5 py-2 btn-style">
+              <button type="submit" :disabled="loading" @click="handleLogin" class="block w-full px-5 py-2 btn-style">
                 <div class="flex items-center justify-center" v-if="loading">
-                  <span class="text-center me-2">{{ $t('btn.signing_up') }}...</span>
+                  <span class="text-center me-2">{{ $t('btn.logging') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div>
-                <span v-else>{{ $t('btn.create_an_account') }}</span>
+                <span v-else>{{ $t('btn.login') }}</span>
               </button>
             </div>
 
@@ -67,12 +66,12 @@
               {{ errorMessage }}
             </div>
           </div>
-        </div>
 
-        <div class="w-full h-full">
-          <div class="relative w-full h-64 sm:h-96 lg:h-full">
-            <img src="https://justfields.com/storage/projects/7M5rV059/slider01.jpg" alt="img"
-              class="absolute inset-0 object-cover w-full h-full sm:max-w-md md:max-w-full" />
+          <div class="text-center">
+            <p class="text-sm mt-7 text-slate-500">{{ $t('form.do_not_have_an_account') }}
+              <nuxt-link to="/auth/sign-up" class="font-medium text-blue-600 ms-1 hover:underline">{{
+                $t('form.register_here') }}</nuxt-link>
+            </p>
           </div>
         </div>
       </div>
@@ -90,30 +89,22 @@
 
 <script setup>
 const authStore = useAuthStore()
-const firstName = ref('');
-const lastName = ref('');
 const email = ref('');
 const password = ref('');
 const loading = ref(false);
-const errorMessage = ref('');
 const { t } = useI18n()
+const errorMessage = ref('');
 const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
-const handleSignup = async () => {
-  if (!email.value || !password.value || !firstName.value || !lastName.value) {
+const handleLogin = async () => {
+  if (!email.value || !password.value) {
     errorMessage.value = t('form.all_fields_are_required')
     return
   }
-  loading.value = true;
   try {
-    await authStore.registerUser(
-      email.value,
-      password.value,
-      firstName.value,
-      lastName.value
-    );
+    await authStore.loginUser(email.value, password.value);
     triggerToast({
-      message: t('toast.successfully_signed_up'),
+      message: t('toast.successfully_login'),
       type: 'success',
       icon: 'mdi-check-circle',
     });
@@ -122,7 +113,7 @@ const handleSignup = async () => {
     }, 3000);
   } catch (error) {
     triggerToast({
-      message: t('toast.failed_to_sign_up'),
+      message: t('toast.failed_to_login'),
       type: 'error',
       icon: 'material-symbols:error-outline-rounded',
     });
@@ -131,30 +122,32 @@ const handleSignup = async () => {
   }
 };
 
-const googleSignup = async () => {
-  loading.value = true;
+const googleLogin = async () => {
   try {
     await authStore.loginWithGoogle();
-    triggerToast({
-      message: t('toast.successfully_signed_up'),
-      type: 'success',
-      icon: 'mdi-check-circle',
-    });
+    setTimeout(() => {
+      loginSuccessfully.value = true
+    }, 3000);
     setTimeout(() => {
       navigateTo('/');
     }, 3000);
   } catch (error) {
-    alert(error.message);
-  } finally {
-    loading.value = false;
+    loginFailed.value = true;
+    setTimeout(() => {
+      loginFailed.value = false;
+    }, 3000);
   }
 };
+
+onMounted(() => {
+  authStore.init();
+});
 
 definePageMeta({
   layout: false
 });
 
 useHead({
-  titleTemplate: () => t("head.sign_up"),
+  titleTemplate: () => t("head.login"),
 });
 </script>

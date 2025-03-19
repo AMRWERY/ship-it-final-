@@ -8,6 +8,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   if (!isAuthenticated.value) {
-    return navigateTo(`/sign-up?redirect=${encodeURIComponent(to.fullPath)}`);
+    return navigateTo(
+      `/auth/login?redirect=${encodeURIComponent(to.fullPath)}`
+    );
   }
 });

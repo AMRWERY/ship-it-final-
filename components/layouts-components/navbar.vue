@@ -46,7 +46,7 @@
                         <!-- login dialog -->
                         <login v-if="!isAuthenticated" />
 
-                        <nuxt-link to="/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
+                        <nuxt-link to="/auth/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
                             v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link>
 
                         <!-- cart-dialog component -->

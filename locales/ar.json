@@ -102,7 +102,11 @@
     "all_fields_are_required": "جميع الحقول مطلوبة",
     "email_valid_ship_error": "يجب أن ينتهي البريد الألكروني ب 'ship.com'",
     "minLengthError": "يجب أن يتكون هذا الحقل من 7 خانات على الأقل",
-    "passwords_must_match": "يجب أن تتطابق كلمات المرور"
+    "passwords_must_match": "يجب أن تتطابق كلمات المرور",
+    "do_not_have_an_account": "ليس لديك حساب",
+    "register_here": "سجل هنا",
+    "already_have_an_account": "لديك حساب بالفعل",
+    "login_here": "تسجيل الدخول هنا"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
@@ -158,7 +162,9 @@
     "please_log_in_to_comment": "الرجاء تسجيل الدخول للتعليق",
     "comment_cannot_be_empty": "لا يمكن أن يكون التعليق فارغا",
     "comment_added_success": "تمت إضافة التعليق بنجاح",
-    "failed_to_add_comment": "فشل في إضافة التعليق"
+    "failed_to_add_comment": "فشل في إضافة التعليق",
+    "successfully_login": "تم تسجيل الدخول بنجاح",
+    "failed_to_login": "فشل تسجيل الدخول"
   },
   "breadcrumb": {
     "home": "الرئيسية",
@@ -173,6 +179,7 @@
   },
   "head": {
     "sign_up": "إنشاء حساب",
+    "login": "تسجيل الدخول",
     "shopping_cart": "عربة التسوق",
     "wishlist": "قائمة الرغبات",
     "checkout": "إتمام الشراء",
