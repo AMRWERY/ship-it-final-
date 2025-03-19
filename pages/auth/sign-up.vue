@@ -69,8 +69,8 @@
           </div>
 
           <div class="text-center">
-            <p class="text-sm mt-7 text-slate-500">{{ $t('form.already_have_an_account') }}
-              <nuxt-link to="/auth/login" class="font-medium text-blue-600 ms-1 hover:underline">{{
+            <p class="mt-6 text-sm text-slate-500 dark:text-gray-100">{{ $t('form.already_have_an_account') }}
+              <nuxt-link to="/auth/login" class="font-medium text-blue-600 ms-1 hover:underline dark:text-blue-400">{{
                 $t('form.login_here') }}</nuxt-link>
             </p>
           </div>
@@ -79,7 +79,7 @@
         <div class="w-full h-full">
           <div class="relative w-full h-64 sm:h-96 lg:h-full">
             <img src="https://justfields.com/storage/projects/7M5rV059/slider01.jpg" alt="img"
-              class="absolute inset-0 object-cover w-full h-full sm:max-w-md md:max-w-full" />
+              class="absolute inset-0 object-cover w-full h-full rounded-lg sm:max-w-md md:max-w-full" />
           </div>
         </div>
       </div>
