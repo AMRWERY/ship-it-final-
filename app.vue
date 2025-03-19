@@ -20,7 +20,8 @@ const localeStore = useLocaleStore();
 const isLoading = ref(true);
 
 onMounted(() => {
-   localeStore.hydrate();
+  localeStore.hydrate();
+
   if (sessionStorage.getItem('visited')) {
     isLoading.value = true;
     setTimeout(() => {

@@ -15,7 +15,7 @@ import ar from "@vee-validate/i18n/dist/locale/ar.json";
 import inputsEn from "~/locales/en.json";
 import inputsAr from "~/locales/ar.json";
 
-export default defineNuxtPlugin((app) => {
+export default defineNuxtPlugin((nuxtApp) => {
   defineRule("required", required);
   defineRule("email", (value) => {
     if (!value || !value.length) {
@@ -52,20 +52,14 @@ export default defineNuxtPlugin((app) => {
   defineRule("numeric", numeric);
   defineRule("length", length);
 
-  const localeStore = useLocaleStore();
-  
   const updateValidationLocale = (locale) => {
+    const messages = {
+      en: { ...en, names: inputsEn.form },
+      ar: { ...ar, names: inputsAr.form },
+    };
+
     configure({
-      generateMessage: localize({
-        en: {
-          ...en,
-          names: inputsEn.form,
-        },
-        ar: {
-          ...ar,
-          names: inputsAr.form,
-        },
-      }),
+      generateMessage: localize(locale, messages[locale]),
       validateOnBlur: true,
       validateOnChange: false,
       validateOnInput: true,
@@ -75,16 +69,17 @@ export default defineNuxtPlugin((app) => {
   };
 
   if (process.client) {
-    const initialLocale =
-      localeStore.locale || localStorage.getItem("locale") || "en";
+    const initialLocale = localStorage.getItem("locale") || "en";
     updateValidationLocale(initialLocale);
   }
+
+  const localeStore = useLocaleStore();
 
   watch(
     () => localeStore.locale,
     (newLocale) => {
-      localStorage.setItem("locale", newLocale);
       updateValidationLocale(newLocale);
+      nuxtApp.$i18n.setLocale(newLocale);
     }
   );
 });
