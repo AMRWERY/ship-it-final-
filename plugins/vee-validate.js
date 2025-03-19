@@ -22,7 +22,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       return true;
     }
     if (!/^[A-Z0-9._%+-]+@ship\.com$/i.test(value)) {
-      return "Email must be a valid 'ship.com' address";
+      return nuxtApp.$i18n.t("form.email_valid_ship_error");
     }
     return true;
   });
@@ -32,7 +32,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       return true;
     }
     if (value.length < limit) {
-      return `This field must be at least ${limit} characters`;
+      return nuxtApp.$i18n.t("form.minLengthError", { limit });
     }
     return true;
   });
@@ -41,7 +41,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     if (value === target) {
       return true;
     }
-    return "Passwords must match";
+    return nuxtApp.$i18n.t("form.passwords_must_match");
   });
 
   defineRule("min", min);

@@ -99,7 +99,10 @@
     "enter_your_voucher_code_here": "أدخل رمز قسيمتك هنا",
     "your_comment": "تعليقك",
     "write_your_comments_here": "اكتب تعليقاتك هنا...",
-    "all_fields_are_required": "جميع الحقول مطلوبة"
+    "all_fields_are_required": "جميع الحقول مطلوبة",
+    "email_valid_ship_error": "يجب أن ينتهي البريد الألكروني ب 'ship.com'",
+    "minLengthError": "يجب أن يتكون هذا الحقل من 7 خانات على الأقل",
+    "passwords_must_match": "يجب أن تتطابق كلمات المرور"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",

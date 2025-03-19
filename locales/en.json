@@ -99,7 +99,10 @@
     "enter_your_voucher_code_here": "enter your voucher code here",
     "your_comment": "Your Comment",
     "write_your_comments_here": "Write your comments here...",
-    "all_fields_are_required": "All fields are required"
+    "all_fields_are_required": "All fields are required",
+    "email_valid_ship_error": "Email must be a valid 'ship.com' address",
+    "minLengthError": "This field must be at least 7 characters",
+    "passwords_must_match": "Passwords must match"
   },
   "btn": {
     "logging": "Logging",
