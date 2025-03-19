@@ -3,16 +3,16 @@
     <!-- overlay component -->
     <overlay :visible="authStore.isOverlayVisible" />
 
-    <div class="py-6 mx-auto mb-5 max-w-7xl sm:px-6 lg:px-8">
-      <section class="relative flex flex-wrap my-12 lg:h-screen lg:items-center">
-        <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+    <div class="flex flex-col items-center justify-center min-h-screen px-4 py-6">
+      <div class="grid items-center w-full max-w-6xl gap-10 md:grid-cols-2 max-md:max-w-md">
+        <div class="w-full max-w-full py-6 border border-gray-100 rounded-lg shadow-lg md:me-auto">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="w-auto h-16 mx-auto" src="@/public/shopping-bags.svg" />
             <h2 class="mt-5 text-2xl font-bold leading-9 tracking-tight text-center text-gray-800 dark:text-gray-200">
               {{ $t('form.create_free_account') }}</h2>
           </div>
 
-          <div class="w-full max-w-md mx-auto mt-10">
+          <div class="w-full max-w-full px-4 mx-auto mt-10">
             <div class="grid my-6 space-y-4">
               <button @click="googleSignup"
                 class="h-12 px-6 transition duration-300 border-2 border-gray-300 rounded-full group hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
@@ -62,18 +62,20 @@
                 <span v-else>{{ $t('btn.create_an_account') }}</span>
               </button>
             </div>
-          </div>
 
-          <div v-if="errorMessage" class="mt-2 text-sm text-red-500">
-            {{ errorMessage }}
+            <div v-if="errorMessage" class="mt-2 text-sm text-red-500">
+              {{ errorMessage }}
+            </div>
           </div>
         </div>
 
-        <div class="relative w-full h-64 sm:h-96 lg:h-full lg:w-1/2">
-          <img src="https://justfields.com/storage/projects/7M5rV059/slider01.jpg" alt="img"
-            class="absolute inset-0 object-cover w-full h-full" />
+        <div class="w-full h-full">
+          <div class="relative w-full h-64 sm:h-96 lg:h-full">
+            <img src="https://justfields.com/storage/projects/7M5rV059/slider01.jpg" alt="img"
+              class="absolute inset-0 object-cover w-full h-full sm:max-w-md md:max-w-full" />
+          </div>
         </div>
-      </section>
+      </div>
     </div>
 
     <!-- dynamic-toast component -->
