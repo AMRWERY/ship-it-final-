@@ -5,7 +5,7 @@ export const useLocaleStore = defineStore("locales", {
   }),
 
   actions: {
-    async hydrate() {
+    hydrate() {
       if (process.client) {
         this.locale = localStorage.getItem("locale") || "en";
       }

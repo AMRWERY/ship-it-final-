@@ -147,9 +147,9 @@ const googleSignup = async () => {
   }
 };
 
-// definePageMeta({
-//   layout: false
-// });
+definePageMeta({
+  layout: false
+});
 
 useHead({
   titleTemplate: () => t("head.sign_up"),
