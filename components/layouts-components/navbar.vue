@@ -49,9 +49,6 @@
                         <nuxt-link to="/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
                             v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link>
 
-                        <!-- profile-menu component -->
-                        <profile-menu />
-
                         <!-- cart-dialog component -->
                         <cart-dialog v-if="isAuthenticated" />
 
@@ -66,6 +63,9 @@
                                     class="transition-transform duration-300 ms-2" />
                             </nuxt-link>
                         </tooltip>
+
+                        <!-- profile-menu component -->
+                        <profile-menu />
                     </div>
                 </div>
             </div>
