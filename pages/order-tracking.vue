@@ -148,10 +148,6 @@ const isOrderCompleted = (statusId) => {
   return statusId === deliveredStatus;
 };
 
-definePageMeta({
-  middleware: 'auth'
-});
-
 useHead({
   titleTemplate: () => t("head.order_tracking"),
 });

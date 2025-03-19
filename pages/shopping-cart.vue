@@ -254,10 +254,6 @@ const totalSavings = computed(() => {
 //currency composable
 const { currencyLocale } = useCurrencyLocale();
 
-definePageMeta({
-  middleware: 'auth'
-});
-
 useHead({
     titleTemplate: () => t("head.shopping_cart"),
 });
