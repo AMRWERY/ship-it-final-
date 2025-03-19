@@ -98,7 +98,8 @@
     "or_continue_with": "أو المتابعة باستخدام",
     "enter_your_voucher_code_here": "أدخل رمز قسيمتك هنا",
     "your_comment": "تعليقك",
-    "write_your_comments_here": "اكتب تعليقاتك هنا..."
+    "write_your_comments_here": "اكتب تعليقاتك هنا...",
+    "all_fields_are_required": "جميع الحقول مطلوبة"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",

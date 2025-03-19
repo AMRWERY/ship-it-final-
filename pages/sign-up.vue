@@ -63,7 +63,7 @@
               </button>
             </div>
 
-            <div v-if="errorMessage" class="mt-2 text-sm text-red-500">
+            <div v-if="errorMessage" class="mt-2 font-medium text-center text-red-600 dark:text-red-500">
               {{ errorMessage }}
             </div>
           </div>
@@ -101,6 +101,7 @@ const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast
 
 const handleSignup = async () => {
   if (!email.value || !password.value || !firstName.value || !lastName.value) {
+    errorMessage.value = t('form.all_fields_are_required')
     return
   }
   loading.value = true;

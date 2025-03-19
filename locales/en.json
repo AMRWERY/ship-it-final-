@@ -98,7 +98,8 @@
     "or_continue_with": "or continue with",
     "enter_your_voucher_code_here": "enter your voucher code here",
     "your_comment": "Your Comment",
-    "write_your_comments_here": "Write your comments here..."
+    "write_your_comments_here": "Write your comments here...",
+    "all_fields_are_required": "All fields are required"
   },
   "btn": {
     "logging": "Logging",
