@@ -53,6 +53,7 @@ export default defineNuxtPlugin((app) => {
   defineRule("length", length);
 
   const localeStore = useLocaleStore();
+  
   const updateValidationLocale = (locale) => {
     configure({
       generateMessage: localize({

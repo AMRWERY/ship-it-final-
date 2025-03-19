@@ -41,7 +41,7 @@
                 v-model="firstName" />
 
               <dynamic-inputs :label="t('form.last_name')" :placeholder="t('form.enter_your_last_name')" type="text"
-                name="last name" :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:person"
+                name="last_name" :rules="'required|alpha_spaces'" :required="true" prefixIcon="material-symbols:person"
                 v-model="lastName" />
 
               <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
@@ -147,9 +147,9 @@ const googleSignup = async () => {
   }
 };
 
-definePageMeta({
-  layout: false
-});
+// definePageMeta({
+//   layout: false
+// });
 
 useHead({
   titleTemplate: () => t("head.sign_up"),
