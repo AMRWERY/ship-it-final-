@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex items-center space-s-1">
+        <div class="flex items-center ms-2">
             <!-- Profile Dropdown -->
             <div class="relative" v-if="isAuthenticated">
                 <tooltip :text="$t('tooltip.profile')" position="bottom">
@@ -8,10 +8,9 @@
                         @click="showDropdown = !showDropdown">
                         <span class="absolute -inset-1.5" />
                         <span class="sr-only">View Profile</span>
-                        <img :src="userProfileImg" alt="profile-img" class="rounded-full h-7 w-7 me-2"
-                            v-if="userProfileImg">
+                        <img :src="userProfileImg" alt="profile-img" class="rounded-full h-7 w-7" v-if="userProfileImg">
                         <img src="https://justfields.com/storage/projects/7M5rV059/vector-avatar-02.jpg"
-                            alt="profile-img" class="rounded-full h-7 w-7 me-2" v-else>
+                            alt="profile-img" class="rounded-full h-7 w-7" v-else>
                     </nuxt-link>
                 </tooltip>
 

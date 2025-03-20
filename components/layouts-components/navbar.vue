@@ -20,7 +20,7 @@
                         <span></span>
                     </div>
 
-                    <div class="flex items-center justify-center space-s-3">
+                    <div class="flex items-center justify-center space-s-2.5">
                         <!-- toggle locales -->
                         <nuxt-link to="" class="font-semibold text-white" role="button" v-if="localeStore.isRTL">
                             <span class="w-5" @click="setLocale('en')">
@@ -60,7 +60,7 @@
                                 <span class="sr-only">View wishlist</span>
                                 <icon :name="wishlistIcon" size="20px"
                                     :class="[wishlistIconClass, wishlistAnimationClass]"
-                                    class="transition-transform duration-300 ms-2" />
+                                    class="transition-transform duration-300" />
                             </nuxt-link-locale>
                         </tooltip>
 
