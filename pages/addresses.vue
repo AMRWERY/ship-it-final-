@@ -1,24 +1,23 @@
 <template>
   <div>
-    <div class="mb-6">
+    <div class="mt-4 mb-6">
       <!-- breadcrumb component -->
       <breadcrumb />
     </div>
 
     <div class="flex flex-col gap-2 px-4 mx-auto max-w-7xl sm:flex-row">
       <div class="flex-1">
-        <h1 class="text-3xl font-semibold">Addresses</h1>
-        <p class="mt-2 text-sm text-gray-500 dark:text-gray-100">Add, edit, and remove addresses</p>
+        <h1 class="text-3xl font-semibold">{{ $t('profile.addresses') }}</h1>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-100">{{ $t('profile.add_edit_and_remove_addresses') }}</p>
       </div>
     </div>
 
     <div class="px-4 pt-6 pb-16 mx-auto max-w-7xl sm:px-6 lg:pb-24 lg:px-8">
       <div class="max-w-xl">
-        <p class="mt-2 text-base text-gray-500 dark:text-gray-100">Add a new address</p>
+        <p class="text-base text-gray-500 dark:text-gray-100">{{ $t('profile.add_a_new_address') }}</p>
       </div>
-      <div class="p-4 mt-4 border-b border-gray-200 rounded-md shadow-sm sm:border sm:rounded-lg">
-        <!-- <form class="space-y-6"> -->
-        <div class="grid grid-cols-1 mt-10 gap-x-6 sm:grid-cols-6">
+      <div class="p-4 mt-4 border border-gray-200 rounded-md shadow-sm sm:rounded-lg">
+        <div class="grid grid-cols-1 gap-x-6 sm:grid-cols-6">
           <ClientOnly>
             <div class="sm:col-span-3" v-if="authStore.user">
               <dynamic-inputs :label="t('form.first_name')" :placeholder="t('form.enter_your_first_name')" type="text"
@@ -40,9 +39,10 @@
                 name="apartment" prefixIcon="material-symbols:home" v-model="authStore.user.apartment" />
             </div>
 
-            <div class="mt-0 lg:mt-5 sm:col-span-3" v-if="authStore.user">
+            <div class="mt-0 lg:mt-4 sm:mt-3 sm:col-span-3" v-if="authStore.user">
               <label for="city"
-                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100 after:content-['*'] after:mis-1 after:text-red-500 dark:after:text-red-300">City</label>
+                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100 after:content-['*'] after:mis-1 after:text-red-500 dark:after:text-red-300">{{
+                  $t('form.city') }}</label>
               <div class="relative mt-1 rounded-md shadow-sm">
                 <select id="city" name="city" autocomplete="city" v-model="authStore.user.selectedCity"
                   class="w-full px-3 py-2 transition duration-300 bg-transparent border rounded-md shadow-sm pe-16 placeholder:text-slate-400 text-slate-700 dark:text-slate-200 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:placeholder:text-slate-200 ps-9">
@@ -62,7 +62,7 @@
               <span class="text-center me-2">{{ $t('btn.adding') }}</span>
               <icon name="svg-spinners:270-ring-with-bg" />
             </div>
-            <span v-else>Add a new address</span>
+            <span v-else>{{ $t('btn.add_a_new_address') }}</span>
           </button>
         </div>
       </div>

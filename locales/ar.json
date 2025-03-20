@@ -138,7 +138,8 @@
     "proceed_to_checkout": "إتمام الشراء",
     "apply_code": "تطبيق الكود",
     "submit": "تقديم",
-    "start_shopping": "ابدأ التسوق"
+    "start_shopping": "ابدأ التسوق",
+    "add_a_new_address": "إضافة عنوان جديد"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",
@@ -331,6 +332,9 @@
     "discount": "تخفيض:",
     "qty": "الكمية:",
     "edit_your_profile": "تعديل ملفك الشخصي",
-    "change_your_password": "تغيير كلمة المرور الخاصة بك"
+    "change_your_password": "تغيير كلمة المرور الخاصة بك",
+    "addresses": "العناوين",
+    "add_edit_and_remove_addresses": "إضافة العناوين وتحريرها وإزالتها",
+    "add_a_new_address": "إضافة عنوان جديد"
   }
 }

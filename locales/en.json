@@ -138,7 +138,8 @@
     "proceed_to_checkout": "Proceed to Checkout",
     "apply_code": "Apply Code",
     "submit": "Submit",
-    "start_shopping": "Start Shopping"
+    "start_shopping": "Start Shopping",
+    "add_a_new_address": "Add a new address"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -331,6 +332,9 @@
     "discount": "Discount:",
     "qty": "Qty:",
     "edit_your_profile": "Edit your Profile",
-    "change_your_password": "Change your Password"
+    "change_your_password": "Change your Password",
+    "addresses": "Addresses",
+    "add_edit_and_remove_addresses": "Add, edit, and remove addresses",
+    "add_a_new_address": "Add a new address"
   }
 }
