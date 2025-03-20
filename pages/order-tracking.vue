@@ -6,19 +6,20 @@
     </div>
 
     <div class="max-w-xl p-2">
-      <h1 class="text-3xl font-semibold text-center">Order history</h1>
+      <h1 class="text-3xl font-semibold text-center">{{ $t('profile.order_history') }}</h1>
     </div>
 
     <div class="flex items-center flex-1 h-full">
       <div class="flex-1 w-full mt-5 text-center" v-if="!showOrders">
         <icon name="streamline:interface-file-clipboard-work-plain-clipboard-task-list-company-office"
           class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-100" />
-        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">You do not have any orders yet!</h3>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">What are you waiting for? </p>
+        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">{{
+          $t('profile.you_do_not_have_any_orders_yet') }}</h3>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">{{ $t('profile.what_are_you_waiting_for') }}</p>
         <div class="mt-6">
           <nuxt-link-locale to="/products" type="button"
-            class="inline-flex items-center justify-center px-4 py-2 btn-style">Start
-            Shopping</nuxt-link-locale>
+            class="inline-flex items-center justify-center px-4 py-2 btn-style">{{ $t('btn.start_shopping')
+            }}</nuxt-link-locale>
         </div>
       </div>
     </div>
@@ -29,15 +30,15 @@
       <div class="p-6 mb-8 rounded-lg shadow">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-600 dark:text-gray-100">Order Number</p>
+            <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.order_number') }}</p>
             <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.orderId }}</p>
           </div>
           <div>
-            <p class="text-sm text-gray-600 dark:text-gray-100">Order Date</p>
+            <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.order_date') }}</p>
             <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.date }}</p>
           </div>
           <div>
-            <p class="text-sm text-gray-600 dark:text-gray-100">Estimated Delivery</p>
+            <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.estimated_delivery') }}</p>
             <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.estimatedDelivery }}</p>
           </div>
         </div>
@@ -45,9 +46,10 @@
 
       <!-- Progress Tracker -->
       <div class="p-6 rounded-lg shadow">
-        <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">Order Status</h2>
+        <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">{{ $t('profile.order_status') }}</h2>
         <div v-if="isOrderCompleted(order.statusId)" class="p-4 mb-8 bg-green-100 rounded">
-          <p class="text-lg font-semibold text-green-800 dark:text-green-500">This order is completed.</p>
+          <p class="text-lg font-semibold text-green-800 dark:text-green-500">{{ $t('profile.this_order_is_completed')
+            }}</p>
         </div>
 
         <div class="relative">
@@ -86,19 +88,23 @@
 
       <!-- Order Items -->
       <div class="p-6 mt-8 rounded-lg shadow">
-        <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">Order Items</h2>
+        <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">{{ $t('profile.order_items') }}</h2>
         <div class="space-y-8" v-if="order.cart && Array.isArray(order.cart) && order.cart.length > 0">
           <div class="flex items-center" v-for="item in order.cart" :key="item">
             <div class="w-20 h-20 overflow-hidden bg-gray-100 rounded-lg">
               <img :src="item.imageUrl1" alt="placeholder" class="object-cover w-full h-full">
             </div>
             <div class="ms-5">
-              <p class="text-lg font-medium text-gray-800 dark:text-gray-200">{{ item.title }}</p>
-              <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">Brand: {{ item.brand }}</p>
-              <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">Discount: {{ item.discount }}%</p>
-              <p class="text-sm text-gray-600 dark:text-gray-100">Qty: {{ item.quantity }}</p>
+              <p class="text-lg font-medium text-gray-800 dark:text-gray-200">{{
+                $i18n.locale === 'ar' ? item.titleAr : item.title }}</p>
+              <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.brand') }} {{ $i18n.locale ===
+                'ar' ? item.brandAr : item.brand }}</p>
+              <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.discount') }} {{ item.discount }}%
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.qty') }} {{ item.quantity }}</p>
             </div>
-            <div class="mt-1 text-lg font-medium text-gray-800 dark:text-gray-200 ms-auto">${{ item.discountedPrice }}
+            <div class="mt-1 text-lg font-medium text-gray-800 dark:text-gray-200 ms-auto">{{
+              $n(parseFloat(item.discountedPrice) || 0, 'currency', currencyLocale) }}
             </div>
           </div>
         </div>
@@ -110,10 +116,11 @@
 <script setup>
 const { t } = useI18n()
 const checkoutStore = useCheckoutStore();
-const showOrders = ref(false);
+const showOrders = ref(null);
 
 onMounted(() => {
   checkoutStore.fetchUserOrders();
+
   showOrders.value = checkoutStore.orders.length > 0;
   if (checkoutStore.status.length === 0) {
     checkoutStore.fetchStatus();
@@ -147,6 +154,9 @@ const isOrderCompleted = (statusId) => {
   const deliveredStatus = checkoutStore.status.find((s) => s.status === "Delivered")?.id;
   return statusId === deliveredStatus;
 };
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 useHead({
   titleTemplate: () => t("head.order_tracking"),

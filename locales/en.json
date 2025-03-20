@@ -134,7 +134,8 @@
     "remove": "Remove",
     "proceed_to_checkout": "Proceed to Checkout",
     "apply_code": "Apply Code",
-    "submit": "Submit"
+    "submit": "Submit",
+    "start_shopping": "Start Shopping"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
@@ -310,5 +311,19 @@
     "privacy_and_data_protection_desc": "We take your privacy seriously. All personal data you provide is securely stored and handled in accordance with our Privacy Policy. You can review and update your data in your account settings, and contact support if you have any concerns about your information.",
     "need_more_help": "Need More Help?",
     "need_more_help_desc": "If you have additional questions or need assistance with your account, please visit our Contact Support page or reach out to our customer service team directly via chat or email."
-  }
+  },
+  "profile": {
+    "order_history": "Order history",
+    "you_do_not_have_any_orders_yet": "You do not have any orders yet!",
+    "what_are_you_waiting_for": "What are you waiting for?",
+    "order_number": "Order Number",
+    "order_date": "Order Date",
+    "estimated_delivery": "Estimated Delivery",
+    "order_status": "Order Status",
+    "this_order_is_completed": "This order is completed.",
+    "order_items": "Order Items",
+    "brand": "Brand:",
+    "discount": "Discount:",
+    "qty": "Qty:"
+  } 
 }
