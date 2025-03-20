@@ -10,7 +10,7 @@
     </div>
 
     <div class="flex items-center flex-1 h-full">
-      <div class="flex-1 w-full mt-5 text-center" v-if="!showOrders">
+      <div class="flex-1 w-full mt-5 text-center" v-if="showOrders">
         <icon name="streamline:interface-file-clipboard-work-plain-clipboard-task-list-company-office"
           class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-100" />
         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">{{
@@ -24,22 +24,22 @@
       </div>
     </div>
 
-    <div class="max-w-6xl px-4 py-12 mx-auto sm:px-6 lg:px-8" v-if="showOrders" v-for="order in checkoutStore.orders"
+    <div class="max-w-6xl px-4 py-6 mx-auto border-b sm:px-6 lg:px-8 border-b-gray-400 dark:border-b-gray-50" v-if="!showOrders" v-for="order in checkoutStore.orders"
       :key="order">
       <!-- Order Details -->
-      <div class="p-6 mb-8 rounded-lg shadow">
+      <div class="p-6 mb-8 rounded-lg bg-gradient-to-r from-gray-100 to-gray-300">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.order_number') }}</p>
-            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.orderId }}</p>
+            <p class="text-sm text-gray-600">{{ $t('profile.order_number') }}</p>
+            <p class="text-lg font-semibold text-gray-800">{{ order.orderId }}</p>
           </div>
           <div>
-            <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.order_date') }}</p>
-            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.date }}</p>
+            <p class="text-sm text-gray-600">{{ $t('profile.order_date') }}</p>
+            <p class="text-lg font-semibold text-gray-800">{{ order.date }}</p>
           </div>
           <div>
-            <p class="text-sm text-gray-600 dark:text-gray-100">{{ $t('profile.estimated_delivery') }}</p>
-            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ order.estimatedDelivery }}</p>
+            <p class="text-sm text-gray-600">{{ $t('profile.estimated_delivery') }}</p>
+            <p class="text-lg font-semibold text-gray-800">{{ order.estimatedDelivery }}</p>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
         <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">{{ $t('profile.order_status') }}</h2>
         <div v-if="isOrderCompleted(order.statusId)" class="p-4 mb-8 bg-green-100 rounded">
           <p class="text-lg font-semibold text-green-800 dark:text-green-500">{{ $t('profile.this_order_is_completed')
-            }}</p>
+          }}</p>
         </div>
 
         <div class="relative">
@@ -77,7 +77,8 @@
 
               <!-- Status Name -->
               <div class="mt-6">
-                <p class="mt-2 text-sm text-gray-800 dark:text-gray-200">{{ status.status }}</p>
+                <p class="mt-2 text-sm text-gray-800 dark:text-gray-200">{{ $i18n.locale ===
+                  'ar' ? status.statusAr : status.status }}</p>
                 <p v-if="order.statusId === status.id" class="text-xs text-gray-500 dark:text-gray-100">{{ order.date }}
                 </p>
               </div>
@@ -87,7 +88,7 @@
       </div>
 
       <!-- Order Items -->
-      <div class="p-6 mt-8 rounded-lg shadow">
+      <div class="p-6 mt-8 rounded-lg dark:shadow-lg dark:border-gray-100 dark:border">
         <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">{{ $t('profile.order_items') }}</h2>
         <div class="space-y-8" v-if="order.cart && Array.isArray(order.cart) && order.cart.length > 0">
           <div class="flex items-center" v-for="item in order.cart" :key="item">
@@ -116,7 +117,7 @@
 <script setup>
 const { t } = useI18n()
 const checkoutStore = useCheckoutStore();
-const showOrders = ref(null);
+const showOrders = ref(false);
 
 onMounted(() => {
   checkoutStore.fetchUserOrders();
