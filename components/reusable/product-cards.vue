@@ -15,11 +15,11 @@
               Up to {{ product.discount }}% off</span>
             <div class="flex items-center justify-end gap-1 ms-auto">
               <tooltip :text="$t('tooltip.quick_look')" position="bottom">
-                <nuxt-link :to="`/products/${product.id}`" type="button"
+                <nuxt-link-locale :to="`/products/${product.id}`" type="button"
                   class="p-2 text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300">
                   <span class="sr-only">Quick look</span>
                   <icon name="material-symbols:visibility-outline-rounded" class="w-6 h-6" aria-hidden="true" />
-                </nuxt-link>
+                </nuxt-link-locale>
               </tooltip>
 
               <tooltip :text="$t('tooltip.add_to_wishlist')" position="bottom">

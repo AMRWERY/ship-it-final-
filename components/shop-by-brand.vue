@@ -26,12 +26,12 @@
           <Carousel v-bind="config" v-else>
             <Slide v-for="category in categoriesStore.categories" :key="category.catId">
               <div class="carousel__item">
-                <nuxt-link :to="{ path: '/products', query: { brand: category.title } }"
+                <nuxt-link-locale :to="{ path: '/products', query: { brand: category.title } }"
                   class="relative flex justify-center flex-shrink-0 w-auto h-auto mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
                   <div class="relative overflow-hidden bg-no-repeat bg-cover">
                     <img class="h-full rounded-t-lg" :src="category.imgOne" />
                   </div>
-                </nuxt-link>
+                </nuxt-link-locale>
               </div>
             </Slide>
 
@@ -45,7 +45,7 @@
 
     <div class="mx-auto mb-8 -mt-8 lg:max-w-full">
       <div class="grid max-w-full grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-4">
-        <nuxt-link class="relative border rounded-lg shadow-md group dark:border-none 
+        <nuxt-link-locale class="relative border rounded-lg shadow-md group dark:border-none 
              h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px]
              w-full" v-for="card in cards" :key="card" :to="{ path: '/products', query: { brand: card.brand } }">
           <div class="h-full overflow-hidden">
@@ -61,7 +61,7 @@
             </h2>
             <p class="text-[12px] font-semibold text-gray-200">{{ card.subtitle }}</p>
           </div>
-        </nuxt-link>
+        </nuxt-link-locale>
       </div>
     </div>
 

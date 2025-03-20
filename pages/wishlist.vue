@@ -28,8 +28,8 @@
 
       <!-- Check if wishlist is empty -->
       <div v-else-if="wishlistStore.wishlist.length === 0" class="text-center text-gray-500 dark:text-gray-100">
-        <p>{{ $t('wishlist.your_wishlist_is_empty') }} <nuxt-link to="/products"
-            class="text-blue-500 dark:text-blue-300">{{ $t('wishlist.Start_adding_products') }}</nuxt-link>
+        <p>{{ $t('wishlist.your_wishlist_is_empty') }} <nuxt-link-locale to="/products"
+            class="text-blue-500 dark:text-blue-300">{{ $t('wishlist.Start_adding_products') }}</nuxt-link-locale>
         </p>
       </div>
 

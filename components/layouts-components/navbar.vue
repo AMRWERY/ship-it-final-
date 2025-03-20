@@ -8,9 +8,9 @@
 
         <nav class="py-3.5 bg-black border-gray-200">
             <div class="flex items-center justify-between mx-auto px-7">
-                <nuxt-link to="/" class="flex items-center">
+                <nuxt-link-locale to="/" class="flex items-center">
                     <span class="text-base text-white me-3 head sm:text-lg md:text-2xl">Ship-IT</span>
-                </nuxt-link>
+                </nuxt-link-locale>
 
                 <!-- categories-menu component -->
                 <categories-menu class="me-auto" />
@@ -46,22 +46,22 @@
                         <!-- login dialog -->
                         <login v-if="!isAuthenticated" />
 
-                        <nuxt-link to="/auth/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
-                            v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link>
+                        <nuxt-link-locale to="/auth/sign-up" class="text-sm text-white capitalize hover:text-gray-200"
+                            v-if="!isAuthenticated">{{ $t('layout.create_account') }}</nuxt-link-locale>
 
                         <!-- cart-dialog component -->
                         <cart-dialog v-if="isAuthenticated" />
 
                         <!--wishlist -->
                         <tooltip :text="$t('tooltip.your_wishlist')" position="bottom">
-                            <nuxt-link to="/wishlist" type="button" class="relative flex text-white rounded-full"
+                            <nuxt-link-locale to="/wishlist" type="button" class="relative flex text-white rounded-full"
                                 v-if="isAuthenticated">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View wishlist</span>
                                 <icon :name="wishlistIcon" size="20px"
                                     :class="[wishlistIconClass, wishlistAnimationClass]"
                                     class="transition-transform duration-300 ms-2" />
-                            </nuxt-link>
+                            </nuxt-link-locale>
                         </tooltip>
 
                         <!-- profile-menu component -->

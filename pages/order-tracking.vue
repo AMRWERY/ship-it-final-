@@ -16,9 +16,9 @@
         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">You do not have any orders yet!</h3>
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-100">What are you waiting for? </p>
         <div class="mt-6">
-          <nuxt-link to="/products" type="button"
+          <nuxt-link-locale to="/products" type="button"
             class="inline-flex items-center justify-center px-4 py-2 btn-style">Start
-            Shopping</nuxt-link>
+            Shopping</nuxt-link-locale>
         </div>
       </div>
     </div>

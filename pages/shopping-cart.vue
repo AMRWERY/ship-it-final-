@@ -127,18 +127,18 @@
                                 </dl>
                             </div>
 
-                            <nuxt-link to="/checkout"
+                            <nuxt-link-locale to="/checkout"
                                 class="flex w-full items-center justify-center px-5 py-2.5 btn-style">{{
-                                    $t('btn.proceed_to_checkout') }}</nuxt-link>
+                                    $t('btn.proceed_to_checkout') }}</nuxt-link-locale>
 
                             <div class="flex items-center justify-center gap-2">
                                 <span class="text-sm font-normal text-gray-500 dark:text-gray-100"> {{ $t('cart.or') }}
                                 </span>
-                                <nuxt-link to="/products"
+                                <nuxt-link-locale to="/products"
                                     class="inline-flex items-center gap-2 text-sm font-medium underline text-primary-700 dark:text-primary-400 hover:no-underline">
                                     {{ $t('cart.continue_shopping') }}
                                     <icon name="heroicons-outline:arrow-right" class="w-5 h-5 rtl:rotate-180" />
-                                </nuxt-link>
+                                </nuxt-link-locale>
                             </div>
                         </div>
 

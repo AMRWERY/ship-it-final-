@@ -48,6 +48,7 @@ const contactStore = useContactStore()
 const authStore = useAuthStore()
 const currentUserUid = ref(null)
 const loading = ref(true);
+const { t } = useI18n()
 
 const userProfileImg = computed(() => authStore.user?.profileImg || '')
 

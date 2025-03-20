@@ -29,12 +29,12 @@
           <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
             <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty')
             }}</p>
-            <nuxt-link to="/products" @click="closeCartSidebar" type="button"
+            <nuxt-link-locale to="/products" @click="closeCartSidebar" type="button"
               class="block text-sm font-medium text-center text-blue-500 dark:text-blue-300">
               <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
                 <icon name="material-symbols:arrow-right-alt-rounded" class="rtl:rotate-180 ms-1" />
               </span>
-            </nuxt-link>
+            </nuxt-link-locale>
           </div>
 
           <div class="mt-12 space-y-4" v-else>
@@ -96,13 +96,13 @@
             </li>
           </ul>
           <div class="space-y-3">
-            <nuxt-link to="/checkout" type="button" @click="closeCartSidebar"
+            <nuxt-link-locale to="/checkout" type="button" @click="closeCartSidebar"
               class="flex items-center justify-center w-full px-5 py-2 mt-6 text-sm font-medium text-white transition duration-300 border rounded-md bg-rose-500">{{
-                $t('btn.proceed_to_checkout') }}</nuxt-link>
-            <nuxt-link to="/shopping-cart" type="button" @click="closeCartSidebar"
+                $t('btn.proceed_to_checkout') }}</nuxt-link-locale>
+            <nuxt-link-locale to="/shopping-cart" type="button" @click="closeCartSidebar"
               class="block w-full px-5 py-2 text-center btn-style">
               {{ $t('btn.view_cart') }}
-            </nuxt-link>
+            </nuxt-link-locale>
           </div>
         </div>
       </div>

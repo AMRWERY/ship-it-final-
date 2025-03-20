@@ -33,11 +33,11 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.js",
     locales: ["en", "ar"],
     defaultLocale: "en",
-    // strategy: "prefix",
+    strategy: "prefix",
     detectBrowserLanguage: {
       useCookie: true,
       fallbackLocale: "en",
-      // redirectOn: "all",
+      redirectOn: "all",
     },
   },
   carousel: {

@@ -69,10 +69,10 @@
               {{ $t('footer.quick_links') }}
             </h6>
             <p class="mb-4">
-              <nuxt-link to="/blogs" class="text-white">{{ $t('footer.blogs') }}</nuxt-link>
+              <nuxt-link-locale to="/blogs" class="text-white">{{ $t('footer.blogs') }}</nuxt-link-locale>
             </p>
             <p class="mb-4">
-              <nuxt-link to="/help-center" class="text-white">{{ $t('footer.help_center') }}</nuxt-link>
+              <nuxt-link-locale to="/help-center" class="text-white">{{ $t('footer.help_center') }}</nuxt-link-locale>
             </p>
           </div>
           <!-- Contact section -->

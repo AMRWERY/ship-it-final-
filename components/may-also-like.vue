@@ -5,7 +5,7 @@
         v-if="recommendedProducts.length > 0">You may also like</p>
       <div class="flow-root mt-4">
         <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
-          <nuxt-link v-for="product in recommendedProducts" :key="product.id" :to="`/products/${product.id}`"
+          <nuxt-link-locale v-for="product in recommendedProducts" :key="product.id" :to="`/products/${product.id}`"
             class="relative z-50 p-3 overflow-hidden bg-gray-100 rounded-lg cursor-pointer group hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all">
             <div class="w-full h-[200px] sm:h-[300px] overflow-hidden mx-auto">
               <img :src="product.imageUrl1" alt="product1" class="object-contain w-full h-full" />
@@ -21,7 +21,7 @@
                   || 0, 'currency', currencyLocale) }}</h4>
               </div>
             </div>
-          </nuxt-link>
+          </nuxt-link-locale>
         </div>
       </div>
     </div>

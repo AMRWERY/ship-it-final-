@@ -44,7 +44,7 @@
         <Carousel v-bind="config" v-else>
           <Slide v-for="card in filteredProducts" :key="card.id">
             <div class="carousel__item">
-              <nuxt-link :to="`/products/${card.id}`">
+              <nuxt-link-locale :to="`/products/${card.id}`">
                 <div
                   class="relative z-50 p-2 overflow-hidden bg-gray-100 rounded-lg cursor-pointer group hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all dark:bg-gray-800">
                   <div class="w-full h-[200px] sm:h-[300px] overflow-hidden mx-auto">
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                 </div>
-              </nuxt-link>
+              </nuxt-link-locale>
             </div>
           </Slide>
 
@@ -93,7 +93,7 @@
 
       <div class="max-w-2xl mx-auto my-2 lg:max-w-full sm:my-5 md:my-7">
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
-          <nuxt-link v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
+          <nuxt-link-locale v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
             class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105 dark:border-none">
             <div class="block max-w-full bg-white rounded-lg xs:min-w-full">
               <img :src="card.img" class="object-cover w-full h-full" />
@@ -103,7 +103,7 @@
               <h2 class="mt-2 mb-4 text-xl font-semibold text-white">{{ card.title }}</h2>
               <p class="text-base font-semibold text-gray-200">{{ card.subtitle }}</p>
             </div>
-          </nuxt-link>
+          </nuxt-link-locale>
         </div>
       </div>
     </section>

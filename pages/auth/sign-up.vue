@@ -70,8 +70,8 @@
 
           <div class="text-center">
             <p class="mt-6 text-sm text-slate-500 dark:text-gray-100">{{ $t('form.already_have_an_account') }}
-              <nuxt-link to="/auth/login" class="font-medium text-blue-600 ms-1 hover:underline dark:text-blue-400">{{
-                $t('form.login_here') }}</nuxt-link>
+              <nuxt-link-locale to="/auth/login" class="font-medium text-blue-600 ms-1 hover:underline dark:text-blue-400">{{
+                $t('form.login_here') }}</nuxt-link-locale>
             </p>
           </div>
         </div>

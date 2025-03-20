@@ -206,8 +206,8 @@
             </div>
 
             <div class="space-y-3">
-              <nuxt-link to="/order-summary" class="flex w-full items-center justify-center px-5 py-2.5 btn-style">{{
-                $t('btn.place_order') }}</nuxt-link>
+              <nuxt-link-locale to="/order-summary" class="flex w-full items-center justify-center px-5 py-2.5 btn-style">{{
+                $t('btn.place_order') }}</nuxt-link-locale>
             </div>
           </div>
 

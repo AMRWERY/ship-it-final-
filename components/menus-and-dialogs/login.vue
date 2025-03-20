@@ -32,8 +32,8 @@
               </div>
 
               <div class="mt-5 text-center">
-                <p>{{ $t('form.or') }} <nuxt-link to="/auth/sign-up" class="text-blue-600 dark:text-blue-400">{{
-                  $t('form.create_free_account') }}</nuxt-link>
+                <p>{{ $t('form.or') }} <nuxt-link-locale to="/auth/sign-up" class="text-blue-600 dark:text-blue-400">{{
+                  $t('form.create_free_account') }}</nuxt-link-locale>
                 </p>
               </div>
 
