@@ -1,14 +1,11 @@
 <template>
   <div>
     <section class="max-w-full mx-auto">
-      <div class="flex items-center justify-center mb-3">
+      <div class="flex items-center justify-center mb-0 md:mb-3">
         <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
         <span class="mx-4 title title-font">{{ title }}</span>
         <div class="w-1/12 h-1 border-t-2 border-gray-700 dark:border-gray-100"></div>
       </div>
-
-      <!-- skeleton-loader component -->
-      <!-- <skeleton-loader v-if="filteredProducts.length === 0" /> -->
 
       <ClientOnly>
         <!-- skeleton-loader -->
@@ -20,7 +17,7 @@
                   <div class="w-full h-[200px] sm:h-[300px] bg-gray-300 dark:bg-gray-600 rounded-lg animate-pulse">
                   </div>
 
-                  <div class="absolute left-0 right-0 w-11/12 mx-auto space-y-3 bottom-2">
+                  <div class="absolute w-11/12 mx-auto space-y-3 end-0 start-0 bottom-2">
                     <div class="w-3/4 h-4 mx-auto bg-gray-400 rounded dark:bg-gray-500"></div>
                     <div class="flex items-center justify-center space-x-2">
                       <div class="w-1/4 h-4 bg-gray-400 rounded dark:bg-gray-500"></div>
@@ -54,13 +51,14 @@
                     class="absolute w-11/12 p-2 mx-auto transition-all duration-300 rounded-lg end-0 start-0 bottom-2 lg:-bottom-80 lg:group-hover:bottom-2 bg-black/60 lg:bg-white lg:p-3 dark:bg-gray-600">
                     <div class="text-center">
                       <h3
-                        class="text-sm font-bold text-white lg:text-base lg:text-gray-800 dark:text-gray-200 dark:lg:text-gray-300">
+                        class="text-sm font-bold text-white lg:text-base lg:text-gray-800 dark:text-gray-200 dark:lg:text-gray-300 sm:truncate md:text-ellipsis">
                         {{ $i18n.locale === 'ar' ? card.titleAr :
                           card.title }}</h3>
                       <div class="flex items-center justify-center mt-2 space-s-2">
-                        <h4 class="text-lg font-bold text-red-700 sm:text-base dark:text-red-400 lg:text-2xl">{{
+                        <h4 class="font-bold text-red-700 sm:text-base dark:text-red-400 lg:text-2xl">{{
                           $n(parseFloat(card.discountedPrice), 'currency', currencyLocale) }}</h4>
-                        <h4 class="text-sm text-gray-500 line-through sm:text-base dark:text-gray-100 mt-0.5"
+                        <h4
+                          class="text-gray-500 line-through sm:text-base dark:text-gray-100 mt-0.5 decoration-from-font"
                           v-if="card.originalPrice">{{ $n(parseFloat(card.originalPrice), 'currency', currencyLocale) }}
                         </h4>
                       </div>
@@ -93,9 +91,11 @@
 
       <div class="max-w-2xl mx-auto my-2 lg:max-w-full sm:my-5 md:my-7">
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
-          <nuxt-link-locale v-for="card in cardsOne" :key="card" :to="{ path: '/products', query: { brand: card.brand } }"
-            class="relative transition-transform duration-300 border rounded-lg shadow-md group hover:scale-105 dark:border-none">
-            <div class="block max-w-full bg-white rounded-lg xs:min-w-full">
+          <nuxt-link-locale v-for="card in cardsOne" :key="card"
+            :to="{ path: '/products', query: { brand: card.brand } }"
+            class="relative h-full transition-transform duration-300 border shadow-md group hover:scale-105 dark:border-none">
+            <div
+              class="block max-w-full bg-white xs:min-w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[600px]">
               <img :src="card.img" class="object-cover w-full h-full" />
             </div>
             <div

@@ -9,7 +9,7 @@
     <transition name="slide-fade">
       <div v-if="isDialogOpen"
         class="fixed inset-0 p-4 flex flex-wrap justify-end items-end w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
-        <div class="relative w-full max-w-lg p-4 bg-white rounded-lg shadow-lg">
+        <div class="relative w-full max-w-lg p-4 bg-white dark:bg-[#181a1b] rounded-lg shadow-lg">
           <div class="flex items-center pb-3 border-b border-gray-300">
             <h3 class="flex-1 text-xl font-medium leading-normal text-surface dark:text-gray-100">{{
               $t('form.new_message') }}</h3>

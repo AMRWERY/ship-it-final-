@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Button to open the dialog -->
-    <div class="h-8 bg-[#4f46e5] text-white">
+    <div class="h-8 bg-[#4f46e5] text-white dark:bg-[#1d169c]">
       <nuxt-link to="" type="button"
         class="flex items-center justify-center py-1 text-sm capitalize cursor-pointer sm:text-medium md:text-lg"
         @click="openDialog">
@@ -36,7 +36,7 @@
                         <div class="flex flex-col gap-4">
                           <div class="relative shadow-lg">
                             <img :src="selectedImage"
-                              class="w-full aspect-[11/8] object-cover object-center h-[450px]" />
+                              class="w-full aspect-[11/8] object-center sm:h-[300px] md:h-[450px] sm:object-contain md:object-cover" />
                             <button @click="closeDialog"
                               class="absolute top-2 end-2 p-1.5 flex bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors lg:hidden">
                               <icon name="material-symbols:close-small"
@@ -47,7 +47,7 @@
                             <div class="flex flex-row gap-4 shrink-0 space-s-2">
                               <img v-for="(image, index) in imageList" :key="index" :src="image"
                                 @click="setSelectedImage(image)"
-                                class="object-cover object-top w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-md cursor-pointer aspect-square" />
+                                class="object-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-md cursor-pointer sm:object-contain md:object-cover aspect-square" />
                             </div>
                           </div>
                         </div>
@@ -56,7 +56,7 @@
                       <div class="w-full">
                         <div>
                           <div class="flex items-center justify-between">
-                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                            <h3 class="font-bold text-gray-800 dark:text-gray-200 sm:text-lg md:text-2xl">
                               {{ $i18n.locale ===
                                 'ar' ? currentDeal?.titleAr :
                                 currentDeal?.title }}
@@ -70,12 +70,12 @@
                             'ar' ? currentDeal?.brandAr :
                             currentDeal?.brand }}</p>
 
-                          <div class="flex flex-wrap items-center gap-2 mt-4">
-                            <p class="text-base text-gray-500 line-through dark:text-gray-100">{{
-                              $n(parseFloat(currentDeal?.originalPrice), 'currency', currencyLocale) }}</p>
-                            <h4 class="text-2xl font-bold text-purple-800 sm:text-3xl">{{
+                          <div class="flex flex-wrap items-center gap-2">
+                            <h4 class="font-bold text-purple-800 sm:text-xl md:text-3xl dark:text-purple-400">{{
                               $n(parseFloat(currentDeal?.discountedPrice), 'currency', currencyLocale) }}</h4>
-                            <div class="flex py-1.5 px-2 bg-purple-600 font-semibold !ms-4 rounded-lg">
+                              <p class="font-semibold text-gray-500 line-through dark:text-gray-100 sm:text-base md:text-xl decoration-from-font">{{
+                                $n(parseFloat(currentDeal?.originalPrice), 'currency', currencyLocale) }}</p>
+                            <div class="flex py-1.5 px-2 bg-purple-600 font-semibold ms-4 rounded-lg">
                               <span class="text-sm text-white">{{ $t('home.save') }} {{ currentDeal?.discount }}%</span>
                             </div>
                           </div>
@@ -145,12 +145,12 @@
                             <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.quantity') }}
                             </h3>
                             <div class="flex mt-4 overflow-hidden border divide-x rounded w-max">
-                              <button type="button" class="w-12 h-10 font-semibold bg-gray-100"
+                              <button type="button" class="w-12 h-10 font-semibold bg-gray-100 dark:text-gray-700"
                                 @click="decrementQuantity">
                                 <icon name="ic:round-minus" class="w-4 h-4" />
                               </button>
                               <input type="number" placeholder="1"
-                                class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14"
+                                class="flex items-center justify-center h-10 text-lg font-semibold text-gray-800 bg-transparent w-14 dark:text-gray-200"
                                 v-model="quantity">
                               <button type="button" class="w-12 h-10 font-semibold text-white bg-gray-800"
                                 @click="incrementQuantity">
@@ -201,7 +201,8 @@
                             </div>
                           </div>
 
-                          <div class="max-w-2xl mt-12 custom-scroll max-h-32">
+                          <hr class="mt-6 border-gray-300" />
+                          <div class="max-w-2xl custom-scroll max-h-32">
                             <div class="mt-6">
                               <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('home.description')
                               }}

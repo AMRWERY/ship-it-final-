@@ -13,7 +13,7 @@
           <Carousel v-if="loading || categoriesStore.categories.length === 0" v-bind="config">
             <Slide v-for="i in 5" :key="i">
               <div class="px-2 carousel__item">
-                <skeleton-loader type="rectangle" :css-class="'h-56 w-full mx-2 rounded-xl'"
+                <skeleton-loader type="rectangle" :css-class="'h-44 w-full mx-2 rounded-xl'"
                   :bg-class="'bg-gray-200 dark:bg-gray-700'">
                 </skeleton-loader>
               </div>
@@ -27,7 +27,7 @@
             <Slide v-for="category in categoriesStore.categories" :key="category.catId">
               <div class="carousel__item">
                 <nuxt-link-locale :to="{ path: '/products', query: { brand: category.title } }"
-                  class="relative flex justify-center flex-shrink-0 w-auto h-auto mx-2 overflow-hidden border border-white rounded-xl dark:border-none">
+                  class="relative flex justify-center flex-shrink-0 w-32 h-auto mx-2 overflow-hidden border border-white md:w-auto rounded-xl dark:border-none">
                   <div class="relative overflow-hidden bg-no-repeat bg-cover">
                     <img class="h-full rounded-t-lg" :src="category.imgOne" />
                   </div>
@@ -102,8 +102,8 @@ const config = ref({
       peek: 0
     },
     400: {
-      itemsToShow: 2,
-      snapAlign: 'start',
+      itemsToShow: 3,
+      snapAlign: 'center',
       peek: 20
     },
     700: {

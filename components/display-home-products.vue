@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="max-w-full py-6 mx-auto space-y-6 sm:px-6 lg:px-8">
+    <div class="max-w-full py-0 mx-auto sm:px-6 lg:px-8 md:py-5">
 
       <!-- dynamic-products-carousel component -->
       <dynamic-products-carousel :config="config" :productTypes="['Express_Deals']" :title="$t('home.express_deals')"
