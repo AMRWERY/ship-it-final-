@@ -277,7 +277,9 @@
     "customer_reviews": "Customer Reviews",
     "votes": "votes",
     "save": "Save",
-    "no_comments_yet": "No comments yet."
+    "no_comments_yet": "No comments yet.",
+    "up_to": "Up to",
+    "off": "off"
   },
   "error_page": {
     "you_are_all_alone_here": "You are all alone here"
@@ -325,5 +327,5 @@
     "brand": "Brand:",
     "discount": "Discount:",
     "qty": "Qty:"
-  } 
+  }
 }

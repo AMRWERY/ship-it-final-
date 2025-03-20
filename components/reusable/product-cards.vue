@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-7">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 mt-7">
       <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black"
         v-for="product in productStore.products" :key="product.id">
         <div class="w-full h-56">
@@ -12,7 +12,7 @@
           <div class="flex items-center justify-between gap-4 mb-4">
             <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800"
               v-if="product.discount">
-              Up to {{ product.discount }}% off</span>
+              {{ $t('products.up_to') }} {{ product.discount }}% {{ $t('products.off') }}</span>
             <div class="flex items-center justify-end gap-1 ms-auto">
               <tooltip :text="$t('tooltip.quick_look')" position="bottom">
                 <nuxt-link-locale :to="`/products/${product.id}`" type="button"

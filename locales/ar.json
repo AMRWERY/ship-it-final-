@@ -277,7 +277,9 @@
     "customer_reviews": "آراء العملاء",
     "votes": "الأصوات",
     "save": "وفر",
-    "no_comments_yet": "لا توجد تعليقات حتى الآن."
+    "no_comments_yet": "لا توجد تعليقات حتى الآن.",
+    "up_to": "حتى",
+    "off": "خصم"
   },
   "error_page": {
     "you_are_all_alone_here": "أنت وحدك هنا"
