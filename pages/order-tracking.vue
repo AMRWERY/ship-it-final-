@@ -5,9 +5,7 @@
       <breadcrumb />
     </div>
 
-    <div class="max-w-xl p-2">
-      <h1 class="text-3xl font-semibold text-center">{{ $t('profile.order_history') }}</h1>
-    </div>
+    <p class="text-3xl font-semibold text-center">{{ $t('profile.order_history') }}</p>
 
     <div class="flex items-center flex-1 h-full" v-if="checkoutStore.orders.length === 0">
       <div class="flex-1 w-full mt-5 text-center">
@@ -20,6 +18,42 @@
           <nuxt-link-locale to="/products" type="button"
             class="inline-flex items-center justify-center px-4 py-2 btn-style">{{ $t('btn.start_shopping')
             }}</nuxt-link-locale>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skeleton Loader -->
+    <div v-if="isLoading">
+      <div v-for="n in 3" :key="n"
+        class="max-w-6xl px-4 py-6 mx-auto border-b sm:px-6 lg:px-8 border-b-gray-400 dark:border-b-gray-50">
+        <div class="p-6 mb-8 rounded-lg bg-gradient-to-r from-gray-100 to-gray-300 animate-pulse">
+          <div class="flex items-center justify-between">
+            <div class="w-1/3 h-4 bg-gray-300 rounded"></div>
+            <div class="w-1/4 h-4 bg-gray-300 rounded"></div>
+            <div class="w-1/4 h-4 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+        <div class="p-6 mb-8 rounded-lg shadow animate-pulse">
+          <div class="w-1/2 h-6 mb-4 bg-gray-300 rounded"></div>
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center justify-between h-2 bg-gray-200 rounded-full">
+              <div class="w-full h-2 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 mt-8 rounded-lg dark:shadow-lg dark:border-gray-100 dark:border animate-pulse">
+          <div class="w-1/2 h-6 mb-4 bg-gray-300 rounded"></div>
+          <div class="space-y-8">
+            <div class="flex items-center">
+              <div class="w-20 h-20 bg-gray-300 rounded-lg"></div>
+              <div class="flex-1 ms-5">
+                <div class="w-3/4 h-4 mb-2 bg-gray-300 rounded"></div>
+                <div class="w-1/2 h-4 mb-2 bg-gray-300 rounded"></div>
+                <div class="w-1/3 h-4 bg-gray-300 rounded"></div>
+              </div>
+              <div class="w-16 h-4 bg-gray-300 rounded"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -117,12 +151,16 @@
 <script setup>
 const { t } = useI18n()
 const checkoutStore = useCheckoutStore();
+const isLoading = ref(true)
 
 onMounted(() => {
   checkoutStore.fetchUserOrders();
   if (checkoutStore.status.length === 0) {
     checkoutStore.fetchStatus();
   }
+  setTimeout(() => {
+    isLoading.value = false
+  }, 3000)
 });
 
 const currentStatusIcon = (statusId) => {
