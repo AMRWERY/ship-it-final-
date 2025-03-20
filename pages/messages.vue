@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-6">
+    <div class="mt-5 mb-6">
       <!-- breadcrumb component -->
       <breadcrumb />
     </div>
@@ -9,13 +9,29 @@
       class="flex flex-col h-screen max-w-5xl mx-auto overflow-hidden rounded-md shadow-xl dark:border-gray-100 dark:border">
       <!-- Chat Messages -->
       <div class="flex-1 p-8 space-y-4 overflow-y-auto">
-        <div v-if="loading" class="flex items-center justify-center text-gray-500">
-          <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+        <!-- Skeleton Loading -->
+        <div v-if="loading" class="space-y-8">
+          <div v-for="n in 3" :key="n" class="space-y-4">
+            <div class="flex items-start space-s-3">
+              <div class="bg-gray-300 rounded-full w-14 h-14 dark:bg-gray-600 animate-pulse"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-16 bg-gray-300 rounded-lg dark:bg-gray-600 animate-pulse"></div>
+                <div class="w-1/4 h-4 bg-gray-300 rounded dark:bg-gray-600 animate-pulse"></div>
+              </div>
+            </div>
+            <div class="flex items-end justify-end space-s-3">
+              <div class="flex-1 space-y-2">
+                <div class="h-16 bg-blue-300 rounded-lg dark:bg-blue-600 animate-pulse"></div>
+                <div class="w-1/4 h-4 ml-auto bg-blue-300 rounded dark:bg-blue-600 animate-pulse"></div>
+              </div>
+              <div class="bg-gray-300 rounded-full w-14 h-14 dark:bg-gray-600 animate-pulse"></div>
+            </div>
+          </div>
         </div>
 
         <div v-else-if="userMessages.length === 0"
           class="text-lg font-semibold text-center text-gray-500 dark:text-gray-100">
-          No messages found
+          {{ $t('profile.no_messages_found') }}
         </div>
 
         <div class="space-y-4" v-for="msg in userMessages" :key="msg.id" v-else>

@@ -335,6 +335,7 @@
     "change_your_password": "تغيير كلمة المرور الخاصة بك",
     "addresses": "العناوين",
     "add_edit_and_remove_addresses": "إضافة العناوين وتحريرها وإزالتها",
-    "add_a_new_address": "إضافة عنوان جديد"
+    "add_a_new_address": "إضافة عنوان جديد",
+    "no_messages_found": "لم يتم العثور على رسائل"
   }
 }
