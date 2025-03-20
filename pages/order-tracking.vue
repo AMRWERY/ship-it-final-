@@ -9,8 +9,8 @@
       <h1 class="text-3xl font-semibold text-center">{{ $t('profile.order_history') }}</h1>
     </div>
 
-    <div class="flex items-center flex-1 h-full">
-      <div class="flex-1 w-full mt-5 text-center" v-if="showOrders">
+    <div class="flex items-center flex-1 h-full" v-if="checkoutStore.orders.length === 0">
+      <div class="flex-1 w-full mt-5 text-center">
         <icon name="streamline:interface-file-clipboard-work-plain-clipboard-task-list-company-office"
           class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-100" />
         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">{{
@@ -24,8 +24,8 @@
       </div>
     </div>
 
-    <div class="max-w-6xl px-4 py-6 mx-auto border-b sm:px-6 lg:px-8 border-b-gray-400 dark:border-b-gray-50"
-      v-if="!showOrders" v-for="order in checkoutStore.orders" :key="order">
+    <div class="max-w-6xl px-4 py-6 mx-auto border-b sm:px-6 lg:px-8 border-b-gray-400 dark:border-b-gray-50" v-else
+      v-for="order in checkoutStore.orders" :key="order">
       <!-- Order Details -->
       <div class="p-6 mb-8 rounded-lg bg-gradient-to-r from-gray-100 to-gray-300">
         <div class="flex items-center justify-between">
@@ -117,12 +117,9 @@
 <script setup>
 const { t } = useI18n()
 const checkoutStore = useCheckoutStore();
-const showOrders = computed(() => checkoutStore.orders.length === 0);
 
 onMounted(() => {
   checkoutStore.fetchUserOrders();
-
-  showOrders.value = checkoutStore.orders.length > 0;
   if (checkoutStore.status.length === 0) {
     checkoutStore.fetchStatus();
   }
