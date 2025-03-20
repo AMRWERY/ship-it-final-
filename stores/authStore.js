@@ -36,6 +36,12 @@ export const useAuthStore = defineStore("auth", {
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
           const userData = userDoc.data();
+          if (userData.birthDate?.toDate) {
+            const date = userData.birthDate.toDate();
+            userData.birthDate = `${date.getFullYear()}-${String(
+              date.getMonth() + 1
+            ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+          }
           this.user = { ...userData };
           this.role = userData.role || "user";
           // console.log('user data:', userData)
@@ -217,7 +223,11 @@ export const useAuthStore = defineStore("auth", {
                 JSON.parse(localStorage.getItem("user")) || {};
               localStorage.setItem(
                 "user",
-                JSON.stringify({ ...sessionUserData, ...updatedProfile })
+                JSON.stringify({
+                  ...sessionUserData,
+                  ...updatedProfile,
+                  profileImg: profileImgUrl,
+                })
               );
               resolve("Profile updated successfully");
             })

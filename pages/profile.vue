@@ -36,7 +36,7 @@
 
               <div class="sm:col-span-3" v-if="authStore.user">
                 <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-100">{{ $t('form.birth_date')
-                  }}</span>
+                }}</span>
                 <!-- date-picker componenet -->
                 <date-picker v-model="authStore.user.birthDate" />
               </div>
@@ -46,15 +46,14 @@
               <div
                 class="flex items-center justify-center h-48 p-4 bg-gray-200 border rounded-md shadow-md dark:bg-gray-100 w-96">
                 <label for="upload" class="flex flex-col items-center gap-2 cursor-pointer">
-                  <template v-if="imagePreview">
-                    <img :src="imagePreview" alt="Profile Preview" class="object-cover w-full h-48 rounded-xl" />
-                  </template>
-                  <template v-else>
-                    <icon name="tdesign:user-avatar" class="w-10 h-10 text-gray-500 stroke-indigo-500" />
-                    <span class="font-medium text-gray-600">{{ $t('form.upload_file') }}</span>
-                  </template>
+                  <icon name="tdesign:user-avatar" class="w-10 h-10 text-gray-500 stroke-indigo-500" />
+                  <span class="font-medium text-gray-600">{{ $t('form.upload_file') }}</span>
                 </label>
                 <input id="upload" type="file" class="hidden" @change="onFileSelected" />
+              </div>
+              <div class="mt-4 w-96" v-if="imagePreview">
+                <img :src="imagePreview" alt="Profile Preview"
+                  class="object-cover object-center h-48 mx-auto border shadow-md rounded-xl dark:border-gray-100" />
               </div>
             </div>
           </div>
@@ -130,13 +129,32 @@ const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast
 onMounted(() => {
   if (authStore.user) {
     authStore.fetchUserData(authStore.user.uid);
+    const localUser = JSON.parse(localStorage.getItem("user")) || {};
+    if (localUser.birthDate) {
+      authStore.user.birthDate = localUser.birthDate;
+    }
+    if (localUser.profileImg) {
+      imagePreview.value = localUser.profileImg;
+    }
+    if (authStore.user.profileImg && authStore.user.profileImg !== localUser.profileImg) {
+      imagePreview.value = authStore.user.profileImg;
+    }
   } else {
     authStore.init();
   }
 });
 
+watch(() => authStore.user?.profileImg, (newVal) => {
+  if (newVal) {
+    imagePreview.value = newVal;
+    const userData = JSON.parse(localStorage.getItem("user")) || {};
+    userData.profileImg = newVal;
+    localStorage.setItem("user", JSON.stringify(userData));
+  }
+});
+
 const selectedFile = ref(null);
-const imagePreview = ref(null);
+const imagePreview = ref(authStore.user?.profileImg || null);
 
 const onFileSelected = (event) => {
   const file = event.target.files[0];
