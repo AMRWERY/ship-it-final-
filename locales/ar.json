@@ -106,7 +106,8 @@
     "do_not_have_an_account": "ليس لديك حساب",
     "register_here": "سجل هنا",
     "already_have_an_account": "لديك حساب بالفعل",
-    "login_here": "تسجيل الدخول هنا"
+    "login_here": "تسجيل الدخول هنا",
+    "upload_file": "تحميل الملف"
   },
   "btn": {
     "logging": "جاري تسجيل الدخول",
@@ -114,7 +115,9 @@
     "signing_up": "جاري التسجيل",
     "create_an_account": "إنشاء حساب",
     "saving": "جاري الحفظ",
+    "save": "حفظ",
     "updating": "جاري التحديث",
+    "update": "تحديث",
     "adding": "جاري الأضافه",
     "please_wait": "من فضلك انتظر",
     "add_to_cart": "أضف إلى السلة",
@@ -326,6 +329,8 @@
     "order_items": "عناصر الطلب",
     "brand": "ماركة:",
     "discount": "تخفيض:",
-    "qty": "الكمية:"
+    "qty": "الكمية:",
+    "edit_your_profile": "تعديل ملفك الشخصي",
+    "change_your_password": "تغيير كلمة المرور الخاصة بك"
   }
 }

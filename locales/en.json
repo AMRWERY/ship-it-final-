@@ -106,7 +106,8 @@
     "do_not_have_an_account": "Don't have an account",
     "register_here": "Register here",
     "already_have_an_account": "Already have an account",
-    "login_here": "Login here"
+    "login_here": "Login here",
+    "upload_file": "Upload file"
   },
   "btn": {
     "logging": "Logging",
@@ -114,7 +115,9 @@
     "signing_up": "Signing up",
     "create_an_account": "Create an account",
     "saving": "Saving",
+    "save": "Save",
     "updating": "Updating",
+    "update": "Update",
     "adding": "Adding",
     "please_wait": "Please wait",
     "add_to_cart": "Add to cart",
@@ -326,6 +329,8 @@
     "order_items": "Order Items",
     "brand": "Brand:",
     "discount": "Discount:",
-    "qty": "Qty:"
+    "qty": "Qty:",
+    "edit_your_profile": "Edit your Profile",
+    "change_your_password": "Change your Password"
   }
 }
