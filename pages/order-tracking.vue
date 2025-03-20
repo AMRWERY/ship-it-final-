@@ -24,8 +24,8 @@
       </div>
     </div>
 
-    <div class="max-w-6xl px-4 py-6 mx-auto border-b sm:px-6 lg:px-8 border-b-gray-400 dark:border-b-gray-50" v-if="!showOrders" v-for="order in checkoutStore.orders"
-      :key="order">
+    <div class="max-w-6xl px-4 py-6 mx-auto border-b sm:px-6 lg:px-8 border-b-gray-400 dark:border-b-gray-50"
+      v-if="!showOrders" v-for="order in checkoutStore.orders" :key="order">
       <!-- Order Details -->
       <div class="p-6 mb-8 rounded-lg bg-gradient-to-r from-gray-100 to-gray-300">
         <div class="flex items-center justify-between">
@@ -49,7 +49,7 @@
         <h2 class="mb-6 text-xl font-semibold text-gray-800 dark:text-gray-200">{{ $t('profile.order_status') }}</h2>
         <div v-if="isOrderCompleted(order.statusId)" class="p-4 mb-8 bg-green-100 rounded">
           <p class="text-lg font-semibold text-green-800 dark:text-green-500">{{ $t('profile.this_order_is_completed')
-          }}</p>
+            }}</p>
         </div>
 
         <div class="relative">
@@ -117,7 +117,7 @@
 <script setup>
 const { t } = useI18n()
 const checkoutStore = useCheckoutStore();
-const showOrders = ref(false);
+const showOrders = computed(() => checkoutStore.orders.length === 0);
 
 onMounted(() => {
   checkoutStore.fetchUserOrders();
