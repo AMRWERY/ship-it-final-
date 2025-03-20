@@ -7,7 +7,7 @@
         <today-deal />
 
         <nav class="py-3.5 bg-black border-gray-200">
-            <div class="flex items-center justify-between mx-auto px-7">
+            <div class="flex items-center justify-between px-2 mx-auto sm:px-4 md:px-7">
                 <nuxt-link-locale to="/" class="flex items-center">
                     <span class="text-base text-white me-3 head sm:text-lg md:text-2xl">Ship-IT</span>
                 </nuxt-link-locale>

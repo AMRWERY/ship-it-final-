@@ -8,7 +8,7 @@
       <!-- navbar componenet -->
       <navbar :is-dark="themeStore.isDark" @toggle-theme="themeStore.toggleTheme" />
 
-      <div class="max-w-full py-6 mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-full mx-auto sm:px-6 lg:px-8">
         <main>
           <slot />
         </main>
