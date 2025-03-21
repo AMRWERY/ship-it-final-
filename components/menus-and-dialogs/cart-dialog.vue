@@ -22,8 +22,28 @@
             </button>
           </div>
 
-          <div v-if="loading" class="flex items-center justify-center text-gray-500">
-            <icon name="svg-spinners:bars-scale" class="w-16 h-16 text-gray-500 dark:text-gray-100" />
+          <!-- Skeleton Loader -->
+          <div v-if="loading" class="space-y-8">
+            <div v-for="n in 3" :key="n" class="grid items-start grid-cols-3 gap-4">
+              <div class="flex items-start col-span-2 gap-4 border-b-2">
+                <div class="bg-gray-200 rounded-md w-28 h-28 max-sm:w-24 max-sm:h-24 animate-pulse dark:bg-gray-700">
+                </div>
+                <div class="flex flex-col flex-1 gap-2">
+                  <div class="w-3/4 h-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                  <div class="w-1/2 h-3 bg-gray-200 rounded dark:bg-gray-700"></div>
+                  <div class="w-1/3 h-3 bg-gray-200 rounded dark:bg-gray-700"></div>
+                  <div class="w-20 h-8 mt-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div class="w-16 h-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                <div class="flex gap-3">
+                  <div class="w-5 h-5 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                  <div class="w-8 h-5 bg-gray-200 rounded dark:bg-gray-700"></div>
+                  <div class="w-5 h-5 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
@@ -51,7 +71,7 @@
                   <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">{{ $t('cart.brand') }} {{
                     $i18n.locale ===
                       'ar' ? item.brandAr :
-                    item.brand }}</p>
+                      item.brand }}</p>
                   <p class="text-xs font-semibold text-gray-500 mt-0.5 dark:text-gray-100">{{ $t('cart.quantity') }} {{
                     item.quantity }}
                   </p>
