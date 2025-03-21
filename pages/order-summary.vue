@@ -197,13 +197,16 @@ onMounted(() => {
 // pdf file
 const pdfLoading = ref(false);
 
-const downloadPDF = () => {
+const downloadPDF = async () => {
   const html2pdf = useNuxtApp().$html2pdf;
   if (html2pdf) {
     pdfLoading.value = true;
+    await preloadImages();
     setTimeout(() => {
       const orderSummary = document.getElementById('Ship-IT');
       const pdfContent = orderSummary.cloneNode(true);
+      // Replace Firebase URLs with data URLs
+      replaceFirebaseUrlsWithDataUrls(pdfContent);
       const downloadButton = pdfContent.querySelector('button');
       if (downloadButton) {
         downloadButton.remove();
@@ -216,13 +219,49 @@ const downloadPDF = () => {
         margin: 10,
         filename: 'Ship-IT.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 4 },
+        html2canvas: {
+          scale: 4,
+          useCORS: true,
+          logging: true
+        },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       };
       html2pdf().from(pdfContent).set(options).save();
       pdfLoading.value = false;
     }, 3000)
   }
+};
+
+const preloadImages = () => {
+  return Promise.all(
+    Array.from(document.querySelectorAll('img'))
+      .map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+      })
+  );
+};
+
+const replaceFirebaseUrlsWithDataUrls = async (element) => {
+  const images = element.querySelectorAll('img');
+  return Promise.all(Array.from(images).map(async (img) => {
+    try {
+      const response = await fetch(img.src);
+      const blob = await response.blob();
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+      img.src = dataUrl;
+    } catch (error) {
+      console.error('Error converting image:', error);
+      img.remove();
+    }
+  }));
 };
 
 //currency composable
