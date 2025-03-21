@@ -14,7 +14,7 @@
       class="fixed inset-0 w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] font-sans">
       <div class="relative w-full h-screen max-w-lg bg-white shadow-lg ms-auto dark:bg-[#181a1b]">
         <div class="overflow-auto p-6 h-[calc(100vh-124px)] scroll-hidden">
-          <div class="flex items-center gap-4 text-gray-800 dark:text-gray-200">
+          <div class="flex items-center gap-4 pb-4 text-gray-800 border-b dark:text-gray-200">
             <h3 class="flex-1 text-2xl font-bold">{{ $t('cart.shopping_cart') }}</h3>
             <button @click="closeCartSidebar">
               <icon name="material-symbols:close-rounded"
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Skeleton Loader (have data) -->
-          <div v-if="loading" class="space-y-8">
+          <div v-if="loading" class="mt-8 space-y-8">
             <div v-for="n in 3" :key="n" class="grid items-start grid-cols-3 gap-4">
               <div class="flex items-start col-span-2 gap-4 border-b-2">
                 <div class="bg-gray-200 rounded-md w-28 h-28 max-sm:w-24 max-sm:h-24 animate-pulse dark:bg-gray-700">
@@ -59,9 +59,9 @@
             </div>
           </div>
 
-          <div class="mt-12 space-y-4" v-else>
+          <div class="mt-8 space-y-4" v-else>
             <div class="grid items-start grid-cols-3 gap-4" v-for="item in cartStore.cart" :key="item.id">
-              <div class="flex items-start col-span-2 gap-4 border-b-2">
+              <div class="flex items-start col-span-2 gap-4 pb-2 border-b">
                 <div class="p-2 bg-gray-100 rounded-md w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 dark:bg-[#181a1b]">
                   <img :src="item.imageUrl1" class="object-contain w-full h-full" />
                 </div>

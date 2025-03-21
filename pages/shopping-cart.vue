@@ -12,7 +12,45 @@
                 <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
                     <div class="flex-none w-full mx-auto lg:max-w-2xl xl:max-w-4xl">
                         <div class="space-y-6">
-                            <div v-for="item in cartStore.cart" :key="item.id"
+                            <!-- Skeleton Loader -->
+                            <div v-if="loading" v-for="n in 3" :key="n"
+                                class="p-4 bg-white dark:bg-[#181a1b] border border-gray-200 dark:border-gray-200 rounded-lg shadow-sm md:p-6 animate-pulse">
+                                <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+                                    <div class="shrink-0 md:order-1">
+                                        <div class="w-20 h-20 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between md:order-3 md:justify-end">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 bg-gray-200 rounded-md dark:bg-gray-700"></div>
+                                            <div class="w-10 h-5 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                            <div class="w-5 h-5 bg-gray-200 rounded-md dark:bg-gray-700"></div>
+                                        </div>
+                                        <div class="w-20 h-5 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                    </div>
+
+                                    <div class="flex-1 w-full min-w-0 space-y-4 md:order-2 md:max-w-md">
+                                        <div class="w-3/4 h-5 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                        <div class="w-1/2 h-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                        <div class="w-1/3 h-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                        <div class="w-24 h-8 bg-gray-200 rounded dark:bg-gray-700"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Empty Cart -->
+                            <div v-else-if="cartStore.cart.length === 0"
+                                class="p-6 text-center bg-white dark:bg-[#181a1b] rounded-lg border border-gray-200 dark:border-gray-700">
+                                <p class="mb-4 text-lg text-gray-900 dark:text-gray-200">
+                                    {{ $t('cart.your_cart_is_currently_empty') }}
+                                </p>
+                                <nuxt-link-locale to="/products"
+                                    class="text-blue-600 dark:text-blue-400 hover:underline">
+                                    {{ $t('cart.continue_shopping') }}
+                                </nuxt-link-locale>
+                            </div>
+
+                            <div v-else v-for="item in cartStore.cart" :key="item.id"
                                 class="p-4 bg-white dark:bg-[#181a1b] border border-gray-200 dark:border-gray-200 rounded-lg shadow-sm md:p-6">
                                 <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                     <nuxt-link to="" class="shrink-0 md:order-1">
@@ -119,7 +157,7 @@
 
                                 <dl class="flex items-center justify-between gap-4 pt-2 border-t border-gray-400">
                                     <dt class="text-base font-bold text-gray-900 dark:text-gray-200">{{ $t('cart.total')
-                                        }}</dt>
+                                    }}</dt>
                                     <dd class="text-base font-bold text-gray-900 dark:text-gray-200">{{
                                         $n(parseFloat(totalAmount),
                                             'currency', currencyLocale) }}
@@ -155,7 +193,7 @@
                                 </div>
                                 <button type="submit"
                                     class="flex w-full items-center justify-center px-5 py-2.5 btn-style">{{
-                                    $t('btn.apply_code') }}</button>
+                                        $t('btn.apply_code') }}</button>
                             </form>
                         </div>
                     </div>
