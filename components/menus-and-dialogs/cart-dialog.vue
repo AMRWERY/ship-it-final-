@@ -136,17 +136,17 @@ const removingItem = ref(null);
 const loading = ref(false)
 
 const removeItem = async (docId, quantityToRemove) => {
-  if (!docId) {
-    return;
-  }
+  if (!docId) return;
   try {
     removingItem.value = docId;
     await cartStore.removeFromCart(docId, quantityToRemove);
     setTimeout(() => {
       removingItem.value = null;
-    }, 3000);
+    }, 2000);
   } catch (error) {
     console.error("Error removing item:", error);
+  } finally {
+    removingItem.value = null;
   }
 };
 
