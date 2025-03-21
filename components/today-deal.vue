@@ -73,7 +73,9 @@
                           <div class="flex flex-wrap items-center gap-2">
                             <h4 class="font-bold text-purple-800 sm:text-xl md:text-3xl dark:text-purple-400">{{
                               $n(parseFloat(currentDeal?.discountedPrice), 'currency', currencyLocale) }}</h4>
-                              <p class="font-semibold text-gray-500 line-through dark:text-gray-100 sm:text-base md:text-xl decoration-from-font">{{
+                            <p
+                              class="font-semibold text-gray-500 line-through dark:text-gray-100 sm:text-base md:text-xl decoration-from-font">
+                              {{
                                 $n(parseFloat(currentDeal?.originalPrice), 'currency', currencyLocale) }}</p>
                             <div class="flex py-1.5 px-2 bg-purple-600 font-semibold ms-4 rounded-lg">
                               <span class="text-sm text-white">{{ $t('home.save') }} {{ currentDeal?.discount }}%</span>
@@ -100,7 +102,7 @@
                           <div class="flex flex-wrap gap-2 mt-2">
                             <button v-for="color in currentDeal?.colors" :key="color" @click="setSelectedColor(color)"
                               :class="{
-                                'border-blue-600 bg-blue-50': selectedColor === color,
+                                'border-blue-600 bg-blue-50 text-gray-700': selectedColor === color,
                                 'border-gray-300': selectedColor !== color
                               }"
                               class="relative flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
@@ -120,7 +122,7 @@
                           <div class="flex flex-wrap gap-2 mt-2">
                             <button v-for="size in currentDeal?.sizes" :key="size" @click="setSelectedSize(size)"
                               :class="{
-                                'border-blue-600 bg-blue-50': selectedSize === size,
+                                'border-blue-600 bg-blue-50 text-gray-700': selectedSize === size,
                                 'border-gray-300': selectedSize !== size
                               }"
                               class="relative flex items-center justify-center w-auto px-2 py-1 text-sm transition-colors border h-11 hover:border-blue-600 shrink-0">
@@ -137,7 +139,7 @@
 
                         <div class="mt-4">
                           <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
-                          }}</span></p>
+                              }}</span></p>
                         </div>
 
                         <div class="mt-4">
