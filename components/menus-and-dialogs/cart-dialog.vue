@@ -22,7 +22,20 @@
             </button>
           </div>
 
-          <!-- Skeleton Loader -->
+
+          <!-- no data -->
+          <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
+            <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty')
+            }}</p>
+            <nuxt-link-locale to="/products" @click="closeCartSidebar" type="button"
+              class="block text-sm font-medium text-center text-blue-500 dark:text-blue-300">
+              <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
+                <icon name="material-symbols:arrow-right-alt-rounded" class="rtl:rotate-180 ms-1" />
+              </span>
+            </nuxt-link-locale>
+          </div>
+
+          <!-- Skeleton Loader (have data) -->
           <div v-if="loading" class="space-y-8">
             <div v-for="n in 3" :key="n" class="grid items-start grid-cols-3 gap-4">
               <div class="flex items-start col-span-2 gap-4 border-b-2">
@@ -44,17 +57,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
-            <p class="text-base text-center text-gray-800 dark:text-gray-200">{{ $t('cart.your_cart_is_currently_empty')
-            }}</p>
-            <nuxt-link-locale to="/products" @click="closeCartSidebar" type="button"
-              class="block text-sm font-medium text-center text-blue-500 dark:text-blue-300">
-              <span class="flex justify-center text-sm">{{ $t('cart.continue_shopping') }}
-                <icon name="material-symbols:arrow-right-alt-rounded" class="rtl:rotate-180 ms-1" />
-              </span>
-            </nuxt-link-locale>
           </div>
 
           <div class="mt-12 space-y-4" v-else>
@@ -145,7 +147,6 @@ const removeItem = async (docId, quantityToRemove) => {
     }, 2000);
   } catch (error) {
     console.error("Error removing item:", error);
-  } finally {
     removingItem.value = null;
   }
 };
@@ -153,15 +154,6 @@ const removeItem = async (docId, quantityToRemove) => {
 const saveCartToLocalStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cartStore.cart));
 };
-
-onMounted(() => {
-  loading.value = true;
-  setTimeout(() => {
-    cartStore.fetchCart();
-    saveCartToLocalStorage();
-    loading.value = false;
-  }, 3000);
-});
 
 const totalAmount = computed(() => {
   const itemsTotal = cartStore.cart.reduce((total, item) => {
@@ -200,6 +192,15 @@ const isSidebarOpen = ref(false);
 
 const openCartSidebar = () => {
   isSidebarOpen.value = true;
+  if (cartStore.cart.length > 0) {
+    loading.value = true;
+    setTimeout(() => {
+      cartStore.fetchCart();
+      loading.value = false;
+    }, 2000);
+  } else {
+    cartStore.fetchCart();
+  }
 };
 
 const closeCartSidebar = () => {
