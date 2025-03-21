@@ -141,12 +141,11 @@ const removeItem = async (docId, quantityToRemove) => {
   if (!docId) return;
   try {
     removingItem.value = docId;
-    await cartStore.removeFromCart(docId, quantityToRemove);
-    setTimeout(() => {
-      removingItem.value = null;
-    }, 2000);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    cartStore.removeFromCart(docId, quantityToRemove);
   } catch (error) {
     console.error("Error removing item:", error);
+  } finally {
     removingItem.value = null;
   }
 };
