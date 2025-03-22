@@ -8,16 +8,16 @@
         <!-- Social network icons container -->
         <div class="flex justify-center">
           <nuxt-link to="" class="me-6">
-            <icon name="logos:facebook" class="w-6 h-6" />
+            <img src="/facebook-logo.svg" alt="facebook-logo" class="w-7 h-7">
           </nuxt-link>
           <nuxt-link to="" class="me-6">
-            <icon name="skill-icons:instagram" class="w-6 h-6" />
+            <img src="/instagram.svg" alt="instagram" class="w-7 h-7">
           </nuxt-link>
           <nuxt-link to="" class="me-6">
-            <icon name="fa6-brands:x-twitter" class="w-6 h-6" />
+            <img src="/twitter.svg" alt="twitter" class="w-7 h-7">
           </nuxt-link>
           <nuxt-link to="" class="me-6">
-            <icon name="logos:whatsapp-icon" class="w-6 h-6" />
+            <img src="/whatsapp.svg" alt="whatsapp" class="w-7 h-7">
           </nuxt-link>
         </div>
       </div>
