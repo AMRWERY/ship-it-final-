@@ -1,6 +1,7 @@
 import {
   collection,
   getDocs,
+  onSnapshot,
   query,
   orderBy,
   addDoc,
@@ -20,18 +21,29 @@ export const useTodayDealStore = defineStore("today-deals", {
     fetchDeals() {
       const dealsRef = collection(db, "today-deal");
       const dealsQuery = query(dealsRef, orderBy("startTime"));
-      return getDocs(dealsQuery)
-        .then((snapshot) => {
-          this.products = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          this.setActiveDeal();
-          this.setNextDeals();
-        })
-        .catch((error) => {
-          console.error("Error fetching deals:", error);
-        });
+      let unsubscribe = null;
+      const promise = new Promise((resolve, reject) => {
+        unsubscribe = onSnapshot(
+          dealsQuery,
+          (snapshot) => {
+            this.products = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            this.setActiveDeal();
+            this.setNextDeals();
+            resolve();
+          },
+          (error) => {
+            console.error("Error fetching deals:", error);
+            reject(error);
+          }
+        );
+      });
+      onUnmounted(() => {
+        if (unsubscribe) unsubscribe();
+      });
+      return promise;
     },
 
     setActiveDeal() {
