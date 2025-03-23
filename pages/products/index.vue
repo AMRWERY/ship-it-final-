@@ -273,6 +273,8 @@
 </template>
 
 <script setup>
+const { t, locale } = useI18n()
+
 const isSectionOpen = ref({
   categories: true,
   colors: false,
@@ -308,45 +310,50 @@ const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const route = useRoute();
 
-const brandBanner = {
+const brandBanner = computed(() => ({
   Nike: {
     image: 'https://justfields.com/storage/projects/7M5rV059/active-wear.jpg',
-    description: 'Browse a large selection of activewear and workout clothes. Find the best deals from top brands in the market. Explore the outside with confidence.',
+    description: t('products.browse_a_large_selection_of_activewear_and_workout_clothes_find_the_best_deals_from_top_brands_in_the_market_explore_the_outside_with_confidence'),
   },
   Levis: {
     image: 'https://justfields.com/storage/projects/7M5rV059/kids-clothes.jpg',
-    description: "Explore our best selection of kids' clothes. Buy fashionable fun baby wear from top brands. We believe that every kid needs this cool items list...",
+    description: t('products.explore_our_best_selection_of_kids_clothes_buy_fashionable_fun_baby_wear_from_top_brands_we_believe_that_every_kid_needs_this_cool_items_list'),
   },
   New_Look: {
     image: 'https://justfields.com/storage/projects/7M5rV059/SunglassesSeason.jpg',
-    description: "We have got a perfect pair of sunglasses for everyone's style. Getting your hands on the frame looks good on you has never been easier. See Your options...",
+    description: t('products.we_have_got_a_perfect_pair_of_sunglasses_for_everyones_style_getting_your_hands_on_the_frame_looks_good_on_you_has_never_been_easier_see_your_options'),
   },
   XD_Design: {
     image: 'https://justfields.com/storage/projects/7M5rV059/Accessories-and-Bags.jpg',
-    description: "Complete your outfits with these extra-unique pieces from Top brands. Express yourself loud with your favorite one having all selection varieties and don’t forget to elevate your look with accessories.",
+    description: t('products.complete_your_outfits_with_these_extra_unique_pieces_from_top_brands_express_yourself_loud_with_your_favorite_one_having_all_selection_varieties_and_do_not_forget_to_elevate_your_look_with_accessories'),
   },
   Ajooni: {
     image: 'https://justfields.com/storage/projects/7M5rV059/women-dresses-cover.jpg',
-    description: "Make a fashion statement no matter the occasion by wearing one of these stylish dresses from our women's dresses collection - whether you're aiming for femininity, classiness, casualness, or extra chic-ness!",
+    description: t('products.make_a_fashion_statement_no_matter_the_occasion_by_wearing_one_of_these_stylish_dresses_from_our_women_dresses_collection—whether_you_are_aiming_for_femininity_classiness_casualness_or_extra_chic_ness'),
   },
   Inc: {
     image: 'https://justfields.com/storage/projects/7M5rV059/Inc.jpg',
-    description: "Equip yourself for winter with these coats, winter jackets, jumpers, leggings, pullovers, and other must-have cold-weather items to stay snug - and on a budget! Great Deal? OF COURSE YES.",
+    description: t('products.equip_yourself_for_winter_with_these_coats_winter_jackets_jumpers_leggings_pullovers_and_other_must_have_cold_weather_items_to_stay_snug_and_on_a_budget_great_deal_oF_course_yes'),
   },
   Shein: {
     image: 'https://justfields.com/storage/projects/7M5rV059/shein-collection-cover.jpg',
-    description: "Explore an extensive selection of SHEIN clothing, shoes, bags, jewelry, and swimwear. Find your favorite looks and show the world your trendsetting style.",
+    description: t('products.explore_an_extensive_selection_of_shein_clothing_shoes_bags_jewelry_and_swimwear_find_your_favorite_looks_and_show_the_world_your_trendsetting_style'),
   },
   Michael_kors: {
     image: 'https://justfields.com/storage/projects/7M5rV059/Michael_kors.jpg',
-    description: "Boots have no limits! Whether you're looking for high or low, leather or rubber, chunky or sleek, We have it all. Look no further than Here! Find our stunning collection of women’s boots from the best brands around the world.",
+    description: t('products.boots_have_no_limits_Whether_you_are_looking_for_high_or_low_leather_or_rubber_chunky_or_sleek_we_have_it_all_look_no_further_than_here_find_our_stunning_collection_of_women_boots_from_the_best_brands_around_the_world'),
   },
-};
+}));
 
 const currentBrand = computed(() => route.query.brand)
-const { locale } = useI18n()
+
 const brandName = computed(() => {
-  if (route.query.brand) return route.query.brand.replace(/_/g, ' ');
+  if (route.query.brand) {
+    // return route.query.brand.replace(/_/g, ' ');
+    return locale.value === 'ar'
+    ? route.query.brandAr
+    : route.query.brand;;
+  }
   
   if (route.query.categoryId) return locale.value === 'ar'
     ? route.query.titleAr

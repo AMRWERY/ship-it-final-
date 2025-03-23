@@ -106,6 +106,9 @@ onMounted(async () => {
   if (route.query.categoryId) {
     const categoryId = String(route.query.categoryId);
     productsList.value = productStore.fetchProductsByCategory(categoryId);
+  } else if (route.query.brand) {
+    const brandTitle = String(route.query.brand);
+    productsList.value = productStore.fetchProductsByBrand(brandTitle);
   } else {
     productStore.fetchProducts();
     productsList.value = productStore.products

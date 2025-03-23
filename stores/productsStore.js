@@ -110,11 +110,10 @@ export const useProductsStore = defineStore("products", {
     },
 
     fetchProductsByBrand(brandName) {
-      if (!brandName) {
-        return;
-      }
+      if (!brandName) return;
+      const formattedBrand = brandName.replace(/_/g, " ");
       getDocs(
-        query(collection(db, "products"), where("brand", "==", brandName))
+        query(collection(db, "products"), where("brand", "==", formattedBrand))
       )
         .then((querySnap) => {
           const filteredProducts = querySnap.docs.map((doc) => ({
