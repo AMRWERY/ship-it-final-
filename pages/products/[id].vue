@@ -256,7 +256,7 @@ const loading = ref(false);
 const errorMessage = ref("");
 const itemAdded = ref('')
 const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
 
@@ -488,4 +488,14 @@ const handleCommentSubmit = async () => {
     commentLoading.value = false;
   }
 };
+
+const productTitle = computed(() => {
+  return locale.value === 'ar'
+    ? productStore.selectedProduct?.titleAr || productStore.selectedProduct?.title
+    : productStore.selectedProduct?.title;
+});
+
+useHead({
+  titleTemplate: () => productTitle.value,
+});
 </script>

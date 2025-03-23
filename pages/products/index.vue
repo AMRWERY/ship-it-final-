@@ -369,4 +369,8 @@ onMounted(() => {
     productStore.fetchProducts();
   }
 })
+
+useHead({
+  titleTemplate: () => brandName.value,
+});
 </script>
