@@ -344,10 +344,13 @@ const brandBanner = {
 };
 
 const currentBrand = computed(() => route.query.brand)
-
+const { locale } = useI18n()
 const brandName = computed(() => {
   if (route.query.brand) return route.query.brand.replace(/_/g, ' ');
-  if (route.query.categoryId) return route.query.title || route.query.titleAr || '';
+  
+  if (route.query.categoryId) return locale.value === 'ar'
+    ? route.query.titleAr
+    : route.query.title;;
   return '';
 });
 
