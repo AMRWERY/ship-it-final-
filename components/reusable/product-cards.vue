@@ -95,7 +95,6 @@ const categoriesStore = useCategoriesStore()
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
 const route = useRoute();
-// const brandName = ref("");
 const loading = ref({});
 const errorMessage = ref("");
 const itemAdded = ref('')
@@ -107,7 +106,6 @@ onMounted(async () => {
   if (route.query.categoryId) {
     const categoryId = String(route.query.categoryId);
     productsList.value = productStore.fetchProductsByCategory(categoryId);
-    // console.log('id', categoryId)
   } else {
     productStore.fetchProducts();
     productsList.value = productStore.products

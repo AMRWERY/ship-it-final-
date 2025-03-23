@@ -344,11 +344,10 @@ const brandBanner = {
 };
 
 const currentBrand = computed(() => route.query.brand)
-// const brandName = ref("");
 
 const brandName = computed(() => {
   if (route.query.brand) return route.query.brand.replace(/_/g, ' ');
-  if (route.query.catId) return categoriesStore.currentCategory?.title || '';
+  if (route.query.categoryId) return route.query.title || route.query.titleAr || '';
   return '';
 });
 
