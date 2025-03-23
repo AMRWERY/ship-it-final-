@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Button to open the dialog -->
-    <div class="h-8 bg-[#4f46e5] text-white dark:bg-[#1d169c]">
+    <div class="h-8 bg-[#4f46e5] text-white dark:bg-[#1d169c] z-50 fixed top-0 left-0 right-0">
       <nuxt-link to="" type="button"
         class="flex items-center justify-center py-1 text-sm capitalize cursor-pointer sm:text-medium md:text-lg"
         @click="openDialog">
@@ -139,7 +139,7 @@
 
                         <div class="mt-4">
                           <p class="text-sm">{{ $t('home.sku') }} <span class="font-semibold">{{ currentDeal?.sku
-                              }}</span></p>
+                          }}</span></p>
                         </div>
 
                         <div class="mt-4">
