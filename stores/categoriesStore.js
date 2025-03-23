@@ -36,7 +36,7 @@ export const useCategoriesStore = defineStore("categories", {
           }))
           .sort((a, b) => a.catId - b.catId);
         this.updatePagination();
-        console.log("Fetched categories:", this.categories);
+        // console.log("Fetched categories:", this.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -53,7 +53,6 @@ export const useCategoriesStore = defineStore("categories", {
           this.currentCategory = querySnapshot.docs[0].data();
         } else {
           this.currentCategory = null;
-          // console.error("Category not found");
         }
       } catch (error) {
         console.error("Error fetching category:", error);
@@ -64,7 +63,6 @@ export const useCategoriesStore = defineStore("categories", {
       this.filteredCategories = this.categories.filter(
         (cat) => Number(cat.catId) >= minId && Number(cat.catId) <= maxId
       );
-      // console.log('data', this.filteredCategories)
     },
 
     addCategory(title, imageFile) {

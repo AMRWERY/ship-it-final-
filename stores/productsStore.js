@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db, storage } from "@/firebase";
-import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const useProductsStore = defineStore("products", {
   state: () => ({
@@ -130,7 +130,7 @@ export const useProductsStore = defineStore("products", {
 
     fetchProductsByCategory(categoryId) {
       if (!categoryId) return;
-      return this.products.filter((prod) => prod.categoryId == categoryId)
+      return this.products.filter((prod) => prod.categoryId == categoryId);
     },
 
     fetchProductDetail(productId) {
@@ -159,10 +159,8 @@ export const useProductsStore = defineStore("products", {
         if (this.selectedProduct) {
           this.selectedProduct.userComment = commentText;
         }
-        // console.log("Comment updated successfully");
         return true;
       } catch (error) {
-        // console.error("Error updating comment:", error);
         return false;
       }
     },

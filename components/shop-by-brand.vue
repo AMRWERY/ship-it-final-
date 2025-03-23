@@ -28,7 +28,7 @@
               <div class="carousel__item">
                 <nuxt-link-locale :to="{
                   name: 'products', query: {
-                    id: category.id,
+                    categoryId: category.id,
                     title: category.title,
                     titleAr: category.titleAr
                   }
