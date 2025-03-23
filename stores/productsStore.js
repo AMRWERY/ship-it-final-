@@ -111,7 +111,6 @@ export const useProductsStore = defineStore("products", {
 
     fetchProductsByBrand(brandName) {
       if (!brandName) {
-        // console.error("Brand name is required to fetch products by brand.");
         return;
       }
       getDocs(
@@ -129,29 +128,13 @@ export const useProductsStore = defineStore("products", {
         });
     },
 
-    fetchProductsByCategory(catId) {
-      if (!catId) {
-        // console.error("Category ID is required to fetch products by category.");
-        return;
-      }
-      getDocs(query(collection(db, "products"), where("catId", "==", catId)))
-        .then((querySnap) => {
-          const filteredProducts = querySnap.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          this.products = filteredProducts;
-        })
-        .catch((error) => {
-          console.error("Error fetching products by category:", error);
-        });
+    fetchProductsByCategory(categoryId) {
+      if (!categoryId) return;
+      return this.products.filter((prod) => prod.categoryId == categoryId)
     },
 
     fetchProductDetail(productId) {
-      if (!productId) {
-        // console.error("Product ID is missing or invalid.");
-        return null;
-      }
+      if (!productId) return null;
       const docRef = doc(db, "products", productId);
       return getDoc(docRef)
         .then((docSnap) => {
@@ -165,7 +148,6 @@ export const useProductsStore = defineStore("products", {
           }
         })
         .catch((error) => {
-          // console.error("Error fetching product details:", error);
           return null;
         });
     },

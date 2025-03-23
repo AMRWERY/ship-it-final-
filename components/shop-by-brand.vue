@@ -24,9 +24,15 @@
           </Carousel>
 
           <Carousel v-bind="config" v-else>
-            <Slide v-for="category in categoriesStore.categories" :key="category.catId">
+            <Slide v-for="category in categoriesStore.filteredCategories" :key="category.id">
               <div class="carousel__item">
-                <nuxt-link-locale :to="{ path: '/products', query: { brand: category.catId } }"
+                <nuxt-link-locale :to="{
+                  name: 'products', query: {
+                    categoryId: category.id,
+                    categoryTitle: category.title,
+                    categoryTitleAr: category.titleAr
+                  }
+                }"
                   class="relative flex justify-center flex-shrink-0 w-32 h-auto mx-2 overflow-hidden border border-white md:w-auto rounded-xl dark:border-none">
                   <div class="relative overflow-hidden bg-no-repeat bg-cover">
                     <img class="h-full rounded-t-lg" :src="category.imgOne" />
@@ -80,7 +86,8 @@ const { t } = useI18n()
 const categoriesStore = useCategoriesStore()
 const loading = ref(true)
 
-onMounted(() => {
+onMounted(async () => {
+  await categoriesStore.fetchCategories();
   categoriesStore.fetchCategoriesByRange(1, 5);
   setTimeout(() => {
     loading.value = false

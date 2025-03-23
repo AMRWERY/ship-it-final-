@@ -2,7 +2,7 @@
   <div>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 mt-7">
       <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black"
-        v-for="product in productStore.products" :key="product.id">
+        v-for="product in productsList" :key="product.id">
         <div class="w-full h-56">
           <nuxt-link to="">
             <img class="object-cover w-full h-full mx-auto" :src="product.imageUrl1" />
@@ -91,24 +91,40 @@
 
 <script setup>
 const productStore = useProductsStore()
+const categoriesStore = useCategoriesStore()
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
 const route = useRoute();
-const brandName = ref("");
+// const brandName = ref("");
 const loading = ref({});
 const errorMessage = ref("");
 const itemAdded = ref('')
 const { showToast, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
+const productsList = ref([])
 
 onMounted(async () => {
-  brandName.value = route.query.brand;
-  if (brandName.value) {
-    productStore.fetchProductsByBrand(brandName.value);
+  if (route.query.categoryId) {
+    const categoryId = String(route.query.categoryId);
+    productsList.value = productStore.fetchProductsByCategory(categoryId);
+    // console.log('id', categoryId)
+  } else {
+    productStore.fetchProducts();
+    productsList.value = productStore.products
+  }
+});
+
+watch(() => route.query, async (newQuery) => {
+  if (newQuery.categoryId) {
+    const categoryId = String(newQuery.categoryId);
+    await categoriesStore.fetchCategoryById(categoryId);
+    productStore.fetchProductsByCategory(categoryId);
+  } else if (newQuery.brand) {
+    productStore.fetchProductsByBrand(newQuery.brand);
   } else {
     productStore.fetchProducts();
   }
-})
+});
 
 const quantity = ref(1)
 

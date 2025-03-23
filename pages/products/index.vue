@@ -305,6 +305,7 @@ const closeSidebar = () => {
 };
 
 const productStore = useProductsStore()
+const categoriesStore = useCategoriesStore()
 const route = useRoute();
 
 const brandBanner = {
@@ -343,12 +344,21 @@ const brandBanner = {
 };
 
 const currentBrand = computed(() => route.query.brand)
-const brandName = ref("");
+// const brandName = ref("");
+
+const brandName = computed(() => {
+  if (route.query.brand) return route.query.brand.replace(/_/g, ' ');
+  if (route.query.catId) return categoriesStore.currentCategory?.title || '';
+  return '';
+});
 
 onMounted(() => {
-  brandName.value = route.query.brand;
-  if (brandName.value) {
-    productStore.fetchProductsByBrand(brandName.value);
+  if (route.query.brand) {
+    productStore.fetchProductsByBrand(route.query.brand);
+  }
+  else if (route.query.catId) {
+    categoriesStore.fetchCategoryById(route.query.catId);
+    productStore.fetchProductsByCategory(route.query.catId);
   } else {
     productStore.fetchProducts();
   }

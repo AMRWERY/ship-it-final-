@@ -14,6 +14,7 @@ import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 export const useCategoriesStore = defineStore("categories", {
   state: () => ({
     categories: [],
+    filteredCategories: [],
     subCategories: [],
     paginatedCategories: [],
     paginatedSubcategories: [],
@@ -35,52 +36,36 @@ export const useCategoriesStore = defineStore("categories", {
           }))
           .sort((a, b) => a.catId - b.catId);
         this.updatePagination();
-        // console.log("Fetched categories:", this.categories);
+        console.log("Fetched categories:", this.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     },
 
-    fetchCategoriesByRange(minId, maxId) {
-      const categoriesQuery = query(
-        collection(db, "categories"),
-        where("catId", ">=", minId),
-        where("catId", "<=", maxId)
-      );
-      getDocs(categoriesQuery)
-        .then((querySnapshot) => {
-          this.categories = querySnapshot.docs.map((doc) => doc.data());
-        })
-        .catch((error) => {
-          console.error("Error fetching categories:", error);
-        });
+    async fetchCategoryById(catId) {
+      try {
+        const q = query(
+          collection(db, "categories"),
+          where("catId", "==", Number(catId))
+        );
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          this.currentCategory = querySnapshot.docs[0].data();
+        } else {
+          this.currentCategory = null;
+          // console.error("Category not found");
+        }
+      } catch (error) {
+        console.error("Error fetching category:", error);
+      }
     },
 
-    // async fetchCategoryDetails(categoryId) {
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db, "categories"));
-    //     const category = querySnapshot.docs
-    //       .map((doc) => ({ id: doc.id, ...doc.data() }))
-    //       .find((cat) => cat.id === categoryId);
-    //     if (category) {
-    //       this.currentCategory = category;
-    //     } else {
-    //       console.error(`Category with ID ${categoryId} not found.`);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error fetching category details:", error);
-    //   }
-    // },
-
-    // async updateCategory(categoryId, updatedData) {
-    //   try {
-    //     const categoryDoc = doc(db, "categories", categoryId);
-    //     await updateDoc(categoryDoc, updatedData);
-    //   } catch (error) {
-    //     // console.error("Error updating category:", error);
-    //     throw error;
-    //   }
-    // },
+    fetchCategoriesByRange(minId, maxId) {
+      this.filteredCategories = this.categories.filter(
+        (cat) => Number(cat.catId) >= minId && Number(cat.catId) <= maxId
+      );
+      // console.log('data', this.filteredCategories)
+    },
 
     addCategory(title, imageFile) {
       const storage = getStorage();
