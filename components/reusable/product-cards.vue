@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 mt-7">
-      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black"
-        v-for="product in productsList" :key="product.id">
+      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-black" v-for="product in products"
+        :key="product.id">
         <div class="w-full h-56">
           <nuxt-link to="">
             <img class="object-cover w-full h-full mx-auto" :src="product.imageUrl1" />
@@ -209,6 +209,10 @@ const wishlistIconClass = (product) => {
 //ratings
 const props = defineProps({
   productId: String,
+  products: {
+    type: Array,
+    required: true,
+  }
 });
 
 const handleRating = (rating) => {

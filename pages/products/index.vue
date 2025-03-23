@@ -43,31 +43,15 @@
                     <icon name="material-symbols:add" size="18px" v-else />
                   </button>
                 </div>
-                <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="totes" v-model="filters.categories" value="Totes"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="totes" class="cursor-pointer">Totes</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="backpacks" v-model="filters.categories" value="Backpacks"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="backpacks" class="cursor-pointer">Backpacks</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="travel-bags" v-model="filters.categories" value="Travel Bags"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="travel-bags" class="cursor-pointer">Travel Bags</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="hip-bags" v-model="filters.categories" value="Hip Bags"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="hip-bags" class="cursor-pointer">Hip Bags</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="laptop-sleeves" v-model="filters.categories" value="Laptop Sleeves"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="laptop-sleeves" class="cursor-pointer">Laptop Sleeves</label>
+                <ul v-show="isSectionOpen.categories"
+                  class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
+                  <li v-for="category in categoriesStore.categories" :key="category.id"
+                    class="flex items-center space-s-2">
+                    <input type="checkbox" :id="`cat-${category.id}`" v-model="filters.categories" :value="category.id"
+                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent" />
+                    <label :for="`cat-${category.id}`" class="cursor-pointer">
+                      {{ locale === 'ar' ? category.titleAr : category.title }}
+                    </label>
                   </li>
                 </ul>
               </div>
@@ -144,7 +128,7 @@
         <!-- Second column (9/12) -->
         <div class="col-span-12 lg:col-span-9">
           <!-- product-cards component -->
-          <product-cards />
+          <product-cards :products="filteredProducts" />
 
           <!-- pagination component -->
           <pagination-component />
@@ -171,31 +155,15 @@
                   <icon name="material-symbols:add" size="18px" v-else />
                 </button>
               </div>
-              <ul v-show="isSectionOpen.categories" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="totes" v-model="filters.categories" value="Totes"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="totes" class="cursor-pointer">Totes</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="backpacks" v-model="filters.categories" value="Backpacks"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="backpacks" class="cursor-pointer">Backpacks</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="travel-bags" v-model="filters.categories" value="Travel Bags"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="travel-bags" class="cursor-pointer">Travel Bags</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="hip-bags" v-model="filters.categories" value="Hip Bags"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="hip-bags" class="cursor-pointer">Hip Bags</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="laptop-sleeves" v-model="filters.categories" value="Laptop Sleeves"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="laptop-sleeves" class="cursor-pointer">Laptop Sleeves</label>
+              <ul v-show="isSectionOpen.categories"
+                class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
+                <li v-for="category in categoriesStore.categories" :key="category.id"
+                  class="flex items-center space-s-2">
+                  <input type="checkbox" :id="`cat-${category.id}`" v-model="filters.categories" :value="category.id"
+                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent" />
+                  <label :for="`cat-${category.id}`" class="cursor-pointer">
+                    {{ locale === 'ar' ? category.titleAr : category.title }}
+                  </label>
                 </li>
               </ul>
             </div>
@@ -359,16 +327,39 @@ const brandName = computed(() => {
 });
 
 onMounted(() => {
+  categoriesStore.fetchCategories();
+
   if (route.query.brand) {
     productStore.fetchProductsByBrand(route.query.brand);
-  }
-  else if (route.query.catId) {
+  } else if (route.query.catId) {
     categoriesStore.fetchCategoryById(route.query.catId);
     productStore.fetchProductsByCategory(route.query.catId);
   } else {
     productStore.fetchProducts();
   }
 })
+
+watch(
+  () => filters.value.categories,
+  (newCategories) => {
+    if (newCategories.length > 0) {
+      productStore.fetchProductsByCategories(newCategories);
+    } else {
+      productStore.fetchProducts();
+    }
+  },
+  { deep: true }
+);
+
+const filteredProducts = computed(() => {
+  if (filters.value.categories.length > 0) {
+    return productStore.products.filter(product =>
+      filters.value.categories.includes(product.categoryId)
+    );
+  } else {
+    return productStore.products;
+  }
+});
 
 useHead({
   titleTemplate: () => brandName.value,

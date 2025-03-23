@@ -91,14 +91,10 @@ export const useProductsStore = defineStore("products", {
     },
 
     deleteProduct(productId) {
-      if (!productId) {
-        // console.error("Product ID is missing or invalid.");
-        return;
-      }
+      if (!productId) return;
       const productRef = doc(db, "products", productId);
       deleteDoc(productRef)
         .then(() => {
-          // console.log(`Product with ID ${productId} deleted successfully.`);
           this.products = this.products.filter(
             (product) => product.id !== productId
           );
@@ -130,6 +126,29 @@ export const useProductsStore = defineStore("products", {
     fetchProductsByCategory(categoryId) {
       if (!categoryId) return;
       return this.products.filter((prod) => prod.categoryId == categoryId);
+    },
+    async fetchProductsByCategories(categoryIds) {
+      if (!categoryIds?.length) {
+        this.fetchProducts();
+        return;
+      }
+      try {
+        // console.log("Querying Firestore for category IDs:", categoryIds);
+        const stringCategoryIds = categoryIds.map((id) => String(id));
+        const q = query(
+          collection(db, "products"),
+          where("categoryId", "in", stringCategoryIds)
+        );
+        const querySnap = await getDocs(q);
+        this.products = (querySnap?.docs || []).map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        // console.log("Fetched products:", this.products);
+        // console.log("Firestore returned:", querySnap.docs);
+      } catch (error) {
+        console.error("Error fetching products by categories:", error);
+      }
     },
 
     fetchProductDetail(productId) {
