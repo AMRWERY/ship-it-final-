@@ -28,9 +28,9 @@
               <div class="carousel__item">
                 <nuxt-link-locale :to="{
                   name: 'products', query: {
-                    categoryId: category.id,
-                    categoryTitle: category.title,
-                    categoryTitleAr: category.titleAr
+                    id: category.id,
+                    title: category.title,
+                    titleAr: category.titleAr
                   }
                 }"
                   class="relative flex justify-center flex-shrink-0 w-32 h-auto mx-2 overflow-hidden border border-white md:w-auto rounded-xl dark:border-none">
