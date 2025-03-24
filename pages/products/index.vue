@@ -100,6 +100,39 @@
                   </li>
                 </ul>
               </div>
+
+              <!-- Price range Filter -->
+              <div>
+                <div class="flex items-center justify-between mb-5">
+                  <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.range_price') }}</h4>
+                  <button @click="toggleSection('price')" class="text-gray-500 dark:text-gray-100">
+                    <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.price" />
+                    <icon name="material-symbols:add" size="18px" v-else />
+                  </button>
+                </div>
+                <div v-show="isSectionOpen.price" class="mt-4">
+                  <div class="flex justify-between mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+                    <span>{{ $t('products.min') }}</span>
+                    <span>{{ $t('products.max') }}</span>
+                  </div>
+                  <div class="relative h-1 my-4">
+                    <input type="range" :min="minDiscountedPrice" :max="maxDiscountedPrice"
+                      v-model.number="filters.priceRange.min"
+                      class="absolute z-50 w-full h-1 bg-transparent appearance-none pointer-events-none range-input">
+                    <input type="range" :min="minDiscountedPrice" :max="maxDiscountedPrice"
+                      v-model.number="filters.priceRange.max"
+                      class="absolute z-50 w-full h-1 bg-transparent appearance-none pointer-events-none range-input">
+                    <div class="absolute w-full h-1 -translate-y-1/2 bg-gray-700 rounded-full dark:bg-gray-200 top-1/2">
+                    </div>
+                  </div>
+                  <div class="flex justify-between mt-4 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="text-base text-gray-700 dark:text-gray-200">{{ $n(filters.priceRange.min, 'currency',
+                      currencyLocale) }}</span>
+                    <span class="text-base text-gray-700 dark:text-gray-200">{{ $n(filters.priceRange.max, 'currency',
+                      currencyLocale) }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -214,6 +247,39 @@
                 </li>
               </ul>
             </div>
+
+            <!-- Price range Filter -->
+            <div>
+              <div class="flex items-center justify-between mb-5">
+                <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.range_price') }}</h4>
+                <button @click="toggleSection('price')" class="text-gray-500 dark:text-gray-100">
+                  <icon name="ic:baseline-minus" size="18px" v-if="isSectionOpen.price" />
+                  <icon name="material-symbols:add" size="18px" v-else />
+                </button>
+              </div>
+              <div v-show="isSectionOpen.price" class="mt-4">
+                <div class="flex justify-between mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+                  <span>{{ $t('products.min') }}</span>
+                  <span>{{ $t('products.max') }}</span>
+                </div>
+                <div class="relative h-1 my-4">
+                  <input type="range" :min="minDiscountedPrice" :max="maxDiscountedPrice"
+                    v-model.number="filters.priceRange.min"
+                    class="absolute z-50 w-full h-1 bg-transparent appearance-none pointer-events-none range-input">
+                  <input type="range" :min="minDiscountedPrice" :max="maxDiscountedPrice"
+                    v-model.number="filters.priceRange.max"
+                    class="absolute z-50 w-full h-1 bg-transparent appearance-none pointer-events-none range-input">
+                  <div class="absolute w-full h-1 -translate-y-1/2 bg-gray-700 rounded-full dark:bg-gray-200 top-1/2">
+                  </div>
+                </div>
+                <div class="flex justify-between mt-4 text-sm text-gray-500 dark:text-gray-400">
+                  <span class="text-base text-gray-700 dark:text-gray-200">{{ $n(filters.priceRange.min, 'currency',
+                    currencyLocale) }}</span>
+                  <span class="text-base text-gray-700 dark:text-gray-200">{{ $n(filters.priceRange.max, 'currency',
+                    currencyLocale) }}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -228,13 +294,15 @@ const isSectionOpen = ref({
   categories: true,
   colors: false,
   sizes: false,
+  price: true
 });
 
 // Filters state
 const filters = ref({
   categories: [],
   colors: [],
-  sizes: []
+  sizes: [],
+  priceRange: { min: 0, max: 1000000 }
 });
 
 // Sidebar visibility
@@ -326,6 +394,25 @@ onMounted(() => {
 const loading = ref(false)
 let loadingTimeout = null
 
+const minDiscountedPrice = computed(() => {
+  if (productStore.products.length === 0) return 0;
+  return Math.min(...productStore.products.map(p => p.discountedPrice));
+});
+
+const maxDiscountedPrice = computed(() => {
+  if (productStore.products.length === 0) return 1000;
+  return Math.max(...productStore.products.map(p => p.discountedPrice));
+});
+
+watch(() => productStore.products, (newProducts) => {
+  if (newProducts.length > 0) {
+    filters.value.priceRange = {
+      min: minDiscountedPrice.value,
+      max: maxDiscountedPrice.value
+    };
+  }
+}, { immediate: true });
+
 watch(
   () => [filters.value.categories, filters.value.colors, filters.value.sizes],
   async ([newCategories, newColors, newSizes]) => {
@@ -362,7 +449,10 @@ const filteredProducts = computed(() => {
     const sizeMatch = filters.value.sizes.length === 0 ||
       product.sizes?.some(size => filters.value.sizes.includes(size));
 
-    return categoryMatch && colorMatch && sizeMatch;
+    const priceMatch = product.discountedPrice >= filters.value.priceRange.min &&
+      product.discountedPrice <= filters.value.priceRange.max;
+
+    return categoryMatch && colorMatch && sizeMatch && priceMatch;
   });
 });
 
@@ -390,6 +480,9 @@ const totalPages = computed(() =>
 const handlePageChange = (newPage) => {
   currentPage.value = newPage
 }
+
+//currency composable
+const { currencyLocale } = useCurrencyLocale();
 
 useHead({
   titleTemplate: () => brandName.value,

@@ -10,4 +10,9 @@
   .btn-style {
     @apply text-sm font-medium text-white transition duration-300 bg-black border border-black rounded-md hover:bg-white hover:text-black dark:bg-white dark:hover:bg-gray-200 dark:text-black;
   }
+
+  .range-input::-webkit-slider-thumb {
+    @apply w-4 h-4 bg-indigo-600 rounded-full cursor-pointer pointer-events-auto dark:bg-indigo-400;
+    -webkit-appearance: none;
+  }
 }

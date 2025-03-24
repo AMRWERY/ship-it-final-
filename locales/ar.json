@@ -292,7 +292,10 @@
     "equip_yourself_for_winter_with_these_coats_winter_jackets_jumpers_leggings_pullovers_and_other_must_have_cold_weather_items_to_stay_snug_and_on_a_budget_great_deal_oF_course_yes": "جهّز نفسك لفصل الشتاء بهذه المعاطف، والسترات الشتوية، والكنزات الصوفية، والسراويل الضيقة، والبلوفرات، وغيرها من القطع الأساسية للطقس البارد لتشعر بالدفء - وبميزانية محدودة! صفقة رائعة؟ بالطبع نعم.",
     "explore_an_extensive_selection_of_shein_clothing_shoes_bags_jewelry_and_swimwear_find_your_favorite_looks_and_show_the_world_your_trendsetting_style": "استكشفي تشكيلة واسعة من ملابس وأحذية وحقائب ومجوهرات وملابس سباحة شي إن. اختاري إطلالاتك المفضلة وأظهري للعالم أسلوبك العصري.",
     "boots_have_no_limits_Whether_you_are_looking_for_high_or_low_leather_or_rubber_chunky_or_sleek_we_have_it_all_look_no_further_than_here_find_our_stunning_collection_of_women_boots_from_the_best_brands_around_the_world": "لا حدود للأحذية! سواء كنتِ تبحثين عن أحذية طويلة أو منخفضة، جلدية أو مطاطية، سميكة أو أنيقة، لدينا كل ما تحتاجينه. لا تبحثي أبعد من هنا! اكتشفي مجموعتنا الرائعة من الأحذية النسائية من أفضل الماركات العالمية.",
-    "no_products_found": "لم يتم العثور على أي منتجات"
+    "no_products_found": "لم يتم العثور على أي منتجات",
+    "range_price": "نطاق السعر",
+    "min": "الحد الأدنى",
+    "max": "الحد الأعلى"
   },
   "error_page": {
     "you_are_all_alone_here": "أنت وحدك هنا"
