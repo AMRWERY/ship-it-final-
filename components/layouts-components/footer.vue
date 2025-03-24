@@ -47,22 +47,12 @@
             <h6 class="flex justify-center mb-4 font-semibold md:justify-start">
               {{ $t('footer.categories') }}
             </h6>
-            <p class="mb-4">
-              <nuxt-link to="" class="text-white">{{ $t('footer.women') }}</nuxt-link>
-            </p>
-            <p class="mb-4">
-              <nuxt-link to="" class="text-white">{{ $t('footer.men') }}</nuxt-link>
-            </p>
-            <p class="mb-4">
-              <nuxt-link to="" class="text-white">{{ $t('footer.juniors_kids') }}</nuxt-link>
-            </p>
-            <p class="mb-4">
-              <nuxt-link to="" class="text-white">{{ $t('footer.electronics') }}</nuxt-link>
-            </p>
-            <p>
-              <nuxt-link to="" class="text-white">{{ $t('footer.beauty') }}</nuxt-link>
+            <p class="mb-4" v-for="category in categoriesStore.subCategories" :key="category">
+              <nuxt-link to="" class="text-white">{{ $i18n.locale === 'ar' ? category.titleAr :
+                category.title }}</nuxt-link>
             </p>
           </div>
+
           <!-- Useful links section 2 -->
           <div class="">
             <h6 class="flex justify-center mb-4 font-semibold md:justify-start">
@@ -100,5 +90,9 @@
 </template>
 
 <script setup>
+const categoriesStore = useCategoriesStore()
 
+onMounted(() => {
+  categoriesStore.fetchSubCategories();
+});
 </script>

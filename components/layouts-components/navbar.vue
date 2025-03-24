@@ -12,9 +12,6 @@
                     <span class="text-base text-white me-3 head sm:text-lg md:text-2xl">Ship-IT</span>
                 </nuxt-link-locale>
 
-                <!-- categories-menu component -->
-                <categories-menu class="me-auto" />
-
                 <div class="flex items-center lg:order-2">
                     <div class="hidden mt-2 me-4 sm:inline-block">
                         <span></span>
