@@ -38,7 +38,7 @@
             <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">{{ $t('products.filter_options') }}</h3>
             <div class="space-y-5">
               <!-- Categories -->
-              <div>
+              <div class="pb-4 border-b-2 border-gray-500 dark:border-gray-400">
                 <div class="flex items-center justify-between">
                   <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.categories') }}</h4>
                   <button @click="toggleSection('categories')" class="text-gray-500 dark:text-gray-100">
@@ -60,7 +60,7 @@
               </div>
 
               <!-- Color Filter -->
-              <div>
+              <div class="pb-4 border-b-2 border-gray-500 dark:border-gray-400">
                 <div class="flex items-center justify-between">
                   <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.color') }}</h4>
                   <button @click="toggleSection('colors')" class="text-gray-500 dark:text-gray-100">
@@ -81,7 +81,7 @@
               </div>
 
               <!-- Size Filter -->
-              <div>
+              <div class="pb-4 border-b-2 border-gray-500 dark:border-gray-400">
                 <div class="flex items-center justify-between">
                   <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.size') }}</h4>
                   <button @click="toggleSection('sizes')" class="text-gray-500 dark:text-gray-100">
@@ -176,16 +176,16 @@
       <div v-if="isSidebarVisible"
         class="fixed inset-0 z-50 transition-all duration-300 ease-in-out bg-gray-600 bg-opacity-50">
         <div
-          class="fixed top-0 w-64 h-full transition-transform transform bg-white shadow-lg dark:bg-[#181a1b] end-0 max-h-screen custom-scroll"
+          class="fixed top-0 w-72 h-full transition-transform transform bg-white shadow-lg dark:bg-[#181a1b] end-0 max-h-screen custom-scroll"
           :class="isSidebarVisible ? 'translate-x-0' : 'translate-x-full'">
-          <div class="p-3 space-y-5">
+          <div class="px-2 py-3 space-y-5">
             <div class="flex justify-between">
               <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">{{ $t('products.filter_options') }}</h3>
               <icon name="material-symbols:close-small-outline" class="text-gray-500 cursor-pointer dark:text-gray-200"
                 @click="closeSidebar" />
             </div>
             <!-- Categories -->
-            <div>
+            <div class="pb-4 border-b-2 border-gray-500 dark:border-gray-400">
               <div class="flex items-center justify-between">
                 <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.categories') }}</h4>
                 <button @click="toggleSection('categories')" class="text-gray-500 dark:text-gray-100">
@@ -207,7 +207,7 @@
             </div>
 
             <!-- Color Filter -->
-            <div>
+            <div class="pb-4 border-b-2 border-gray-500 dark:border-gray-400">
               <div class="flex items-center justify-between">
                 <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.color') }}</h4>
                 <button @click="toggleSection('colors')" class="text-gray-500 dark:text-gray-100">
@@ -228,7 +228,7 @@
             </div>
 
             <!-- Size Filter -->
-            <div>
+            <div class="pb-4 border-b-2 border-gray-500 dark:border-gray-400">
               <div class="flex items-center justify-between">
                 <h4 class="font-semibold text-gray-600 dark:text-gray-100">{{ $t('products.size') }}</h4>
                 <button @click="toggleSection('sizes')" class="text-gray-500 dark:text-gray-100">
