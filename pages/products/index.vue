@@ -106,17 +106,36 @@
 
         <!-- Second column (9/12) -->
         <div class="col-span-12 lg:col-span-9">
-          <!-- product-cards component -->
-          <product-cards :products="paginatedProducts" v-if="filteredProducts.length > 0" />
-
-          <div v-if="filteredProducts.length === 0" class="flex items-center justify-center p-4">
-            <p class="text-3xl font-semibold text-center text-gray-700 dark:text-gray-200">{{
-              $t('products.no_products_found') }}</p>
+          <!-- Skeleton Loader -->
+          <div v-if="loading" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 animate-pulse mt-7">
+            <div v-for="n in 6" :key="n" class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+              <div class="h-48 mb-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+              <div class="space-y-3">
+                <div class="w-3/4 h-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                <div class="w-1/2 h-4 bg-gray-200 rounded dark:bg-gray-700"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-1/3 h-6 bg-gray-200 rounded dark:bg-gray-700"></div>
+                  <div class="w-20 h-10 bg-gray-200 rounded-lg dark:bg-gray-700"></div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- pagination component -->
-          <pagination-component :current-page="currentPage" :total-pages="totalPages" @page-changed="handlePageChange"
-            v-if="filteredProducts.length > 0" />
+          <template v-else>
+            <!-- product-cards component -->
+            <product-cards :products="paginatedProducts" v-if="filteredProducts.length > 0" />
+
+            <!-- No products found -->
+            <div v-else class="flex items-center justify-center p-4 min-h-[400px]">
+              <p class="text-3xl font-semibold text-center text-gray-700 dark:text-gray-200">
+                {{ $t('products.no_products_found') }}
+              </p>
+            </div>
+
+            <!-- pagination-component component -->
+            <pagination-component v-if="filteredProducts.length > 0" :current-page="currentPage"
+              :total-pages="totalPages" @page-changed="handlePageChange" />
+          </template>
         </div>
       </div>
 
@@ -304,15 +323,33 @@ onMounted(() => {
   productStore.fetchSizes()
 })
 
+const loading = ref(false)
+let loadingTimeout = null
+
 watch(
   () => [filters.value.categories, filters.value.colors, filters.value.sizes],
-  ([newCategories, newColors, newSizes]) => {
+  async ([newCategories, newColors, newSizes]) => {
     if (newCategories.length > 0 || newColors.length > 0 || newSizes.length > 0) {
-      productStore.fetchProducts();
+      loading.value = true
+      loadingTimeout = setTimeout(() => {
+        loading.value = false
+      }, 2000)
+      try {
+        await productStore.fetchProducts()
+      } catch (error) {
+        console.error("Error fetching products:", error)
+      } finally {
+        if (loadingTimeout) {
+          clearTimeout(loadingTimeout)
+          if (loading.value) {
+            setTimeout(() => loading.value = false, 2000)
+          }
+        }
+      }
     }
   },
   { deep: true }
-);
+)
 
 const filteredProducts = computed(() => {
   return productStore.products.filter(product => {
