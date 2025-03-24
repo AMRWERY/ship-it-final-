@@ -16,9 +16,12 @@
 
     <div class="mx-auto my-6 max-w-8xl">
       <div class="flex justify-between px-6">
-        <p class="font-medium text-gray-700 dark:text-gray-200">1 - 1 {{ $t('products.pages_over_2_items_for') }} <span
-            class="font-semibold text-blue-700 dark:text-blue-400">{{
-              brandName }}</span></p>
+        <p class="font-medium text-gray-700 dark:text-gray-200" v-if="filteredProducts.length > 0">{{ (currentPage - 1)
+          * productsPerPage + 1 }} -
+          {{ Math.min(currentPage * productsPerPage, filteredProducts.length) }} {{
+            $t('products.pages_over_2_items_for') }} <span class="font-semibold text-blue-700 dark:text-blue-400">{{
+            brandName }}</span></p>
+        <div v-else class="flex-1"></div>
         <div class="flex space-s-4">
           <icon name="mdi:square-rounded" class="text-gray-500 dark:text-gray-100" />
           <!-- Button to trigger the sidebar (Only visible on small screens) -->
@@ -104,10 +107,16 @@
         <!-- Second column (9/12) -->
         <div class="col-span-12 lg:col-span-9">
           <!-- product-cards component -->
-          <product-cards :products="filteredProducts" />
+          <product-cards :products="paginatedProducts" v-if="filteredProducts.length > 0" />
+
+          <div v-if="filteredProducts.length === 0" class="flex items-center justify-center p-4">
+            <p class="text-3xl font-semibold text-center text-gray-700 dark:text-gray-200">{{
+              $t('products.no_products_found') }}</p>
+          </div>
 
           <!-- pagination component -->
-          <pagination-component />
+          <pagination-component :current-page="currentPage" :total-pages="totalPages" @page-changed="handlePageChange"
+            v-if="filteredProducts.length > 0" />
         </div>
       </div>
 
@@ -319,6 +328,31 @@ const filteredProducts = computed(() => {
     return categoryMatch && colorMatch && sizeMatch;
   });
 });
+
+const currentPage = ref(1)
+const productsPerPage = 15
+
+watch(
+  () => [filters.value.categories, filters.value.colors, filters.value.sizes],
+  () => {
+    currentPage.value = 1
+  },
+  { deep: true }
+)
+
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * productsPerPage
+  const end = start + productsPerPage
+  return filteredProducts.value.slice(start, end)
+})
+
+const totalPages = computed(() =>
+  Math.ceil(filteredProducts.value.length / productsPerPage)
+)
+
+const handlePageChange = (newPage) => {
+  currentPage.value = newPage
+}
 
 useHead({
   titleTemplate: () => brandName.value,
