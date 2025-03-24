@@ -92,7 +92,7 @@
                     <input type="checkbox" :id="`size-${size.id}`" :value="size.value" v-model="filters.sizes"
                       class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
                     <label :for="`size-${size.id}`" class="cursor-pointer">
-                      {{ $i18n.locale === 'ar' ? size.titleAr : size.title }}
+                      {{ size.title }}
                     </label>
                   </li>
                 </ul>
@@ -114,9 +114,10 @@
       <!-- Sidebar that will slide in from the right on small screens -->
       <div v-if="isSidebarVisible"
         class="fixed inset-0 z-50 transition-all duration-300 ease-in-out bg-gray-600 bg-opacity-50">
-        <div class="fixed top-0 w-64 h-full transition-transform transform bg-white shadow-lg dark:bg-[#181a1b] end-0"
+        <div
+          class="fixed top-0 w-64 h-full transition-transform transform bg-white shadow-lg dark:bg-[#181a1b] end-0 max-h-screen custom-scroll"
           :class="isSidebarVisible ? 'translate-x-0' : 'translate-x-full'">
-          <div class="p-4 space-y-5">
+          <div class="p-3 space-y-5">
             <div class="flex justify-between">
               <h3 class="mb-4 font-semibold text-gray-700 dark:text-gray-200">{{ $t('products.filter_options') }}</h3>
               <icon name="material-symbols:close-small-outline" class="text-gray-500 cursor-pointer dark:text-gray-200"
@@ -295,11 +296,9 @@ onMounted(() => {
 })
 
 watch(
-  () => filters.value.categories,
-  (newCategories) => {
-    if (newCategories.length > 0) {
-      productStore.fetchProductsByCategories(newCategories);
-    } else {
+  () => [filters.value.categories, filters.value.colors, filters.value.sizes],
+  ([newCategories, newColors, newSizes]) => {
+    if (newCategories.length > 0 || newColors.length > 0 || newSizes.length > 0) {
       productStore.fetchProducts();
     }
   },
@@ -307,13 +306,18 @@ watch(
 );
 
 const filteredProducts = computed(() => {
-  if (filters.value.categories.length > 0) {
-    return productStore.products.filter(product =>
-      filters.value.categories.includes(product.categoryId)
-    );
-  } else {
-    return productStore.products;
-  }
+  return productStore.products.filter(product => {
+    const categoryMatch = filters.value.categories.length === 0 ||
+      filters.value.categories.includes(product.categoryId);
+
+    const colorMatch = filters.value.colors.length === 0 ||
+      product.colors?.some(color => filters.value.colors.includes(color));
+
+    const sizeMatch = filters.value.sizes.length === 0 ||
+      product.sizes?.some(size => filters.value.sizes.includes(size));
+
+    return categoryMatch && colorMatch && sizeMatch;
+  });
 });
 
 useHead({
