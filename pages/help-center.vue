@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col min-h-screen shadow-xl dark:shadow-slate-50">
       <!-- Header -->
-      <header class="p-6 text-white bg-blue-600 dark:bg-blue-400">
+      <header class="p-6 mt-2 text-white bg-blue-600 dark:bg-blue-400">
         <div class="container flex items-center justify-between mx-auto">
           <h1 class="text-3xl font-bold">{{ $t('help_center.help_center') }}</h1>
         </div>
@@ -15,7 +15,7 @@
           <ul class="space-y-3">
             <li v-for="tab in tabs" :key="tab.id">
               <nuxt-link-locale :to="`#${tab.id}`" @click.prevent="activeTab = tab.id"
-                class="block px-3 py-2 transition-colors rounded-lg" :class="{
+                class="block px-3 py-2 transition-colors rounded-lg cursor-pointer" :class="{
                   'text-blue-600 bg-blue-50 dark:bg-blue-900/20': activeTab === tab.id,
                   'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800': activeTab !== tab.id
                 }">
