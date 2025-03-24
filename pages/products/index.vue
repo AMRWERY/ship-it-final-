@@ -46,7 +46,7 @@
                 <ul v-show="isSectionOpen.categories"
                   class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
                   <li v-for="category in categoriesStore.categories" :key="category.id"
-                    class="flex items-center space-s-2">
+                    class="flex items-center space-s-2 ms-2">
                     <input type="checkbox" :id="`cat-${category.id}`" v-model="filters.categories" :value="category.id"
                       class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent" />
                     <label :for="`cat-${category.id}`" class="cursor-pointer">
@@ -65,26 +65,14 @@
                     <icon name="material-symbols:add" size="18px" v-else />
                   </button>
                 </div>
-                <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="red" v-model="filters.colors" value="Red"
+                <ul v-show="isSectionOpen.colors"
+                  class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
+                  <li v-for="color in productStore.colors" :key="color.id" class="flex items-center space-s-2 ms-2">
+                    <input type="checkbox" :id="`color-${color.id}`" :value="color.value" v-model="filters.colors"
                       class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="red" class="cursor-pointer">Red</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="blue" v-model="filters.colors" value="Blue"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="blue" class="cursor-pointer">Blue</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="green" v-model="filters.colors" value="Green"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="green" class="cursor-pointer">Green</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="black" v-model="filters.colors" value="Black"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="black" class="cursor-pointer">Black</label>
+                    <label :for="`color-${color.id}`" class="cursor-pointer">
+                      {{ $i18n.locale === 'ar' ? color.titleAr : color.title }}
+                    </label>
                   </li>
                 </ul>
               </div>
@@ -98,26 +86,14 @@
                     <icon name="material-symbols:add" size="18px" v-else />
                   </button>
                 </div>
-                <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="small" v-model="filters.sizes" value="Small"
+                <ul v-show="isSectionOpen.sizes"
+                  class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
+                  <li v-for="size in productStore.sizes" :key="size.id" class="flex items-center space-s-2 ms-2">
+                    <input type="checkbox" :id="`size-${size.id}`" :value="size.value" v-model="filters.sizes"
                       class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="small" class="cursor-pointer">Small</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="medium" v-model="filters.sizes" value="Medium"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="medium" class="cursor-pointer">Medium</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="large" v-model="filters.sizes" value="Large"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="large" class="cursor-pointer">Large</label>
-                  </li>
-                  <li class="flex items-center space-s-2">
-                    <input type="checkbox" id="extra-large" v-model="filters.sizes" value="Extra Large"
-                      class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                    <label for="extra-large" class="cursor-pointer">Extra Large</label>
+                    <label :for="`size-${size.id}`" class="cursor-pointer">
+                      {{ $i18n.locale === 'ar' ? size.titleAr : size.title }}
+                    </label>
                   </li>
                 </ul>
               </div>
@@ -158,7 +134,7 @@
               <ul v-show="isSectionOpen.categories"
                 class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
                 <li v-for="category in categoriesStore.categories" :key="category.id"
-                  class="flex items-center space-s-2">
+                  class="flex items-center space-s-2 ms-2">
                   <input type="checkbox" :id="`cat-${category.id}`" v-model="filters.categories" :value="category.id"
                     class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent" />
                   <label :for="`cat-${category.id}`" class="cursor-pointer">
@@ -177,26 +153,14 @@
                   <icon name="material-symbols:add" size="18px" v-else />
                 </button>
               </div>
-              <ul v-show="isSectionOpen.colors" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="red" v-model="filters.colors" value="Red"
+              <ul v-show="isSectionOpen.colors"
+                class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
+                <li v-for="color in productStore.colors" :key="color.id" class="flex items-center space-s-2 ms-2">
+                  <input type="checkbox" :id="`color-${color.id}`" :value="color.value" v-model="filters.colors"
                     class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="red" class="cursor-pointer">Red</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="blue" v-model="filters.colors" value="Blue"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="blue" class="cursor-pointer">Blue</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="green" v-model="filters.colors" value="Green"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="green" class="cursor-pointer">Green</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="black" v-model="filters.colors" value="Black"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="black" class="cursor-pointer">Black</label>
+                  <label :for="`color-${color.id}`" class="cursor-pointer">
+                    {{ $i18n.locale === 'ar' ? color.titleAr : color.title }}
+                  </label>
                 </li>
               </ul>
             </div>
@@ -210,26 +174,14 @@
                   <icon name="material-symbols:add" size="18px" v-else />
                 </button>
               </div>
-              <ul v-show="isSectionOpen.sizes" class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100">
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="small" v-model="filters.sizes" value="Small"
+              <ul v-show="isSectionOpen.sizes"
+                class="mt-5 space-y-4 text-sm text-gray-600 dark:text-gray-100 max-h-56 custom-scroll">
+                <li v-for="color in productStore.colors" :key="color.id" class="flex items-center space-s-2 ms-2">
+                  <input type="checkbox" :id="`color-${color.id}`" :value="color.value" v-model="filters.colors"
                     class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="small" class="cursor-pointer">Small</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="medium" v-model="filters.sizes" value="Medium"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="medium" class="cursor-pointer">Medium</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="large" v-model="filters.sizes" value="Large"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="large" class="cursor-pointer">Large</label>
-                </li>
-                <li class="flex items-center space-s-2">
-                  <input type="checkbox" id="extra-large" v-model="filters.sizes" value="Extra Large"
-                    class="text-gray-500 transition duration-150 ease-in-out form-checkbox checked:bg-gray-700 checked:border-transparent">
-                  <label for="extra-large" class="cursor-pointer">Extra Large</label>
+                  <label :for="`color-${color.id}`" class="cursor-pointer">
+                    {{ $i18n.locale === 'ar' ? color.titleAr : color.title }}
+                  </label>
                 </li>
               </ul>
             </div>
@@ -337,6 +289,9 @@ onMounted(() => {
   } else {
     productStore.fetchProducts();
   }
+
+  productStore.fetchColors()
+  productStore.fetchSizes()
 })
 
 watch(

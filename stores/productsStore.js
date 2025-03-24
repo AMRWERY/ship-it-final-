@@ -20,6 +20,8 @@ export const useProductsStore = defineStore("products", {
     currentPage: 1,
     productsPerPage: 10,
     productRatings: {},
+    colors: [],
+    sizes: [],
   }),
 
   actions: {
@@ -240,6 +242,30 @@ export const useProductsStore = defineStore("products", {
         });
       } catch (error) {
         console.error("Error updating rating:", error);
+      }
+    },
+
+    async fetchColors() {
+      try {
+        const querySnap = await getDocs(collection(db, "colors"));
+        this.colors = querySnap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      } catch (error) {
+        console.error("Error fetching colors:", error);
+      }
+    },
+
+    async fetchSizes() {
+      try {
+        const querySnap = await getDocs(collection(db, "sizes"));
+        this.sizes = querySnap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      } catch (error) {
+        console.error("Error fetching sizes:", error);
       }
     },
   },
