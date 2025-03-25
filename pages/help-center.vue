@@ -16,7 +16,7 @@
             <li v-for="tab in tabs" :key="tab.id">
               <nuxt-link-locale :to="`#${tab.id}`" @click.prevent="activeTab = tab.id"
                 class="block px-3 py-2 transition-colors rounded-lg cursor-pointer" :class="{
-                  'text-blue-600 bg-blue-50 dark:bg-blue-900/20': activeTab === tab.id,
+                  'text-blue-600 dark:text-blue-200 bg-blue-50 dark:bg-blue-900/20': activeTab === tab.id,
                   'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800': activeTab !== tab.id
                 }">
                 {{ tab.title }}
