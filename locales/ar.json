@@ -413,5 +413,32 @@
     "add_edit_and_remove_addresses": "إضافة العناوين وتحريرها وإزالتها",
     "add_a_new_address": "إضافة عنوان جديد",
     "no_messages_found": "لم يتم العثور على رسائل"
+  },
+  "blogs": {
+    "shipping_insights_updates": "رؤى وتحديثات الشحن",
+    "stay_informed_with_the_latest_trends_tips_and_innovations_in_global_logistics_and_ecommerce_shipping": "كن مطلعًا على أحدث الاتجاهات والنصائح والابتكارات في مجال الخدمات اللوجستية العالمية والشحن التجاري الإلكتروني.",
+    "date_1": "15 مارس 2025",
+    "title_1": "5 طرق لتحسين سير عمل الشحن الخاص بك",
+    "desc_1": "اكتشف كيف يمكن لاختيارات التغليف الذكية وتحسين المسار أن تقلل التكاليف بنسبة تصل إلى 30%.",
+    "paragraph_1": "إن تحسين سير عمل الشحن الخاص بك له تأثير كبير على التكاليف الإجمالية والكفاءة. من إعادة النظر في التغليف إلى استخدام أدوات التوجيه المتقدمة، كل خطوة لها أهميتها.",
+    "paragraph_2": "لا يقتصر دور التغليف الذكي على حماية منتجاتك فحسب، بل يوفر أيضًا المساحة ويقلل تكاليف المواد. فكّر في استخدام مواد صديقة للبيئة وفعالة من حيث التكلفة..",
+    "paragraph_3": "ويضمن الاستفادة من التقنيات الحديثة، مثل برامج تحسين المسارات، تسليم الشحنات في الوقت المحدد وبتكلفة أقل.",
+    "date_2": "12 مارس 2025",
+    "title_2": "إتقان لوائح الشحن الدولي",
+    "desc_2": "دليل أساسي للتعامل مع الجمارك والرسوم والخدمات اللوجستية عبر الحدود.",
+    "paragraph_4": "يتضمن الشحن الدولي لوائح معقدة ومتطلبات توثيقية متعددة. لذا، يُعدّ الفهم الواضح للإجراءات الجمركية أمرًا بالغ الأهمية.",
+    "paragraph_5": "يقدم هذا الدليل رؤى حول إدارة الرسوم والضرائب والامتثال التنظيمي لضمان عبور البضائع بسلاسة عبر الحدود.",
+    "paragraph_6": "إن البقاء على اطلاع بأحدث التغييرات في سياسات التجارة الدولية يمكن أن يوفر عليك التأخير والعقوبات المحتملة.",
+    "date_3": "8 مارس 2025",
+    "title_3": "الشحن المستدام: مبادرتنا الخضراء",
+    "desc_3": "كيف نعمل على تقليل البصمة الكربونية باستخدام المواد القابلة للتحلل الحيوي والأساطيل الكهربائية.",
+    "paragraph_7": "الاستدامة هي جوهر عمليات الشحن لدينا. مبادرتنا الخضراء مصممة لتقليل التأثير البيئي.",
+    "paragraph_8": "ومن خلال اعتماد المواد القابلة للتحلل الحيوي ودمج المركبات الكهربائية في أسطولنا، فإننا نتخذ خطوات عملية نحو مستقبل أكثر اخضرارًا.",
+    "paragraph_9": "يتيح لنا البحث والتطوير المستمر الابتكار وتنفيذ ممارسات أكثر استدامة في شبكتنا اللوجستية.",
+    "title_4": "Real-Time Tracking: Enhancing Customer Experience",
+    "desc_4": "Learn how our new tracking system improves delivery transparency and satisfaction.",
+    "paragraph_10": "Real-time tracking transforms customer experience by providing precise delivery updates and increased transparency.",
+    "paragraph_11": "Our advanced tracking system integrates seamlessly with existing platforms to offer live updates and notifications.",
+    "paragraph_12": "This initiative not only boosts customer satisfaction but also helps us optimize our delivery routes and resource allocation."
   }
 }

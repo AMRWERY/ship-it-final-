@@ -413,5 +413,33 @@
     "add_edit_and_remove_addresses": "Add, edit, and remove addresses",
     "add_a_new_address": "Add a new address",
     "no_messages_found": "No messages found"
+  },
+  "blogs": {
+    "shipping_insights_updates": "Shipping Insights & Updates",
+    "stay_informed_with_the_latest_trends_tips_and_innovations_in_global_logistics_and_ecommerce_shipping": "Stay informed with the latest trends, tips, and innovations in global logistics and e-commerce shipping.",
+    "date_1": "March 15, 2025",
+    "title_1": "5 Ways to Optimize Your Shipping Workflow",
+    "desc_1": "Discover how smart packaging choices and route optimization can reduce costs by up to 30%.",
+    "paragraph_1": "Optimizing your shipping workflow can have a profound effect on overall costs and efficiency. From rethinking packaging to using advanced routing tools, every step counts.",
+    "paragraph_2": "Smart packaging not only protects your products but can also save space and reduce material costs. Consider eco-friendly and cost-effective materials.",
+    "paragraph_3": "Leveraging modern technologies, such as route optimization software, ensures that shipments are delivered on time and at a lower cost.",
+    "date_2": "March 12, 2025",
+    "title_2": "Mastering International Shipping Regulations",
+    "desc_2": "Essential guide to navigating customs, duties, and cross-border logistics.",
+    "paragraph_4": "International shipping involves complex regulations and numerous documentation requirements. A clear understanding of customs procedures is vital.",
+    "paragraph_5": "This guide provides insights into managing duties, taxes, and regulatory compliance to ensure smooth transit of goods across borders.",
+    "paragraph_6": "Staying updated with the latest changes in international trade policies can save you from potential delays and penalties.",
+    "date_3": "March 8, 2025",
+    "title_3": "Sustainable Shipping: Our Green Initiative",
+    "desc_3": "How we're reducing carbon footprint with biodegradable materials and electric fleets.",
+    "paragraph_7": "Sustainability is at the core of our shipping operations. Our green initiative is designed to minimize environmental impact.",
+    "paragraph_8": "By adopting biodegradable materials and integrating electric vehicles into our fleet, we are taking actionable steps towards a greener future.",
+    "paragraph_9": "Continuous research and development allow us to innovate and implement more sustainable practices in our logistics network.",
+    "date_4": "March 1, 2025",
+    "title_4": "Real-Time Tracking: Enhancing Customer Experience",
+    "desc_4": "Learn how our new tracking system improves delivery transparency and satisfaction.",
+    "paragraph_10": "Real-time tracking transforms customer experience by providing precise delivery updates and increased transparency.",
+    "paragraph_11": "Our advanced tracking system integrates seamlessly with existing platforms to offer live updates and notifications.",
+    "paragraph_12": "This initiative not only boosts customer satisfaction but also helps us optimize our delivery routes and resource allocation."
   }
 }
