@@ -139,7 +139,8 @@
     "apply_code": "تطبيق الكود",
     "submit": "تقديم",
     "start_shopping": "ابدأ التسوق",
-    "add_a_new_address": "إضافة عنوان جديد"
+    "add_a_new_address": "إضافة عنوان جديد",
+    "open_blog": "افتح المدونه"
   },
   "toast": {
     "successfully_logged_in": "تم تسجيل الدخول بنجاح",

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="py-6 rounded-lg shadow-lg sm:py-8 lg:py-12 dark:border dark:border-gray-100">
+    <div class="py-6 mt-4 rounded-lg shadow-lg sm:py-8 lg:py-12 dark:border dark:border-gray-100">
       <div class="max-w-screen-xl px-4 mx-auto md:px-8">
         <div class="mb-10 md:mb-16">
           <h2 class="mb-4 text-2xl font-bold text-center text-gray-800 md:mb-6 lg:text-3xl dark:text-gray-200">Shipping
@@ -25,10 +25,20 @@
                   blog.title }}</router-link>
               </h2>
               <p class="text-gray-500 dark:text-gray-100">{{ blog.desc }}</p>
+              <div class="mt-2">
+                <button role="button" @click="openBlog(blog)"
+                  class="text-sm text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-500">{{
+                    $t('btn.open_blog') }}</button>
+              </div>
               <div>
               </div>
             </div>
           </div>
+
+          <!-- blogs-dialog component -->
+          <ClientOnly>
+            <blogs-dialog v-if="selectedBlog" :blog="selectedBlog" @close="closeBlog" />
+          </ClientOnly>
         </div>
       </div>
     </div>
@@ -36,6 +46,16 @@
 </template>
 
 <script setup>
+const selectedBlog = ref(null)
+
+const openBlog = (blog) => {
+  selectedBlog.value = blog
+}
+
+const closeBlog = () => {
+  selectedBlog.value = null
+}
+
 const blogs = computed(() => [
   {
     date: 'March 15, 2024',

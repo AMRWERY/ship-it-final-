@@ -139,7 +139,8 @@
     "apply_code": "Apply Code",
     "submit": "Submit",
     "start_shopping": "Start Shopping",
-    "add_a_new_address": "Add a new address"
+    "add_a_new_address": "Add a new address",
+    "open_blog": "Open Blog"
   },
   "toast": {
     "successfully_logged_in": "successfully logged in",
