@@ -1,14 +1,18 @@
 <template>
   <div>
     <ClientOnly v-if="isLoading">
+      <!-- skeleton-loader-main component-->
       <skeleton-loader-main />
     </ClientOnly>
 
     <ClientOnly v-else>
       <NuxtLayout>
+        <!-- progress-bar component-->
         <progress-bar />
         <NuxtPage />
+        <!-- scroll-to-top component-->
         <scroll-to-top />
+        <!-- contact-us component-->
         <contact-us />
       </NuxtLayout>
     </ClientOnly>
