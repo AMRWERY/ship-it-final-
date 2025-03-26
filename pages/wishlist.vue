@@ -7,20 +7,21 @@
       </div>
 
       <h2 class="mb-8 text-3xl font-semibold text-center">{{ $t('wishlist.your_wishlist') }}</h2>
-      <!-- skeleton-loader componenet -->
+      <!-- skeleton loader -->
       <div v-if="loading" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <div v-for="i in 4" :key="i" class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-black">
-          <skeleton-loader type="rectangle" class="w-full h-48 bg-gray-200 rounded-none dark:bg-gray-800" />
+        <div v-for="i in 4" :key="i"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 animate-pulse">
+          <div class="w-full h-48 bg-gray-200 dark:bg-gray-700"></div>
           <div class="p-4">
-            <skeleton-loader type="rectangle" class="w-3/4 h-6 mb-2 bg-gray-200 dark:bg-gray-700" />
-            <skeleton-loader type="rectangle" class="w-1/2 h-4 bg-gray-200 dark:bg-gray-700" />
-            <div class="flex items-center mt-2 space-s-2">
-              <skeleton-loader type="rectangle" class="w-1/3 h-6 bg-gray-200 dark:bg-gray-700" />
-              <skeleton-loader type="rectangle" class="w-1/4 h-4 bg-gray-200 dark:bg-gray-700" />
+            <div class="w-3/4 h-5 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-1/2 h-4 mt-3 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="flex items-center mt-4 space-s-2">
+              <div class="w-1/3 h-6 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+              <div class="w-1/4 h-4 bg-gray-200 rounded-full dark:bg-gray-700"></div>
             </div>
-            <div class="flex mt-2 space-s-5">
-              <skeleton-loader type="circle" class="w-10 h-10 bg-gray-200 dark:bg-gray-700" />
-              <skeleton-loader type="rectangle" class="w-full h-10 bg-gray-200 dark:bg-gray-700" />
+            <div class="flex mt-4 space-s-5">
+              <div class="h-10 bg-gray-200 rounded-full w-11 dark:bg-gray-700"></div>
+              <div class="w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700"></div>
             </div>
           </div>
         </div>
@@ -50,7 +51,6 @@
               <p class="mt-2 text-sm text-gray-500 line-through dark:text-gray-100" v-if="item.originalPrice">{{
                 $n(parseFloat(item.originalPrice), 'currency', currencyLocale) }}</p>
             </div>
-
             <div class="flex mt-2 space-s-5">
               <!-- Remove Button -->
               <button type="button" :title="$t('tooltip.delete_item')" @click="removeItem(item.docId)"

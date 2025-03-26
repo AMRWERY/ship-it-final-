@@ -9,13 +9,18 @@
         </div>
 
         <ClientOnly>
-          <!-- skeleton-loader componenet -->
+          <!-- skeleton loader -->
           <Carousel v-if="loading || categoriesStore.categories.length === 0" v-bind="config">
             <Slide v-for="i in 5" :key="i">
-              <div class="px-2 carousel__item">
-                <skeleton-loader type="rectangle" :css-class="'h-44 w-full mx-2 rounded-xl'"
-                  :bg-class="'bg-gray-200 dark:bg-gray-700'">
-                </skeleton-loader>
+              <div class="carousel__item">
+                <div
+                  class="relative flex justify-center flex-shrink-0 w-32 h-auto mx-2 overflow-hidden border border-white md:w-auto rounded-xl dark:border-none dark:bg-gray-700">
+                  <div class="relative w-full bg-gray-200 h-44 animate-pulse rounded-xl dark:bg-gray-600">
+                    <div
+                      class="absolute inset-0 bg-gradient-to-e from-transparent via-white/50 to-transparent animate-shimmer">
+                    </div>
+                  </div>
+                </div>
               </div>
             </Slide>
             <template #addons>

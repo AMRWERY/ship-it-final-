@@ -35,7 +35,7 @@
             </nuxt-link-locale>
           </div>
 
-          <!-- Skeleton Loader (have data) -->
+          <!-- Skeleton Loader -->
           <div v-if="loading" class="mt-8 space-y-8">
             <div v-for="n in 3" :key="n" class="grid items-start grid-cols-3 gap-4">
               <div class="flex items-start col-span-2 gap-4 border-b-2">

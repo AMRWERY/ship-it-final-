@@ -8,29 +8,23 @@
       </div>
 
       <ClientOnly>
-        <!-- skeleton-loader -->
+        <!-- Skeleton Loader -->
         <Carousel v-if="loading || filteredProducts.length === 0" v-bind="config">
-          <Slide v-for="i in 5" :key="i">
-            <div class="px-2 carousel__item">
-              <skeleton-loader type="rectangle" :css-class="'w-full bg-gray-200 dark:bg-gray-700 rounded-lg'">
-                <div class="relative p-2 space-y-4">
-                  <div class="w-full h-[200px] sm:h-[300px] bg-gray-300 dark:bg-gray-600 rounded-lg animate-pulse">
+          <Slide v-if="loading" v-for="i in 4" :key="`skeleton-${i}`">
+            <div class="carousel__item">
+              <div class="relative z-50 p-2 overflow-hidden bg-gray-100 rounded-lg dark:bg-gray-800 animate-pulse">
+                <div class="w-full h-[200px] sm:h-[300px] bg-gray-300 rounded-lg dark:bg-gray-700"></div>
+                <div class="mt-4 space-y-3">
+                  <div class="w-3/4 h-4 mx-auto bg-gray-300 rounded-full dark:bg-gray-700"></div>
+                  <div class="flex justify-center space-s-2">
+                    <div class="w-1/4 h-6 bg-gray-300 rounded-full dark:bg-gray-700"></div>
+                    <div class="w-1/4 h-4 mt-1 bg-gray-300 rounded-full dark:bg-gray-700"></div>
                   </div>
-
-                  <div class="absolute w-11/12 mx-auto space-y-3 end-0 start-0 bottom-2">
-                    <div class="w-3/4 h-4 mx-auto bg-gray-400 rounded dark:bg-gray-500"></div>
-                    <div class="flex items-center justify-center space-x-2">
-                      <div class="w-1/4 h-4 bg-gray-400 rounded dark:bg-gray-500"></div>
-                      <div class="w-1/5 h-3 bg-gray-400 rounded dark:bg-gray-500"></div>
-                    </div>
-                    <div class="flex justify-center mt-4 space-x-1 max-sm:hidden">
-                      <div class="w-4 h-4 bg-gray-400 rounded-full dark:bg-gray-500"></div>
-                      <div class="w-4 h-4 bg-gray-400 rounded-full dark:bg-gray-500"></div>
-                      <div class="w-4 h-4 bg-gray-400 rounded-full dark:bg-gray-500"></div>
-                    </div>
+                  <div class="flex justify-center mt-4">
+                    <div class="w-1/2 h-4 bg-gray-300 rounded-full dark:bg-gray-700"></div>
                   </div>
                 </div>
-              </skeleton-loader>
+              </div>
             </div>
           </Slide>
           <template #addons>
@@ -72,7 +66,6 @@
               </nuxt-link-locale>
             </div>
           </Slide>
-
           <template #addons>
             <Navigation />
           </template>
